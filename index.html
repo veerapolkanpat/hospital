@@ -970,6 +970,155 @@ document.addEventListener('DOMContentLoaded', () => {
     //     // window.googleAnalyticsInitialized = true;
     // }
 });
+        // ... (โค้ดส่วนบนเหมือนเดิม) ...
+
+// --- Cookie Consent Banner Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookiesButton = document.getElementById('accept-cookies');
+    const manageCookiesButton = document.getElementById('manage-cookies');
+    const cookieManagementModal = document.getElementById('cookie-management-modal');
+    const closeCookieManagementModalButton = document.getElementById('close-cookie-management-modal');
+    const saveCookiePreferencesButton = document.getElementById('save-cookie-preferences');
+    const declineAllCookiesButton = document.getElementById('decline-all-cookies');
+
+    const cookieNecessary = document.getElementById('cookie-necessary');
+    const cookieAnalytics = document.getElementById('cookie-analytics');
+    const cookieMarketing = document.getElementById('cookie-marketing');
+
+    // Function to show the cookie banner
+    function showCookieBanner() {
+        cookieBanner.classList.remove('hidden', 'translate-y-full');
+        setTimeout(() => {
+            cookieBanner.classList.add('translate-y-0');
+        }, 100);
+    }
+
+    // Function to hide the cookie banner
+    function hideCookieBanner() {
+        cookieBanner.classList.remove('translate-y-0');
+        cookieBanner.classList.add('translate-y-full');
+        setTimeout(() => {
+            cookieBanner.classList.add('hidden');
+        }, 500);
+    }
+
+    // Function to save cookie preferences to Local Storage
+    function saveCookiePreferences(analyticsConsent, marketingConsent) {
+        localStorage.setItem('cookieConsent', 'custom'); // Indicates user made a custom choice
+        localStorage.setItem('cookieAnalytics', analyticsConsent ? 'accepted' : 'declined');
+        localStorage.setItem('cookieMarketing', marketingConsent ? 'accepted' : 'declined');
+        console.log("Cookie preferences saved.");
+        // In a real application, you would now activate/deactivate scripts based on these consents
+        applyCookiePreferences();
+        hideCookieBanner(); // Hide the main banner if user saved preferences
+    }
+
+    // Function to load cookie preferences from Local Storage and apply them
+    function loadCookiePreferencesIntoModal() {
+        // Necessary cookie is always checked and disabled
+        cookieNecessary.checked = true;
+
+        const analytics = localStorage.getItem('cookieAnalytics');
+        const marketing = localStorage.getItem('cookieMarketing');
+
+        cookieAnalytics.checked = (analytics === 'accepted' || analytics === null); // Default to accepted if not set
+        cookieMarketing.checked = (marketing === 'accepted' || marketing === null); // Default to accepted if not set
+    }
+
+    // Function to apply cookie preferences (e.g., loading analytics scripts)
+    function applyCookiePreferences() {
+        const analyticsConsent = localStorage.getItem('cookieAnalytics');
+        const marketingConsent = localStorage.getItem('cookieMarketing');
+
+        // Example: Load Google Analytics if accepted
+        // if (analyticsConsent === 'accepted' && !window.googleAnalyticsInitialized) {
+        //     console.log("Loading Google Analytics script based on consent...");
+        //     // loadGoogleAnalytics(); // Your function to load GA
+        //     // window.googleAnalyticsInitialized = true;
+        // } else if (analyticsConsent === 'declined' && window.googleAnalyticsInitialized) {
+        //     // Disable/unload analytics if previously loaded and now declined (more complex)
+        //     console.log("Analytics declined.");
+        // }
+        // Similarly for marketing cookies/scripts
+    }
+
+
+    // --- Initial check on page load ---
+    const hasAcceptedCookies = localStorage.getItem('cookieConsent');
+    if (!hasAcceptedCookies) {
+        showCookieBanner();
+    } else {
+        cookieBanner.classList.add('hidden');
+        applyCookiePreferences(); // Apply existing preferences
+    }
+
+    // --- Event Listeners for Banner Buttons ---
+    acceptCookiesButton.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        localStorage.setItem('cookieAnalytics', 'accepted');
+        localStorage.setItem('cookieMarketing', 'accepted');
+        hideCookieBanner();
+        console.log("All cookies accepted.");
+        applyCookiePreferences(); // Apply all preferences
+    });
+
+    manageCookiesButton.addEventListener('click', () => {
+        loadCookiePreferencesIntoModal(); // Load current preferences into the modal checkboxes
+        cookieManagementModal.style.display = 'flex'; // Show the cookie management modal
+        hideCookieBanner(); // Hide the main cookie banner
+    });
+
+    // --- Event Listeners for Cookie Management Modal Buttons ---
+    closeCookieManagementModalButton.addEventListener('click', () => {
+        cookieManagementModal.style.display = 'none';
+        // Decide whether to show the main banner again if no choice was made in modal
+        if (!localStorage.getItem('cookieConsent')) { // If no choice was made at all
+            showCookieBanner();
+        }
+    });
+
+    saveCookiePreferencesButton.addEventListener('click', () => {
+        const analyticsConsent = cookieAnalytics.checked;
+        const marketingConsent = cookieMarketing.checked;
+        saveCookiePreferences(analyticsConsent, marketingConsent);
+        cookieManagementModal.style.display = 'none'; // Close the modal
+        showMessageModal("บันทึกการตั้งค่า", "การตั้งค่าคุกกี้ของท่านถูกบันทึกเรียบร้อยแล้ว", "alert");
+    });
+
+    declineAllCookiesButton.addEventListener('click', () => {
+        showMessageModal(
+            "ยืนยันการปฏิเสธ",
+            "ท่านต้องการปฏิเสธคุกกี้ทั้งหมด (ยกเว้นคุกกี้ที่จำเป็นอย่างยิ่ง) ใช่หรือไม่?",
+            "confirm",
+            (confirmed) => {
+                if (confirmed) {
+                    saveCookiePreferences(false, false); // Save false for analytics and marketing
+                    cookieManagementModal.style.display = 'none'; // Close the modal
+                    showMessageModal("สำเร็จ", "ท่านได้ปฏิเสธคุกกี้ที่ไม่จำเป็นทั้งหมดแล้ว", "alert");
+                }
+            }
+        );
+    });
+
+    // Close modals if clicking outside (add cookie management modal)
+    window.addEventListener('click', (event) => {
+        if (event.target == adminModal) {
+            closeAdminModal();
+        }
+        if (event.target == document.getElementById('message-modal')) {
+            document.getElementById('message-modal').style.display = 'none';
+        }
+        if (event.target == cookieManagementModal) { // New: Close cookie management modal
+            cookieManagementModal.style.display = 'none';
+            if (!localStorage.getItem('cookieConsent')) { // If no choice was made at all
+                showCookieBanner(); // Show the main banner again
+            }
+        }
+    });
+
+    // ... (ส่วนอื่นๆ ของ JavaScript เหมือนเดิม) ...
+});
     </script>
     <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 flex flex-col md:flex-row items-center justify-between z-[1001] shadow-lg transform transition-transform duration-500 ease-out translate-y-full">
         <p class="text-sm text-center md:text-left mb-3 md:mb-0 mr-0 md:mr-4">
@@ -982,6 +1131,50 @@ document.addEventListener('DOMContentLoaded', () => {
             <button id="manage-cookies" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md text-sm transition duration-200 w-full md:w-auto">
                 จัดการคุกกี้
             </button>
+        </div>
+    </div>
+    <div id="cookie-management-modal" class="modal">
+        <div class="modal-content max-w-xl">
+            <span class="close-button" id="close-cookie-management-modal">×</span>
+            <h2 class="text-2xl font-bold text-blue-700 mb-6 text-center">การตั้งค่าคุกกี้</h2>
+            <p class="text-gray-700 mb-6 text-center">
+                เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์การใช้งานของท่าน โปรดเลือกประเภทของคุกกี้ที่ท่านต้องการยอมรับ:
+            </p>
+
+            <div class="space-y-4 mb-6">
+                <div class="flex items-start">
+                    <input type="checkbox" id="cookie-necessary" class="form-checkbox h-5 w-5 text-blue-600 rounded mt-1" checked disabled>
+                    <label for="cookie-necessary" class="ml-3 text-gray-800">
+                        <span class="font-semibold">คุกกี้ที่จำเป็นอย่างยิ่ง (Strictly Necessary Cookies)</span>
+                        <p class="text-sm text-gray-600">คุกกี้เหล่านี้จำเป็นเพื่อให้เว็บไซต์ทำงานได้อย่างถูกต้องและไม่สามารถปิดใช้งานได้</p>
+                    </label>
+                </div>
+
+                <div class="flex items-start">
+                    <input type="checkbox" id="cookie-analytics" class="form-checkbox h-5 w-5 text-blue-600 rounded mt-1">
+                    <label for="cookie-analytics" class="ml-3 text-gray-800">
+                        <span class="font-semibold">คุกกี้เพื่อการวิเคราะห์ (Analytics Cookies)</span>
+                        <p class="text-sm text-gray-600">ช่วยให้เราเข้าใจว่าผู้เยี่ยมชมมีปฏิสัมพันธ์กับเว็บไซต์อย่างไร เพื่อปรับปรุงประสิทธิภาพ</p>
+                    </label>
+                </div>
+
+                <div class="flex items-start">
+                    <input type="checkbox" id="cookie-marketing" class="form-checkbox h-5 w-5 text-blue-600 rounded mt-1">
+                    <label for="cookie-marketing" class="ml-3 text-gray-800">
+                        <span class="font-semibold">คุกกี้เพื่อการตลาด (Marketing Cookies)</span>
+                        <p class="text-sm text-gray-600">ใช้เพื่อแสดงโฆษณาที่เกี่ยวข้องกับความสนใจของท่าน</p>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4">
+                <button id="save-cookie-preferences" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md transition duration-200">
+                    บันทึกการตั้งค่า
+                </button>
+                <button id="decline-all-cookies" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-md transition duration-200">
+                    ปฏิเสธคุกกี้ทั้งหมด (ยกเว้นที่จำเป็น)
+                </button>
+            </div>
         </div>
     </div>
 </body>
