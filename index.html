@@ -905,6 +905,84 @@
 
         // Initialize Firebase when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', initializeFirebase);
+
+        // --- Cookie Consent Banner Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookiesButton = document.getElementById('accept-cookies');
+    const manageCookiesButton = document.getElementById('manage-cookies'); // Added for future expansion
+
+    const hasAcceptedCookies = localStorage.getItem('cookieConsent');
+
+    // Show the banner if consent hasn't been given
+    if (!hasAcceptedCookies) {
+        // Use a small timeout to ensure the transition plays nicely after DOM is ready
+        setTimeout(() => {
+            cookieBanner.classList.remove('translate-y-full');
+            cookieBanner.classList.add('translate-y-0');
+        }, 100);
+    } else {
+        cookieBanner.classList.add('hidden'); // Hide immediately if already accepted
+    }
+
+    // Event listener for "Accept All" button
+    acceptCookiesButton.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted'); // Store consent in Local Storage
+        cookieBanner.classList.remove('translate-y-0');
+        cookieBanner.classList.add('translate-y-full');
+        setTimeout(() => {
+            cookieBanner.classList.add('hidden');
+        }, 500); // Hide after transition
+        console.log("Cookie consent accepted.");
+        // Here you would typically enable tracking scripts (e.g., Google Analytics)
+        // if (!window.googleAnalyticsInitialized) {
+        //     loadGoogleAnalytics(); // Example function to load GA
+        //     window.googleAnalyticsInitialized = true;
+        // }
+    });
+
+    // Event listener for "Manage Cookies" button (Placeholder for future functionality)
+    manageCookiesButton.addEventListener('click', () => {
+        showMessageModal("จัดการคุกกี้", "ฟังก์ชันจัดการคุกกี้ยังไม่พร้อมใช้งานในตอนนี้ คุณสามารถยอมรับทั้งหมดหรือปิดหน้าต่างไปก่อนได้ค่ะ", "alert");
+        // In a real scenario, this would open a more detailed cookie preference modal.
+    });
+
+    // Example of how you might conditionally load analytics based on consent
+    // function loadGoogleAnalytics() {
+    //     // Place your Google Analytics or other tracking scripts here
+    //     console.log("Loading Google Analytics script...");
+    //     const script = document.createElement('script');
+    //     script.src = "https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID";
+    //     script.async = true;
+    //     document.head.appendChild(script);
+
+    //     script.onload = () => {
+    //         window.dataLayer = window.dataLayer || [];
+    //         function gtag(){dataLayer.push(arguments);}
+    //         gtag('js', new Date());
+    //         gtag('config', 'YOUR_GA_TRACKING_ID');
+    //     };
+    // }
+
+    // If cookies were already accepted on a previous visit, load analytics immediately (if applicable)
+    // if (hasAcceptedCookies === 'accepted' && !window.googleAnalyticsInitialized) {
+    //     // loadGoogleAnalytics();
+    //     // window.googleAnalyticsInitialized = true;
+    // }
+});
     </script>
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 flex flex-col md:flex-row items-center justify-between z-[1001] shadow-lg transform transition-transform duration-500 ease-out translate-y-full">
+        <p class="text-sm text-center md:text-left mb-3 md:mb-0 mr-0 md:mr-4">
+            เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์ของคุณ การเข้าชมเว็บไซต์ของเราหมายความว่าคุณยินยอมให้เราใช้คุกกี้ตาม <a href="#" class="text-blue-400 hover:underline">นโยบายความเป็นส่วนตัว</a> ของเรา
+        </p>
+        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3">
+            <button id="accept-cookies" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md text-sm transition duration-200 w-full md:w-auto">
+                ยอมรับทั้งหมด
+            </button>
+            <button id="manage-cookies" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md text-sm transition duration-200 w-full md:w-auto">
+                จัดการคุกกี้
+            </button>
+        </div>
+    </div>
 </body>
 </html>
