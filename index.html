@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+  <meta charset="UTF-8">
+  <title>โรงพยาบาลวีระพลการแพทย์</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โรงพยาบาล วีระพลการแพทย์ - ดูแลสุขภาพของคุณด้วยใจ</title>
+    <title>โรงพยาบาล [ชื่อโรงพยาบาลของคุณ] - ดูแลสุขภาพของคุณด้วยใจ</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            font-family: 'Prompt', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: #f8fafc; /* Slate-50 */
         }
         .hero-background {
@@ -98,38 +107,60 @@
         }
     </style>
 </head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/images/logo.png" alt="โลโก้" height="40"> รพ.วีระพลการแพทย์
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="about.html">เกี่ยวกับเรา</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">บริการ</a></li>
+          <li class="nav-item"><a class="nav-link" href="doctors.html">แพทย์</a></li>
+          <li class="nav-item"><a class="nav-link" href="appointment.html">นัดหมาย</a></li>
+          <li class="nav-item"><a class="nav-link" href="news.html">ข่าวสาร</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">ติดต่อ</a></li>
+        </ul>
+      </div>
 <body class="text-gray-800">
 
+    <!-- Header Section -->
     <header class="bg-white shadow-md fixed w-full z-50">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2">
                 <img src="https://placehold.co/40x40/3b82f6/ffffff?text=โลโก้" alt="โลโก้โรงพยาบาล" class="rounded-full">
-                <span class="text-2xl font-bold text-blue-600">โรงพยาบาล วีระพลการแพทย์</span>
+                <span class="text-2xl font-bold text-blue-600">โรงพยาบาล [ชื่อ]</span>
             </a>
             <div class="hidden md:flex space-x-6">
                 <a href="#hero" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">หน้าแรก</a>
                 <a href="#about" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">เกี่ยวกับเรา</a>
                 <a href="#services" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">บริการ</a>
                 <a href="#doctors" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">แพทย์ของเรา</a>
-                <a href="https://veerapolkanpat.github.io/appointment-form/" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200" target="_blank">นัดหมาย</a>
+                <a href="#appointment" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">นัดหมาย</a>
                 <a href="#health-qa" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">ปรึกษา AI</a>
                 <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">ติดต่อเรา</a>
                 <button id="admin-button" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">
                     <i class="fas fa-user-shield mr-1"></i> Admin
                 </button>
             </div>
+            <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
         </nav>
+        <!-- Mobile Menu (Hidden by default) -->
         <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
             <a href="#hero" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">หน้าแรก</a>
             <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">เกี่ยวกับเรา</a>
             <a href="#services" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">บริการ</a>
             <a href="#doctors" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">แพทย์ของเรา</a>
-            <a href="https://veerapolkanpat.github.io/appointment-form/" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200" target="_blank">นัดหมาย</a>
+            <a href="#appointment" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">นัดหมาย</a>
             <a href="#health-qa" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">ปรึกษา AI</a>
             <a href="#contact" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">ติดต่อเรา</a>
             <button id="mobile-admin-button" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">
@@ -138,24 +169,22 @@
         </div>
     </header>
 
-    ---
-
+    <!-- Hero Section -->
     <section id="hero" class="hero-background h-screen flex items-center justify-center text-white text-center pt-16">
         <div class="relative z-10 bg-black bg-opacity-60 p-8 md:p-12 rounded-lg max-w-3xl mx-auto shadow-2xl">
             <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 animate-fade-in-up">
-                ดูแลสุขภาพของคุณด้วยใจ ที่โรงพยาบาล วีระพลการแพทย์
+                ดูแลสุขภาพของคุณด้วยใจ ที่โรงพยาบาล [ชื่อโรงพยาบาลของคุณ]
             </h1>
             <p class="text-lg md:text-xl mb-8 opacity-90 animate-fade-in-up delay-200">
                 บริการทางการแพทย์ครบวงจร ด้วยทีมแพทย์ผู้เชี่ยวชาญและเทคโนโลยีที่ทันสมัย
             </p>
-            <a href="https://veerapolkanpat.github.io/appointment-form/" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animate-fade-in-up delay-400" target="_blank">
+            <a href="#appointment" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animate-fade-in-up delay-400">
                 นัดหมายแพทย์วันนี้ <i class="fas fa-calendar-alt ml-2"></i>
             </a>
         </div>
     </section>
 
-    ---
-
+    <!-- About Us Section -->
     <section id="about" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-12">เกี่ยวกับเรา</h2>
@@ -164,9 +193,9 @@
                     <img src="https://placehold.co/600x400/a78bfa/ffffff?text=ภาพภายในโรงพยาบาล" alt="ภาพภายในโรงพยาบาล" class="rounded-lg shadow-xl w-full h-auto transform hover:scale-102 transition duration-300">
                 </div>
                 <div class="md:w-1/2">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">โรงพยาบาล วีระพลการแพทย์</h3>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">โรงพยาบาล [ชื่อโรงพยาบาลของคุณ]</h3>
                     <p class="text-gray-600 leading-relaxed mb-4">
-                        โรงพยาบาลวีระพลการแพทย์ ก่อตั้งขึ้นด้วยความมุ่งมั่นที่จะเป็นศูนย์กลางการดูแลสุขภาพที่ครบวงจรในภูมิภาค ด้วยจำนวน 50 เตียง เราพร้อมให้บริการทางการแพทย์ที่ได้มาตรฐานสากล โดยทีมแพทย์ผู้เชี่ยวชาญ พยาบาล และบุคลากรทางการแพทย์ที่เปี่ยมด้วยประสบการณ์และความเอาใจใส่
+                        โรงพยาบาล [ชื่อโรงพยาบาลของคุณ] ก่อตั้งขึ้นด้วยความมุ่งมั่นที่จะเป็นศูนย์กลางการดูแลสุขภาพที่ครบวงจรในภูมิภาค ด้วยจำนวน 50 เตียง เราพร้อมให้บริการทางการแพทย์ที่ได้มาตรฐานสากล โดยทีมแพทย์ผู้เชี่ยวชาญ พยาบาล และบุคลากรทางการแพทย์ที่เปี่ยมด้วยประสบการณ์และความเอาใจใส่
                     </p>
                     <p class="text-gray-600 leading-relaxed">
                         เราให้ความสำคัญกับการนำเทคโนโลยีทางการแพทย์ที่ทันสมัยมาใช้ เพื่อให้การวินิจฉัยและการรักษาเป็นไปอย่างแม่นยำและมีประสิทธิภาพสูงสุด พร้อมสิ่งอำนวยความสะดวกที่ครบครัน เพื่อให้ผู้ป่วยและญาติได้รับความสะดวกสบายตลอดการเข้าใช้บริการ
@@ -177,12 +206,12 @@
         </div>
     </section>
 
-    ---
-
+    <!-- Services Section -->
     <section id="services" class="py-16 bg-blue-50">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-12">บริการของเรา</h2>
             <div id="services-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Services will be loaded here by JavaScript from Firestore -->
                 <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center justify-center min-h-[180px]">
                     <i class="fas fa-spinner fa-spin text-blue-500 text-3xl mb-4"></i>
                     <p class="text-gray-600">กำลังโหลดบริการ...</p>
@@ -191,12 +220,12 @@
         </div>
     </section>
 
-    ---
-
+    <!-- Our Doctors Section -->
     <section id="doctors" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-12">แพทย์ของเรา</h2>
             <div id="doctors-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Doctors will be loaded here by JavaScript from Firestore -->
                 <div class="bg-blue-50 p-6 rounded-lg shadow-lg flex flex-col items-center text-center justify-center min-h-[250px]">
                     <i class="fas fa-spinner fa-spin text-blue-500 text-3xl mb-4"></i>
                     <p class="text-gray-600">กำลังโหลดข้อมูลแพทย์...</p>
@@ -210,25 +239,42 @@
         </div>
     </section>
 
-    ---
-
+    <!-- Appointment Section -->
     <section id="appointment" class="py-16 bg-blue-600 text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">นัดหมายแพทย์</h2>
             <p class="text-lg md:text-xl mb-8">
-                เพื่อความสะดวกสบายของคุณ สามารถนัดหมายแพทย์ล่วงหน้าได้ง่ายๆ ผ่านระบบออนไลน์ของเรา
+                เพื่อความสะดวกสบายของคุณ สามารถนัดหมายแพทย์ล่วงหน้าได้ง่ายๆ
             </p>
-            <a href="https://veerapolkanpat.github.io/appointment-form/" class="bg-white text-blue-600 hover:bg-blue-100 font-bold py-4 px-10 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 inline-flex items-center justify-center text-lg" target="_blank">
-                ไปที่หน้าจองนัดหมาย <i class="fas fa-external-link-alt ml-3"></i>
-            </a>
-            <p class="text-white text-sm mt-4 opacity-90">
-                (คุณจะถูกนำไปยังหน้าฟอร์มการนัดหมายภายนอก)
-            </p>
+            <div class="bg-white p-8 rounded-lg shadow-xl max-w-xl mx-auto text-gray-800">
+                <form>
+                    <div class="mb-4">
+                        <input type="text" id="name" name="name" placeholder="ชื่อ-นามสกุล" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <input type="tel" id="phone" name="phone" placeholder="เบอร์โทรศัพท์" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <input type="email" id="email" name="email" placeholder="อีเมล (ไม่บังคับ)" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        <select id="doctor-appointment" name="doctor" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">เลือกแพทย์/แผนก</option>
+                            <!-- Options will be populated dynamically from Firestore doctors -->
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <input type="date" id="date" name="date" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full">
+                        ส่งคำขอนัดหมาย <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+            </div>
         </div>
     </section>
 
-    ---
-
+    <!-- Health Q&A Section with Gemini API -->
     <section id="health-qa" class="py-16 bg-blue-50">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-blue-700 mb-6">ปรึกษาปัญหาสุขภาพเบื้องต้น ✨</h2>
@@ -254,8 +300,7 @@
         </div>
     </section>
 
-    ---
-
+    <!-- Contact Section -->
     <section id="contact" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-12">ติดต่อเรา</h2>
@@ -263,10 +308,10 @@
                 <div class="bg-blue-50 p-6 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">ข้อมูลการติดต่อ</h3>
                     <p class="text-gray-600 mb-2">
-                        <strong class="text-blue-600">ที่อยู่:</strong> 12 หมู่ 15 ถนนวิจารณ์รังสรรค์ ตำบลหนองบัว อำเภอเมืองหนองบัวลำภู จังหวัดหนองบัวลำภู 39000
+                        <strong class="text-blue-600">ที่อยู่:</strong> [ที่อยู่โรงพยาบาลของคุณ]
                     </p>
                     <p class="text-gray-600 mb-2">
-                        <strong class="text-blue-600">โทรศัพท์:</strong> (042)312-344, (042)312-345, (042)-312-346
+                        <strong class="text-blue-600">โทรศัพท์:</strong> [เบอร์โทรศัพท์โรงพยาบาล]
                     </p>
                     <p class="text-gray-600 mb-2">
                         <strong class="text-blue-600">โทรสาร:</strong> [เบอร์โทรสาร (ถ้ามี)]
@@ -275,18 +320,20 @@
                         <strong class="text-blue-600">อีเมล:</strong> [อีเมลโรงพยาบาล]
                     </p>
                     <div class="mt-4 flex space-x-4">
-                        <a href="https://www.facebook.com/Veerapolkanpat" target="_blank" class="text-blue-600 hover:text-blue-800 text-2xl" aria-label="Facebook">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-2xl" aria-label="Facebook">
                             <i class="fab fa-facebook-square"></i>
                         </a>
                         <a href="#" class="text-blue-600 hover:text-blue-800 text-2xl" aria-label="Line Official Account">
                             <i class="fab fa-line"></i>
                         </a>
+                        <!-- Add more social media icons as needed -->
                     </div>
                 </div>
                 <div class="bg-blue-50 p-6 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold text-gray-800 mb-4">แผนที่</h3>
+                    <!-- Google Maps Embed - Replace with your actual map embed code -->
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3809.111867169429!2d102.40422137497184!3d17.202359283733074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31245df7b036c641%3A0x74a0058e578c7849!2z4Lih4Lir4Liy4Lio4Lij4Li14Lii4Liy4LiB4Liy4Lio4LiX4Liy4Lii4Liy4LiH4LmA4LiB4Lij4Liw4LmA4Liq4Liy4Lin4Lih4Liy4Lij4LmA4Lih4Lio4Liy4Lij4Lix4Lij4LiU4Lih4Liy!5e0!3m2!1sth!2sth!4v1700000000000!5m2!1sth!2sth"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.402610587784!2d100.56616421483017!3d13.756330990352528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29ed800000001%3A0x101000000000000!2sBangkok%20Hospital!5e0!3m2!1sen!2sth!4v1678901234567!5m2!1sen!2sth"
                         width="100%"
                         height="300"
                         style="border:0;"
@@ -300,11 +347,10 @@
         </div>
     </section>
 
-    ---
-
+    <!-- Footer Section -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4 text-center">
-            <p>© 2025 โรงพยาบาล วีระพลการแพทย์ สงวนลิขสิทธิ์</p>
+            <p>&copy; 2025 โรงพยาบาล [ชื่อโรงพยาบาลของคุณ] สงวนลิขสิทธิ์</p>
             <div class="flex justify-center space-x-4 mt-4">
                 <a href="#" class="text-gray-400 hover:text-white transition duration-200">นโยบายความเป็นส่วนตัว</a>
                 <span class="text-gray-400">|</span>
@@ -313,13 +359,11 @@
         </div>
     </footer>
 
+    <!-- Admin Modal -->
     <div id="admin-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button" id="close-admin-modal">×</span>
+            <span class="close-button" id="close-admin-modal">&times;</span>
             <h2 class="text-2xl font-bold text-blue-700 mb-6 text-center">จัดการข้อมูลโรงพยาบาล</h2>
-            <p class="text-red-500 text-center font-semibold mb-4">
-                ⚠️ Firebase ปิดการเชื่อมต่ออยู่ ไม่สามารถจัดการข้อมูลได้ ⚠️
-            </p>
 
             <div class="mb-8">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">จัดการแพทย์</h3>
@@ -327,28 +371,28 @@
                     <input type="hidden" id="doctor-id">
                     <div>
                         <label for="doctor-name" class="block text-sm font-medium text-gray-700">ชื่อแพทย์</label>
-                        <input type="text" id="doctor-name" placeholder="ชื่อ-นามสกุลแพทย์" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required disabled>
+                        <input type="text" id="doctor-name" placeholder="ชื่อ-นามสกุลแพทย์" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
                     </div>
                     <div>
                         <label for="doctor-specialty" class="block text-sm font-medium text-gray-700">สาขาเชี่ยวชาญ</label>
-                        <input type="text" id="doctor-specialty" placeholder="เช่น อายุรแพทย์, ศัลยแพทย์" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required disabled>
+                        <input type="text" id="doctor-specialty" placeholder="เช่น อายุรแพทย์, ศัลยแพทย์" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
                     </div>
                     <div>
                         <label for="doctor-experience" class="block text-sm font-medium text-gray-700">ประสบการณ์</label>
-                        <textarea id="doctor-experience" rows="2" placeholder="เช่น เชี่ยวชาญด้านโรคระบบทางเดินหายใจ ประสบการณ์ 15 ปี" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" disabled></textarea>
+                        <textarea id="doctor-experience" rows="2" placeholder="เช่น เชี่ยวชาญด้านโรคระบบทางเดินหายใจ ประสบการณ์ 15 ปี" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
                     </div>
                     <div>
                         <label for="doctor-image" class="block text-sm font-medium text-gray-700">URL รูปภาพแพทย์ (Placeholder)</label>
-                        <input type="text" id="doctor-image" placeholder="เช่น https://placehold.co/150x150/60a5fa/ffffff?text=แพทย์" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" disabled>
+                        <input type="text" id="doctor-image" placeholder="เช่น https://placehold.co/150x150/60a5fa/ffffff?text=แพทย์" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                     </div>
-                    <button type="submit" class="bg-blue-400 text-white font-bold py-2 px-4 rounded-md w-full" disabled>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full transition duration-200">
                         <span id="doctor-form-button-text">เพิ่มแพทย์</span>
                     </button>
                 </form>
                 <div class="mt-6">
                     <h4 class="text-lg font-semibold mb-3">รายชื่อแพทย์ที่มีอยู่ (คลิกเพื่อแก้ไข)</h4>
                     <ul id="doctors-list" class="space-y-2 max-h-60 overflow-y-auto border border-gray-200 p-3 rounded-md">
-                        <li class="text-gray-500 text-center">ไม่สามารถโหลดข้อมูลแพทย์ได้ (Firebase ปิดอยู่)</li>
+                        <!-- Doctors will be listed here for admin -->
                     </ul>
                 </div>
             </div>
@@ -359,48 +403,76 @@
                     <input type="hidden" id="service-id">
                     <div>
                         <label for="service-name" class="block text-sm font-medium text-gray-700">ชื่อบริการ/แผนก</label>
-                        <input type="text" id="service-name" placeholder="เช่น แผนกอายุรกรรม" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required disabled>
+                        <input type="text" id="service-name" placeholder="เช่น แผนกอายุรกรรม" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
                     </div>
                     <div>
                         <label for="service-description" class="block text-sm font-medium text-gray-700">รายละเอียดบริการ</label>
-                        <textarea id="service-description" rows="2" placeholder="เช่น ดูแลรักษาโรคทั่วไปและโรคเรื้อรังต่างๆ" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" disabled></textarea>
+                        <textarea id="service-description" rows="2" placeholder="เช่น ดูแลรักษาโรคทั่วไปและโรคเรื้อรังต่างๆ" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
                     </div>
                     <div>
                         <label for="service-icon" class="block text-sm font-medium text-gray-700">คลาสไอคอน (Font Awesome)</label>
-                        <input type="text" id="service-icon" placeholder="เช่น fas fa-heartbeat (ดู Font Awesome Icons)" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" disabled>
+                        <input type="text" id="service-icon" placeholder="เช่น fas fa-heartbeat (ดู Font Awesome Icons)" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                     </div>
-                    <button type="submit" class="bg-blue-400 text-white font-bold py-2 px-4 rounded-md w-full" disabled>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full transition duration-200">
                         <span id="service-form-button-text">เพิ่มบริการ</span>
                     </button>
                 </form>
                 <div class="mt-6">
                     <h4 class="text-lg font-semibold mb-3">รายชื่อบริการที่มีอยู่ (คลิกเพื่อแก้ไข)</h4>
                     <ul id="services-list" class="space-y-2 max-h-60 overflow-y-auto border border-gray-200 p-3 rounded-md">
-                        <li class="text-gray-500 text-center">ไม่สามารถโหลดข้อมูลบริการได้ (Firebase ปิดอยู่)</li>
+                        <!-- Services will be listed here for admin -->
                     </ul>
                 </div>
             </div>
             <p class="text-center text-sm text-gray-500 mt-8">
-                User ID: <span id="current-user-id">N/A (Firebase ปิดอยู่)</span>
+                User ID: <span id="current-user-id"></span>
             </p>
         </div>
     </div>
+  </nav>
 
+  <header class="bg-light text-center p-5">
+    <h1 class="display-5 fw-bold">ยินดีต้อนรับสู่โรงพยาบาลวีระพลการแพทย์</h1>
+    <p class="lead">บริการด้วยหัวใจ ใส่ใจทุกการรักษา</p>
+    <a href="appointment.html" class="btn btn-primary">จองนัดหมาย</a>
+  </header>
+
+  <section class="container py-5">
+    <h2 class="text-center mb-4">บริการเด่นของเรา</h2>
+    <div class="row text-center">
+      <div class="col-md-4">
+        <h5>แผนกอายุรกรรม</h5>
+        <p>ดูแลรักษาโรคทั่วไป โดยแพทย์ผู้เชี่ยวชาญ</p>
+      </div>
+      <div class="col-md-4">
+        <h5>แผนกกุมารเวช</h5>
+        <p>ดูแลเด็กตั้งแต่แรกเกิดจนถึงวัยรุ่น</p>
+      </div>
+      <div class="col-md-4">
+        <h5>แผนกฉุกเฉิน 24 ชม.</h5>
+        <p>บริการฉุกเฉินตลอด 24 ชั่วโมง</p>
+      </div>
+
+    <!-- Message Modal (for alerts/confirmations) -->
     <div id="message-modal" class="modal">
         <div class="modal-content text-center">
-            <span class="close-button" id="close-message-modal">×</span>
+            <span class="close-button" id="close-message-modal">&times;</span>
             <h3 id="message-modal-title" class="text-xl font-bold mb-4"></h3>
             <p id="message-modal-content" class="mb-6"></p>
             <button id="message-modal-ok-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md transition duration-200">ตกลง</button>
             <button id="message-modal-cancel-button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-6 rounded-md ml-4 hidden transition duration-200">ยกเลิก</button>
         </div>
     </div>
+  </section>
 
+  <footer class="bg-dark text-white text-center p-3">
+    <small>&copy; 2025 โรงพยาบาลวีระพลการแพทย์</small>
+  </footer>
+    <!-- Firebase SDKs -->
     <script type="module">
-        // --- Firebase imports are commented out to disable Firebase functionality ---
-        // import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        // import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        // import { getFirestore, collection, getDocs, addDoc, setDoc, doc, deleteDoc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, getDocs, addDoc, setDoc, doc, deleteDoc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Global variables provided by Canvas environment
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
@@ -408,24 +480,7 @@
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
         let app, db, auth, userId;
-        let isAuthReady = false; // Set to false since Firebase is disabled
-
-        // --- Mock Data for Services and Doctors (when Firebase is disabled) ---
-        const mockServices = [
-            { id: 's1', name: 'แผนกอายุรกรรม', description: 'ดูแลรักษาโรคทั่วไปและโรคเรื้อรังต่างๆ', icon: 'fas fa-heartbeat' },
-            { id: 's2', name: 'แผนกศัลยกรรม', description: 'ให้บริการผ่าตัดทั่วไปและเฉพาะทาง', icon: 'fas fa-cut' },
-            { id: 's3', name: 'แผนกกุมารเวชกรรม', description: 'ดูแลสุขภาพเด็กตั้งแต่แรกเกิดจนถึงวัยรุ่น', icon: 'fas fa-child' },
-            { id: 's4', name: 'แผนกสูตินรีเวชกรรม', description: 'ดูแลสุขภาพสตรีและการตั้งครรภ์', icon: 'fas fa-venus-double' },
-            { id: 's5', name: 'แผนกฉุกเฉิน', description: 'ให้บริการทางการแพทย์ฉุกเฉินตลอด 24 ชั่วโมง', icon: 'fas fa-ambulance' },
-            { id: 's6', name: 'แผนกทันตกรรม', description: 'ให้บริการดูแลรักษาสุขภาพช่องปากและฟัน', icon: 'fas fa-tooth' }
-        ];
-
-        const mockDoctors = [
-            { id: 'd1', name: 'นพ. สมชาย ใจดี', specialty: 'อายุรแพทย์ทั่วไป', experience: 'ประสบการณ์ 15 ปี เชี่ยวชาญโรคเบาหวาน', image: 'https://placehold.co/150x150/3b82f6/ffffff?text=แพทย์1' },
-            { id: 'd2', name: 'พญ. สุดาพร งามยิ่ง', specialty: 'กุมารแพทย์', experience: 'ดูแลสุขภาพเด็กและวัคซีน ประสบการณ์ 10 ปี', image: 'https://placehold.co/150x150/3b82f6/ffffff?text=แพทย์2' },
-            { id: 'd3', name: 'นพ. วีระชัย ชาญณรงค์', specialty: 'ศัลยแพทย์กระดูกและข้อ', experience: 'ผ่าตัดข้อเข่าและสะโพก ประสบการณ์ 20 ปี', image: 'https://placehold.co/150x150/3b82f6/ffffff?text=แพทย์3' },
-            { id: 'd4', name: 'พญ. นภาพร รุ่งเรือง', specialty: 'สูตินรีแพทย์', experience: 'เชี่ยวชาญการฝากครรภ์และภาวะมีบุตรยาก ประสบการณ์ 12 ปี', image: 'https://placehold.co/150x150/3b82f6/ffffff?text=แพทย์4' }
-        ];
+        let isAuthReady = false;
 
         // --- Utility Functions for Modals (Replacing alert/confirm) ---
         function showMessageModal(title, message, type = 'alert', onConfirm = null) {
@@ -460,66 +515,59 @@
             modal.style.display = 'flex'; // Use flex to center
         }
 
-        // --- Firebase Initialization and Authentication (DISABLED) ---
+        // --- Firebase Initialization and Authentication ---
         async function initializeFirebase() {
-            console.warn("Firebase integration is currently DISABLED. Data will be loaded from mock data.");
-            // try {
-            //     if (Object.keys(firebaseConfig).length === 0) {
-            //         console.error("Firebase config is empty. Cannot initialize Firebase.");
-            //         showMessageModal("ข้อผิดพลาด", "ไม่สามารถเชื่อมต่อ Firebase ได้: การตั้งค่าไม่ถูกต้อง", "alert");
-            //         return;
-            //     }
-            //     app = initializeApp(firebaseConfig);
-            //     db = getFirestore(app);
-            //     auth = getAuth(app);
+            try {
+                if (Object.keys(firebaseConfig).length === 0) {
+                    console.error("Firebase config is empty. Cannot initialize Firebase.");
+                    showMessageModal("ข้อผิดพลาด", "ไม่สามารถเชื่อมต่อ Firebase ได้: การตั้งค่าไม่ถูกต้อง", "alert");
+                    return;
+                }
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
 
-            //     onAuthStateChanged(auth, async (user) => {
-            //         if (user) {
-            //             userId = user.uid;
-            //             document.getElementById('current-user-id').textContent = userId;
-            //             console.log("User signed in:", userId);
-            //         } else {
-            //             // Sign in anonymously if no token, or if token failed
-            //             if (initialAuthToken) {
-            //                 try {
-            //                     const userCredential = await signInWithCustomToken(auth, initialAuthToken);
-            //                     userId = userCredential.user.uid;
-            //                     document.getElementById('current-user-id').textContent = userId;
-            //                     console.log("Signed in with custom token:", userId);
-            //                 } catch (error) {
-            //                     console.error("Error signing in with custom token:", error);
-            //                     showMessageModal("ข้อผิดพลาด", "ไม่สามารถเข้าสู่ระบบได้: " + error.message, "alert");
-            //                     await signInAnonymously(auth); // Fallback to anonymous
-            //                     userId = auth.currentUser?.uid || crypto.randomUUID();
-            //                     document.getElementById('current-user-id').textContent = userId;
-            //                     console.log("Signed in anonymously after token failure:", userId);
-            //                 }
-            //             } else {
-            //                 await signInAnonymously(auth);
-            //                 userId = auth.currentUser?.uid || crypto.randomUUID();
-            //                 document.getElementById('current-user-id').textContent = userId;
-            //                 console.log("Signed in anonymously:", userId);
-            //             }
-            //         }
-            //         isAuthReady = true;
-            //         // Once auth is ready, start loading data
-            //         loadDoctors();
-            //         loadServices();
-            //         loadAdminDoctors();
-            //         loadAdminServices();
-            //     });
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        document.getElementById('current-user-id').textContent = userId;
+                        console.log("User signed in:", userId);
+                    } else {
+                        // Sign in anonymously if no token, or if token failed
+                        if (initialAuthToken) {
+                            try {
+                                const userCredential = await signInWithCustomToken(auth, initialAuthToken);
+                                userId = userCredential.user.uid;
+                                document.getElementById('current-user-id').textContent = userId;
+                                console.log("Signed in with custom token:", userId);
+                            } catch (error) {
+                                console.error("Error signing in with custom token:", error);
+                                showMessageModal("ข้อผิดพลาด", "ไม่สามารถเข้าสู่ระบบได้: " + error.message, "alert");
+                                await signInAnonymously(auth); // Fallback to anonymous
+                                userId = auth.currentUser?.uid || crypto.randomUUID();
+                                document.getElementById('current-user-id').textContent = userId;
+                                console.log("Signed in anonymously after token failure:", userId);
+                            }
+                        } else {
+                            await signInAnonymously(auth);
+                            userId = auth.currentUser?.uid || crypto.randomUUID();
+                            document.getElementById('current-user-id').textContent = userId;
+                            console.log("Signed in anonymously:", userId);
+                        }
+                    }
+                    isAuthReady = true;
+                    // Once auth is ready, start loading data
+                    loadDoctors();
+                    loadServices();
+                    populateAppointmentDoctors();
+                    loadAdminDoctors();
+                    loadAdminServices();
+                });
 
-            // } catch (error) {
-            //     console.error("Error initializing Firebase:", error);
-            //     showMessageModal("ข้อผิดพลาด", "ไม่สามารถเริ่มต้น Firebase ได้: " + error.message, "alert");
-            // }
-
-            // Always load mock data when Firebase is disabled
-            isAuthReady = false; // Ensure this is false
-            loadServices();
-            loadDoctors();
-            loadAdminDoctors(); // Load mock data for admin view as well
-            loadAdminServices(); // Load mock data for admin view as well
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+                showMessageModal("ข้อผิดพลาด", "ไม่สามารถเริ่มต้น Firebase ได้: " + error.message, "alert");
+            }
         }
 
         // --- Firestore Data Loading and Rendering (Public Facing) ---
@@ -559,352 +607,416 @@
             doctors.forEach(doctor => {
                 const doctorCard = `
                     <div class="bg-blue-50 p-6 rounded-lg shadow-lg flex flex-col items-center text-center">
-                        <img src="${doctor.image || 'https://placehold.co/150x150/60a5fa/ffffff?text=แพทย์'}" alt="${doctor.name}" class="w-24 h-24 rounded-full object-cover mb-4 shadow-md">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-1">${doctor.name}</h3>
+                        <img src="${doctor.imageUrl || 'https://placehold.co/150x150/60a5fa/ffffff?text=แพทย์'}" alt="${doctor.name}" class="w-32 h-32 rounded-full object-cover mb-4 border-4 border-blue-300">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">${doctor.name}</h3>
                         <p class="text-blue-600 font-medium mb-2">${doctor.specialty}</p>
-                        <p class="text-gray-600 text-sm">${doctor.experience}</p>
+                        <p class="text-gray-600">
+                            ${doctor.experience}
+                        </p>
+                        <a href="#" class="mt-4 text-blue-600 hover:text-blue-800 font-semibold transition duration-200">ดูตารางออกตรวจ <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 `;
                 container.insertAdjacentHTML('beforeend', doctorCard);
             });
         }
 
-        // --- Data Loading from Firestore (NOW USING MOCK DATA) ---
-        async function loadServices() {
-            // if (!isAuthReady) {
-            //     console.warn("Firebase Auth not ready, skipping loadServices.");
-            //     return;
-            // }
-            try {
-                // const servicesCol = collection(db, 'services');
-                // const serviceSnapshot = await getDocs(servicesCol);
-                // const servicesList = serviceSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                renderServices(mockServices); // Use mock data
-            } catch (error) {
-                console.error("Error loading services: ", error);
-                showMessageModal("ข้อผิดพลาด", "ไม่สามารถโหลดข้อมูลบริการได้: " + error.message, "alert");
-                document.getElementById('services-container').innerHTML = '<p class="col-span-full text-center text-red-500">เกิดข้อผิดพลาดในการโหลดบริการ</p>';
-            }
-        }
-
-        async function loadDoctors() {
-            // if (!isAuthReady) {
-            //     console.warn("Firebase Auth not ready, skipping loadDoctors.");
-            //     return;
-            // }
-            try {
-                // const doctorsCol = collection(db, 'doctors');
-                // const doctorSnapshot = await getDocs(doctorsCol);
-                // const doctorsList = doctorSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                renderDoctors(mockDoctors); // Use mock data
-            } catch (error) {
-                console.error("Error loading doctors: ", error);
+        // Load doctors data from Firestore
+        function loadDoctors() {
+            if (!isAuthReady || !db) return;
+            const doctorsCollectionRef = collection(db, `artifacts/${appId}/public/data/doctors`);
+            onSnapshot(doctorsCollectionRef, (snapshot) => {
+                const doctors = [];
+                snapshot.forEach(doc => {
+                    doctors.push({ id: doc.id, ...doc.data() });
+                });
+                renderDoctors(doctors);
+            }, (error) => {
+                console.error("Error loading doctors:", error);
                 showMessageModal("ข้อผิดพลาด", "ไม่สามารถโหลดข้อมูลแพทย์ได้: " + error.message, "alert");
-                document.getElementById('doctors-container').innerHTML = '<p class="col-span-full text-center text-red-500">เกิดข้อผิดพลาดในการโหลดแพทย์</p>';
-            }
+            });
         }
 
-        // --- Admin Panel Functions (DISABLED OR USING MOCK DATA) ---
-
-        // Render Doctors in Admin Modal (using mock data or disabled)
-        function loadAdminDoctors() {
-            // if (!isAuthReady) return; // This check is now redundant for Firebase, but good practice
-            const doctorsListElem = document.getElementById('doctors-list');
-            doctorsListElem.innerHTML = '';
-
-            if (!isAuthReady) { // If Firebase is intentionally disabled
-                mockDoctors.forEach((doctor) => {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'flex justify-between items-center bg-gray-100 p-2 rounded-md shadow-sm opacity-50 cursor-not-allowed'; // Indicate disabled
-                    listItem.innerHTML = `
-                        <span class="text-gray-700">${doctor.name} (${doctor.specialty})</span>
-                        <button class="bg-red-300 text-white text-sm py-1 px-3 rounded-md cursor-not-allowed" disabled>ลบ</button>
-                    `;
-                    doctorsListElem.appendChild(listItem);
+        // Load services data from Firestore
+        function loadServices() {
+            if (!isAuthReady || !db) return;
+            const servicesCollectionRef = collection(db, `artifacts/${appId}/public/data/services`);
+            onSnapshot(servicesCollectionRef, (snapshot) => {
+                const services = [];
+                snapshot.forEach(doc => {
+                    services.push({ id: doc.id, ...doc.data() });
                 });
-                return;
-            }
-
-            // Original Firebase listener (commented out)
-            // const doctorsCol = collection(db, 'doctors');
-            // onSnapshot(query(doctorsCol), (snapshot) => {
-            //     doctorsListElem.innerHTML = ''; // Clear to prevent duplicates
-            //     snapshot.forEach((docItem) => {
-            //         const doctor = { id: docItem.id, ...docItem.data() };
-            //         const listItem = document.createElement('li');
-            //         listItem.className = 'flex justify-between items-center bg-gray-100 p-2 rounded-md shadow-sm';
-            //         listItem.innerHTML = `
-            //             <span class="text-gray-700 cursor-pointer hover:text-blue-600" data-id="${doctor.id}">${doctor.name} (${doctor.specialty})</span>
-            //             <button class="delete-doctor-button bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-3 rounded-md transition duration-200" data-id="${doctor.id}">ลบ</button>
-            //         `;
-            //         doctorsListElem.appendChild(listItem);
-
-            //         listItem.querySelector('span').addEventListener('click', () => {
-            //             document.getElementById('doctor-id').value = doctor.id;
-            //             document.getElementById('doctor-name').value = doctor.name;
-            //             document.getElementById('doctor-specialty').value = doctor.specialty;
-            //             document.getElementById('doctor-experience').value = doctor.experience;
-            //             document.getElementById('doctor-image').value = doctor.image;
-            //             document.getElementById('doctor-form-button-text').textContent = 'บันทึกการแก้ไขแพทย์';
-            //         });
-            //     });
-            // });
+                renderServices(services);
+            }, (error) => {
+                console.error("Error loading services:", error);
+                showMessageModal("ข้อผิดพลาด", "ไม่สามารถโหลดข้อมูลบริการได้: " + error.message, "alert");
+            });
         }
 
-        // Add/Update Doctor (DISABLED)
-        document.getElementById('doctor-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            showMessageModal("โปรดทราบ", "ฟังก์ชันการจัดการแพทย์ถูกปิดใช้งานอยู่ (Firebase ถูกปิดการเชื่อมต่อ)", "alert");
-            // if (!isAuthReady) {
-            //     showMessageModal("ข้อผิดพลาด", "โปรดรอให้ Firebase เชื่อมต่อก่อน", "alert");
-            //     return;
-            // }
-
-            // const doctorId = document.getElementById('doctor-id').value;
-            // const name = document.getElementById('doctor-name').value;
-            // const specialty = document.getElementById('doctor-specialty').value;
-            // const experience = document.getElementById('doctor-experience').value;
-            // const image = document.getElementById('doctor-image').value;
-
-            // try {
-            //     if (doctorId) {
-            //         // Update existing doctor
-            //         await setDoc(doc(db, 'doctors', doctorId), { name, specialty, experience, image });
-            //         showMessageModal("สำเร็จ", "แก้ไขข้อมูลแพทย์เรียบร้อยแล้ว", "alert");
-            //     } else {
-            //         // Add new doctor
-            //         await addDoc(collection(db, 'doctors'), { name, specialty, experience, image });
-            //         showMessageModal("สำเร็จ", "เพิ่มแพทย์ใหม่เรียบร้อยแล้ว", "alert");
-            //     }
-            //     document.getElementById('doctor-form').reset();
-            //     document.getElementById('doctor-id').value = '';
-            //     document.getElementById('doctor-form-button-text').textContent = 'เพิ่มแพทย์';
-            //     loadDoctors(); // Refresh public display
-            // } catch (error) {
-            //     console.error("Error adding/updating doctor: ", error);
-            //     showMessageModal("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลแพทย์ได้: " + error.message, "alert");
-            // }
-        });
-
-        // Delete Doctor (DISABLED)
-        document.getElementById('doctors-list').addEventListener('click', (e) => {
-            if (e.target.classList.contains('delete-doctor-button')) {
-                const doctorIdToDelete = e.target.dataset.id;
-                showMessageModal("โปรดทราบ", "ฟังก์ชันการลบแพทย์ถูกปิดใช้งานอยู่ (Firebase ถูกปิดการเชื่อมต่อ)", "alert");
-                // showMessageModal("ยืนยันการลบ", "คุณแน่ใจหรือไม่ว่าต้องการลบแพทย์ท่านนี้?", "confirm", async (confirmed) => {
-                //     if (confirmed) {
-                //         try {
-                //             await deleteDoc(doc(db, 'doctors', doctorIdToDelete));
-                //             showMessageModal("สำเร็จ", "ลบแพทย์เรียบร้อยแล้ว", "alert");
-                //             loadDoctors(); // Refresh public display
-                //         } catch (error) {
-                //             console.error("Error deleting doctor: ", error);
-                //             showMessageModal("ข้อผิดพลาด", "ไม่สามารถลบแพทย์ได้: " + error.message, "alert");
-                //         }
-                //     }
-                // });
-            }
-        });
-
-        // Render Services in Admin Modal (using mock data or disabled)
-        function loadAdminServices() {
-            // if (!isAuthReady) return; // This check is now redundant for Firebase, but good practice
-            const servicesListElem = document.getElementById('services-list');
-            servicesListElem.innerHTML = '';
-
-            if (!isAuthReady) { // If Firebase is intentionally disabled
-                mockServices.forEach((service) => {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'flex justify-between items-center bg-gray-100 p-2 rounded-md shadow-sm opacity-50 cursor-not-allowed'; // Indicate disabled
-                    listItem.innerHTML = `
-                        <span class="text-gray-700">${service.name} <i class="${service.icon} ml-2"></i></span>
-                        <button class="bg-red-300 text-white text-sm py-1 px-3 rounded-md cursor-not-allowed" disabled>ลบ</button>
-                    `;
-                    servicesListElem.appendChild(listItem);
+        // Populate doctors in the appointment form dropdown
+        function populateAppointmentDoctors() {
+            if (!isAuthReady || !db) return;
+            const selectElement = document.getElementById('doctor-appointment');
+            const doctorsCollectionRef = collection(db, `artifacts/${appId}/public/data/doctors`);
+            onSnapshot(doctorsCollectionRef, (snapshot) => {
+                selectElement.innerHTML = '<option value="">เลือกแพทย์/แผนก</option>'; // Reset options
+                snapshot.forEach(doc => {
+                    const doctor = doc.data();
+                    const option = document.createElement('option');
+                    option.value = doctor.name; // Or doctor.id if you want to store ID
+                    option.textContent = `${doctor.name} (${doctor.specialty})`;
+                    selectElement.appendChild(option);
                 });
-                return;
-            }
-
-            // Original Firebase listener (commented out)
-            // const servicesCol = collection(db, 'services');
-            // onSnapshot(query(servicesCol), (snapshot) => {
-            //     servicesListElem.innerHTML = ''; // Clear to prevent duplicates
-            //     snapshot.forEach((docItem) => {
-            //         const service = { id: docItem.id, ...docItem.data() };
-            //         const listItem = document.createElement('li');
-            //         listItem.className = 'flex justify-between items-center bg-gray-100 p-2 rounded-md shadow-sm';
-            //         listItem.innerHTML = `
-            //             <span class="text-gray-700 cursor-pointer hover:text-blue-600" data-id="${service.id}">${service.name} <i class="${service.icon} ml-2"></i></span>
-            //             <button class="delete-service-button bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-3 rounded-md transition duration-200" data-id="${service.id}">ลบ</button>
-            //         `;
-            //         servicesListElem.appendChild(listItem);
-
-            //         listItem.querySelector('span').addEventListener('click', () => {
-            //             document.getElementById('service-id').value = service.id;
-            //             document.getElementById('service-name').value = service.name;
-            //             document.getElementById('service-description').value = service.description;
-            //             document.getElementById('service-icon').value = service.icon;
-            //             document.getElementById('service-form-button-text').textContent = 'บันทึกการแก้ไขบริการ';
-            //         });
-            //     });
-            // });
+            }, (error) => {
+                console.error("Error populating appointment doctors:", error);
+            });
         }
 
-        // Add/Update Service (DISABLED)
-        document.getElementById('service-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            showMessageModal("โปรดทราบ", "ฟังก์ชันการจัดการบริการถูกปิดใช้งานอยู่ (Firebase ถูกปิดการเชื่อมต่อ)", "alert");
-            // if (!isAuthReady) {
-            //     showMessageModal("ข้อผิดพลาด", "โปรดรอให้ Firebase เชื่อมต่อก่อน", "alert");
-            //     return;
-            // }
+        // --- Admin Panel Functions ---
 
-            // const serviceId = document.getElementById('service-id').value;
-            // const name = document.getElementById('service-name').value;
-            // const description = document.getElementById('service-description').value;
-            // const icon = document.getElementById('service-icon').value;
-
-            // try {
-            //     if (serviceId) {
-            //         // Update existing service
-            //         await setDoc(doc(db, 'services', serviceId), { name, description, icon });
-            //         showMessageModal("สำเร็จ", "แก้ไขข้อมูลบริการเรียบร้อยแล้ว", "alert");
-            //     } else {
-            //         // Add new service
-            //         await addDoc(collection(db, 'services'), { name, description, icon });
-            //         showMessageModal("สำเร็จ", "เพิ่มบริการใหม่เรียบร้อยแล้ว", "alert");
-            //     }
-            //     document.getElementById('service-form').reset();
-            //     document.getElementById('service-id').value = '';
-            //     document.getElementById('service-form-button-text').textContent = 'เพิ่มบริการ';
-            //     loadServices(); // Refresh public display
-            // } catch (error) {
-            //     console.error("Error adding/updating service: ", error);
-            //     showMessageModal("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลบริการได้: " + error.message, "alert");
-            // }
-        });
-
-        // Delete Service (DISABLED)
-        document.getElementById('services-list').addEventListener('click', (e) => {
-            if (e.target.classList.contains('delete-service-button')) {
-                const serviceIdToDelete = e.target.dataset.id;
-                showMessageModal("โปรดทราบ", "ฟังก์ชันการลบบริการถูกปิดใช้งานอยู่ (Firebase ถูกปิดการเชื่อมต่อ)", "alert");
-                // showMessageModal("ยืนยันการลบ", "คุณแน่ใจหรือไม่ว่าต้องการลบบริการนี้?", "confirm", async (confirmed) => {
-                //     if (confirmed) {
-                //         try {
-                //             await deleteDoc(doc(db, 'services', serviceIdToDelete));
-                //             showMessageModal("สำเร็จ", "ลบบริการเรียบร้อยแล้ว", "alert");
-                //             loadServices(); // Refresh public display
-                //         } catch (error) {
-                //             console.error("Error deleting service: ", error);
-                //             showMessageModal("ข้อผิดพลาด", "ไม่สามารถลบบริการได้: " + error.message, "alert");
-                //         }
-                //     }
-                // });
-            }
-        });
-
-        // --- AI Health Q&A Functionality ---
-        document.getElementById('ask-ai-button').addEventListener('click', async () => {
-            const questionInput = document.getElementById('health-question');
-            const aiResponseDiv = document.getElementById('ai-response');
-            const responseContent = document.getElementById('response-content');
-            const askButton = document.getElementById('ask-ai-button');
-            const buttonText = document.getElementById('button-text');
-            const loadingSpinner = document.getElementById('loading-spinner');
-
-            const question = questionInput.value.trim();
-            if (!question) {
-                showMessageModal("โปรดทราบ", "กรุณาพิมพ์คำถามของคุณก่อน", "alert");
-                return;
-            }
-
-            // Show loading state
-            buttonText.textContent = 'กำลังคิด...';
-            loadingSpinner.classList.remove('hidden');
-            askButton.disabled = true;
-            aiResponseDiv.classList.add('hidden'); // Hide previous response
-
-            try {
-                // In a real application, you'd send this to a backend that calls a generative AI API
-                // For this example, we'll simulate a response
-                const simulatedResponse = await new Promise(resolve => setTimeout(() => {
-                    const sampleResponses = [
-                        "อาการปวดหัวมีหลายสาเหตุ หากปวดรุนแรงเฉียบพลัน ปวดไม่หาย หรือมีอาการร่วมเช่น แขนขาอ่อนแรง ชา พูดไม่ชัด ควรรีบพบแพทย์ทันทีค่ะ",
-                        "ไข้หวัดทั่วไปมักเกิดจากเชื้อไวรัส และมักหายได้เองใน 3-7 วัน ควรพักผ่อนให้เพียงพอ ดื่มน้ำมากๆ และทานยาลดไข้/แก้ปวด หากอาการไม่ดีขึ้นหรือแย่ลง ควรปรึกษาแพทย์ค่ะ",
-                        "การดูแลสุขภาพช่องปากที่ดีควรแปรงฟันอย่างน้อยวันละ 2 ครั้ง ใช้ไหมขัดฟัน และพบทันตแพทย์เพื่อตรวจสุขภาพฟันทุก 6 เดือนค่ะ",
-                        "วิธีลดความเครียดมีหลายอย่าง เช่น การออกกำลังกายอย่างสม่ำเสมอ การฝึกหายใจลึกๆ การทำสมาธิ การหางานอดิเรกที่ชอบ และการพูดคุยกับเพื่อนหรือครอบครัว",
-                        "การรับประทานอาหารให้ครบ 5 หมู่ และหลากหลาย จะช่วยให้ร่างกายได้รับสารอาหารที่จำเป็นอย่างครบถ้วนค่ะ เน้นผัก ผลไม้ ธัญพืชไม่ขัดสี และโปรตีนไม่ติดมัน"
-                    ];
-                    resolve(sampleResponses[Math.floor(Math.random() * sampleResponses.length)]);
-                }, 1500)); // Simulate API call delay
-
-                responseContent.textContent = simulatedResponse;
-                aiResponseDiv.classList.remove('hidden');
-            } catch (error) {
-                console.error("Error asking AI:", error);
-                responseContent.textContent = "ขออภัยค่ะ เกิดข้อผิดพลาดในการประมวลผลคำถามของคุณ กรุณาลองใหม่อีกครั้ง";
-                aiResponseDiv.classList.remove('hidden');
-            } finally {
-                // Reset button state
-                buttonText.textContent = 'ถาม AI';
-                loadingSpinner.classList.add('hidden');
-                askButton.disabled = false;
-            }
-        });
-
-        // --- Event Listeners and Initial Calls ---
-
-        // Mobile Menu Toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Admin Modal Toggle
-        const adminButton = document.getElementById('admin-button');
-        const mobileAdminButton = document.getElementById('mobile-admin-button');
         const adminModal = document.getElementById('admin-modal');
         const closeAdminModalButton = document.getElementById('close-admin-modal');
-        const closeMessageModalButton = document.getElementById('close-message-modal');
+        const adminButton = document.getElementById('admin-button');
+        const mobileAdminButton = document.getElementById('mobile-admin-button');
 
-        function openAdminModal() {
+        const doctorForm = document.getElementById('doctor-form');
+        const doctorIdInput = document.getElementById('doctor-id');
+        const doctorNameInput = document.getElementById('doctor-name');
+        const doctorSpecialtyInput = document.getElementById('doctor-specialty');
+        const doctorExperienceInput = document.getElementById('doctor-experience');
+        const doctorImageInput = document.getElementById('doctor-image');
+        const doctorFormButtonText = document.getElementById('doctor-form-button-text');
+        const doctorsList = document.getElementById('doctors-list');
+
+        const serviceForm = document.getElementById('service-form');
+        const serviceIdInput = document.getElementById('service-id');
+        const serviceNameInput = document.getElementById('service-name');
+        const serviceDescriptionInput = document.getElementById('service-description');
+        const serviceIconInput = document.getElementById('service-icon');
+        const serviceFormButtonText = document.getElementById('service-form-button-text');
+        const servicesList = document.getElementById('services-list');
+
+        // Open Admin Modal
+        adminButton.addEventListener('click', () => {
             adminModal.style.display = 'flex';
-        }
-
-        function closeAdminModal() {
-            adminModal.style.display = 'none';
-            // Clear any edit forms when closing
-            document.getElementById('doctor-form').reset();
-            document.getElementById('doctor-id').value = '';
-            document.getElementById('doctor-form-button-text').textContent = 'เพิ่มแพทย์';
-            document.getElementById('service-form').reset();
-            document.getElementById('service-id').value = '';
-            document.getElementById('service-form-button-text').textContent = 'เพิ่มบริการ';
-        }
-
-        adminButton.addEventListener('click', openAdminModal);
+        });
         mobileAdminButton.addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.add('hidden'); // Close mobile menu first
-            openAdminModal();
-        });
-        closeAdminModalButton.addEventListener('click', closeAdminModal);
-        closeMessageModalButton.addEventListener('click', () => {
-            document.getElementById('message-modal').style.display = 'none';
+            adminModal.style.display = 'flex';
+            mobileMenu.classList.add('hidden'); // Close mobile menu if open
         });
 
-        // Close modals if clicking outside
+        // Close Admin Modal
+        closeAdminModalButton.addEventListener('click', () => {
+            adminModal.style.display = 'none';
+            resetDoctorForm();
+            resetServiceForm();
+        });
+
+        // Close modal if clicked outside content
         window.addEventListener('click', (event) => {
             if (event.target == adminModal) {
-                closeAdminModal();
+                adminModal.style.display = 'none';
+                resetDoctorForm();
+                resetServiceForm();
             }
             if (event.target == document.getElementById('message-modal')) {
                 document.getElementById('message-modal').style.display = 'none';
             }
         });
 
-        // Initialize Firebase when the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', initializeFirebase);
+        // --- Doctor Admin Functions ---
+        function resetDoctorForm() {
+            doctorIdInput.value = '';
+            doctorNameInput.value = '';
+            doctorSpecialtyInput.value = '';
+            doctorExperienceInput.value = '';
+            doctorImageInput.value = '';
+            doctorFormButtonText.textContent = 'เพิ่มแพทย์';
+        }
+
+        function loadAdminDoctors() {
+            if (!isAuthReady || !db) return;
+            const doctorsCollectionRef = collection(db, `artifacts/${appId}/public/data/doctors`);
+            onSnapshot(doctorsCollectionRef, (snapshot) => {
+                doctorsList.innerHTML = '';
+                if (snapshot.empty) {
+                    doctorsList.innerHTML = '<li class="text-gray-500">ยังไม่มีข้อมูลแพทย์</li>';
+                }
+                snapshot.forEach(docSnapshot => {
+                    const doctor = { id: docSnapshot.id, ...docSnapshot.data() };
+                    const li = document.createElement('li');
+                    li.className = 'flex justify-between items-center bg-gray-100 p-2 rounded-md shadow-sm hover:bg-gray-200 transition duration-150 cursor-pointer';
+                    li.innerHTML = `
+                        <span>${doctor.name} - ${doctor.specialty}</span>
+                        <div>
+                            <button data-id="${doctor.id}" class="edit-doctor-btn text-blue-600 hover:text-blue-800 mr-2"><i class="fas fa-edit"></i></button>
+                            <button data-id="${doctor.id}" class="delete-doctor-btn text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    `;
+                    doctorsList.appendChild(li);
+                });
+            }, (error) => {
+                console.error("Error loading admin doctors:", error);
+                showMessageModal("ข้อผิดพลาด", "ไม่สามารถโหลดข้อมูลแพทย์สำหรับผู้ดูแลได้: " + error.message, "alert");
+            });
+        }
+
+        doctorForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!isAuthReady || !db) {
+                showMessageModal("ข้อผิดพลาด", "ระบบยังไม่พร้อม กรุณารอสักครู่", "alert");
+                return;
+            }
+
+            const doctorData = {
+                name: doctorNameInput.value.trim(),
+                specialty: doctorSpecialtyInput.value.trim(),
+                experience: doctorExperienceInput.value.trim(),
+                imageUrl: doctorImageInput.value.trim() || `https://placehold.co/150x150/60a5fa/ffffff?text=${encodeURIComponent(doctorNameInput.value.split(' ')[0])}`
+            };
+
+            try {
+                if (doctorIdInput.value) {
+                    // Update existing doctor
+                    await setDoc(doc(db, `artifacts/${appId}/public/data/doctors`, doctorIdInput.value), doctorData);
+                    showMessageModal("สำเร็จ", "อัปเดตข้อมูลแพทย์เรียบร้อยแล้ว", "alert");
+                } else {
+                    // Add new doctor
+                    await addDoc(collection(db, `artifacts/${appId}/public/data/doctors`), doctorData);
+                    showMessageModal("สำเร็จ", "เพิ่มแพทย์ใหม่เรียบร้อยแล้ว", "alert");
+                }
+                resetDoctorForm();
+            } catch (error) {
+                console.error("Error saving doctor:", error);
+                showMessageModal("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลแพทย์ได้: " + error.message, "alert");
+            }
+        });
+
+        doctorsList.addEventListener('click', async (e) => {
+            if (e.target.closest('.edit-doctor-btn')) {
+                const id = e.target.closest('.edit-doctor-btn').dataset.id;
+                if (!db) return;
+                const doctorDoc = await getDocs(query(collection(db, `artifacts/${appId}/public/data/doctors`)));
+                let doctorToEdit = null;
+                doctorDoc.forEach(doc => {
+                    if (doc.id === id) {
+                        doctorToEdit = { id: doc.id, ...doc.data() };
+                    }
+                });
+
+                if (doctorToEdit) {
+                    doctorIdInput.value = doctorToEdit.id;
+                    doctorNameInput.value = doctorToEdit.name;
+                    doctorSpecialtyInput.value = doctorToEdit.specialty;
+                    doctorExperienceInput.value = doctorToEdit.experience;
+                    doctorImageInput.value = doctorToEdit.imageUrl;
+                    doctorFormButtonText.textContent = 'บันทึกการแก้ไขแพทย์';
+                }
+            } else if (e.target.closest('.delete-doctor-btn')) {
+                const id = e.target.closest('.delete-doctor-btn').dataset.id;
+                showMessageModal("ยืนยันการลบ", "คุณแน่ใจหรือไม่ที่จะลบข้อมูลแพทย์นี้?", "confirm", async (confirmed) => {
+                    if (confirmed) {
+                        try {
+                            if (!db) return;
+                            await deleteDoc(doc(db, `artifacts/${appId}/public/data/doctors`, id));
+                            showMessageModal("สำเร็จ", "ลบข้อมูลแพทย์เรียบร้อยแล้ว", "alert");
+                            resetDoctorForm();
+                        } catch (error) {
+                            console.error("Error deleting doctor:", error);
+                            showMessageModal("ข้อผิดพลาด", "ไม่สามารถลบข้อมูลแพทย์ได้: " + error.message, "alert");
+                        }
+                    }
+                });
+            }
+        });
+
+        // --- Service Admin Functions ---
+        function resetServiceForm() {
+            serviceIdInput.value = '';
+            serviceNameInput.value = '';
+            serviceDescriptionInput.value = '';
+            serviceIconInput.value = '';
+            serviceFormButtonText.textContent = 'เพิ่มบริการ';
+        }
+
+        function loadAdminServices() {
+            if (!isAuthReady || !db) return;
+            const servicesCollectionRef = collection(db, `artifacts/${appId}/public/data/services`);
+            onSnapshot(servicesCollectionRef, (snapshot) => {
+                servicesList.innerHTML = '';
+                if (snapshot.empty) {
+                    servicesList.innerHTML = '<li class="text-gray-500">ยังไม่มีข้อมูลบริการ</li>';
+                }
+                snapshot.forEach(docSnapshot => {
+                    const service = { id: docSnapshot.id, ...docSnapshot.data() };
+                    const li = document.createElement('li');
+                    li.className = 'flex justify-between items-center bg-gray-100 p-2 rounded-md shadow-sm hover:bg-gray-200 transition duration-150 cursor-pointer';
+                    li.innerHTML = `
+                        <span><i class="${service.icon} mr-2"></i>${service.name}</span>
+                        <div>
+                            <button data-id="${service.id}" class="edit-service-btn text-blue-600 hover:text-blue-800 mr-2"><i class="fas fa-edit"></i></button>
+                            <button data-id="${service.id}" class="delete-service-btn text-red-600 hover:text-red-800"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    `;
+                    servicesList.appendChild(li);
+                });
+            }, (error) => {
+                console.error("Error loading admin services:", error);
+                showMessageModal("ข้อผิดพลาด", "ไม่สามารถโหลดข้อมูลบริการสำหรับผู้ดูแลได้: " + error.message, "alert");
+            });
+        }
+
+        serviceForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!isAuthReady || !db) {
+                showMessageModal("ข้อผิดพลาด", "ระบบยังไม่พร้อม กรุณารอสักครู่", "alert");
+                return;
+            }
+
+            const serviceData = {
+                name: serviceNameInput.value.trim(),
+                description: serviceDescriptionInput.value.trim(),
+                icon: serviceIconInput.value.trim() || 'fas fa-hospital' // Default icon if not provided
+            };
+
+            try {
+                if (serviceIdInput.value) {
+                    // Update existing service
+                    await setDoc(doc(db, `artifacts/${appId}/public/data/services`, serviceIdInput.value), serviceData);
+                    showMessageModal("สำเร็จ", "อัปเดตข้อมูลบริการเรียบร้อยแล้ว", "alert");
+                } else {
+                    // Add new service
+                    await addDoc(collection(db, `artifacts/${appId}/public/data/services`), serviceData);
+                    showMessageModal("สำเร็จ", "เพิ่มบริการใหม่เรียบร้อยแล้ว", "alert");
+                }
+                resetServiceForm();
+            } catch (error) {
+                console.error("Error saving service:", error);
+                showMessageModal("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลบริการได้: " + error.message, "alert");
+            }
+        });
+
+        servicesList.addEventListener('click', async (e) => {
+            if (e.target.closest('.edit-service-btn')) {
+                const id = e.target.closest('.edit-service-btn').dataset.id;
+                if (!db) return;
+                const serviceDoc = await getDocs(query(collection(db, `artifacts/${appId}/public/data/services`)));
+                let serviceToEdit = null;
+                serviceDoc.forEach(doc => {
+                    if (doc.id === id) {
+                        serviceToEdit = { id: doc.id, ...doc.data() };
+                    }
+                });
+
+                if (serviceToEdit) {
+                    serviceIdInput.value = serviceToEdit.id;
+                    serviceNameInput.value = serviceToEdit.name;
+                    serviceDescriptionInput.value = serviceToEdit.description;
+                    serviceIconInput.value = serviceToEdit.icon;
+                    serviceFormButtonText.textContent = 'บันทึกการแก้ไขบริการ';
+                }
+            } else if (e.target.closest('.delete-service-btn')) {
+                const id = e.target.closest('.delete-service-btn').dataset.id;
+                showMessageModal("ยืนยันการลบ", "คุณแน่ใจหรือไม่ที่จะลบข้อมูลบริการนี้?", "confirm", async (confirmed) => {
+                    if (confirmed) {
+                        try {
+                            if (!db) return;
+                            await deleteDoc(doc(db, `artifacts/${appId}/public/data/services`, id));
+                            showMessageModal("สำเร็จ", "ลบข้อมูลบริการเรียบร้อยแล้ว", "alert");
+                            resetServiceForm();
+                        } catch (error) {
+                            console.error("Error deleting service:", error);
+                            showMessageModal("ข้อผิดพลาด", "ไม่สามารถลบข้อมูลบริการได้: " + error.message, "alert");
+                        }
+                    }
+                });
+            }
+        });
+
+        // --- Main Page Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const healthQuestionInput = document.getElementById('health-question');
+            const askAiButton = document.getElementById('ask-ai-button');
+            const aiResponseDiv = document.getElementById('ai-response');
+            const responseContent = document.getElementById('response-content');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const buttonText = document.getElementById('button-text');
+
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Initialize Firebase when DOM is ready
+            initializeFirebase();
+
+            // Gemini API Integration
+            askAiButton.addEventListener('click', async function() {
+                const prompt = healthQuestionInput.value.trim();
+                if (!prompt) {
+                    responseContent.textContent = "กรุณาพิมพ์คำถามของคุณก่อน";
+                    aiResponseDiv.classList.remove('hidden');
+                    return;
+                }
+
+                // Show loading spinner and disable button
+                buttonText.textContent = "กำลังประมวลผล...";
+                loadingSpinner.classList.remove('hidden');
+                askAiButton.disabled = true;
+                aiResponseDiv.classList.add('hidden'); // Hide previous response
+
+                try {
+                    let chatHistory = [];
+                    // Add a system instruction to guide the LLM's behavior
+                    chatHistory.push({
+                        role: "user",
+                        parts: [{ text: "คุณคือผู้ช่วยด้านสุขภาพเบื้องต้นของโรงพยาบาลเอกชนขนาด 50 เตียง โปรดให้ข้อมูลสุขภาพทั่วไปและคำแนะนำเบื้องต้นที่เป็นประโยชน์ แต่ย้ำเตือนเสมอว่าข้อมูลนี้ไม่สามารถทดแทนคำแนะนำจากแพทย์ได้ และควรปรึกษาแพทย์หากมีอาการรุนแรงหรือเรื้อรัง" }]
+                    });
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // Canvas will automatically provide the API key
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        responseContent.textContent = text;
+                    } else {
+                        responseContent.textContent = "ขออภัย ไม่สามารถประมวลผลคำถามของคุณได้ในขณะนี้ กรุณาลองอีกครั้ง";
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API:', error);
+                    responseContent.textContent = "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง";
+                } finally {
+                    // Hide loading spinner and enable button
+                    buttonText.textContent = "ถาม AI";
+                    loadingSpinner.classList.add('hidden');
+                    askAiButton.disabled = false;
+                    aiResponseDiv.classList.remove('hidden'); // Show the response area
+                }
+            });
+        });
     </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
