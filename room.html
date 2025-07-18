@@ -14,8 +14,13 @@
     .room-img {
       height: 220px;
       object-fit: cover;
-      cursor: pointer;
-      border-radius: 8px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .room-img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
     .room-label {
       text-align: center;
@@ -28,10 +33,9 @@
     }
   </style>
 </head>
-
 <body>
 
-<!-- ✅ Navbar รองรับมือถือ -->
+<!-- ✅ Navbar -->
 <header class="bg-white shadow-sm fixed-top">
   <nav class="navbar navbar-expand-md navbar-light bg-white container">
     <a class="navbar-brand d-flex align-items-center" href="https://veerapolkanpat.github.io/hospital/">
@@ -67,18 +71,23 @@
   <p class="text-center mb-5">โรงพยาบาลวีระพลการแพทย์ เสนอบริการห้องพักพร้อมสิ่งอำนวยความสะดวกครบครัน โดยมีให้เลือกหลายประเภท ตั้งแต่ห้องราคาประหยัดจนถึงห้อง VIP</p>
 
   <div class="row g-4">
+    <!-- VIP Room -->
     <div class="col-md-4 text-center">
       <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip2.avif" class="img-fluid room-img" data-bs-toggle="modal" data-bs-target="#vipModal">
       <div class="room-label">ห้อง VIP</div>
       <small class="text-muted d-block">คลิกที่รูปเพื่อดูรายละเอียด</small>
       <p class="card-text">ห้องพักเดี่ยวมีความเป็นส่วนตัว พร้อมสิ่งอำนวยความสะดวกครบครัน เช่น โทรทัศน์ ตู้เย็น โซฟา เตียงปรับระดับ และห้องน้ำในตัว</p>
     </div>
+
+    <!-- Special Room -->
     <div class="col-md-4 text-center">
       <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip3.avif" class="img-fluid room-img" data-bs-toggle="modal" data-bs-target="#specialModal">
       <div class="room-label">ห้องพิเศษรวม</div>
       <small class="text-muted d-block">คลิกที่รูปเพื่อดูรายละเอียด</small>
       <p class="card-text">ห้องพิเศษรวมให้บริการในราคาประหยัด พร้อมความเป็นส่วนตัวและสิ่งอำนวยความสะดวกที่จำเป็น เพื่อการพักฟื้นอย่างสบายใจ</p>
     </div>
+
+    <!-- Pre-ICU Room -->
     <div class="col-md-4 text-center">
       <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/icu.avif" class="img-fluid room-img" data-bs-toggle="modal" data-bs-target="#icuModal">
       <div class="room-label">ห้อง Pre-ICU</div>
@@ -89,7 +98,7 @@
 </div>
 
 <!-- ✅ Modals -->
-<!-- VIP Modal -->
+<!-- VIP -->
 <div class="modal fade" id="vipModal" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -133,7 +142,7 @@
   </div>
 </div>
 
-<!-- พิเศษรวม Modal -->
+<!-- Special Room -->
 <div class="modal fade" id="specialModal" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -155,7 +164,7 @@
               <li>กระติกน้ำร้อนไฟฟ้า</li>
               <li>เครื่องปรับอากาศ</li>
               <li>ของใช้ในห้องน้ำ</li>
-              <li>ตู้ส่วนตัว</li>
+              <li>ตู้ส่วนตัวเฉพาะผู้ป่วย</li>
               <li>ฟรี Wi-Fi</li>
             </ul>
           </div>
@@ -176,7 +185,7 @@
   </div>
 </div>
 
-<!-- Pre-ICU Modal -->
+<!-- Pre-ICU -->
 <div class="modal fade" id="icuModal" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
