@@ -1,165 +1,112 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>โรงพยาบาล วีระพลการแพทย์</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>โรงพยาบาลวีระพลการแพทย์</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Prompt', sans-serif; }
-    .hero-bg {
-      background-image: url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-    .dropdown:hover .dropdown-menu {
-      display: block;
+    body {
+      font-family: 'Prompt', sans-serif;
     }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
 
+<body class="bg-white text-gray-800">
   <!-- Navbar -->
-  <header class="bg-white shadow fixed top-0 left-0 right-0 z-50">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="#" class="flex items-center gap-3">
-        <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" class="h-10 w-10 rounded-full" alt="logo">
-        <span class="text-lg md:text-xl font-bold text-blue-800">รพ.วีระพลการแพทย์</span>
-      </a>
-      <nav class="hidden md:flex items-center gap-6">
-        <a href="#about" class="hover:text-blue-600">เกี่ยวกับเรา</a>
-        <div class="relative dropdown">
-          <button class="hover:text-blue-600 flex items-center gap-1">บริการ <i class="fas fa-angle-down text-sm"></i></button>
-          <div class="dropdown-menu absolute left-0 mt-2 w-56 bg-white shadow-lg rounded-lg hidden z-50">
-            <a href="/hospital/room.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">ห้องพักและสิ่งอำนวยความสะดวก</a>
-            <a href="/hospital/insurance.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">บริษัทประกันคู่สัญญา</a>
-          </div>
-        </div>
-        <a href="#doctors" class="hover:text-blue-600">แพทย์</a>
-        <a href="https://veerapolkanpat.github.io/appointment-form/" target="_blank" class="hover:text-blue-600">นัดหมาย</a>
-        <a href="#contact" class="hover:text-blue-600">ติดต่อ</a>
+  <header class="bg-gradient-to-r from-blue-600 to-blue-400 text-white shadow">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">โรงพยาบาลวีระพลการแพทย์</h1>
+      <nav class="space-x-6 hidden md:flex">
+        <a href="#services" class="hover:underline">บริการ</a>
+        <a href="#doctors" class="hover:underline">ทีมแพทย์</a>
+        <a href="#appointment" class="hover:underline">นัดหมาย</a>
+        <a href="#contact" class="hover:underline">ติดต่อเรา</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero-bg h-screen flex items-center justify-center text-white text-center pt-20">
-    <div class="bg-black bg-opacity-50 p-10 rounded-xl shadow-xl max-w-3xl">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">ดูแลสุขภาพของคุณด้วยใจ</h1>
-      <p class="text-lg mb-6">บริการทางการแพทย์ครบวงจร ด้วยทีมแพทย์ผู้เชี่ยวชาญ</p>
-      <a href="https://veerapolkanpat.github.io/appointment-form/" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full inline-flex items-center">
-        นัดหมายแพทย์ <i class="fas fa-calendar-alt ml-2"></i>
-      </a>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="py-16 bg-white">
-    <div class="container mx-auto px-4 flex flex-col md:flex-row gap-8 items-center">
-      <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/front_hos.jpg" class="w-full md:w-1/2 rounded-lg shadow" alt="โรงพยาบาล">
-      <div class="md:w-1/2">
-        <h2 class="text-3xl font-bold text-blue-700 mb-4">เกี่ยวกับเรา</h2>
-        <p class="text-gray-700 mb-3">
-          โรงพยาบาลวีระพลการแพทย์ มีจำนวน 50 เตียง พร้อมให้บริการด้านสุขภาพแบบครบวงจร ด้วยมาตรฐานและทีมแพทย์เฉพาะทาง
-        </p>
-        <p class="text-gray-700">
-          เรามุ่งมั่นให้บริการอย่างอบอุ่น ปลอดภัย และทันสมัย ครอบคลุมทั้งการตรวจวินิจฉัย รักษา และฟื้นฟูสุขภาพ
-        </p>
-      </div>
+  <!-- Hero Section -->
+  <section class="bg-blue-100 py-16 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-semibold mb-4">ดูแลสุขภาพของคุณด้วยหัวใจ</h2>
+      <p class="text-lg mb-6">ให้บริการทางการแพทย์แบบครบวงจร ครอบคลุมทุกช่วงวัย</p>
+      <a href="#appointment" class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg shadow">นัดหมายออนไลน์</a>
     </div>
   </section>
 
   <!-- Services -->
-  <section id="services" class="py-16 bg-blue-50">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-blue-700 mb-10">บริการของเรา</h2>
+  <section id="services" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-10">บริการของเรา</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md">
-          <i class="fas fa-heartbeat text-blue-600 text-4xl mb-3"></i>
-          <h3 class="font-semibold mb-1">อายุรกรรม</h3>
-          <p class="text-sm text-gray-600">ดูแลรักษาโรคทั่วไปและเรื้อรัง</p>
+        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold mb-2">ตรวจสุขภาพทั่วไป</h3>
+          <p>บริการตรวจร่างกายสำหรับทุกเพศทุกวัย</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md">
-          <i class="fas fa-user-md text-blue-600 text-4xl mb-3"></i>
-          <h3 class="font-semibold mb-1">ศัลยกรรม</h3>
-          <p class="text-sm text-gray-600">ผ่าตัดโดยแพทย์เฉพาะทาง</p>
+        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold mb-2">คลินิกเฉพาะทาง</h3>
+          <p>ให้บริการโดยแพทย์เฉพาะทางแต่ละสาขา</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md">
-          <i class="fas fa-ambulance text-blue-600 text-4xl mb-3"></i>
-          <h3 class="font-semibold mb-1">ฉุกเฉิน 24 ชม.</h3>
-          <p class="text-sm text-gray-600">ดูแลเร่งด่วนตลอด 24 ชั่วโมง</p>
+        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold mb-2">ฉุกเฉิน 24 ชั่วโมง</h3>
+          <p>พร้อมดูแลตลอดทุกช่วงเวลา</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Doctors -->
-  <section id="doctors" class="py-16 bg-white">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-blue-700 mb-10">ทีมแพทย์ของเรา</h2>
+  <section id="doctors" class="py-16">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-10">ทีมแพทย์ของเรา</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-blue-50 p-6 rounded-lg shadow">
-          <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr1.avif" alt="dr1" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
-          <h3 class="font-semibold">นพ.วีระพล พจน์จลองศิลป์</h3>
-          <p class="text-sm text-gray-600">เวชศาสตร์ทั่วไป</p>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <img src="https://placehold.co/150x150" alt="Doctor" class="mx-auto rounded-full mb-4">
+          <h3 class="text-lg font-semibold">นพ. สมชาย ใจดี</h3>
+          <p>อายุรแพทย์</p>
         </div>
-        <div class="bg-blue-50 p-6 rounded-lg shadow">
-          <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr2.avif" alt="dr2" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
-          <h3 class="font-semibold">นพ.พณิช พจน์จลองศิลป์</h3>
-          <p class="text-sm text-gray-600">อายุรศาสตร์</p>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <img src="https://placehold.co/150x150" alt="Doctor" class="mx-auto rounded-full mb-4">
+          <h3 class="text-lg font-semibold">พญ. วิภา สุขใจ</h3>
+          <p>กุมารแพทย์</p>
         </div>
-        <div class="bg-blue-50 p-6 rounded-lg shadow">
-          <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr4.avif" alt="dr3" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
-          <h3 class="font-semibold">พญ.สุมณทิพย์ พจน์จลองศิลป์</h3>
-          <p class="text-sm text-gray-600">โรคหัวใจ</p>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <img src="https://placehold.co/150x150" alt="Doctor" class="mx-auto rounded-full mb-4">
+          <h3 class="text-lg font-semibold">นพ. วิทยา สายใจ</h3>
+          <p>ศัลยแพทย์</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Appointment -->
+  <section id="appointment" class="bg-blue-50 py-16">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6">จองคิวนัดหมาย</h2>
+      <p class="mb-8">กรุณาติดต่อผ่าน Line Official หรือเบอร์โทรศัพท์</p>
+      <a href="https://lin.ee/xxxxxx" class="inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg">แอดไลน์เพื่อนัดหมาย</a>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-blue-700 mb-6">ติดต่อเรา</h2>
-      <p class="text-gray-700">📍 12 หมู่ 15 ต.หนองบัว อ.เมือง จ.หนองบัวลำภู 39000</p>
-      <p class="text-gray-700 mt-2">📞 (042)312-344-6 | 📠 (042)312-341</p>
-      <p class="text-gray-700 mt-2">✉️ veerapolkarnpat@hotmail.com</p>
-      <div class="mt-4 flex justify-center space-x-4 text-xl">
-        <a href="https://www.facebook.com/Veerapolkanpat" class="text-blue-600 hover:text-blue-800"><i class="fab fa-facebook-square"></i></a>
-        <a href="https://line.me/R/ti/p/@981gqmdr" class="text-green-500 hover:text-green-700"><i class="fab fa-line"></i></a>
-      </div>
+  <section id="contact" class="py-16">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6">ติดต่อเรา</h2>
+      <p class="mb-4">ที่อยู่: 123 หมู่ 1 อำเภอเมือง จังหวัดสุขภาพดี</p>
+      <p class="mb-4">โทรศัพท์: 042-123456</p>
+      <p>อีเมล: info@veerapolhospital.com</p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-10">
-    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
-      <div>
-        <h3 class="font-semibold text-lg mb-2">โรงพยาบาล วีระพลการแพทย์</h3>
-        <p>ให้บริการทางการแพทย์ด้วยความเชี่ยวชาญ และความห่วงใย</p>
-      </div>
-      <div>
-        <h3 class="font-semibold text-lg mb-2">ลิงก์ที่เกี่ยวข้อง</h3>
-        <ul class="space-y-1">
-          <li><a href="/hospital/room.html" class="hover:underline">ห้องพักและสิ่งอำนวยความสะดวก</a></li>
-          <li><a href="/hospital/insurance.html" class="hover:underline">บริษัทประกันคู่สัญญา</a></li>
-          <li><a href="https://veerapolkanpat.github.io/appointment-form/" target="_blank" class="hover:underline">นัดหมายออนไลน์</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="font-semibold text-lg mb-2">นโยบาย</h3>
-        <ul class="space-y-1">
-          <li><a href="https://veerapolkanpat.github.io/hospital/privacy-policy.html" class="hover:underline">นโยบายความเป็นส่วนตัว</a></li>
-          <li><a href="https://veerapolkanpat.github.io/hospital/terms.html" class="hover:underline">ข้อกำหนดและเงื่อนไข</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="text-center text-xs mt-6 text-gray-400">
-      © 2025 โรงพยาบาล วีระพลการแพทย์ สงวนลิขสิทธิ์
+  <footer class="bg-blue-600 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>&copy; 2025 โรงพยาบาลวีระพลการแพทย์. สงวนลิขสิทธิ์</p>
     </div>
   </footer>
-
 </body>
+
 </html>
