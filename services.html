@@ -1,68 +1,85 @@
-<section id="rooms-facilities" class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-12">ห้องพักและสิ่งอำนวยความสะดวก</h2>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ห้องพักและสิ่งอำนวยความสะดวก - รพ.วีระพลการแพทย์</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Prompt', sans-serif;
+      background-color: #f9f9f9;
+    }
+    .banner {
+      background: url('https://static.wixstatic.com/media/ea0a7d_f2fa0eebc5e24d75850a409fd1964f4c~mv2.jpg/v1/fill/w_1903,h_721,al_c,q_85,enc_auto/ea0a7d_f2fa0eebc5e24d75850a409fd1964f4c~mv2.jpg') center/cover no-repeat;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 2px 2px 4px #000;
+    }
+    .section-title {
+      font-weight: bold;
+      color: #003366;
+    }
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col md:flex-row items-center text-center md:text-left">
-                <img src="https://placehold.co/200x150/60a5fa/ffffff?text=ห้องพิเศษเดี่ยว" alt="ห้องพักพิเศษเดี่ยว" class="w-40 h-auto rounded-md mb-4 md:mb-0 md:mr-6 object-cover">
-                <div>
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">ห้องพักพิเศษเดี่ยว</h3>
-                    <p class="text-gray-600">ห้องพักส่วนตัวกว้างขวาง พร้อมห้องน้ำในตัว, โทรทัศน์, ตู้เย็น, และโซฟาสำหรับญาติ</p>
-                    <ul class="text-gray-700 text-sm mt-2 list-disc list-inside">
-                        <li>เตียงผู้ป่วยปรับระดับ</li>
-                        <li>เครื่องปรับอากาศ</li>
-                        <li>Wi-Fi ฟรี</li>
-                        <li>สัญญาณเรียกพยาบาลฉุกเฉิน</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col md:flex-row items-center text-center md:text-left">
-                <img src="https://placehold.co/200x150/60a5fa/ffffff?text=ห้องพิเศษคู่" alt="ห้องพักพิเศษคู่" class="w-40 h-auto rounded-md mb-4 md:mb-0 md:mr-6 object-cover">
-                <div>
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">ห้องพักพิเศษคู่</h3>
-                    <p class="text-gray-600">ห้องพักสำหรับสองท่าน พร้อมสิ่งอำนวยความสะดวกครบครัน เพื่อความสะดวกสบายสำหรับผู้ป่วยและผู้ดูแล</p>
-                    <ul class="text-gray-700 text-sm mt-2 list-disc list-inside">
-                        <li>เตียงผู้ป่วย 2 เตียง</li>
-                        <li>ห้องน้ำในตัว</li>
-                        <li>ตู้เย็นและโทรทัศน์</li>
-                        <li>พื้นที่นั่งเล่นส่วนกลาง</li>
-                    </ul>
-                </div>
-            </div>
-            </div>
+  <!-- Banner -->
+  <div class="banner">
+    <h1 class="display-4">ห้องพักและสิ่งอำนวยความสะดวก</h1>
+  </div>
 
-        <h3 class="text-2xl font-bold text-center text-blue-600 mb-8 mt-12">สิ่งอำนวยความสะดวกทั่วไป</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <i class="fas fa-utensils text-blue-500 text-3xl mb-4"></i>
-                <h4 class="text-xl font-semibold text-gray-800 mb-2">โรงอาหาร / คาเฟ่</h4>
-                <p class="text-gray-600 text-sm">บริการอาหารและเครื่องดื่มหลากหลายเมนูสำหรับผู้ป่วย ญาติ และบุคลากร</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <i class="fas fa-parking text-blue-500 text-3xl mb-4"></i>
-                <h4 class="text-xl font-semibold text-gray-800 mb-2">ที่จอดรถ</h4>
-                <p class="text-gray-600 text-sm">ที่จอดรถกว้างขวาง สะดวกสบายสำหรับผู้มาติดต่อ</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <i class="fas fa-wifi text-blue-500 text-3xl mb-4"></i>
-                <h4 class="text-xl font-semibold text-gray-800 mb-2">อินเทอร์เน็ต Wi-Fi</h4>
-                <p class="text-gray-600 text-sm">บริการ Wi-Fi ฟรีทั่วทั้งบริเวณโรงพยาบาล</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <i class="fas fa-store text-blue-500 text-3xl mb-4"></i>
-                <h4 class="text-xl font-semibold text-gray-800 mb-2">ร้านค้าและร้านขายยา</h4>
-                <p class="text-gray-600 text-sm">มีร้านค้าและร้านขายยาภายในโรงพยาบาลเพื่อความสะดวก</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <i class="fas fa-wheelchair text-blue-500 text-3xl mb-4"></i>
-                <h4 class="text-xl font-semibold text-gray-800 mb-2">ทางลาด/ลิฟต์สำหรับผู้พิการ</h4>
-                <p class="text-gray-600 text-sm">สิ่งอำนวยความสะดวกครบครันเพื่อรองรับผู้ป่วยทุกประเภท</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <i class="fas fa-clinic-medical text-blue-500 text-3xl mb-4"></i>
-                <h4 class="text-xl font-semibold text-gray-800 mb-2">ห้องรับรองญาติ</h4>
-                <p class="text-gray-600 text-sm">พื้นที่สะดวกสบายสำหรับญาติผู้ป่วยที่มารอ</p>
-            </div>
+  <div class="container my-5">
+    <p class="lead text-center">
+      โรงพยาบาลวีระพลการแพทย์ ให้ความสำคัญกับความสะดวกสบายของผู้ป่วยและญาติ ด้วยห้องพักที่สะอาด สะดวก ปลอดภัย พร้อมสิ่งอำนวยความสะดวกครบครัน
+    </p>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+      <!-- ห้องพักเดี่ยว -->
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="https://static.wixstatic.com/media/ea0a7d_c07d618b796849a49a2d55623c3ab2f6~mv2.jpg/v1/fill/w_552,h_414,al_c,q_85,enc_auto/ea0a7d_c07d618b796849a49a2d55623c3ab2f6~mv2.jpg" class="card-img-top" alt="ห้องพักเดี่ยว">
+          <div class="card-body">
+            <h5 class="card-title section-title">ห้องพักเดี่ยว</h5>
+            <p class="card-text">ห้องพักเดี่ยวมีความเป็นส่วนตัว พร้อมสิ่งอำนวยความสะดวกครบครัน เช่น โทรทัศน์ ตู้เย็น โซฟา เตียงปรับระดับ และห้องน้ำในตัว</p>
+          </div>
         </div>
+      </div>
+
+      <!-- ห้องพิเศษ -->
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="https://static.wixstatic.com/media/ea0a7d_66a90b9a6c4e45638a8981b0df48c0ee~mv2.jpg/v1/fill/w_552,h_414,al_c,q_85,enc_auto/ea0a7d_66a90b9a6c4e45638a8981b0df48c0ee~mv2.jpg" class="card-img-top" alt="ห้องพิเศษ">
+          <div class="card-body">
+            <h5 class="card-title section-title">ห้องพิเศษ</h5>
+            <p class="card-text">ห้องกว้างขวางตกแต่งสวยงาม พร้อมโซนนั่งพักผ่อนสำหรับญาติ และสิ่งอำนวยความสะดวกที่เหนือระดับ</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- สิ่งอำนวยความสะดวก -->
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="https://static.wixstatic.com/media/ea0a7d_0c926fef3ae04167a241a296c2181a86~mv2.jpg/v1/fill/w_552,h_414,al_c,q_85,enc_auto/ea0a7d_0c926fef3ae04167a241a296c2181a86~mv2.jpg" class="card-img-top" alt="สิ่งอำนวยความสะดวก">
+          <div class="card-body">
+            <h5 class="card-title section-title">สิ่งอำนวยความสะดวก</h5>
+            <p class="card-text">บริการโทรทัศน์ Wi-Fi เครื่องทำน้ำอุ่น ที่จอดรถสะดวก พร้อมบริการอาหารตามหลักโภชนาการ</p>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
+
+    <div class="text-center mt-5">
+      <a href="index.html" class="btn btn-primary">กลับสู่หน้าแรก</a>
+    </div>
+  </div>
+
+</body>
+</html>
