@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   <style>
     body {
       font-family: 'Prompt', sans-serif;
@@ -30,35 +29,40 @@
   </style>
 </head>
 
-<body class="text-gray-800">
+<body>
 
-<!-- ✅ Navbar -->
-<header class="bg-white shadow-md fixed w-full z-50">
-  <nav class="container mx-auto px-4 py-4 d-flex justify-content-between align-items-center">
-    <a href="https://veerapolkanpat.github.io/hospital/" class="d-flex align-items-center text-decoration-none">
-      <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" class="h-12 rounded-circle me-2" style="height:48px; width:48px;">
-      <span class="fs-4 fw-bold text-success">รพ.วีระพลการแพทย์</span>
+<!-- ✅ Navbar รองรับมือถือ -->
+<header class="bg-white shadow-sm fixed-top">
+  <nav class="navbar navbar-expand-md navbar-light bg-white container">
+    <a class="navbar-brand d-flex align-items-center" href="https://veerapolkanpat.github.io/hospital/">
+      <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" alt="Logo" class="rounded-circle me-2" style="height: 48px; width: 48px;">
+      <span class="fw-bold text-success">รพ.วีระพลการแพทย์</span>
     </a>
-    <div class="d-none d-md-flex gap-3">
-      <a href="https://veerapolkanpat.github.io/hospital/" class="text-secondary text-decoration-none">หน้าแรก</a>
-      <a href="https://veerapolkanpat.github.io/hospital/#about" class="text-secondary text-decoration-none">เกี่ยวกับเรา</a>
-      <div class="dropdown">
-        <a href="https://veerapolkanpat.github.io/hospital/#services" class="dropdown-toggle text-secondary text-decoration-none" data-bs-toggle="dropdown">บริการ</a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/hospital/room.html">ห้องพักและสิ่งอำนวยความสะดวก</a></li>
-          <li><a class="dropdown-item" href="/hospital/insurance.html">บริษัทประกันคู่สัญญา</a></li>
-        </ul>
-      </div>
-      <a href="https://veerapolkanpat.github.io/hospital/#doctors" class="text-secondary text-decoration-none">แพทย์ของเรา</a>
-      <a href="https://veerapolkanpat.github.io/appointment-form/" class="text-secondary text-decoration-none" target="_blank">นัดหมาย</a>
-      <a href="https://veerapolkanpat.github.io/hospital/#health-qa" class="text-secondary text-decoration-none">ปรึกษา AI</a>
-      <a href="https://veerapolkanpat.github.io/hospital/#contact" class="text-secondary text-decoration-none">ติดต่อเรา</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+        <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/hospital/">หน้าแรก</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/hospital/#about">เกี่ยวกับเรา</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">บริการ</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/hospital/room.html">ห้องพักและสิ่งอำนวยความสะดวก</a></li>
+            <li><a class="dropdown-item" href="/hospital/insurance.html">บริษัทประกันคู่สัญญา</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/hospital/#doctors">แพทย์ของเรา</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/appointment-form/" target="_blank">นัดหมาย</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/hospital/#health-qa">ปรึกษา AI</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/hospital/#contact">ติดต่อเรา</a></li>
+      </ul>
     </div>
   </nav>
 </header>
 
 <!-- ✅ Content -->
-<div class="container py-5" style="padding-top: 100px;">
+<div class="container py-5" style="padding-top: 120px;">
   <h2 class="text-center text-primary fw-bold mb-4">ห้องพักและสิ่งอำนวยความสะดวก</h2>
   <p class="text-center mb-5">โรงพยาบาลวีระพลการแพทย์ เสนอบริการห้องพักพร้อมสิ่งอำนวยความสะดวกครบครัน โดยมีให้เลือกหลายประเภท ตั้งแต่ห้องราคาประหยัดจนถึงห้อง VIP</p>
 
@@ -84,8 +88,8 @@
   </div>
 </div>
 
-<!-- ✅ Modals ทั้ง 3 ห้อง -->
-<!-- VIP -->
+<!-- ✅ Modals -->
+<!-- VIP Modal -->
 <div class="modal fade" id="vipModal" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -129,7 +133,7 @@
   </div>
 </div>
 
-<!-- พิเศษรวม -->
+<!-- พิเศษรวม Modal -->
 <div class="modal fade" id="specialModal" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -151,7 +155,7 @@
               <li>กระติกน้ำร้อนไฟฟ้า</li>
               <li>เครื่องปรับอากาศ</li>
               <li>ของใช้ในห้องน้ำ</li>
-              <li>ตู้ส่วนตัวเฉพาะผู้ป่วย</li>
+              <li>ตู้ส่วนตัว</li>
               <li>ฟรี Wi-Fi</li>
             </ul>
           </div>
@@ -172,7 +176,7 @@
   </div>
 </div>
 
-<!-- Pre-ICU -->
+<!-- Pre-ICU Modal -->
 <div class="modal fade" id="icuModal" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -219,7 +223,7 @@
   </div>
 </div>
 
-<!-- ✅ Script Bootstrap -->
+<!-- ✅ Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
