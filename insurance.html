@@ -2,126 +2,121 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>บริษัทประกันคู่สัญญา | รพ.วีระพลการแพทย์</title>
+  <title>บริษัทประกันคู่สัญญา</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS + Google Fonts -->
+  <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Font: Prompt -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     body {
       font-family: 'Prompt', sans-serif;
-      background-color: #f8f9fa;
+      background: url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg-room.avif') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
     }
 
-    .room-label {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #007bff;
-      margin-top: 10px;
+    .overlay {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 12px;
+      padding: 40px 20px;
     }
 
-    ul.list-unstyled li {
-      padding: 4px 0;
+    .insurance-list {
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
     }
 
-    .section-top {
-      padding-top: 100px; /* เว้นให้ Navbar */
-    }
-
-    .navbar {
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    .insurance-list li {
+      margin-bottom: 8px;
     }
 
     @media (max-width: 768px) {
-      .section-top {
-        padding-top: 130px;
+      .insurance-list {
+        columns: 1;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header class="bg-white shadow-sm fixed-top">
-    <nav class="navbar navbar-expand-md navbar-light bg-white container">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" alt="Logo" class="rounded-circle me-2" style="height: 48px; width: 48px;">
-        <span class="fw-bold text-success">รพ.วีระพลการแพทย์</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mainNavbar">
-        <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-          <li class="nav-item"><a class="nav-link" href="index.html">หน้าแรก</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">เกี่ยวกับเรา</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">บริการ</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="room.html">ห้องพักและสิ่งอำนวยความสะดวก</a></li>
-              <li><a class="dropdown-item active" href="insurance.html">บริษัทประกันคู่สัญญา</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#doctors">แพทย์ของเรา</a></li>
-          <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/appointment-form/" target="_blank">นัดหมาย</a></li>
-          <li class="nav-item"><a class="nav-link" href="#health-qa">ปรึกษา AI</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">ติดต่อเรา</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-
-  <!-- Main Content -->
-  <main class="container section-top text-center">
-    <h2 class="text-primary fw-bold mb-3">บริษัทประกันคู่สัญญา</h2>
-    <p class="mb-4">โรงพยาบาลวีระพลการแพทย์ รองรับการรักษาจากบริษัทประกันชั้นนำของประเทศ เพื่อความสะดวกสบายของท่าน</p>
-
-    <div class="row row-cols-1 row-cols-md-2 g-4 text-start">
-      <div class="col">
-        <ul class="list-unstyled">
-          <li>กรุงเทพประกันชีวิต</li>
-          <li>กรุงเทพประกันภัย</li>
-          <li>กรุงเทพประกันสุขภาพ</li>
-          <li>กรุงไทย-แอกซ่า ประกันชีวิต</li>
-          <li>กรุงไทยพานิชประกันภัย</li>
-          <li>ไทยประกันชีวิต</li>
-          <li>เมืองไทยประกันชีวิต</li>
-          <li>เมืองไทยประกันภัย</li>
-          <li>เอไอเอ</li>
-          <li>อาคเนย์ประกันภัย</li>
-          <li>อาคเนย์ประกันชีวิต</li>
-          <li>อลิอันซ์ อยุธยา ประกันชีวิต</li>
-          <li>เจนเนอราลี่ ประกันชีวิต</li>
-          <li>เทเวศประกันภัย</li>
-          <li>ทิพยประกันภัย</li>
-        </ul>
-      </div>
-      <div class="col">
-        <ul class="list-unstyled">
-          <li>ไทยประกันภัย</li>
-          <li>ธนชาตประกันภัย</li>
-          <li>นวกิจประกันภัย</li>
-          <li>ฟอลคอนประกันภัย</li>
-          <li>วิริยะประกันภัย</li>
-          <li>สินมั่นคงประกันภัย</li>
-          <li>สินมั่นคงประกันสุขภาพ</li>
-          <li>อลิอันซ์ อยุธยา ประกันภัย</li>
-          <li>เอ็ม เอส ไอ จี ประกันภัย</li>
-          <li>แมพฟริค ครอส ประกันสุขภาพ</li>
-          <li>ซิกน่า ประกันภัย</li>
-          <li>เอฟดับบลิวดี ประกันชีวิต</li>
-          <li>ไอโอไอ กรุงไทย ประกันภัย</li>
-          <li>ไทยพาณิชย์ประกันชีวิต</li>
-          <li>ไทยโพลิซี่ประกันภัย</li>
-          <li>ไทยศรีประกันภัย</li>
-        </ul>
-      </div>
+<!-- ✅ Navbar -->
+<header class="bg-white shadow-sm fixed-top">
+  <nav class="navbar navbar-expand-md navbar-light bg-white container">
+    <a class="navbar-brand d-flex align-items-center" href="https://veerapolkanpat.github.io/hospital/">
+      <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" alt="Logo" class="rounded-circle me-2" style="height: 48px; width: 48px;">
+      <span class="fw-bold text-success">รพ.วีระพลการแพทย์</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+        <li class="nav-item"><a class="nav-link" href="/hospital/">หน้าแรก</a></li>
+        <li class="nav-item"><a class="nav-link" href="/hospital/#about">เกี่ยวกับเรา</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">บริการ</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/hospital/room.html">ห้องพักและสิ่งอำนวยความสะดวก</a></li>
+            <li><a class="dropdown-item active" href="/hospital/insurance.html">บริษัทประกันคู่สัญญา</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="/hospital/#doctors">แพทย์ของเรา</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/appointment-form/" target="_blank">นัดหมาย</a></li>
+        <li class="nav-item"><a class="nav-link" href="/hospital/#health-qa">ปรึกษา AI</a></li>
+        <li class="nav-item"><a class="nav-link" href="/hospital/#contact">ติดต่อเรา</a></li>
+      </ul>
     </div>
-  </main>
+  </nav>
+</header>
 
-  <!-- Bootstrap Bundle JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ✅ Main Content -->
+<main class="container py-5" style="padding-top: 100px;">
+  <div class="overlay">
+    <h2 class="text-center text-primary fw-bold mb-3">บริษัทประกันคู่สัญญา</h2>
+    <p class="text-center mb-4">โรงพยาบาลวีระพลการแพทย์ รองรับการรักษาจากบริษัทประกันชั้นนำของประเทศ เพื่อความสะดวกสบายของท่าน</p>
+
+    <ul class="insurance-list list-unstyled">
+      <li>กรุงเทพประกันชีวิต</li>
+      <li>กรุงเทพประกันภัย</li>
+      <li>กรุงเทพประกันสุขภาพ</li>
+      <li>กรุงไทย-แอกซ่า ประกันชีวิต</li>
+      <li>กรุงไทยพานิชย์ประกันภัย</li>
+      <li>ไทยประกันชีวิต</li>
+      <li>เมืองไทยประกันชีวิต</li>
+      <li>เมืองไทยประกันภัย</li>
+      <li>เอไอเอ</li>
+      <li>อาคเนย์ประกันภัย</li>
+      <li>อาคเนย์ประกันชีวิต</li>
+      <li>อลิอันซ์ อยุธยา ประกันชีวิต</li>
+      <li>เจนเนอราลี ประกันชีวิต</li>
+      <li>เทเวศประกันภัย</li>
+      <li>ทิพยประกันภัย</li>
+      <li>ไทยประกันภัย</li>
+      <li>ธนชาตประกันภัย</li>
+      <li>นวกิจประกันภัย</li>
+      <li>ฟอลคอนประกันภัย</li>
+      <li>วิริยะประกันภัย</li>
+      <li>สินมั่นคงประกันภัย</li>
+      <li>สินมั่นคงประกันสุขภาพ</li>
+      <li>อลิอันซ์ อยุธยา ประกันภัย</li>
+      <li>เอ็ม เอส ไอ จี ประกันภัย</li>
+      <li>แมพเพิล ครีสส ประกันสุขภาพ</li>
+      <li>ซิกน่า ประกันภัย</li>
+      <li>เอฟดับบลิวดี ประกันชีวิต</li>
+      <li>ไอโอไอ กรุงไทย ประกันภัย</li>
+      <li>ไทยพาณิชย์ประกันชีวิต</li>
+      <li>ไทยไพบูลย์ประกันภัย</li>
+      <li>ไทยศรีประกันภัย</li>
+    </ul>
+  </div>
+</main>
+
+<!-- ✅ Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
