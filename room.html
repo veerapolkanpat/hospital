@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ห้องพักและสิ่งอำนวยความสะดวก</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { font-family: 'Prompt', sans-serif; background: #f5f5f5; }
+    .section-title { font-weight: bold; color: #003366; }
+    .room-img { cursor: pointer; height: 230px; object-fit: cover; border-radius: 8px; }
+    .room-label { text-align: center; margin-top: 10px; font-weight: bold; color: #00509e; }
+  </style>
+</head>
+<body>
+
+<div class="container my-5">
+  <h2 class="text-center section-title mb-4">ห้องพักและสิ่งอำนวยความสะดวก</h2>
+
+  <div class="row g-4">
+
+    <!-- ห้อง VIP -->
+    <div class="col-md-4 text-center">
+      <img src="https://static.wixstatic.com/media/ea0a7d_c07d618b796849a49a2d55623c3ab2f6~mv2.jpg"
+           class="img-fluid room-img" data-bs-toggle="modal" data-bs-target="#vipModal" alt="ห้อง VIP">
+      <div class="room-label">ห้อง VIP</div>
+    </div>
+
+    <!-- ห้องพิเศษรวม -->
+    <div class="col-md-4 text-center">
+      <img src="https://static.wixstatic.com/media/ea0a7d_0c926fef3ae04167a241a296c2181a86~mv2.jpg"
+           class="img-fluid room-img" data-bs-toggle="modal" data-bs-target="#specialModal" alt="ห้องพิเศษรวม">
+      <div class="room-label">ห้องพิเศษรวม</div>
+    </div>
+
+    <!-- ห้อง Pre-ICU -->
+    <div class="col-md-4 text-center">
+      <img src="https://static.wixstatic.com/media/ea0a7d_66a90b9a6c4e45638a8981b0df48c0ee~mv2.jpg"
+           class="img-fluid room-img" data-bs-toggle="modal" data-bs-target="#icuModal" alt="ห้อง Pre-ICU">
+      <div class="room-label">ห้อง Pre-ICU</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ✅ Modal ห้อง VIP -->
+<div class="modal fade" id="vipModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">รายละเอียดห้อง VIP</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-primary">สิ่งอำนวยความสะดวก:</h6>
+        <ul>
+          <li>เตียงไฟฟ้า ปรับระดับได้</li>
+          <li>ทีวี, ตู้เย็น, โซฟา</li>
+          <li>ห้องน้ำในตัวพร้อมเครื่องทำน้ำอุ่น</li>
+          <li>ฟรี Wi-Fi</li>
+          <li>บริการอาหารครบมื้อ</li>
+        </ul>
+        <h6 class="text-primary">ราคา:</h6>
+        <ul>
+          <li>ค่าห้อง: 1,800 บาท</li>
+          <li>ค่าบริการแพทย์: 1,200 บาท</li>
+          <li>ค่าบริการพยาบาล: 1,000 บาท</li>
+          <li><strong>รวม: 4,000 บาท/วัน</strong> (รวมค่าอาหาร)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Modal ห้องพิเศษรวม -->
+<div class="modal fade" id="specialModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">รายละเอียดห้องพิเศษรวม</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-success">สิ่งอำนวยความสะดวก:</h6>
+        <ul>
+          <li>เตียงปรับระดับ, ม่านกั้นส่วนตัว</li>
+          <li>พัดลม + แอร์</li>
+          <li>ห้องน้ำรวม แยกชาย-หญิง</li>
+          <li>Wi-Fi ความเร็วสูง</li>
+        </ul>
+        <h6 class="text-success">ราคา:</h6>
+        <ul>
+          <li>ค่าห้อง: 500 บาท/วัน</li>
+          <li>รวมค่าบริการพื้นฐานแล้ว</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Modal ห้อง Pre-ICU -->
+<div class="modal fade" id="icuModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">รายละเอียดห้อง Pre-ICU</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-danger">สิ่งอำนวยความสะดวก:</h6>
+        <ul>
+          <li>เตียงไฟฟ้า พร้อมระบบติดตามชีพจร</li>
+          <li>เครื่องช่วยหายใจเบื้องต้น</li>
+          <li>การดูแลใกล้ชิด 24 ชม.</li>
+          <li>กล้องวงจรปิดเพื่อความปลอดภัย</li>
+        </ul>
+        <h6 class="text-danger">ราคา:</h6>
+        <ul>
+          <li>ค่าห้อง: 2,500 บาท/วัน</li>
+          <li>ค่าบริการดูแลเฉพาะ: 1,500 บาท</li>
+          <li><strong>รวม: 4,000 บาท/วัน</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
