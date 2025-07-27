@@ -253,7 +253,30 @@
 
     
 
-   
+    <section id="health-qa" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-blue-700 mb-6">ปรึกษาปัญหาสุขภาพเบื้องต้น ✨</h2>
+            <p class="text-lg md:text-xl text-gray-600 mb-8">
+                สอบถามอาการหรือข้อสงสัยด้านสุขภาพเบื้องต้นกับ AI ของเรา
+            </p>
+            <div class="bg-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto text-gray-800">
+                <div class="mb-4">
+                    <textarea id="health-question" rows="5" placeholder="พิมพ์คำถามเกี่ยวกับสุขภาพหรืออาการของคุณที่นี่ เช่น 'อาการปวดหัวแบบไหนที่ควรรีบไปพบแพทย์?'" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <button id="ask-ai-button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full flex items-center justify-center">
+                    <span id="button-text">ถาม AI</span>
+                    <div id="loading-spinner" class="spinner ml-3 hidden"></div>
+                </button>
+                <div id="ai-response" class="mt-8 p-6 bg-gray-50 border border-gray-200 rounded-lg text-left hidden">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">คำตอบจาก AI:</h3>
+                    <p class="text-gray-700 whitespace-pre-wrap" id="response-content"></p>
+                    <p class="text-red-500 text-sm mt-4">
+                        <strong class="font-bold">ข้อควรทราบ:</strong> ข้อมูลนี้เป็นเพียงคำแนะนำเบื้องต้นจาก AI และไม่สามารถใช้ทดแทนการวินิจฉัยหรือคำแนะนำจากแพทย์ผู้เชี่ยวชาญได้ หากมีอาการผิดปกติ ควรปรึกษาแพทย์เพื่อการวินิจฉัยและการรักษาที่ถูกต้อง
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     
 
