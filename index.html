@@ -1,105 +1,1211 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="โรงพยาบาลวีระพลการแพทย์ ดูแลสุขภาพของคุณด้วยหัวใจ ใกล้ชิด มั่นใจ ปลอดภัยทุกการรักษา" />
-  <meta property="og:title" content="โรงพยาบาลวีระพลการแพทย์" />
-  <meta property="og:description" content="ดูแลสุขภาพของคุณด้วยหัวใจ ใกล้ชิด มั่นใจ ปลอดภัยทุกการรักษา" />
-  <meta property="og:image" content="https://veerapolkanpat.github.io/hospital/assets/images/og-image.jpg" />
-  <meta name="robots" content="index, follow" />
-  <link rel="icon" href="assets/images/logo.png" type="image/png">
-  <title>โรงพยาบาลวีระพลการแพทย์</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Prompt', sans-serif; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โรงพยาบาล วีระพลการแพทย์ - ดูแลสุขภาพของคุณด้วยใจ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;404;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #f8fafc; /* Slate-50 */
+        }
+        .hero-background {
+            background-image: url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
+        }
+        /* Smooth scroll for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8; /* Slate-400 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* Slate-500 */
+        }
+        /* Simple loading spinner */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-left-color: #ffffff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 90%;
+            width: 500px;
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="bg-white text-gray-800">
+<body class="text-gray-800">
 
-  <!-- Header -->
-  <header class="bg-blue-800 text-white">
-    <div class="container mx-auto flex items-center justify-between px-4 py-4">
-      <div class="flex items-center space-x-4">
-        <img src="assets/images/logo.png" alt="โลโก้โรงพยาบาล" class="h-12 w-12">
-        <h1 class="text-lg md:text-xl font-semibold">โรงพยาบาลวีระพลการแพทย์</h1>
-      </div>
-      <nav class="hidden md:flex space-x-6">
-        <a href="#" class="hover:text-yellow-300">หน้าแรก</a>
-        <a href="#services" class="hover:text-yellow-300">บริการ</a>
-        <a href="#doctors" class="hover:text-yellow-300">ทีมแพทย์</a>
-        <a href="#contact" class="hover:text-yellow-300">ติดต่อเรา</a>
-      </nav>
+    <header class="bg-white shadow-md fixed w-full z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+              <!--  <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/logo.png" alt="โลโก้โรงพยาบาล" class="rounded-full"> -->
+                <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" class="h-10 w-10 rounded-full">
+            <span class="text-2xl font-bold text-green-700">รพ.วีระพลการแพทย์</span> 
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#hero" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">หน้าแรก</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">เกี่ยวกับเรา</a>
+                <!-- <a href="#services" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">บริการ</a> -->
+                <div class="relative group inline-block">
+                  <a href="#services" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">บริการ</a>
+                      <div class="absolute left-0 mt-2 w-56 bg-white border border-gray-200 shadow-lg rounded-lg
+            opacity-0 group-hover:opacity-100
+            invisible group-hover:visible
+            pointer-events-none group-hover:pointer-events-auto
+            transition-all duration-300 z-50">
+                        <a href="/hospital/room.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-100">ห้องพักและสิ่งอำนวยความสะดวก</a>
+                        <a href="/hospital/insurance.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-100">บริษัทประกันคู่สัญญา</a>
+                      </div>
+                    </div>
+                <a href="#doctors" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">แพทย์ของเรา</a>
+                <a href="https://veerapolkanpat.github.io/appointment-form/" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200" target="_blank">นัดหมาย</a>
+                <a href="#health-qa" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">ปรึกษา AI</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">ติดต่อเรา</a>
+                <button id="admin-button" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">
+                    <i class="fas fa-user-shield mr-1"></i> Admin
+                </button>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
+            <a href="#hero" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">หน้าแรก</a>
+            <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">เกี่ยวกับเรา</a>
+            <a href="#services" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">บริการ</a>
+            <div x-data="{ open: false }" class="w-full">
+              <button @click="open = !open"
+                class="flex justify-between items-center w-full px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">
+                บริการ
+                <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+               </button>
+
+        <!-- เมนูย่อย -->
+         <div x-show="open" x-transition class="pl-6">
+            <a href="/hospital/room.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">ห้องพักและสิ่งอำนวยความสะดวก</a>
+            <a href="/hospital/insurance.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">บริษัทประกันคู่สัญญา</a>
+        </div>
+        </div>
+            <a href="#doctors" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">แพทย์ของเรา</a>
+            <a href="https://veerapolkanpat.github.io/appointment-form/" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200" target="_blank">นัดหมาย</a>
+            <a href="#health-qa" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">ปรึกษา AI</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">ติดต่อเรา</a>
+            <button id="mobile-admin-button" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">
+                <i class="fas fa-user-shield mr-1"></i> Admin
+            </button>
+        </div>
+    </header>
+
+    
+
+    <section id="hero" class="hero-background h-screen flex items-center justify-center text-white text-center pt-16">
+        <div class="relative z-10 bg-black bg-opacity-60 p-8 md:p-12 rounded-lg max-w-3xl mx-auto shadow-2xl">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 animate-fade-in-up">
+                ดูแลสุขภาพของคุณด้วยใจ ที่โรงพยาบาล วีระพลการแพทย์
+            </h1>
+            <p class="text-lg md:text-xl mb-8 opacity-90 animate-fade-in-up delay-200">
+                บริการทางการแพทย์ครบวงจร ด้วยทีมแพทย์ผู้เชี่ยวชาญและเทคโนโลยีที่ทันสมัย
+            </p>
+            <a href="https://veerapolkanpat.github.io/appointment-form/" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 animate-fade-in-up delay-400" target="_blank">
+                นัดหมายแพทย์วันนี้ <i class="fas fa-calendar-alt ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    
+
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-12">เกี่ยวกับเรา</h2>
+            <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/front_hos.jpg" alt="ภาพภายในโรงพยาบาล" class="rounded-lg shadow-xl w-full h-auto transform hover:scale-102 transition duration-300">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">โรงพยาบาล วีระพลการแพทย์</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        โรงพยาบาลวีระพลการแพทย์ ก่อตั้งขึ้นด้วยความมุ่งมั่นที่จะเป็นศูนย์กลางการดูแลสุขภาพที่ครบวงจรในภูมิภาค ด้วยจำนวน 50 เตียง เราพร้อมให้บริการทางการแพทย์ที่ได้มาตรฐานสากล โดยทีมแพทย์ผู้เชี่ยวชาญ พยาบาล และบุคลากรทางการแพทย์ที่เปี่ยมด้วยประสบการณ์และความเอาใจใส่
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        เราให้ความสำคัญกับการนำเทคโนโลยีทางการแพทย์ที่ทันสมัยมาใช้ เพื่อให้การวินิจฉัยและการรักษาเป็นไปอย่างแม่นยำและมีประสิทธิภาพสูงสุด พร้อมสิ่งอำนวยความสะดวกที่ครบครัน เพื่อให้ผู้ป่วยและญาติได้รับความสะดวกสบายตลอดการเข้าใช้บริการ
+                    </p>
+                    <a href="#" class="mt-6 inline-block text-blue-600 hover:text-blue-800 font-semibold transition duration-200">อ่านเพิ่มเติม <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section id="services" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-12">บริการของเรา</h2>
+            <div id="services-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center justify-center min-h-[180px]">
+                    <i class="fas fa-spinner fa-spin text-blue-500 text-3xl mb-4"></i>
+                    <p class="text-gray-600">กำลังโหลดบริการ...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="doctors" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-12">แพทย์ของเรา</h2>
+            <div id="doctors-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div class="bg-blue-50 p-6 rounded-lg shadow-lg flex flex-col items-center text-center justify-center min-h-[250px]">
+                <i class="fas fa-spinner fa-spin text-blue-500 text-3xl mb-4"></i>
+                <p class="text-gray-600">กำลังโหลดข้อมูลแพทย์...</p>
+              </div>
+            </div>
+            <div class="text-center mt-12">
+              <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                    ดูรายชื่อแพทย์ทั้งหมด <i class="fas fa-user-md ml-2"></i>
+              </a>
+            </div>
+          </div>
+    </section>
+    
+    <section id="appointment" class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">นัดหมายแพทย์</h2>
+            <p class="text-lg md:text-xl mb-8">
+                เพื่อความสะดวกสบายของคุณ สามารถนัดหมายแพทย์ล่วงหน้าได้ง่ายๆ ผ่านระบบออนไลน์ของเรา
+            </p>
+            <a href="https://veerapolkanpat.github.io/appointment-form/" class="bg-white text-blue-600 hover:bg-blue-100 font-bold py-4 px-10 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 inline-flex items-center justify-center text-lg" target="_blank">
+                ไปที่หน้าจองนัดหมาย <i class="fas fa-external-link-alt ml-3"></i>
+            </a>
+            <p class="text-white text-sm mt-4 opacity-90">
+                (คุณจะถูกนำไปยังหน้าฟอร์มการนัดหมายภายนอก)
+            </p>
+        </div>
+    </section>
+
+    
+
+    <section id="health-qa" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-blue-700 mb-6">ปรึกษาปัญหาสุขภาพเบื้องต้น ✨</h2>
+            <p class="text-lg md:text-xl text-gray-600 mb-8">
+                สอบถามอาการหรือข้อสงสัยด้านสุขภาพเบื้องต้นกับ AI ของเรา
+            </p>
+            <div class="bg-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto text-gray-800">
+                <div class="mb-4">
+                    <textarea id="health-question" rows="5" placeholder="พิมพ์คำถามเกี่ยวกับสุขภาพหรืออาการของคุณที่นี่ เช่น 'อาการปวดหัวแบบไหนที่ควรรีบไปพบแพทย์?'" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <button id="ask-ai-button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full flex items-center justify-center">
+                    <span id="button-text">ถาม AI</span>
+                    <div id="loading-spinner" class="spinner ml-3 hidden"></div>
+                </button>
+                <div id="ai-response" class="mt-8 p-6 bg-gray-50 border border-gray-200 rounded-lg text-left hidden">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">คำตอบจาก AI:</h3>
+                    <p class="text-gray-700 whitespace-pre-wrap" id="response-content"></p>
+                    <p class="text-red-500 text-sm mt-4">
+                        <strong class="font-bold">ข้อควรทราบ:</strong> ข้อมูลนี้เป็นเพียงคำแนะนำเบื้องต้นจาก AI และไม่สามารถใช้ทดแทนการวินิจฉัยหรือคำแนะนำจากแพทย์ผู้เชี่ยวชาญได้ หากมีอาการผิดปกติ ควรปรึกษาแพทย์เพื่อการวินิจฉัยและการรักษาที่ถูกต้อง
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-700 mb-12">ติดต่อเรา</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <div class="bg-blue-50 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">ข้อมูลการติดต่อ</h3>
+                    <p class="text-gray-600 mb-2">
+                        <strong class="text-blue-600">ที่อยู่:</strong> 12 หมู่ 15 ถนนวิจารณ์รังสรรค์ ตำบลหนองบัว อำเภอเมืองหนองบัวลำภู จังหวัดหนองบัวลำภู 39000
+                    </p>
+                    <p class="text-gray-600 mb-2">
+                        <strong class="text-blue-600">โทรศัพท์:</strong> (042)312-344, (042)312-345, (042)-312-346
+                    </p>
+                    <p class="text-gray-600 mb-2">
+                        <strong class="text-blue-600">โทรสาร:</strong> (042)312-341
+                    </p>
+                    <p class="text-gray-600 mb-2">
+                        <strong class="text-blue-600">อีเมล:</strong> veerapolkarnpat@hotmail.com
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="https://www.facebook.com/Veerapolkanpat" target="_blank" class="text-blue-600 hover:text-blue-800 text-2xl" aria-label="Facebook">
+                            <i class="fab fa-facebook-square"></i>
+                        </a>
+                        <a href="https://line.me/R/ti/p/@981gqmdr" class="text-blue-600 hover:text-blue-800 text-2xl" aria-label="Line Official Account">
+                            <i class="fab fa-line"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">แผนที่</h3>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d617.8342201905568!2d102.43968137166904!3d17.203137844513154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3123bf58cad887d1%3A0x510f0ada2af4cf95!2z4LmC4Lij4LiH4Lie4Lii4Liy4Lia4Liy4Lil4Lin4Li14Lij4Liw4Lie4Lil4LiB4Liy4Lij4LmB4Lie4LiX4Lii4LmM!5e0!3m2!1sth!2sth!4v1752745781507!5m2!1sth!2sth"
+                        width="100%"
+                        height="300"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="rounded-md"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2025 โรงพยาบาล วีระพลการแพทย์ สงวนลิขสิทธิ์</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="https://veerapolkanpat.github.io/hospital/privacy-policy.html" class="text-gray-400 hover:text-white transition duration-200">นโยบายความเป็นส่วนตัว</a>
+                <span class="text-gray-400">|</span>
+                <a href="https://veerapolkanpat.github.io/hospital/terms.html" class="text-gray-400 hover:text-white transition duration-200">ข้อกำหนดและเงื่อนไข</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="admin-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-admin-modal">×</span>
+            <h2 class="text-2xl font-bold text-blue-700 mb-6 text-center">จัดการข้อมูลโรงพยาบาล</h2>
+            <p class="text-red-500 text-center font-semibold mb-4">
+                ⚠️ Firebase ปิดการเชื่อมต่ออยู่ ไม่สามารถจัดการข้อมูลได้ ⚠️
+            </p>
+
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">จัดการแพทย์</h3>
+                <form id="doctor-form" class="space-y-4">
+                    <input type="hidden" id="doctor-id">
+                    <div>
+                        <label for="doctor-name" class="block text-sm font-medium text-gray-700">ชื่อแพทย์</label>
+                        <input type="text" id="doctor-name" placeholder="ชื่อ-นามสกุลแพทย์" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required disabled>
+                    </div>
+                    <div>
+                        <label for="doctor-specialty" class="block text-sm font-medium text-gray-700">สาขาเชี่ยวชาญ</label>
+                        <input type="text" id="doctor-specialty" placeholder="เช่น อายุรแพทย์, ศัลยแพทย์" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required disabled>
+                    </div>
+                    <div>
+                        <label for="doctor-experience" class="block text-sm font-medium text-gray-700">ประสบการณ์</label>
+                        <textarea id="doctor-experience" rows="2" placeholder="เช่น เชี่ยวชาญด้านโรคระบบทางเดินหายใจ ประสบการณ์ 15 ปี" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" disabled></textarea>
+                    </div>
+                    <div>
+                        <label for="doctor-image" class="block text-sm font-medium text-gray-700">URL รูปภาพแพทย์ (Placeholder)</label>
+                        <input type="text" id="doctor-image" placeholder="เช่น https://placehold.co/150x150/60a5fa/ffffff?text=แพทย์" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" disabled>
+                    </div>
+                    <button type="submit" class="bg-blue-400 text-white font-bold py-2 px-4 rounded-md w-full" disabled>
+                        <span id="doctor-form-button-text">เพิ่มแพทย์</span>
+                    </button>
+                </form>
+                <div class="mt-6">
+                    <h4 class="text-lg font-semibold mb-3">รายชื่อแพทย์ที่มีอยู่ (คลิกเพื่อแก้ไข)</h4>
+                    <ul id="doctors-list" class="space-y-2 max-h-60 overflow-y-auto border border-gray-200 p-3 rounded-md">
+                        <li class="text-gray-500 text-center">ไม่สามารถโหลดข้อมูลแพทย์ได้ (Firebase ปิดอยู่)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">จัดการบริการ</h3>
+                <form id="service-form" class="space-y-4">
+                    <input type="hidden" id="service-id">
+                    <div>
+                        <label for="service-name" class="block text-sm font-medium text-gray-700">ชื่อบริการ/แผนก</label>
+                        <input type="text" id="service-name" placeholder="เช่น แผนกอายุรกรรม" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required disabled>
+                    </div>
+                    <div>
+                        <label for="service-description" class="block text-sm font-medium text-gray-700">รายละเอียดบริการ</label>
+                        <textarea id="service-description" rows="2" placeholder="เช่น ดูแลรักษาโรคทั่วไปและโรคเรื้อรังต่างๆ" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" disabled></textarea>
+                    </div>
+                    <div>
+                        <label for="service-icon" class="block text-sm font-medium text-gray-700">คลาสไอคอน (Font Awesome)</label>
+                        <input type="text" id="service-icon" placeholder="เช่น fas fa-heartbeat (ดู Font Awesome Icons)" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" disabled>
+                    </div>
+                    <button type="submit" class="bg-blue-400 text-white font-bold py-2 px-4 rounded-md w-full" disabled>
+                        <span id="service-form-button-text">เพิ่มบริการ</span>
+                    </button>
+                </form>
+                <div class="mt-6">
+                    <h4 class="text-lg font-semibold mb-3">รายชื่อบริการที่มีอยู่ (คลิกเพื่อแก้ไข)</h4>
+                    <ul id="services-list" class="space-y-2 max-h-60 overflow-y-auto border border-gray-200 p-3 rounded-md">
+                        <li class="text-gray-500 text-center">ไม่สามารถโหลดข้อมูลบริการได้ (Firebase ปิดอยู่)</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-8">
+                User ID: <span id="current-user-id">N/A (Firebase ปิดอยู่)</span>
+            </p>
+        </div>
     </div>
-  </header>
 
-  <!-- Hero -->
-  <section class="bg-blue-50 py-10 md:py-20 text-center">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">ดูแลสุขภาพของคุณด้วยหัวใจ</h2>
-      <p class="text-lg md:text-xl text-gray-700">ใกล้ชิด มั่นใจ ปลอดภัยทุกการรักษา</p>
+    <div id="message-modal" class="modal">
+        <div class="modal-content text-center">
+            <span class="close-button" id="close-message-modal">×</span>
+            <h3 id="message-modal-title" class="text-xl font-bold mb-4"></h3>
+            <p id="message-modal-content" class="mb-6"></p>
+            <button id="message-modal-ok-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md transition duration-200">ตกลง</button>
+            <button id="message-modal-cancel-button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-6 rounded-md ml-4 hidden transition duration-200">ยกเลิก</button>
+        </div>
     </div>
-  </section>
 
-  <!-- Services -->
-  <section id="services" class="py-12 bg-white">
-    <div class="container mx-auto px-6">
-      <h3 class="text-2xl font-bold mb-8 text-center text-blue-800">บริการของเรา</h3>
-      <div class="grid gap-6 md:grid-cols-3">
-        <div class="bg-blue-100 p-6 rounded-lg shadow hover:shadow-lg transition">
-          <h4 class="text-xl font-semibold mb-2">ตรวจสุขภาพทั่วไป</h4>
-          <p>บริการตรวจร่างกายทั้งเบื้องต้นและเฉพาะทาง โดยทีมแพทย์ผู้เชี่ยวชาญ</p>
+    <script type="module">
+        // --- Firebase imports are commented out to disable Firebase functionality ---
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        // import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        // import { getFirestore, collection, getDocs, addDoc, setDoc, doc, deleteDoc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables provided by Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app, db, auth, userId;
+        let isAuthReady = false; // Set to false since Firebase is disabled
+
+        // --- Mock Data for Services and Doctors (when Firebase is disabled) ---
+        const mockServices = [
+            { id: 's1', name: 'แผนกอายุรกรรม', description: 'ดูแลรักษาโรคทั่วไปและโรคเรื้อรังต่างๆ', icon: 'fas fa-heartbeat' },
+            { id: 's2', name: 'แผนกศัลยกรรม', description: 'ให้บริการผ่าตัดทั่วไปและเฉพาะทาง', icon: 'fas fa-cut' },
+            { id: 's3', name: 'แผนกกุมารเวชกรรม', description: 'ดูแลสุขภาพเด็กตั้งแต่แรกเกิดจนถึงวัยรุ่น', icon: 'fas fa-child' },
+            { id: 's4', name: 'แผนกสูตินรีเวชกรรม', description: 'ดูแลสุขภาพสตรีและการตั้งครรภ์', icon: 'fas fa-venus-double' },
+            { id: 's5', name: 'แผนกฉุกเฉิน', description: 'ให้บริการทางการแพทย์ฉุกเฉินตลอด 24 ชั่วโมง', icon: 'fas fa-ambulance' },
+            { id: 's6', name: 'แผนกทันตกรรม', description: 'ให้บริการดูแลรักษาสุขภาพช่องปากและฟัน', icon: 'fas fa-tooth' }
+        ];
+
+        const mockDoctors = [
+            { id: 'd1', name: 'นพ.วีระพล   พจน์จลองศิลป์', specialty: 'เวชศาสตร์ทั่วไป', experience: 'ปริญญาบัตร แพทย์ศาสตร์บัณฑิต คณะแพทยศาสตร์ มหาวิทยาลัยเชียงใหม่', image: 'https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr1.avif'},
+            { id: 'd2', name: 'นพ.พณิช   พจน์จลองศิลป์', specialty: 'ผู้เชี่ยวชาญสาขาอายุรศาสตร์', experience: 'ปริญญาบัตร แพทย์ศาสตร์บัณฑิต คณะแพทยศาสตร์ ศิริราชพยาบาล มหาวิทยาลัยมหิดล', image: 'https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr2.avif' },
+            { id: 'd3', name: 'พญ.สุมณทิพย์   พจน์จลองศิลป์', specialty: 'ผู้เชี่ยวชาญสาขาอายุรศาสตร์ และอายุรศาสตร์โรคหัวใจ', experience: 'ปริญญาบัตร แพทย์ศาสตร์บัณฑิต คณะแพทยศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย', image: 'https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr4.avif' },
+            { id: 'd4', name: 'พญ.บุษบงก์   ดวงมาตย์พล', specialty: 'ผู้เชี่ยวชาญสาขาวิสัญญีวิทยา', experience: 'ปริญญาบัตร แพทย์ศาสตร์บัณฑิต คณะแพทยศาสตร์ มหาวิทยาลัยขอนแก่น', image: 'https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr3.avif' },
+            { id: 'd5', name: 'นพ.ปราโมทย์   โคตรพันธุ์กูล', specialty: 'ผู้เชี่ยวชาญสาขาศัลยศาสตร์ทั่วไป', experience: 'ปริญญาบัตร แพทย์ศาสตร์บัณฑิต คณะแพทยศาสตร์ ศิริราชพยาบาล มหาวิทยาลัยมหิดล', image: 'https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr5.avif' },
+            { id: 'd6', name: 'พล.ต นพ.ดาราพงศ์ ลังกาฟ้า', specialty: 'ผู้เชี่ยวชาญสาขาสูติศาสตร์ และนรีเวชวิทยา', experience: 'ปริญญาบัตร แพทย์ศาสตร์บัณฑิต คณะแพทยศาสตร์ มหาวิทยาลัยเชียงใหม่', image: 'https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr6.avif' }
+        ];
+
+        // --- Utility Functions for Modals (Replacing alert/confirm) ---
+        function showMessageModal(title, message, type = 'alert', onConfirm = null) {
+            const modal = document.getElementById('message-modal');
+            const modalTitle = document.getElementById('message-modal-title');
+            const modalContent = document.getElementById('message-modal-content');
+            const okButton = document.getElementById('message-modal-ok-button');
+            const cancelButton = document.getElementById('message-modal-cancel-button');
+
+            modalTitle.textContent = title;
+            modalContent.textContent = message;
+
+            okButton.onclick = () => {
+                modal.style.display = 'none';
+                if (type === 'confirm' && onConfirm) {
+                    onConfirm(true);
+                }
+            };
+
+            if (type === 'confirm') {
+                cancelButton.style.display = 'inline-block';
+                cancelButton.onclick = () => {
+                    modal.style.display = 'none';
+                    if (onConfirm) {
+                        onConfirm(false);
+                    }
+                };
+            } else {
+                cancelButton.style.display = 'none';
+            }
+
+            modal.style.display = 'flex'; // Use flex to center
+        }
+
+        // --- Firebase Initialization and Authentication (DISABLED) ---
+        async function initializeFirebase() {
+            console.warn("Firebase integration is currently DISABLED. Data will be loaded from mock data.");
+            // try {
+            //     if (Object.keys(firebaseConfig).length === 0) {
+            //         console.error("Firebase config is empty. Cannot initialize Firebase.");
+            //         showMessageModal("ข้อผิดพลาด", "ไม่สามารถเชื่อมต่อ Firebase ได้: การตั้งค่าไม่ถูกต้อง", "alert");
+            //         return;
+            //     }
+            //     app = initializeApp(firebaseConfig);
+            //     db = getFirestore(app);
+            //     auth = getAuth(app);
+
+            //     onAuthStateChanged(auth, async (user) => {
+            //         if (user) {
+            //             userId = user.uid;
+            //             document.getElementById('current-user-id').textContent = userId;
+            //             console.log("User signed in:", userId);
+            //         } else {
+            //             // Sign in anonymously if no token, or if token failed
+            //             if (initialAuthToken) {
+            //                 try {
+            //                     const userCredential = await signInWithCustomToken(auth, initialAuthToken);
+            //                     userId = userCredential.user.uid;
+            //                     document.getElementById('current-user-id').textContent = userId;
+            //                     console.log("Signed in with custom token:", userId);
+            //                 } catch (error) {
+            //                     console.error("Error signing in with custom token:", error);
+            //                     showMessageModal("ข้อผิดพลาด", "ไม่สามารถเข้าสู่ระบบได้: " + error.message, "alert");
+            //                     await signInAnonymously(auth); // Fallback to anonymous
+            //                     userId = auth.currentUser?.uid || crypto.randomUUID();
+            //                     document.getElementById('current-user-id').textContent = userId;
+            //                     console.log("Signed in anonymously after token failure:", userId);
+            //                 }
+            //             } else {
+            //                 await signInAnonymously(auth);
+            //                 userId = auth.currentUser?.uid || crypto.randomUUID();
+            //                 document.getElementById('current-user-id').textContent = userId;
+            //                 console.log("Signed in anonymously:", userId);
+            //             }
+            //         }
+            //         isAuthReady = true;
+            //         // Once auth is ready, start loading data
+            //         loadDoctors();
+            //         loadServices();
+            //         loadAdminDoctors();
+            //         loadAdminServices();
+            //     });
+
+            // } catch (error) {
+            //     console.error("Error initializing Firebase:", error);
+            //     showMessageModal("ข้อผิดพลาด", "ไม่สามารถเริ่มต้น Firebase ได้: " + error.message, "alert");
+            // }
+
+            // Always load mock data when Firebase is disabled
+            isAuthReady = false; // Ensure this is false
+            loadServices();
+            loadDoctors();
+            loadAdminDoctors(); // Load mock data for admin view as well
+            loadAdminServices(); // Load mock data for admin view as well
+        }
+
+        // --- Firestore Data Loading and Rendering (Public Facing) ---
+
+        // Function to render services on the main page
+        function renderServices(services) {
+            const container = document.getElementById('services-container');
+            container.innerHTML = ''; // Clear existing content
+            if (services.length === 0) {
+                container.innerHTML = '<p class="col-span-full text-center text-gray-500">ยังไม่มีข้อมูลบริการ</p>';
+                return;
+            }
+            services.forEach(service => {
+                const serviceCard = `
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+                        <div class="text-blue-500 text-4xl mb-4 text-center">
+                            <i class="${service.icon || 'fas fa-hospital'} mx-auto"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2 text-center">${service.name}</h3>
+                        <p class="text-gray-600 text-center">
+                            ${service.description}
+                        </p>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', serviceCard);
+            });
+        }
+
+        // Function to render doctors on the main page
+        function renderDoctors(doctors) {
+    const container = document.getElementById('doctors-container');
+    container.innerHTML = ''; // Clear existing content
+
+    if (doctors.length === 0) {
+        container.innerHTML = '<p class="col-span-full text-center text-gray-500">ยังไม่มีข้อมูลแพทย์</p>';
+        return;
+    }
+
+    doctors.forEach(doctor => {
+        const doctorCard = `
+            <div class="bg-blue-50 p-6 rounded-lg shadow-lg flex flex-col items-center text-center">
+                <img src="${doctor.image || 'https://placehold.co/150x150/60a5fa/ffffff?text=แพทย์'}"
+                     alt="${doctor.name}"
+                     class="w-32 h-38 rounded-full object-cover mb-4 shadow-md border-4 border-white" />
+                <h3 class="text-xl font-semibold text-gray-800 mb-1">${doctor.name}</h3>
+                <p class="text-blue-600 font-medium mb-2">${doctor.specialty}</p>
+                <p class="text-gray-600 text-sm">${doctor.experience}</p>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', doctorCard);
+    });
+}
+
+        // --- Data Loading from Firestore (NOW USING MOCK DATA) ---
+        async function loadServices() {
+            // if (!isAuthReady) {
+            //     console.warn("Firebase Auth not ready, skipping loadServices.");
+            //     return;
+            // }
+            try {
+                // const servicesCol = collection(db, 'services');
+                // const serviceSnapshot = await getDocs(servicesCol);
+                // const servicesList = serviceSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderServices(mockServices); // Use mock data
+            } catch (error) {
+                console.error("Error loading services: ", error);
+                showMessageModal("ข้อผิดพลาด", "ไม่สามารถโหลดข้อมูลบริการได้: " + error.message, "alert");
+                document.getElementById('services-container').innerHTML = '<p class="col-span-full text-center text-red-500">เกิดข้อผิดพลาดในการโหลดบริการ</p>';
+            }
+        }
+
+        async function loadDoctors() {
+            // if (!isAuthReady) {
+            //     console.warn("Firebase Auth not ready, skipping loadDoctors.");
+            //     return;
+            // }
+            try {
+                // const doctorsCol = collection(db, 'doctors');
+                // const doctorSnapshot = await getDocs(doctorsCol);
+                // const doctorsList = doctorSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderDoctors(mockDoctors); // Use mock data
+            } catch (error) {
+                console.error("Error loading doctors: ", error);
+                showMessageModal("ข้อผิดพลาด", "ไม่สามารถโหลดข้อมูลแพทย์ได้: " + error.message, "alert");
+                document.getElementById('doctors-container').innerHTML = '<p class="col-span-full text-center text-red-500">เกิดข้อผิดพลาดในการโหลดแพทย์</p>';
+            }
+        }
+
+        // --- Admin Panel Functions (DISABLED OR USING MOCK DATA) ---
+
+        // Render Doctors in Admin Modal (using mock data or disabled)
+        function loadAdminDoctors() {
+            // if (!isAuthReady) return; // This check is now redundant for Firebase, but good practice
+            const doctorsListElem = document.getElementById('doctors-list');
+            doctorsListElem.innerHTML = '';
+
+            if (!isAuthReady) { // If Firebase is intentionally disabled
+                mockDoctors.forEach((doctor) => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'flex justify-between items-center bg-gray-100 p-2 rounded-md shadow-sm opacity-50 cursor-not-allowed'; // Indicate disabled
+                    listItem.innerHTML = `
+                        <span class="text-gray-700">${doctor.name} (${doctor.specialty})</span>
+                        <button class="bg-red-300 text-white text-sm py-1 px-3 rounded-md cursor-not-allowed" disabled>ลบ</button>
+                    `;
+                    doctorsListElem.appendChild(listItem);
+                });
+                return;
+            }
+
+            // Original Firebase listener (commented out)
+            // const doctorsCol = collection(db, 'doctors');
+            // onSnapshot(query(doctorsCol), (snapshot) => {
+            //     doctorsListElem.innerHTML = ''; // Clear to prevent duplicates
+            //     snapshot.forEach((docItem) => {
+            //         const doctor = { id: docItem.id, ...docItem.data() };
+            //         const listItem = document.createElement('li');
+            //         listItem.className = 'flex justify-between items-center bg-gray-100 p-2 rounded-md shadow-sm';
+            //         listItem.innerHTML = `
+            //             <span class="text-gray-700 cursor-pointer hover:text-blue-600" data-id="${doctor.id}">${doctor.name} (${doctor.specialty})</span>
+            //             <button class="delete-doctor-button bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-3 rounded-md transition duration-200" data-id="${doctor.id}">ลบ</button>
+            //         `;
+            //         doctorsListElem.appendChild(listItem);
+
+            //         listItem.querySelector('span').addEventListener('click', () => {
+            //             document.getElementById('doctor-id').value = doctor.id;
+            //             document.getElementById('doctor-name').value = doctor.name;
+            //             document.getElementById('doctor-specialty').value = doctor.specialty;
+            //             document.getElementById('doctor-experience').value = doctor.experience;
+            //             document.getElementById('doctor-image').value = doctor.image;
+            //             document.getElementById('doctor-form-button-text').textContent = 'บันทึกการแก้ไขแพทย์';
+            //         });
+            //     });
+            // });
+        }
+
+        // Add/Update Doctor (DISABLED)
+        document.getElementById('doctor-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            showMessageModal("โปรดทราบ", "ฟังก์ชันการจัดการแพทย์ถูกปิดใช้งานอยู่ (Firebase ถูกปิดการเชื่อมต่อ)", "alert");
+            // if (!isAuthReady) {
+            //     showMessageModal("ข้อผิดพลาด", "โปรดรอให้ Firebase เชื่อมต่อก่อน", "alert");
+            //     return;
+            // }
+
+            // const doctorId = document.getElementById('doctor-id').value;
+            // const name = document.getElementById('doctor-name').value;
+            // const specialty = document.getElementById('doctor-specialty').value;
+            // const experience = document.getElementById('doctor-experience').value;
+            // const image = document.getElementById('doctor-image').value;
+
+            // try {
+            //     if (doctorId) {
+            //         // Update existing doctor
+            //         await setDoc(doc(db, 'doctors', doctorId), { name, specialty, experience, image });
+            //         showMessageModal("สำเร็จ", "แก้ไขข้อมูลแพทย์เรียบร้อยแล้ว", "alert");
+            //     } else {
+            //         // Add new doctor
+            //         await addDoc(collection(db, 'doctors'), { name, specialty, experience, image });
+            //         showMessageModal("สำเร็จ", "เพิ่มแพทย์ใหม่เรียบร้อยแล้ว", "alert");
+            //     }
+            //     document.getElementById('doctor-form').reset();
+            //     document.getElementById('doctor-id').value = '';
+            //     document.getElementById('doctor-form-button-text').textContent = 'เพิ่มแพทย์';
+            //     loadDoctors(); // Refresh public display
+            // } catch (error) {
+            //     console.error("Error adding/updating doctor: ", error);
+            //     showMessageModal("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลแพทย์ได้: " + error.message, "alert");
+            // }
+        });
+
+        // Delete Doctor (DISABLED)
+        document.getElementById('doctors-list').addEventListener('click', (e) => {
+            if (e.target.classList.contains('delete-doctor-button')) {
+                const doctorIdToDelete = e.target.dataset.id;
+                showMessageModal("โปรดทราบ", "ฟังก์ชันการลบแพทย์ถูกปิดใช้งานอยู่ (Firebase ถูกปิดการเชื่อมต่อ)", "alert");
+                // showMessageModal("ยืนยันการลบ", "คุณแน่ใจหรือไม่ว่าต้องการลบแพทย์ท่านนี้?", "confirm", async (confirmed) => {
+                //     if (confirmed) {
+                //         try {
+                //             await deleteDoc(doc(db, 'doctors', doctorIdToDelete));
+                //             showMessageModal("สำเร็จ", "ลบแพทย์เรียบร้อยแล้ว", "alert");
+                //             loadDoctors(); // Refresh public display
+                //         } catch (error) {
+                //             console.error("Error deleting doctor: ", error);
+                //             showMessageModal("ข้อผิดพลาด", "ไม่สามารถลบแพทย์ได้: " + error.message, "alert");
+                //         }
+                //     }
+                // });
+            }
+        });
+
+        // Render Services in Admin Modal (using mock data or disabled)
+        function loadAdminServices() {
+            // if (!isAuthReady) return; // This check is now redundant for Firebase, but good practice
+            const servicesListElem = document.getElementById('services-list');
+            servicesListElem.innerHTML = '';
+
+            if (!isAuthReady) { // If Firebase is intentionally disabled
+                mockServices.forEach((service) => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'flex justify-between items-center bg-gray-100 p-2 rounded-md shadow-sm opacity-50 cursor-not-allowed'; // Indicate disabled
+                    listItem.innerHTML = `
+                        <span class="text-gray-700">${service.name} <i class="${service.icon} ml-2"></i></span>
+                        <button class="bg-red-300 text-white text-sm py-1 px-3 rounded-md cursor-not-allowed" disabled>ลบ</button>
+                    `;
+                    servicesListElem.appendChild(listItem);
+                });
+                return;
+            }
+
+            // Original Firebase listener (commented out)
+            // const servicesCol = collection(db, 'services');
+            // onSnapshot(query(servicesCol), (snapshot) => {
+            //     servicesListElem.innerHTML = ''; // Clear to prevent duplicates
+            //     snapshot.forEach((docItem) => {
+            //         const service = { id: docItem.id, ...docItem.data() };
+            //         const listItem = document.createElement('li');
+            //         listItem.className = 'flex justify-between items-center bg-gray-100 p-2 rounded-md shadow-sm';
+            //         listItem.innerHTML = `
+            //             <span class="text-gray-700 cursor-pointer hover:text-blue-600" data-id="${service.id}">${service.name} <i class="${service.icon} ml-2"></i></span>
+            //             <button class="delete-service-button bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-3 rounded-md transition duration-200" data-id="${service.id}">ลบ</button>
+            //         `;
+            //         servicesListElem.appendChild(listItem);
+
+            //         listItem.querySelector('span').addEventListener('click', () => {
+            //             document.getElementById('service-id').value = service.id;
+            //             document.getElementById('service-name').value = service.name;
+            //             document.getElementById('service-description').value = service.description;
+            //             document.getElementById('service-icon').value = service.icon;
+            //             document.getElementById('service-form-button-text').textContent = 'บันทึกการแก้ไขบริการ';
+            //         });
+            //     });
+            // });
+        }
+
+        // Add/Update Service (DISABLED)
+        document.getElementById('service-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            showMessageModal("โปรดทราบ", "ฟังก์ชันการจัดการบริการถูกปิดใช้งานอยู่ (Firebase ถูกปิดการเชื่อมต่อ)", "alert");
+            // if (!isAuthReady) {
+            //     showMessageModal("ข้อผิดพลาด", "โปรดรอให้ Firebase เชื่อมต่อก่อน", "alert");
+            //     return;
+            // }
+
+            // const serviceId = document.getElementById('service-id').value;
+            // const name = document.getElementById('service-name').value;
+            // const description = document.getElementById('service-description').value;
+            // const icon = document.getElementById('service-icon').value;
+
+            // try {
+            //     if (serviceId) {
+            //         // Update existing service
+            //         await setDoc(doc(db, 'services', serviceId), { name, description, icon });
+            //         showMessageModal("สำเร็จ", "แก้ไขข้อมูลบริการเรียบร้อยแล้ว", "alert");
+            //     } else {
+            //         // Add new service
+            //         await addDoc(collection(db, 'services'), { name, description, icon });
+            //         showMessageModal("สำเร็จ", "เพิ่มบริการใหม่เรียบร้อยแล้ว", "alert");
+            //     }
+            //     document.getElementById('service-form').reset();
+            //     document.getElementById('service-id').value = '';
+            //     document.getElementById('service-form-button-text').textContent = 'เพิ่มบริการ';
+            //     loadServices(); // Refresh public display
+            // } catch (error) {
+            //     console.error("Error adding/updating service: ", error);
+            //     showMessageModal("ข้อผิดพลาด", "ไม่สามารถบันทึกข้อมูลบริการได้: " + error.message, "alert");
+            // }
+        });
+
+        // Delete Service (DISABLED)
+        document.getElementById('services-list').addEventListener('click', (e) => {
+            if (e.target.classList.contains('delete-service-button')) {
+                const serviceIdToDelete = e.target.dataset.id;
+                showMessageModal("โปรดทราบ", "ฟังก์ชันการลบบริการถูกปิดใช้งานอยู่ (Firebase ถูกปิดการเชื่อมต่อ)", "alert");
+                // showMessageModal("ยืนยันการลบ", "คุณแน่ใจหรือไม่ว่าต้องการลบบริการนี้?", "confirm", async (confirmed) => {
+                //     if (confirmed) {
+                //         try {
+                //             await deleteDoc(doc(db, 'services', serviceIdToDelete));
+                //             showMessageModal("สำเร็จ", "ลบบริการเรียบร้อยแล้ว", "alert");
+                //             loadServices(); // Refresh public display
+                //         } catch (error) {
+                //             console.error("Error deleting service: ", error);
+                //             showMessageModal("ข้อผิดพลาด", "ไม่สามารถลบบริการได้: " + error.message, "alert");
+                //         }
+                //     }
+                // });
+            }
+        });
+
+        // --- AI Health Q&A Functionality ---
+        document.getElementById('ask-ai-button').addEventListener('click', async () => {
+            const questionInput = document.getElementById('health-question');
+            const aiResponseDiv = document.getElementById('ai-response');
+            const responseContent = document.getElementById('response-content');
+            const askButton = document.getElementById('ask-ai-button');
+            const buttonText = document.getElementById('button-text');
+            const loadingSpinner = document.getElementById('loading-spinner');
+
+            const question = questionInput.value.trim();
+            if (!question) {
+                showMessageModal("โปรดทราบ", "กรุณาพิมพ์คำถามของคุณก่อน", "alert");
+                return;
+            }
+
+            // Show loading state
+            buttonText.textContent = 'กำลังคิด...';
+            loadingSpinner.classList.remove('hidden');
+            askButton.disabled = true;
+            aiResponseDiv.classList.add('hidden'); // Hide previous response
+
+            try {
+                // In a real application, you'd send this to a backend that calls a generative AI API
+                // For this example, we'll simulate a response
+                const simulatedResponse = await new Promise(resolve => setTimeout(() => {
+                    const sampleResponses = [
+                        "อาการปวดหัวมีหลายสาเหตุ หากปวดรุนแรงเฉียบพลัน ปวดไม่หาย หรือมีอาการร่วมเช่น แขนขาอ่อนแรง ชา พูดไม่ชัด ควรรีบพบแพทย์ทันทีค่ะ",
+                        "ไข้หวัดทั่วไปมักเกิดจากเชื้อไวรัส และมักหายได้เองใน 3-7 วัน ควรพักผ่อนให้เพียงพอ ดื่มน้ำมากๆ และทานยาลดไข้/แก้ปวด หากอาการไม่ดีขึ้นหรือแย่ลง ควรปรึกษาแพทย์ค่ะ",
+                        "การดูแลสุขภาพช่องปากที่ดีควรแปรงฟันอย่างน้อยวันละ 2 ครั้ง ใช้ไหมขัดฟัน และพบทันตแพทย์เพื่อตรวจสุขภาพฟันทุก 6 เดือนค่ะ",
+                        "วิธีลดความเครียดมีหลายอย่าง เช่น การออกกำลังกายอย่างสม่ำเสมอ การฝึกหายใจลึกๆ การทำสมาธิ การหางานอดิเรกที่ชอบ และการพูดคุยกับเพื่อนหรือครอบครัว",
+                        "การรับประทานอาหารให้ครบ 5 หมู่ และหลากหลาย จะช่วยให้ร่างกายได้รับสารอาหารที่จำเป็นอย่างครบถ้วนค่ะ เน้นผัก ผลไม้ ธัญพืชไม่ขัดสี และโปรตีนไม่ติดมัน"
+                    ];
+                    resolve(sampleResponses[Math.floor(Math.random() * sampleResponses.length)]);
+                }, 1500)); // Simulate API call delay
+
+                responseContent.textContent = simulatedResponse;
+                aiResponseDiv.classList.remove('hidden');
+            } catch (error) {
+                console.error("Error asking AI:", error);
+                responseContent.textContent = "ขออภัยค่ะ เกิดข้อผิดพลาดในการประมวลผลคำถามของคุณ กรุณาลองใหม่อีกครั้ง";
+                aiResponseDiv.classList.remove('hidden');
+            } finally {
+                // Reset button state
+                buttonText.textContent = 'ถาม AI';
+                loadingSpinner.classList.add('hidden');
+                askButton.disabled = false;
+            }
+        });
+
+        // --- Event Listeners and Initial Calls ---
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Admin Modal Toggle
+        const adminButton = document.getElementById('admin-button');
+        const mobileAdminButton = document.getElementById('mobile-admin-button');
+        const adminModal = document.getElementById('admin-modal');
+        const closeAdminModalButton = document.getElementById('close-admin-modal');
+        const closeMessageModalButton = document.getElementById('close-message-modal');
+
+        function openAdminModal() {
+            adminModal.style.display = 'flex';
+        }
+
+        function closeAdminModal() {
+            adminModal.style.display = 'none';
+            // Clear any edit forms when closing
+            document.getElementById('doctor-form').reset();
+            document.getElementById('doctor-id').value = '';
+            document.getElementById('doctor-form-button-text').textContent = 'เพิ่มแพทย์';
+            document.getElementById('service-form').reset();
+            document.getElementById('service-id').value = '';
+            document.getElementById('service-form-button-text').textContent = 'เพิ่มบริการ';
+        }
+
+        adminButton.addEventListener('click', openAdminModal);
+        mobileAdminButton.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.add('hidden'); // Close mobile menu first
+            openAdminModal();
+        });
+        closeAdminModalButton.addEventListener('click', closeAdminModal);
+        closeMessageModalButton.addEventListener('click', () => {
+            document.getElementById('message-modal').style.display = 'none';
+        });
+
+        // Close modals if clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target == adminModal) {
+                closeAdminModal();
+            }
+            if (event.target == document.getElementById('message-modal')) {
+                document.getElementById('message-modal').style.display = 'none';
+            }
+        });
+
+        // Initialize Firebase when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', initializeFirebase);
+
+        // --- Cookie Consent Banner Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookiesButton = document.getElementById('accept-cookies');
+    const manageCookiesButton = document.getElementById('manage-cookies'); // Added for future expansion
+
+    const hasAcceptedCookies = localStorage.getItem('cookieConsent');
+
+    // Show the banner if consent hasn't been given
+    if (!hasAcceptedCookies) {
+        // Use a small timeout to ensure the transition plays nicely after DOM is ready
+        setTimeout(() => {
+            cookieBanner.classList.remove('translate-y-full');
+            cookieBanner.classList.add('translate-y-0');
+        }, 100);
+    } else {
+        cookieBanner.classList.add('hidden'); // Hide immediately if already accepted
+    }
+
+    // Event listener for "Accept All" button
+    acceptCookiesButton.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted'); // Store consent in Local Storage
+        cookieBanner.classList.remove('translate-y-0');
+        cookieBanner.classList.add('translate-y-full');
+        setTimeout(() => {
+            cookieBanner.classList.add('hidden');
+        }, 500); // Hide after transition
+        console.log("Cookie consent accepted.");
+        // Here you would typically enable tracking scripts (e.g., Google Analytics)
+        // if (!window.googleAnalyticsInitialized) {
+        //     loadGoogleAnalytics(); // Example function to load GA
+        //     window.googleAnalyticsInitialized = true;
+        // }
+    });
+
+    // Event listener for "Manage Cookies" button (Placeholder for future functionality)
+    //manageCookiesButton.addEventListener('click', () => {
+    //    showMessageModal("จัดการคุกกี้", "ฟังก์ชันจัดการคุกกี้ยังไม่พร้อมใช้งานในตอนนี้ คุณสามารถยอมรับทั้งหมดหรือปิดหน้าต่างไปก่อนได้ค่ะ", "alert");
+        // In a real scenario, this would open a more detailed cookie preference modal.
+    //});
+
+    // Example of how you might conditionally load analytics based on consent
+    // function loadGoogleAnalytics() {
+    //     // Place your Google Analytics or other tracking scripts here
+    //     console.log("Loading Google Analytics script...");
+    //     const script = document.createElement('script');
+    //     script.src = "https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID";
+    //     script.async = true;
+    //     document.head.appendChild(script);
+
+    //     script.onload = () => {
+    //         window.dataLayer = window.dataLayer || [];
+    //         function gtag(){dataLayer.push(arguments);}
+    //         gtag('js', new Date());
+    //         gtag('config', 'YOUR_GA_TRACKING_ID');
+    //     };
+    // }
+
+    // If cookies were already accepted on a previous visit, load analytics immediately (if applicable)
+    // if (hasAcceptedCookies === 'accepted' && !window.googleAnalyticsInitialized) {
+    //     // loadGoogleAnalytics();
+    //     // window.googleAnalyticsInitialized = true;
+    // }
+});
+        // ... (โค้ดส่วนบนเหมือนเดิม) ...
+
+// --- Cookie Consent Banner Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookiesButton = document.getElementById('accept-cookies');
+    const manageCookiesButton = document.getElementById('manage-cookies');
+    const cookieManagementModal = document.getElementById('cookie-management-modal');
+    const closeCookieManagementModalButton = document.getElementById('close-cookie-management-modal');
+    const saveCookiePreferencesButton = document.getElementById('save-cookie-preferences');
+    const declineAllCookiesButton = document.getElementById('decline-all-cookies');
+
+    const cookieNecessary = document.getElementById('cookie-necessary');
+    const cookieAnalytics = document.getElementById('cookie-analytics');
+    const cookieMarketing = document.getElementById('cookie-marketing');
+
+    // Function to show the cookie banner
+    function showCookieBanner() {
+        cookieBanner.classList.remove('hidden', 'translate-y-full');
+        setTimeout(() => {
+            cookieBanner.classList.add('translate-y-0');
+        }, 100);
+    }
+
+    // Function to hide the cookie banner
+    function hideCookieBanner() {
+        cookieBanner.classList.remove('translate-y-0');
+        cookieBanner.classList.add('translate-y-full');
+        setTimeout(() => {
+            cookieBanner.classList.add('hidden');
+        }, 500);
+    }
+
+    // Function to save cookie preferences to Local Storage
+    function saveCookiePreferences(analyticsConsent, marketingConsent) {
+        localStorage.setItem('cookieConsent', 'custom'); // Indicates user made a custom choice
+        localStorage.setItem('cookieAnalytics', analyticsConsent ? 'accepted' : 'declined');
+        localStorage.setItem('cookieMarketing', marketingConsent ? 'accepted' : 'declined');
+        console.log("Cookie preferences saved.");
+        // In a real application, you would now activate/deactivate scripts based on these consents
+        applyCookiePreferences();
+        hideCookieBanner(); // Hide the main banner if user saved preferences
+    }
+
+    // Function to load cookie preferences from Local Storage and apply them
+    function loadCookiePreferencesIntoModal() {
+        // Necessary cookie is always checked and disabled
+        cookieNecessary.checked = true;
+
+        const analytics = localStorage.getItem('cookieAnalytics');
+        const marketing = localStorage.getItem('cookieMarketing');
+
+        cookieAnalytics.checked = (analytics === 'accepted' || analytics === null); // Default to accepted if not set
+        cookieMarketing.checked = (marketing === 'accepted' || marketing === null); // Default to accepted if not set
+    }
+
+    // Function to apply cookie preferences (e.g., loading analytics scripts)
+    function applyCookiePreferences() {
+        const analyticsConsent = localStorage.getItem('cookieAnalytics');
+        const marketingConsent = localStorage.getItem('cookieMarketing');
+
+        // Example: Load Google Analytics if accepted
+        // if (analyticsConsent === 'accepted' && !window.googleAnalyticsInitialized) {
+        //     console.log("Loading Google Analytics script based on consent...");
+        //     // loadGoogleAnalytics(); // Your function to load GA
+        //     // window.googleAnalyticsInitialized = true;
+        // } else if (analyticsConsent === 'declined' && window.googleAnalyticsInitialized) {
+        //     // Disable/unload analytics if previously loaded and now declined (more complex)
+        //     console.log("Analytics declined.");
+        // }
+        // Similarly for marketing cookies/scripts
+    }
+
+
+    // --- Initial check on page load ---
+    const hasAcceptedCookies = localStorage.getItem('cookieConsent');
+    if (!hasAcceptedCookies) {
+        showCookieBanner();
+    } else {
+        cookieBanner.classList.add('hidden');
+        applyCookiePreferences(); // Apply existing preferences
+    }
+
+    // --- Event Listeners for Banner Buttons ---
+    acceptCookiesButton.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        localStorage.setItem('cookieAnalytics', 'accepted');
+        localStorage.setItem('cookieMarketing', 'accepted');
+        hideCookieBanner();
+        console.log("All cookies accepted.");
+        applyCookiePreferences(); // Apply all preferences
+    });
+
+    manageCookiesButton.addEventListener('click', () => {
+        loadCookiePreferencesIntoModal(); // Load current preferences into the modal checkboxes
+        cookieManagementModal.style.display = 'flex'; // Show the cookie management modal
+        hideCookieBanner(); // Hide the main cookie banner
+    });
+
+    // --- Event Listeners for Cookie Management Modal Buttons ---
+    closeCookieManagementModalButton.addEventListener('click', () => {
+        cookieManagementModal.style.display = 'none';
+        // Decide whether to show the main banner again if no choice was made in modal
+        if (!localStorage.getItem('cookieConsent')) { // If no choice was made at all
+            showCookieBanner();
+        }
+    });
+
+    saveCookiePreferencesButton.addEventListener('click', () => {
+        const analyticsConsent = cookieAnalytics.checked;
+        const marketingConsent = cookieMarketing.checked;
+        saveCookiePreferences(analyticsConsent, marketingConsent);
+        cookieManagementModal.style.display = 'none'; // Close the modal
+        showMessageModal("บันทึกการตั้งค่า", "การตั้งค่าคุกกี้ของท่านถูกบันทึกเรียบร้อยแล้ว", "alert");
+    });
+
+    declineAllCookiesButton.addEventListener('click', () => {
+        showMessageModal(
+            "ยืนยันการปฏิเสธ",
+            "ท่านต้องการปฏิเสธคุกกี้ทั้งหมด (ยกเว้นคุกกี้ที่จำเป็นอย่างยิ่ง) ใช่หรือไม่?",
+            "confirm",
+            (confirmed) => {
+                if (confirmed) {
+                    saveCookiePreferences(false, false); // Save false for analytics and marketing
+                    cookieManagementModal.style.display = 'none'; // Close the modal
+                    showMessageModal("สำเร็จ", "ท่านได้ปฏิเสธคุกกี้ที่ไม่จำเป็นทั้งหมดแล้ว", "alert");
+                }
+            }
+        );
+    });
+
+    // Close modals if clicking outside (add cookie management modal)
+    window.addEventListener('click', (event) => {
+        if (event.target == adminModal) {
+            closeAdminModal();
+        }
+        if (event.target == document.getElementById('message-modal')) {
+            document.getElementById('message-modal').style.display = 'none';
+        }
+        if (event.target == cookieManagementModal) { // New: Close cookie management modal
+            cookieManagementModal.style.display = 'none';
+            if (!localStorage.getItem('cookieConsent')) { // If no choice was made at all
+                showCookieBanner(); // Show the main banner again
+            }
+        }
+    });
+
+    // ... (ส่วนอื่นๆ ของ JavaScript เหมือนเดิม) ...
+});
+    </script>
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 flex flex-col md:flex-row items-center justify-between z-[1001] shadow-lg transform transition-transform duration-500 ease-out translate-y-full">
+        <p class="text-sm text-center md:text-left mb-3 md:mb-0 mr-0 md:mr-4">
+            เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์ของคุณ การเข้าชมเว็บไซต์ของเราหมายความว่าคุณยินยอมให้เราใช้คุกกี้ตาม <a href="privacy-policy.html" class="text-blue-400 hover:underline">นโยบายความเป็นส่วนตัว</a> ของเรา
+        </p>
+        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3">
+            <button id="accept-cookies" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md text-sm transition duration-200 w-full md:w-auto">
+                ยอมรับทั้งหมด
+            </button>
+            <button id="manage-cookies" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md text-sm transition duration-200 w-full md:w-auto">
+                จัดการคุกกี้
+            </button>
         </div>
-        <div class="bg-blue-100 p-6 rounded-lg shadow hover:shadow-lg transition">
-          <h4 class="text-xl font-semibold mb-2">คลินิกเฉพาะทาง</h4>
-          <p>คลินิกโรคเรื้อรัง หัวใจ เบาหวาน ความดัน ระบบทางเดินหายใจ ฯลฯ</p>
-        </div>
-        <div class="bg-blue-100 p-6 rounded-lg shadow hover:shadow-lg transition">
-          <h4 class="text-xl font-semibold mb-2">ห้องฉุกเฉิน 24 ชม.</h4>
-          <p>พร้อมดูแลคุณทุกเหตุฉุกเฉิน ด้วยอุปกรณ์และทีมแพทย์ที่พร้อม</p>
-        </div>
-      </div>
     </div>
-  </section>
+    <div id="cookie-management-modal" class="modal">
+        <div class="modal-content max-w-xl">
+            <span class="close-button" id="close-cookie-management-modal">×</span>
+            <h2 class="text-2xl font-bold text-blue-700 mb-6 text-center">การตั้งค่าคุกกี้</h2>
+            <p class="text-gray-700 mb-6 text-center">
+                เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์การใช้งานของท่าน โปรดเลือกประเภทของคุกกี้ที่ท่านต้องการยอมรับ:
+            </p>
 
-  <!-- Doctors -->
-  <section id="doctors" class="py-12 bg-gray-50">
-    <div class="container mx-auto px-6">
-      <h3 class="text-2xl font-bold mb-8 text-center text-blue-800">ทีมแพทย์ของเรา</h3>
-      <div class="grid gap-6 md:grid-cols-3 text-center">
-        <div>
-          <img src="assets/images/doctor1.jpg" class="w-32 h-32 mx-auto rounded-full shadow mb-4" alt="แพทย์ 1">
-          <p class="font-semibold">นพ. สมชาย ใจดี</p>
-          <p class="text-gray-600 text-sm">อายุรแพทย์</p>
+            <div class="space-y-4 mb-6">
+                <div class="flex items-start">
+                    <input type="checkbox" id="cookie-necessary" class="form-checkbox h-5 w-5 text-blue-600 rounded mt-1" checked disabled>
+                    <label for="cookie-necessary" class="ml-3 text-gray-800">
+                        <span class="font-semibold">คุกกี้ที่จำเป็นอย่างยิ่ง (Strictly Necessary Cookies)</span>
+                        <p class="text-sm text-gray-600">คุกกี้เหล่านี้จำเป็นเพื่อให้เว็บไซต์ทำงานได้อย่างถูกต้องและไม่สามารถปิดใช้งานได้</p>
+                    </label>
+                </div>
+
+                <div class="flex items-start">
+                    <input type="checkbox" id="cookie-analytics" class="form-checkbox h-5 w-5 text-blue-600 rounded mt-1">
+                    <label for="cookie-analytics" class="ml-3 text-gray-800">
+                        <span class="font-semibold">คุกกี้เพื่อการวิเคราะห์ (Analytics Cookies)</span>
+                        <p class="text-sm text-gray-600">ช่วยให้เราเข้าใจว่าผู้เยี่ยมชมมีปฏิสัมพันธ์กับเว็บไซต์อย่างไร เพื่อปรับปรุงประสิทธิภาพ</p>
+                    </label>
+                </div>
+
+                <div class="flex items-start">
+                    <input type="checkbox" id="cookie-marketing" class="form-checkbox h-5 w-5 text-blue-600 rounded mt-1">
+                    <label for="cookie-marketing" class="ml-3 text-gray-800">
+                        <span class="font-semibold">คุกกี้เพื่อการตลาด (Marketing Cookies)</span>
+                        <p class="text-sm text-gray-600">ใช้เพื่อแสดงโฆษณาที่เกี่ยวข้องกับความสนใจของท่าน</p>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4">
+                <button id="save-cookie-preferences" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md transition duration-200">
+                    บันทึกการตั้งค่า
+                </button>
+                <button id="decline-all-cookies" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-md transition duration-200">
+                    ปฏิเสธคุกกี้ทั้งหมด (ยกเว้นที่จำเป็น)
+                </button>
+            </div>
         </div>
-        <div>
-          <img src="assets/images/doctor2.jpg" class="w-32 h-32 mx-auto rounded-full shadow mb-4" alt="แพทย์ 2">
-          <p class="font-semibold">พญ. สาวิตรี รักษ์คุณ</p>
-          <p class="text-gray-600 text-sm">สูตินรีแพทย์</p>
-        </div>
-        <div>
-          <img src="assets/images/doctor3.jpg" class="w-32 h-32 mx-auto rounded-full shadow mb-4" alt="แพทย์ 3">
-          <p class="font-semibold">นพ. ปรเมศวร์ แสงทอง</p>
-          <p class="text-gray-600 text-sm">ศัลยแพทย์</p>
-        </div>
-      </div>
     </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-12 bg-white">
-    <div class="container mx-auto px-6 text-center">
-      <h3 class="text-2xl font-bold mb-4 text-blue-800">ติดต่อโรงพยาบาล</h3>
-      <p class="mb-4">โทร: 042-123456, อีเมล: info@veerapolhospital.com</p>
-      <p>ที่อยู่: 123 หมู่ 5 ต.ตัวอย่าง อ.เมือง จ.อุดรธานี 41000</p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-blue-800 text-white text-center py-6">
-    <p>© 2025 โรงพยาบาลวีระพลการแพทย์. สงวนลิขสิทธิ์.</p>
-  </footer>
-
 </body>
 </html>
