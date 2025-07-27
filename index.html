@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="โรงพยาบาลวีระพลการแพทย์ ดูแลสุขภาพของคุณด้วยหัวใจ ใกล้ชิด มั่นใจ ปลอดภัยทุกการรักษา" />
+  <meta property="og:title" content="โรงพยาบาลวีระพลการแพทย์" />
+  <meta property="og:description" content="ดูแลสุขภาพของคุณด้วยหัวใจ ใกล้ชิด มั่นใจ ปลอดภัยทุกการรักษา" />
+  <meta property="og:image" content="https://veerapolkanpat.github.io/hospital/assets/images/og-image.jpg" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="assets/images/logo.png" type="image/png">
+  <title>โรงพยาบาลวีระพลการแพทย์</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Prompt', sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-blue-800 text-white">
+    <div class="container mx-auto flex items-center justify-between px-4 py-4">
+      <div class="flex items-center space-x-4">
+        <img src="assets/images/logo.png" alt="โลโก้โรงพยาบาล" class="h-12 w-12">
+        <h1 class="text-lg md:text-xl font-semibold">โรงพยาบาลวีระพลการแพทย์</h1>
+      </div>
+      <nav class="hidden md:flex space-x-6">
+        <a href="#" class="hover:text-yellow-300">หน้าแรก</a>
+        <a href="#services" class="hover:text-yellow-300">บริการ</a>
+        <a href="#doctors" class="hover:text-yellow-300">ทีมแพทย์</a>
+        <a href="#contact" class="hover:text-yellow-300">ติดต่อเรา</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-blue-50 py-10 md:py-20 text-center">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">ดูแลสุขภาพของคุณด้วยหัวใจ</h2>
+      <p class="text-lg md:text-xl text-gray-700">ใกล้ชิด มั่นใจ ปลอดภัยทุกการรักษา</p>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-12 bg-white">
+    <div class="container mx-auto px-6">
+      <h3 class="text-2xl font-bold mb-8 text-center text-blue-800">บริการของเรา</h3>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="bg-blue-100 p-6 rounded-lg shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-2">ตรวจสุขภาพทั่วไป</h4>
+          <p>บริการตรวจร่างกายทั้งเบื้องต้นและเฉพาะทาง โดยทีมแพทย์ผู้เชี่ยวชาญ</p>
+        </div>
+        <div class="bg-blue-100 p-6 rounded-lg shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-2">คลินิกเฉพาะทาง</h4>
+          <p>คลินิกโรคเรื้อรัง หัวใจ เบาหวาน ความดัน ระบบทางเดินหายใจ ฯลฯ</p>
+        </div>
+        <div class="bg-blue-100 p-6 rounded-lg shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-2">ห้องฉุกเฉิน 24 ชม.</h4>
+          <p>พร้อมดูแลคุณทุกเหตุฉุกเฉิน ด้วยอุปกรณ์และทีมแพทย์ที่พร้อม</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctors -->
+  <section id="doctors" class="py-12 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <h3 class="text-2xl font-bold mb-8 text-center text-blue-800">ทีมแพทย์ของเรา</h3>
+      <div class="grid gap-6 md:grid-cols-3 text-center">
+        <div>
+          <img src="assets/images/doctor1.jpg" class="w-32 h-32 mx-auto rounded-full shadow mb-4" alt="แพทย์ 1">
+          <p class="font-semibold">นพ. สมชาย ใจดี</p>
+          <p class="text-gray-600 text-sm">อายุรแพทย์</p>
+        </div>
+        <div>
+          <img src="assets/images/doctor2.jpg" class="w-32 h-32 mx-auto rounded-full shadow mb-4" alt="แพทย์ 2">
+          <p class="font-semibold">พญ. สาวิตรี รักษ์คุณ</p>
+          <p class="text-gray-600 text-sm">สูตินรีแพทย์</p>
+        </div>
+        <div>
+          <img src="assets/images/doctor3.jpg" class="w-32 h-32 mx-auto rounded-full shadow mb-4" alt="แพทย์ 3">
+          <p class="font-semibold">นพ. ปรเมศวร์ แสงทอง</p>
+          <p class="text-gray-600 text-sm">ศัลยแพทย์</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-12 bg-white">
+    <div class="container mx-auto px-6 text-center">
+      <h3 class="text-2xl font-bold mb-4 text-blue-800">ติดต่อโรงพยาบาล</h3>
+      <p class="mb-4">โทร: 042-123456, อีเมล: info@veerapolhospital.com</p>
+      <p>ที่อยู่: 123 หมู่ 5 ต.ตัวอย่าง อ.เมือง จ.อุดรธานี 41000</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-800 text-white text-center py-6">
+    <p>© 2025 โรงพยาบาลวีระพลการแพทย์. สงวนลิขสิทธิ์.</p>
+  </footer>
+
+</body>
+</html>
