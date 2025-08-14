@@ -7,38 +7,37 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{ --header-offset: 80px; } /* เผื่อกรณี JS ปิด จะกันทับไว้ประมาณ 80px */
+    :root{ --header-offset: 80px; } /* fallback ถ้า JS ไม่ทำงาน */
 
     html{ scroll-behavior:smooth; }
     body{
       font-family:'Prompt',sans-serif;
-      background-color:#f8fafc;           /* Slate-50 */
-      padding-top: var(--header-offset);  /* กัน header fixed ทับเนื้อหา */
+      background-color:#f8fafc;
+      padding-top:var(--header-offset); /* กัน header fixed ทับคอนเทนต์ */
     }
+
+    /* ✅ แก้ anchor ทับ: เวลาเลื่อนไปยัง #id ให้เผื่อระยะเท่าหัว */
+    [id]{ scroll-margin-top: calc(var(--header-offset) + 12px); }
 
     .hero-background{
       background-image:url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg');
       background-size:cover;background-position:center;position:relative;
     }
-    .hero-background::before{
-      content:'';position:absolute;inset:0;
-      background:linear-gradient(to bottom,rgba(0,0,0,.4) 0%,rgba(0,0,0,.6) 100%);
-    }
+    .hero-background::before{ content:'';position:absolute;inset:0;
+      background:linear-gradient(to bottom,rgba(0,0,0,.4),rgba(0,0,0,.6)); }
 
-    /* scrollbar สวยขึ้นเล็กน้อย */
-    ::-webkit-scrollbar{ width:8px; }
-    ::-webkit-scrollbar-track{ background:#f1f1f1;border-radius:10px; }
-    ::-webkit-scrollbar-thumb{ background:#94a3b8;border-radius:10px; }
-    ::-webkit-scrollbar-thumb:hover{ background:#64748b; }
+    ::-webkit-scrollbar{ width:8px }
+    ::-webkit-scrollbar-track{ background:#f1f1f1;border-radius:10px }
+    ::-webkit-scrollbar-thumb{ background:#94a3b8;border-radius:10px }
+    ::-webkit-scrollbar-thumb:hover{ background:#64748b }
 
-    /* modal (ยังไม่ได้ใช้ แต่คงไว้ตามต้นฉบับ) */
     .modal{ display:none;position:fixed;z-index:1000;inset:0;overflow:auto;
-      background-color:rgba(0,0,0,.6);justify-content:center;align-items:center; }
+      background-color:rgba(0,0,0,.6);justify-content:center;align-items:center }
     .modal-content{ background:#fff;margin:auto;padding:2rem;border-radius:.75rem;
       box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
-      max-width:90%;width:500px;position:relative; }
-    .close-button{ color:#aaa;position:absolute;top:1rem;right:1rem;font-size:1.5rem;font-weight:bold; }
-    .close-button:hover,.close-button:focus{ color:#000;text-decoration:none;cursor:pointer; }
+      max-width:90%;width:500px;position:relative }
+    .close-button{ color:#aaa;position:absolute;top:1rem;right:1rem;font-size:1.5rem;font-weight:bold }
+    .close-button:hover,.close-button:focus{ color:#000;cursor:pointer }
   </style>
 </head>
 
@@ -46,7 +45,7 @@
   <!-- HEADER (fixed) -->
   <header id="site-header" class="bg-white shadow-md fixed w-full z-50">
     <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="#" class="flex items-center space-x-2">
+      <a href="#hero" class="flex items-center space-x-2">
         <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" class="h-10 w-10 rounded-full" alt="โลโก้">
         <span class="text-2xl font-bold text-green-700">รพ.วีระพลการแพทย์</span>
       </a>
@@ -74,7 +73,6 @@
         </button>
       </div>
 
-      <!-- mobile hamburger -->
       <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-label="เปิดเมนู">
         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -86,8 +84,6 @@
     <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
       <a href="#hero"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">หน้าแรก</a>
       <a href="#about"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">เกี่ยวกับเรา</a>
-
-      <!-- เมนูย่อย -->
       <div class="w-full">
         <details class="px-4 py-2">
           <summary class="cursor-pointer text-gray-700 hover:text-blue-600">บริการ</summary>
@@ -97,7 +93,6 @@
           </div>
         </details>
       </div>
-
       <a href="#doctors" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">แพทย์ของเรา</a>
       <a href="https://veerapolkanpat.github.io/appointment-form/" target="_blank" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">นัดหมาย</a>
       <a href="#health-qa" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">ปรึกษา AI</a>
@@ -108,8 +103,11 @@
     </div>
   </header>
 
-  <!-- MAIN -->
-  <main class="container mx-auto px-4 md:px-8 py-10 md:py-14">
+  <!-- HERO ให้มี id สำหรับปุ่ม "หน้าแรก" -->
+  <section id="hero" class="hidden"></section>
+
+  <!-- MAIN: ใส่ id="about" ให้ตรงกับลิงก์เมนู -->
+  <main id="about" class="container mx-auto px-4 md:px-8 py-10 md:py-14">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
       <!-- ซ้าย -->
       <aside class="lg:col-span-5">
@@ -172,26 +170,23 @@
     </div>
   </main>
 
-  <!-- JS: คำนวณความสูง header และ toggle เมนูมือถือ -->
   <script>
     function setHeaderOffset(){
       const h = document.getElementById('site-header');
       if(!h) return;
-      const height = h.offsetHeight; // ความสูงจริง (รวม padding)
-      document.documentElement.style.setProperty('--header-offset', height + 'px');
+      document.documentElement.style.setProperty('--header-offset', h.offsetHeight + 'px');
     }
-    // เรียกตอนโหลดและเมื่อเปลี่ยนขนาดหน้าจอ
+    // คำนวณตอนโหลดและเวลาเปลี่ยนขนาด/เปิดเมนูมือถือ
+    window.addEventListener('DOMContentLoaded', setHeaderOffset);
     window.addEventListener('load', setHeaderOffset);
     window.addEventListener('resize', setHeaderOffset);
 
-    // เปิด/ปิดเมนูมือถือ
-    const btn = document.getElementById('mobile-menu-button');
+    const btn  = document.getElementById('mobile-menu-button');
     const menu = document.getElementById('mobile-menu');
     if(btn && menu){
       btn.addEventListener('click', () => {
         menu.classList.toggle('hidden');
-        // อัปเดต offset เผื่อความสูง header เปลี่ยนตอนเปิดเมนูมือถือ
-        setHeaderOffset();
+        setHeaderOffset(); // อัปเดต offset ถ้าความสูง header เปลี่ยน
       });
     }
   </script>
