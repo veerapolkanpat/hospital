@@ -6,172 +6,113 @@
   <title>เกี่ยวกับเรา – โรงพยาบาลวีระพลการแพทย์</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- <style> body{font-family:"Prompt",sans-serif} </style> -->
-      <style>
-        body {
-            font-family: 'Prompt', sans-serif;
-            background-color: #f8fafc; /* Slate-50 */
-        }
-        .hero-background {
-            background-image: url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg'); 
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        .hero-background::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
-        }
-        /* Smooth scroll for anchor links */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Custom scrollbar for better aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #94a3b8; /* Slate-400 */
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #64748b; /* Slate-500 */
-        }
-        /* Simple loading spinner */
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-left-color: #ffffff;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        /* Modal styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 2rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            max-width: 90%;
-            width: 500px;
-            position: relative;
-        }
-        .close-button {
-            color: #aaa;
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+  <style>
+    :root{ --header-offset: 80px; } /* เผื่อกรณี JS ปิด จะกันทับไว้ประมาณ 80px */
 
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family:'Prompt',sans-serif;
+      background-color:#f8fafc;           /* Slate-50 */
+      padding-top: var(--header-offset);  /* กัน header fixed ทับเนื้อหา */
+    }
+
+    .hero-background{
+      background-image:url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg');
+      background-size:cover;background-position:center;position:relative;
+    }
+    .hero-background::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(to bottom,rgba(0,0,0,.4) 0%,rgba(0,0,0,.6) 100%);
+    }
+
+    /* scrollbar สวยขึ้นเล็กน้อย */
+    ::-webkit-scrollbar{ width:8px; }
+    ::-webkit-scrollbar-track{ background:#f1f1f1;border-radius:10px; }
+    ::-webkit-scrollbar-thumb{ background:#94a3b8;border-radius:10px; }
+    ::-webkit-scrollbar-thumb:hover{ background:#64748b; }
+
+    /* modal (ยังไม่ได้ใช้ แต่คงไว้ตามต้นฉบับ) */
+    .modal{ display:none;position:fixed;z-index:1000;inset:0;overflow:auto;
+      background-color:rgba(0,0,0,.6);justify-content:center;align-items:center; }
+    .modal-content{ background:#fff;margin:auto;padding:2rem;border-radius:.75rem;
+      box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+      max-width:90%;width:500px;position:relative; }
+    .close-button{ color:#aaa;position:absolute;top:1rem;right:1rem;font-size:1.5rem;font-weight:bold; }
+    .close-button:hover,.close-button:focus{ color:#000;text-decoration:none;cursor:pointer; }
+  </style>
 </head>
+
 <body class="bg-white text-slate-800">
-    <header class="bg-white shadow-md fixed w-full z-50">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2">
-              <!--  <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/logo.png" alt="โลโก้โรงพยาบาล" class="rounded-full"> -->
-                <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" class="h-10 w-10 rounded-full">
-            <span class="text-2xl font-bold text-green-700">รพ.วีระพลการแพทย์</span> 
-            </a>
-            <div class="hidden md:flex space-x-6">
-                <a href="#hero" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">หน้าแรก</a>
-                <a href="#about" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">เกี่ยวกับเรา</a>
-                <!-- <a href="#services" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">บริการ</a> -->
-                <div class="relative group inline-block">
-                  <a href="#services" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">บริการ</a>
-                      <div class="absolute left-0 mt-2 w-56 bg-white border border-gray-200 shadow-lg rounded-lg
-            opacity-0 group-hover:opacity-100
-            invisible group-hover:visible
-            pointer-events-none group-hover:pointer-events-auto
-            transition-all duration-300 z-50">
-                        <a href="/hospital/room.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-100">ห้องพักและสิ่งอำนวยความสะดวก</a>
-                        <a href="/hospital/insurance.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-100">บริษัทประกันคู่สัญญา</a>
-                      </div>
-                    </div>
-                <a href="#doctors" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">แพทย์ของเรา</a>
-                <a href="https://veerapolkanpat.github.io/appointment-form/" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200" target="_blank">นัดหมาย</a>
-                <!-- <a href="#health-qa" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">ปรึกษา AI</a> -->
-                <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">ติดต่อเรา</a>
-                <button id="admin-button" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200">
-                    <i class="fas fa-user-shield mr-1"></i> Admin
-                </button>
-            </div>
-            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
-            <a href="#hero" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">หน้าแรก</a>
-            <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">เกี่ยวกับเรา</a>
-            <a href="#services" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">บริการ</a>
-            <div x-data="{ open: false }" class="w-full">
-              <button @click="open = !open"
-                class="flex justify-between items-center w-full px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">
-                บริการ
-                <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-               </button>
+  <!-- HEADER (fixed) -->
+  <header id="site-header" class="bg-white shadow-md fixed w-full z-50">
+    <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="flex items-center space-x-2">
+        <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" class="h-10 w-10 rounded-full" alt="โลโก้">
+        <span class="text-2xl font-bold text-green-700">รพ.วีระพลการแพทย์</span>
+      </a>
 
-        <!-- เมนูย่อย -->
-         <div x-show="open" x-transition class="pl-6">
-            <a href="/hospital/room.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">ห้องพักและสิ่งอำนวยความสะดวก</a>
-            <a href="/hospital/insurance.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">บริษัทประกันคู่สัญญา</a>
-        </div>
-        </div>
-            <a href="#doctors" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">แพทย์ของเรา</a>
-            <a href="https://veerapolkanpat.github.io/appointment-form/" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200" target="_blank">นัดหมาย</a>
-            <a href="#health-qa" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">ปรึกษา AI</a>
-            <a href="#contact" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">ติดต่อเรา</a>
-            <button id="mobile-admin-button" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition duration-200">
-                <i class="fas fa-user-shield mr-1"></i> Admin
-            </button>
-        </div>
-    </header>
+      <div class="hidden md:flex space-x-6">
+        <a href="#hero"   class="text-gray-600 hover:text-blue-600 font-medium transition">หน้าแรก</a>
+        <a href="#about"  class="text-gray-600 hover:text-blue-600 font-medium transition">เกี่ยวกับเรา</a>
 
+        <div class="relative group inline-block">
+          <a href="#services" class="text-gray-600 hover:text-blue-600 font-medium transition">บริการ</a>
+          <div class="absolute left-0 mt-2 w-56 bg-white border border-gray-200 shadow-lg rounded-lg
+                      opacity-0 group-hover:opacity-100 invisible group-hover:visible
+                      pointer-events-none group-hover:pointer-events-auto transition-all duration-300 z-50">
+            <a href="/hospital/room.html"      class="block px-4 py-2 text-gray-700 hover:bg-blue-100">ห้องพักและสิ่งอำนวยความสะดวก</a>
+            <a href="/hospital/insurance.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-100">บริษัทประกันคู่สัญญา</a>
+          </div>
+        </div>
+
+        <a href="#doctors" class="text-gray-600 hover:text-blue-600 font-medium transition">แพทย์ของเรา</a>
+        <a href="https://veerapolkanpat.github.io/appointment-form/" target="_blank" class="text-gray-600 hover:text-blue-600 font-medium transition">นัดหมาย</a>
+        <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition">ติดต่อเรา</a>
+
+        <button id="admin-button" class="text-gray-600 hover:text-blue-600 font-medium transition">
+          <i class="fas fa-user-shield mr-1"></i> Admin
+        </button>
+      </div>
+
+      <!-- mobile hamburger -->
+      <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-label="เปิดเมนู">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
+      <a href="#hero"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">หน้าแรก</a>
+      <a href="#about"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">เกี่ยวกับเรา</a>
+
+      <!-- เมนูย่อย -->
+      <div class="w-full">
+        <details class="px-4 py-2">
+          <summary class="cursor-pointer text-gray-700 hover:text-blue-600">บริการ</summary>
+          <div class="pl-2 pt-2">
+            <a href="/hospital/room.html"      class="block px-2 py-2 text-gray-700 hover:bg-gray-100">ห้องพักและสิ่งอำนวยความสะดวก</a>
+            <a href="/hospital/insurance.html" class="block px-2 py-2 text-gray-700 hover:bg-gray-100">บริษัทประกันคู่สัญญา</a>
+          </div>
+        </details>
+      </div>
+
+      <a href="#doctors" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">แพทย์ของเรา</a>
+      <a href="https://veerapolkanpat.github.io/appointment-form/" target="_blank" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">นัดหมาย</a>
+      <a href="#health-qa" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">ปรึกษา AI</a>
+      <a href="#contact"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">ติดต่อเรา</a>
+      <button id="mobile-admin-button" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+        <i class="fas fa-user-shield mr-1"></i> Admin
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
   <main class="container mx-auto px-4 md:px-8 py-10 md:py-14">
-    <!-- GRID 2 คอลัมน์ -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-
-      <!-- คอลัมน์ซ้าย: รูปอาคาร + ใบรับรอง -->
+      <!-- ซ้าย -->
       <aside class="lg:col-span-5">
-        <!-- รูปอาคาร -->
         <div class="bg-white rounded-xl shadow overflow-hidden">
           <img
             src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/front_hos.jpg"
@@ -180,76 +121,79 @@
             onerror="this.src='https://placehold.co/900x600/e2e8f0/475569?text=Hospital+Building'">
         </div>
 
-        <!-- ใบรับรอง -->
         <section class="mt-10">
-          <h3 class="text-2xl md:text-[28px] font-bold text-emerald-600 mb-6">
-            การรับรองคุณภาพตามมาตรฐาน
-          </h3>
-
-          <!-- สามารถจัดเป็น 1 ต่อ 1 (เหมือนภาพ) หรือใช้ grid 2 คอล์มบนจอใหญ่ -->
+          <h3 class="text-2xl md:text-[28px] font-bold text-emerald-600 mb-6">การรับรองคุณภาพตามมาตรฐาน</h3>
           <div class="space-y-6">
-            <!-- CERT IMAGES: เปลี่ยน src ให้เป็นไฟล์ของคุณ -->
             <div class="bg-white rounded-xl shadow p-4 flex justify-center">
-              <img
-                src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/cert_medical_council.png"
-                alt="ตรารับรองมาตรฐานหน่วยงานสาธารณสุข"
-                class="max-h-28 object-contain"
-                onerror="this.src='https://placehold.co/400x200/ffffff/64748b?text=Certificate+1'">
+              <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/cert_medical_council.png"
+                   alt="ตรารับรองมาตรฐานหน่วยงานสาธารณสุข"
+                   class="max-h-28 object-contain"
+                   onerror="this.src='https://placehold.co/400x200/ffffff/64748b?text=Certificate+1'">
             </div>
-
             <div class="bg-white rounded-xl shadow p-4 flex justify-center">
-              <img
-                src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/cert_laboratory_accreditation.png"
-                alt="Laboratory Accreditation"
-                class="max-h-28 object-contain"
-                onerror="this.src='https://placehold.co/400x200/ffffff/64748b?text=Certificate+2'">
+              <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/cert_laboratory_accreditation.png"
+                   alt="Laboratory Accreditation"
+                   class="max-h-28 object-contain"
+                   onerror="this.src='https://placehold.co/400x200/ffffff/64748b?text=Certificate+2'">
             </div>
-
             <div class="bg-white rounded-xl shadow p-4 flex justify-center">
-              <img
-                src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/cert_ethics_hospital.png"
-                alt="เกียรติบัตรโรงพยาบาลคุณธรรม"
-                class="max-h-28 object-contain"
-                onerror="this.src='https://placehold.co/400x200/ffffff/64748b?text=Certificate+3'">
+              <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/cert_ethics_hospital.png"
+                   alt="เกียรติบัตรโรงพยาบาลคุณธรรม"
+                   class="max-h-28 object-contain"
+                   onerror="this.src='https://placehold.co/400x200/ffffff/64748b?text=Certificate+3'">
             </div>
           </div>
         </section>
       </aside>
 
-      <!-- คอลัมน์ขวา: หัวข้อ + เนื้อหา -->
+      <!-- ขวา -->
       <section class="lg:col-span-7">
-        <h1 class="text-3xl md:text-4xl font-extrabold text-emerald-600 mb-6">
-          โรงพยาบาลวีระพลการแพทย์
-        </h1>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-emerald-600 mb-6">โรงพยาบาลวีระพลการแพทย์</h1>
 
         <div class="prose prose-slate max-w-none leading-relaxed text-[17px] md:text-[18px]">
           <p>
             โรงพยาบาลวีระพลการแพทย์ เป็นโรงพยาบาลเอกชนขนาด <strong>50 เตียง</strong>
             ตั้งอยู่ที่ <strong>12 ถนนวิจารณ์รังสรรค์ อำเภอเมือง จังหวัดหนองบัวลำภู</strong>
             มีเนื้อที่ประมาณ <strong>200 ตารางวา</strong> เริ่มก่อตั้งเมื่อปี <strong>พ.ศ. 2536</strong>
-            โดย <strong>นายแพทย์วีระพล และคุณ ณัฎธิกา พจน์จลองศิลป์</strong>
-            ในชื่อทางธุรกิจ บริษัท หนองบัวเวชการจำกัด เพื่อดำเนินการสถานพยาบาลเอกชน
-            เริ่มต้นด้วยจำนวนเตียง <strong>10 เตียง</strong> และขยายตามความต้องการของผู้รับบริการ
-            และสอดรับนโยบายของรัฐ จนถึงขนาด <strong>30 เตียง</strong> และ <strong>50 เตียง</strong> ตามลำดับ
+            โดย <strong>นายแพทย์วีระพล และคุณ ณัฎธิกา พจน์จลองศิลป์</strong> …
           </p>
-
           <p>
             ในด้านการบริการ โรงพยาบาลได้รับความไว้วางใจจากบริษัทประกันต่าง ๆ และหน่วยงานภาครัฐ/เอกชน
             รวมถึงในปี <strong>2544</strong> เข้าร่วมโครงการ <strong>หลักประกันสุขภาพแห่งชาติ (30 บาทรักษาทุกโรค)</strong>
             เพื่อให้ประชาชนเข้าถึงการรักษาอย่างทั่วถึง
           </p>
-
           <p>
             ด้านคุณภาพบริการ โรงพยาบาลมุ่งมั่นพัฒนาอย่างต่อเนื่อง ตั้งแต่ปี <strong>2543</strong>
-            ได้เตรียมการพัฒนาคุณภาพเข้าสู่ระบบ <strong>ISO 9001:2000</strong>
-            และในปี <strong>2544</strong> มุ่งมั่นสู่มาตรฐาน <strong>HA (Hospital Accreditation)</strong>
-            เพื่อให้ผู้รับบริการได้รับบริการที่มีคุณภาพและเกิดความพึงพอใจ พร้อมส่งเสริมการมีส่วนร่วมของทุกหน่วยงาน
-            เพื่อผลักดันระบบบริการที่มีประสิทธิภาพและยั่งยืนเพื่อประชาชน
+            ได้เตรียมการพัฒนาคุณภาพเข้าสู่ระบบ <strong>ISO 9001:2000</strong> และในปี <strong>2544</strong>
+            มุ่งมั่นสู่มาตรฐาน <strong>HA (Hospital Accreditation)</strong> …
           </p>
         </div>
       </section>
     </div>
   </main>
 
+  <!-- JS: คำนวณความสูง header และ toggle เมนูมือถือ -->
+  <script>
+    function setHeaderOffset(){
+      const h = document.getElementById('site-header');
+      if(!h) return;
+      const height = h.offsetHeight; // ความสูงจริง (รวม padding)
+      document.documentElement.style.setProperty('--header-offset', height + 'px');
+    }
+    // เรียกตอนโหลดและเมื่อเปลี่ยนขนาดหน้าจอ
+    window.addEventListener('load', setHeaderOffset);
+    window.addEventListener('resize', setHeaderOffset);
+
+    // เปิด/ปิดเมนูมือถือ
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    if(btn && menu){
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        // อัปเดต offset เผื่อความสูง header เปลี่ยนตอนเปิดเมนูมือถือ
+        setHeaderOffset();
+      });
+    }
+  </script>
 </body>
 </html>
