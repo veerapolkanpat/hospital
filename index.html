@@ -835,53 +835,53 @@
         });
 
         // --- AI Health Q&A Functionality ---
-        document.getElementById('ask-ai-button').addEventListener('click', async () => {
-            const questionInput = document.getElementById('health-question');
-            const aiResponseDiv = document.getElementById('ai-response');
-            const responseContent = document.getElementById('response-content');
-            const askButton = document.getElementById('ask-ai-button');
-            const buttonText = document.getElementById('button-text');
-            const loadingSpinner = document.getElementById('loading-spinner');
+      //  document.getElementById('ask-ai-button').addEventListener('click', async () => {
+      //      const questionInput = document.getElementById('health-question');
+      //      const aiResponseDiv = document.getElementById('ai-response');
+      //      const responseContent = document.getElementById('response-content');
+      //      const askButton = document.getElementById('ask-ai-button');
+      //      const buttonText = document.getElementById('button-text');
+      //      const loadingSpinner = document.getElementById('loading-spinner');
 
-            const question = questionInput.value.trim();
-            if (!question) {
-                showMessageModal("โปรดทราบ", "กรุณาพิมพ์คำถามของคุณก่อน", "alert");
-                return;
-            }
+      //      const question = questionInput.value.trim();
+      //      if (!question) {
+      //          showMessageModal("โปรดทราบ", "กรุณาพิมพ์คำถามของคุณก่อน", "alert");
+      //          return;
+      //      }
 
             // Show loading state
-            buttonText.textContent = 'กำลังคิด...';
-            loadingSpinner.classList.remove('hidden');
-            askButton.disabled = true;
-            aiResponseDiv.classList.add('hidden'); // Hide previous response
+      //      buttonText.textContent = 'กำลังคิด...';
+      //      loadingSpinner.classList.remove('hidden');
+      //      askButton.disabled = true;
+      //      aiResponseDiv.classList.add('hidden'); // Hide previous response
 
-            try {
+      //      try {
                 // In a real application, you'd send this to a backend that calls a generative AI API
                 // For this example, we'll simulate a response
-                const simulatedResponse = await new Promise(resolve => setTimeout(() => {
-                    const sampleResponses = [
-                        "อาการปวดหัวมีหลายสาเหตุ หากปวดรุนแรงเฉียบพลัน ปวดไม่หาย หรือมีอาการร่วมเช่น แขนขาอ่อนแรง ชา พูดไม่ชัด ควรรีบพบแพทย์ทันทีค่ะ",
-                        "ไข้หวัดทั่วไปมักเกิดจากเชื้อไวรัส และมักหายได้เองใน 3-7 วัน ควรพักผ่อนให้เพียงพอ ดื่มน้ำมากๆ และทานยาลดไข้/แก้ปวด หากอาการไม่ดีขึ้นหรือแย่ลง ควรปรึกษาแพทย์ค่ะ",
-                        "การดูแลสุขภาพช่องปากที่ดีควรแปรงฟันอย่างน้อยวันละ 2 ครั้ง ใช้ไหมขัดฟัน และพบทันตแพทย์เพื่อตรวจสุขภาพฟันทุก 6 เดือนค่ะ",
-                        "วิธีลดความเครียดมีหลายอย่าง เช่น การออกกำลังกายอย่างสม่ำเสมอ การฝึกหายใจลึกๆ การทำสมาธิ การหางานอดิเรกที่ชอบ และการพูดคุยกับเพื่อนหรือครอบครัว",
-                        "การรับประทานอาหารให้ครบ 5 หมู่ และหลากหลาย จะช่วยให้ร่างกายได้รับสารอาหารที่จำเป็นอย่างครบถ้วนค่ะ เน้นผัก ผลไม้ ธัญพืชไม่ขัดสี และโปรตีนไม่ติดมัน"
-                    ];
-                    resolve(sampleResponses[Math.floor(Math.random() * sampleResponses.length)]);
-                }, 1500)); // Simulate API call delay
+      //          const simulatedResponse = await new Promise(resolve => setTimeout(() => {
+      //              const sampleResponses = [
+      //                  "อาการปวดหัวมีหลายสาเหตุ หากปวดรุนแรงเฉียบพลัน ปวดไม่หาย หรือมีอาการร่วมเช่น แขนขาอ่อนแรง ชา พูดไม่ชัด ควรรีบพบแพทย์ทันทีค่ะ",
+      //                  "ไข้หวัดทั่วไปมักเกิดจากเชื้อไวรัส และมักหายได้เองใน 3-7 วัน ควรพักผ่อนให้เพียงพอ ดื่มน้ำมากๆ และทานยาลดไข้/แก้ปวด หากอาการไม่ดีขึ้นหรือแย่ลง ควรปรึกษาแพทย์ค่ะ",
+      //                  "การดูแลสุขภาพช่องปากที่ดีควรแปรงฟันอย่างน้อยวันละ 2 ครั้ง ใช้ไหมขัดฟัน และพบทันตแพทย์เพื่อตรวจสุขภาพฟันทุก 6 เดือนค่ะ",
+      //                  "วิธีลดความเครียดมีหลายอย่าง เช่น การออกกำลังกายอย่างสม่ำเสมอ การฝึกหายใจลึกๆ การทำสมาธิ การหางานอดิเรกที่ชอบ และการพูดคุยกับเพื่อนหรือครอบครัว",
+      //                  "การรับประทานอาหารให้ครบ 5 หมู่ และหลากหลาย จะช่วยให้ร่างกายได้รับสารอาหารที่จำเป็นอย่างครบถ้วนค่ะ เน้นผัก ผลไม้ ธัญพืชไม่ขัดสี และโปรตีนไม่ติดมัน"
+      //              ];
+      //              resolve(sampleResponses[Math.floor(Math.random() * sampleResponses.length)]);
+      //          }, 1500)); // Simulate API call delay
 
-                responseContent.textContent = simulatedResponse;
-                aiResponseDiv.classList.remove('hidden');
-            } catch (error) {
-                console.error("Error asking AI:", error);
-                responseContent.textContent = "ขออภัยค่ะ เกิดข้อผิดพลาดในการประมวลผลคำถามของคุณ กรุณาลองใหม่อีกครั้ง";
-                aiResponseDiv.classList.remove('hidden');
-            } finally {
-                // Reset button state
-                buttonText.textContent = 'ถาม AI';
-                loadingSpinner.classList.add('hidden');
-                askButton.disabled = false;
-            }
-        });
+      //          responseContent.textContent = simulatedResponse;
+      //          aiResponseDiv.classList.remove('hidden');
+      //      } catch (error) {
+      //          console.error("Error asking AI:", error);
+      //          responseContent.textContent = "ขออภัยค่ะ เกิดข้อผิดพลาดในการประมวลผลคำถามของคุณ กรุณาลองใหม่อีกครั้ง";
+      //          aiResponseDiv.classList.remove('hidden');
+      //      } finally {
+      //          // Reset button state
+      //          buttonText.textContent = 'ถาม AI';
+      //          loadingSpinner.classList.add('hidden');
+      //          askButton.disabled = false;
+      //      }
+      //  });
 
         // --- Event Listeners and Initial Calls ---
 
