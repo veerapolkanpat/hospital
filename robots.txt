@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://veerapolkanpat.github.io/hospital/sitemap.xml
