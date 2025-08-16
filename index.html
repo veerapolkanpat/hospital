@@ -7,29 +7,38 @@
   <meta name="description" content="โรงพยาบาลวีระพลการแพทย์ ให้บริการตรวจรักษาโรคทั่วไป ตรวจสุขภาพ ตรวจเลือด ตรวจเอกซเรย์ พร้อมทีมแพทย์และพยาบาลผู้เชี่ยวชาญ ดูแลด้วยหัวใจ">
   <meta name="keywords" content="โรงพยาบาล, รพ.วีระพลการแพทย์, วีระพลการแพทย์, สุขภาพ, ตรวจรักษา">
   <meta name="robots" content="index, follow">
+
+  <!-- Canonical (ให้เหลืออันเดียว) -->
   <link rel="canonical" href="https://veerapolkanpat.github.io/hospital/">
+
+  <!-- OpenGraph -->
   <meta property="og:site_name" content="โรงพยาบาลวีระพลการแพทย์">
   <meta property="og:title" content="โรงพยาบาลวีระพลการแพทย์ – บริการตรวจรักษาและดูแลสุขภาพครบวงจร">
   <meta property="og:description" content="ให้บริการตรวจรักษาโรคทั่วไป ตรวจสุขภาพ ตรวจเลือด ตรวจเอกซเรย์ พร้อมทีมแพทย์และพยาบาลผู้เชี่ยวชาญ">
-  <meta property="og:image" content="https://veerapolkanpat.github.io/hospital/assets/LOGO.png">
+  <meta property="og:image" content="https://veerapolkanpat.github.io/hospital/LOGO.png">
   <meta property="og:url" content="https://veerapolkanpat.github.io/hospital/">
   <meta property="og:locale" content="th_TH">
   <meta property="og:type" content="website">
-  <!-- WebSite & Organization structured data -->
+
+  <!-- WebSite (ผูกกับ Organization ด้วย @id/publisher) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": "https://veerapolkanpat.github.io/hospital/#website",
     "name": "โรงพยาบาลวีระพลการแพทย์",
     "alternateName": ["รพ.วีระพลการแพทย์","Veerapolkanpat Hospital"],
-    "url": "https://veerapolkanpat.github.io/hospital/"
+    "url": "https://veerapolkanpat.github.io/hospital/",
+    "publisher": { "@id": "https://veerapolkanpat.github.io/hospital/#org" }
   }
   </script>
 
+  <!-- Organization -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://veerapolkanpat.github.io/hospital/#org",
     "name": "โรงพยาบาลวีระพลการแพทย์",
     "url": "https://veerapolkanpat.github.io/hospital/",
     "logo": "https://veerapolkanpat.github.io/hospital/LOGO.png",
@@ -39,8 +48,8 @@
     ]
   }
   </script>
-  <link rel="canonical" href="https://veerapolkanpat.github.io/hospital/">
-  <!-- Favicon (แนะนำวางไว้ที่ /hospital/ รากของเว็บ) -->
+
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/hospital/favicon.svg?v=2">
   <link rel="icon" type="image/png" sizes="32x32" href="/hospital/favicon-32.png?v=2">
   <link rel="icon" type="image/png" sizes="16x16" href="/hospital/favicon-16.png?v=2">
@@ -48,22 +57,22 @@
   <link rel="apple-touch-icon" href="/hospital/apple-touch-icon.png?v=2">
   <meta name="theme-color" content="#0d6efd">
 
-  <!-- Google tag (gtag.js) -->
+  <!-- GA4 + Consent Mode -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ0FG8PVXQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    function gtag(){ dataLayer.push(arguments); }
 
-    gtag('config', 'G-QZ0FG8PVXQ');
+    // ไม่ใช้คุกกี้จนกว่าจะยินยอม
+    gtag('consent', 'default', { 'analytics_storage': 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-QZ0FG8PVXQ', { anonymize_ip: true });
   </script>
 
-  <!-- Bootstrap 5 -->
+  <!-- Bootstrap / Fonts / Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Fonts + Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  
 
   <style>
     body{font-family:'Prompt',sans-serif;background-color:#f8f9fa}
@@ -76,49 +85,29 @@
     .section-pad{padding:80px 0}
     .shadow-soft{box-shadow:0 8px 24px rgba(0,0,0,.08)}
 
-    /* ===== Doctors card – ปรับสวยขึ้น ===== */
-    .doc-card{
-      background:#eaf3ff;border:0;border-radius:16px;padding:32px;
-      box-shadow:0 8px 24px rgba(0,0,0,.08);
-      transition:transform .25s ease, box-shadow .25s ease;
-    }
-    .doc-card:hover{ transform:translateY(-4px); box-shadow:0 16px 32px rgba(0,0,0,.12); }
-
-    .doc-oval{
-      width:170px;height:210px;border-radius:85px/105px;margin:0 auto 14px;
-      position:relative;overflow:hidden;
-      background:radial-gradient(120px 100px at 50% 10%, #ffffff 0 60%, #e8f2ff 61% 100%);
-      box-shadow:0 6px 18px rgba(0,0,0,.08);
-    }
-    .doc-oval::before{
-      content:"";position:absolute;inset:-8px;border-radius:inherit;
-      background:linear-gradient(135deg,#8cc8ff33,#2ecc7133);filter:blur(10px);
-    }
-    .doc-oval img{
-      width:128px;height:148px;object-fit:cover;border-radius:50%;
-      border:6px solid #fff;margin-top:18px;position:relative;z-index:2;
-      transition:transform .25s ease;
-    }
-    .doc-card:hover .doc-oval img{ transform:translateY(-2px) scale(1.03); }
-    .doc-oval svg{ position:absolute;left:0;bottom:-1px;width:100%;height:auto;z-index:1;
-      filter:drop-shadow(0 6px 8px rgba(46,204,113,.35));
-    }
+    /* Doctors card */
+    .doc-card{background:#eaf3ff;border:0;border-radius:16px;padding:32px;box-shadow:0 8px 24px rgba(0,0,0,.08);transition:transform .25s ease, box-shadow .25s ease}
+    .doc-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(0,0,0,.12)}
+    .doc-oval{width:170px;height:210px;border-radius:85px/105px;margin:0 auto 14px;position:relative;overflow:hidden;background:radial-gradient(120px 100px at 50% 10%, #ffffff 0 60%, #e8f2ff 61% 100%);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+    .doc-oval::before{content:"";position:absolute;inset:-8px;border-radius:inherit;background:linear-gradient(135deg,#8cc8ff33,#2ecc7133);filter:blur(10px)}
+    .doc-oval img{width:128px;height:148px;object-fit:cover;border-radius:50%;border:6px solid #fff;margin-top:18px;position:relative;z-index:2;transition:transform .25s ease}
+    .doc-card:hover .doc-oval img{transform:translateY(-2px) scale(1.03)}
+    .doc-oval svg{position:absolute;left:0;bottom:-1px;width:100%;height:auto;z-index:1;filter:drop-shadow(0 6px 8px rgba(46,204,113,.35))}
     .doc-name{font-weight:700;margin-bottom:.25rem}
     .doc-spec{color:#0d6efd;font-weight:600;margin-bottom:.25rem}
     .doc-brief{color:#6c757d;font-size:.95rem}
 
-    /* Featured packages */
+    /* Packages */
     .pkg-img{height:200px;object-fit:cover}
     .price-now{color:#dc3545;font-weight:700;font-size:1.15rem}
     .price-old{color:#6c757d;font-size:.9rem;text-decoration:line-through}
+    #pkgIncludes, .card-body ul { padding-left: 1.15rem; } /* bullet สวยๆ */
 
-    /* Cookie toast bottom */
+    /* Cookie toast */
     #cookieToast{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:1080}
 
     .cert-img{max-height:110px;width:auto;object-fit:contain}
-    
   </style>
-  
 </head>
 <body>
 
