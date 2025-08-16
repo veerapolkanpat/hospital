@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ข่าวสาร & ประกาศ - โรงพยาบาลวีระพลการแพทย์</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    .news-hero {
+      background: url('images/news-banner.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .news-card img {
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <header class="news-hero">
+    <h1>ข่าวสาร & ประกาศ</h1>
+    <p>ศูนย์รวมข่าวสาร กิจกรรม โปรโมชั่น และประกาศรับสมัครงาน</p>
+  </header>
+
+  <div class="container my-5">
+    <!-- เมนูเลือกประเภท -->
+    <ul class="nav nav-pills justify-content-center mb-4" id="newsTabs">
+      <li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#all">ทั้งหมด</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#announcement">ข่าวประชาสัมพันธ์</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#promotion">โปรโมชั่น</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#jobs">รับสมัครงาน</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#docs">เอกสารเผยแพร่</a></li>
+    </ul>
+
+    <!-- เนื้อหา -->
+    <div class="tab-content">
+
+      <!-- ทั้งหมด -->
+      <div class="tab-pane fade show active" id="all">
+        <div class="row g-4">
+          <!-- การ์ดข่าว -->
+          <div class="col-md-4">
+            <div class="card news-card h-100">
+              <img src="images/news1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">แพ็กเกจตรวจสุขภาพประจำปี</h5>
+                <p class="card-text text-muted">ประกาศเมื่อ: 15 สิงหาคม 2566</p>
+                <p>โปรโมชั่นพิเศษ ลด 20% ถึงสิ้นเดือนนี้</p>
+                <a href="news-detail.html?id=1" class="btn btn-primary">อ่านเพิ่มเติม</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- การ์ดข่าว -->
+          <div class="col-md-4">
+            <div class="card news-card h-100">
+              <img src="images/job1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">ประกาศรับสมัคร: พยาบาลวิชาชีพ</h5>
+                <p class="card-text text-muted">ประกาศเมื่อ: 10 สิงหาคม 2566</p>
+                <p>คุณสมบัติ: จบพยาบาล มีใบประกอบวิชาชีพ อายุไม่เกิน 35 ปี</p>
+                <a href="job-detail.html?id=1" class="btn btn-success">ดูรายละเอียดงาน</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ข่าวประชาสัมพันธ์ -->
+      <div class="tab-pane fade" id="announcement">
+        <p>📢 ส่วนนี้จะแสดงเฉพาะข่าวประชาสัมพันธ์</p>
+      </div>
+
+      <!-- โปรโมชั่น -->
+      <div class="tab-pane fade" id="promotion">
+        <p>🎉 ส่วนนี้จะแสดงโปรโมชั่นแพ็กเกจ</p>
+      </div>
+
+      <!-- รับสมัครงาน -->
+      <div class="tab-pane fade" id="jobs">
+        <p>👩‍⚕️ ส่วนนี้จะแสดงประกาศรับสมัครงาน</p>
+      </div>
+
+      <!-- เอกสารเผยแพร่ -->
+      <div class="tab-pane fade" id="docs">
+        <p>📄 ส่วนนี้จะแสดงเอกสารเผยแพร่ให้ดาวน์โหลด</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
