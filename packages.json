@@ -89,7 +89,7 @@
     "category": "ศัลยกรรม/หัตถการ",
     "price": 32900,
     "oldPrice": 38900,
-    "img": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
+    "img": "/hospital/hospital/assets/images/1755330676977-S__73138179.jpg",
     "short": "สำหรับไส้เลื่อนไม่ซับซ้อน กลับบ้านได้ในวันเดียว",
     "includes": [
       "ค่าห้องผ่าตัด",
@@ -97,7 +97,7 @@
       "ติดตามอาการหลังผ่าตัด 1 ครั้ง"
     ],
     "note": "ราคาสำหรับขนาดเล็ก-กลาง ไม่รวมภาวะแทรกซ้อน",
-    "active": true
+    "active": false
   },
   {
     "id": "EYE-CHECK",
