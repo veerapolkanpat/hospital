@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>โรงพยาบาล วีระพลการแพทย์</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- SEO / Social -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- <meta name="google-site-verification" content="..."> -->
   <meta name="description" content="โรงพยาบาลวีระพลการแพทย์ ให้บริการตรวจรักษาโรคทั่วไป ตรวจสุขภาพ ตรวจเลือด ตรวจเอกซเรย์ พร้อมทีมแพทย์และพยาบาลผู้เชี่ยวชาญ ดูแลด้วยหัวใจ">
   <meta name="keywords" content="โรงพยาบาล, รพ.วีระพลการแพทย์, วีระพลการแพทย์, สุขภาพ, ตรวจรักษา">
   <meta name="robots" content="index, follow">
@@ -26,29 +25,35 @@
   <style>
     body{font-family:'Prompt',sans-serif;background-color:#f8f9fa}
     .navbar-brand img{height:48px;width:48px;border-radius:50%}
-    .hero {
-      min-height: 85vh;
-      background: url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg') center/cover no-repeat;
-      position: relative;
-      display:flex;align-items:center;
-    }
-    .hero::before{
-      content:"";position:absolute;inset:0;
-      background:linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,.6));
-    }
-    .hero .inner{
-      position:relative;color:#fff;max-width:780px;margin:auto;text-align:center;
-      background:rgba(0,0,0,.55);border-radius:1rem;padding:2rem 1.5rem
-    }
+
+    /* Hero */
+    .hero{min-height:85vh;background:url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg') center/cover no-repeat;position:relative;display:flex;align-items:center}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,.6))}
+    .hero .inner{position:relative;color:#fff;max-width:780px;margin:auto;text-align:center;background:rgba(0,0,0,.55);border-radius:1rem;padding:2rem 1.5rem}
     .section-pad{padding:80px 0}
     .shadow-soft{box-shadow:0 8px 24px rgba(0,0,0,.08)}
+
+    /* == Doctors card (ตามภาพตัวอย่าง) == */
+    .doc-card{background:#eaf3ff;border:0;border-radius:16px;padding:32px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .doc-oval{width:160px;height:200px;border-radius:80px/100px;background:#fff;margin:0 auto 14px;position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.08);display:flex;align-items:flex-start;justify-content:center}
+    .doc-oval img{width:120px;height:140px;object-fit:cover;border-radius:50%;border:6px solid #fff;margin-top:18px;z-index:2}
+    .doc-oval svg{position:absolute;left:0;bottom:-1px;width:100%;height:auto}
+    .doc-name{font-weight:700;margin-bottom:.25rem}
+    .doc-spec{color:#0d6efd;font-weight:600;margin-bottom:.25rem}
+    .doc-brief{color:#6c757d;font-size:.95rem}
+
+    /* == Featured package card == */
+    .pkg-img{height:200px;object-fit:cover}
+    .price-now{color:#dc3545;font-weight:700;font-size:1.15rem}
+    .price-old{color:#6c757d;font-size:.9rem;text-decoration:line-through}
+
     /* Cookie toast bottom */
     #cookieToast{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:1080}
   </style>
 </head>
 <body>
 
-<!-- Navbar (เหมือน packages.html) -->
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
   <div class="container">
     <a class="navbar-brand fw-bold text-success d-flex align-items-center" href="/hospital/">
@@ -113,7 +118,7 @@
           เรานำเทคโนโลยีการแพทย์ที่ทันสมัยมาใช้ เพื่อการวินิจฉัยและรักษาที่แม่นยำ
           พร้อมสิ่งอำนวยความสะดวก ครบถ้วนเพื่อความสบายของผู้ป่วยและญาติ
         </p>
-        <a href="/hospital/about.html" class="btn btn-outline-primary">เกี่ยวกับเรา <i class="fa-solid fa-arrow-right ms-1"></i></a>
+        <a href="#services" class="btn btn-outline-primary">ดูบริการของเรา <i class="fa-solid fa-arrow-right ms-1"></i></a>
       </div>
     </div>
   </div>
@@ -126,151 +131,139 @@
     <p class="text-center text-muted mb-5">ครอบคลุมตั้งแต่การตรวจสุขภาพทั่วไป จนถึงการรักษาเฉพาะทาง</p>
 
     <div class="row g-4">
-      <!-- การ์ดบริการตัวอย่าง 6 รายการ -->
       <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft">
-          <div class="card-body text-center">
-            <div class="display-6 text-primary mb-3"><i class="fas fa-heartbeat"></i></div>
+        <div class="card h-100 shadow-soft text-center">
+          <div class="display-6 text-primary mt-4 mb-2"><i class="fas fa-heartbeat"></i></div>
+          <div class="card-body pt-0">
             <h5 class="card-title">แผนกอายุรกรรม</h5>
             <p class="card-text text-muted">ดูแลรักษาโรคทั่วไปและโรคเรื้อรังต่างๆ</p>
           </div>
         </div>
       </div>
-
       <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft">
-          <div class="card-body text-center">
-            <div class="display-6 text-primary mb-3"><i class="fas fa-cut"></i></div>
+        <div class="card h-100 shadow-soft text-center">
+          <div class="display-6 text-primary mt-4 mb-2"><i class="fas fa-cut"></i></div>
+          <div class="card-body pt-0">
             <h5 class="card-title">แผนกศัลยกรรม</h5>
             <p class="card-text text-muted">ผ่าตัดทั่วไปและเฉพาะทางด้วยทีมแพทย์มากประสบการณ์</p>
           </div>
         </div>
       </div>
-
       <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft">
-          <div class="card-body text-center">
-            <div class="display-6 text-primary mb-3"><i class="fas fa-child"></i></div>
-            <h5 class="card-title">กุมารเวชกรรม</h5>
-            <p class="card-text text-muted">ดูแลสุขภาพเด็กตั้งแต่แรกเกิดจนถึงวัยรุ่น</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft">
-          <div class="card-body text-center">
-            <div class="display-6 text-primary mb-3"><i class="fas fa-venus"></i></div>
-            <h5 class="card-title">สูตินรีเวช</h5>
-            <p class="card-text text-muted">ดูแลสุขภาพสตรี การตั้งครรภ์ และตรวจวินิจฉัยเฉพาะทาง</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft">
-          <div class="card-body text-center">
-            <div class="display-6 text-primary mb-3"><i class="fas fa-tooth"></i></div>
-            <h5 class="card-title">ทันตกรรม</h5>
-            <p class="card-text text-muted">ตรวจรักษาช่องปากและฟัน ครบวงจร</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft">
-          <div class="card-body text-center">
-            <div class="display-6 text-primary mb-3"><i class="fas fa-truck-medical"></i></div>
+        <div class="card h-100 shadow-soft text-center">
+          <div class="display-6 text-primary mt-4 mb-2"><i class="fas fa-truck-medical"></i></div>
+          <div class="card-body pt-0">
             <h5 class="card-title">ฉุกเฉิน 24 ชม.</h5>
             <p class="card-text text-muted">พร้อมทีมและอุปกรณ์ฉุกเฉิน มาตรฐานความปลอดภัย</p>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="text-center mt-5">
-      <a href="/hospital/packages.html" class="btn btn-outline-primary btn-lg">ดูแพ็กเกจตรวจสุขภาพ/โปรโมชัน</a>
-    </div>
   </div>
 </section>
 
-<!-- Doctors -->
-<section id="doctors" class="section-pad bg-white">
+<!-- Featured Packages (3) -->
+<section id="featured-packages" class="section-pad bg-white">
   <div class="container">
-    <h2 class="text-primary fw-bold text-center mb-4">แพทย์ของเรา</h2>
-    <p class="text-center text-muted mb-5">ทีมแพทย์ผู้เชี่ยวชาญหลายสาขา พร้อมดูแลคุณ</p>
+    <h2 class="text-primary fw-bold text-center mb-4">แพ็กเกจ / โปรโมชันแนะนำ</h2>
+    <p class="text-center text-muted mb-4">คัดมาให้ 3 รายการที่น่าสนใจจากระบบแพ็กเกจ</p>
 
-    <div class="row g-4">
-      <!-- ตัวอย่าง 6 การ์ดแพทย์ -->
-      <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft text-center">
-          <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr1.avif" class="card-img-top" alt="">
-          <div class="card-body">
-            <h6 class="card-title mb-1">นพ.วีระพล พจน์จลองศิลป์</h6>
-            <div class="text-primary small mb-2">เวชศาสตร์ทั่วไป</div>
-            <p class="card-text text-muted small">คณะแพทยศาสตร์ มหาวิทยาลัยเชียงใหม่</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft text-center">
-          <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr2.avif" class="card-img-top" alt="">
-          <div class="card-body">
-            <h6 class="card-title mb-1">นพ.พณิช พจน์จลองศิลป์</h6>
-            <div class="text-primary small mb-2">อายุรศาสตร์</div>
-            <p class="card-text text-muted small">คณะแพทยศาสตร์ ศิริราชพยาบาล</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft text-center">
-          <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr4.avif" class="card-img-top" alt="">
-          <div class="card-body">
-            <h6 class="card-title mb-1">พญ.สุมณทิพย์ พจน์จลองศิลป์</h6>
-            <div class="text-primary small mb-2">อายุรศาสตร์โรคหัวใจ</div>
-            <p class="card-text text-muted small">คณะแพทยศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft text-center">
-          <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr3.avif" class="card-img-top" alt="">
-          <div class="card-body">
-            <h6 class="card-title mb-1">พญ.บุษบงก์ ดวงมาตย์พล</h6>
-            <div class="text-primary small mb-2">วิสัญญีวิทยา</div>
-            <p class="card-text text-muted small">มหาวิทยาลัยขอนแก่น</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft text-center">
-          <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr5.avif" class="card-img-top" alt="">
-          <div class="card-body">
-            <h6 class="card-title mb-1">นพ.ปราโมทย์ โคตรพันธุ์กูล</h6>
-            <div class="text-primary small mb-2">ศัลยศาสตร์ทั่วไป</div>
-            <p class="card-text text-muted small">คณะแพทยศาสตร์ ศิริราชพยาบาล</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-4">
-        <div class="card h-100 shadow-soft text-center">
-          <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr6.avif" class="card-img-top" alt="">
-          <div class="card-body">
-            <h6 class="card-title mb-1">พล.ต.นพ.ดาราพงศ์ ลังกาฟ้า</h6>
-            <div class="text-primary small mb-2">สูติ-นรีเวช</div>
-            <p class="card-text text-muted small">มหาวิทยาลัยเชียงใหม่</p>
-          </div>
+    <div class="row g-4" id="pkgRow">
+      <div class="col-12">
+        <div class="text-center text-muted">
+          <i class="fa-solid fa-spinner fa-spin me-2"></i>กำลังโหลดแพ็กเกจ...
         </div>
       </div>
     </div>
 
     <div class="text-center mt-4">
-      <a href="#contact" class="btn btn-outline-secondary">ติดต่อเพื่อสอบถามตารางแพทย์</a>
+      <a href="/hospital/packages.html" class="btn btn-primary">ดูแพ็กเกจทั้งหมด</a>
+    </div>
+  </div>
+</section>
+
+<!-- Doctors -->
+<section id="doctors" class="section-pad bg-light">
+  <div class="container">
+    <h2 class="text-primary fw-bold text-center mb-4">แพทย์ของเรา</h2>
+
+    <div class="row g-4">
+      <!-- 1 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr1.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">นพ.วีระพล พจน์จลองศิลป์</div>
+          <div class="doc-spec">เวชศาสตร์ทั่วไป</div>
+          <div class="doc-brief">ปริญญาบัตร แพทย์ศาสตร์บัณฑิต คณะแพทยศาสตร์ ม.เชียงใหม่</div>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr2.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">นพ.พณิช พจน์จลองศิลป์</div>
+          <div class="doc-spec">ผู้เชี่ยวชาญสาขาอายุรศาสตร์</div>
+          <div class="doc-brief">คณะแพทยศาสตร์ ศิริราชพยาบาล ม.มหิดล</div>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr4.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">พญ.สุมณทิพย์ พจน์จลองศิลป์</div>
+          <div class="doc-spec">อายุรศาสตร์ และโรคหัวใจ</div>
+          <div class="doc-brief">คณะแพทยศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย</div>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr3.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">พญ.บุษบงก์ ดวงมาตย์พล</div>
+          <div class="doc-spec">วิสัญญีวิทยา</div>
+          <div class="doc-brief">คณะแพทยศาสตร์ มหาวิทยาลัยขอนแก่น</div>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr5.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">นพ.ปราโมทย์ โคตรพันธุ์กูล</div>
+          <div class="doc-spec">ศัลยศาสตร์ทั่วไป</div>
+          <div class="doc-brief">คณะแพทยศาสตร์ ศิริราชพยาบาล ม.มหิดล</div>
+        </div>
+      </div>
+      <!-- 6 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr6.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">พล.ต นพ.ดาราพงศ์ ลังกาฟ้า</div>
+          <div class="doc-spec">สูติศาสตร์ และนรีเวชวิทยา</div>
+          <div class="doc-brief">คณะแพทยศาสตร์ มหาวิทยาลัยเชียงใหม่</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="#contact" class="btn btn-outline-secondary">สอบถามตารางตรวจแพทย์</a>
     </div>
   </div>
 </section>
@@ -324,9 +317,9 @@
 <footer class="bg-dark text-white py-4">
   <div class="container text-center small">
     <div class="mb-2">© 2025 โรงพยาบาล วีระพลการแพทย์ สงวนลิขสิทธิ์</div>
-    <a class="text-white-50 me-2" href="https://veerapolkanpat.github.io/hospital/privacy-policy.html">นโยบายความเป็นส่วนตัว</a>
+    <a class="text-white-50 me-2" href="/hospital/privacy-policy.html">นโยบายความเป็นส่วนตัว</a>
     <span class="text-white-50">|</span>
-    <a class="text-white-50 ms-2" href="https://veerapolkanpat.github.io/hospital/terms.html">ข้อกำหนดและเงื่อนไข</a>
+    <a class="text-white-50 ms-2" href="/hospital/terms.html">ข้อกำหนดและเงื่อนไข</a>
   </div>
 </footer>
 
@@ -343,8 +336,71 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Featured packages loader -->
 <script>
-  // Cookie toast
+  const PACKAGES_JSON = '/hospital/packages.json'; // โหลดจาก GitHub Pages โดยตรง
+
+  function thb(n){ return new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0}).format(Number(n||0)); }
+
+  function renderFeatured(list){
+    const wrap = document.getElementById('pkgRow');
+    if(!wrap) return;
+    wrap.innerHTML = '';
+    list.forEach(p=>{
+      const includes = Array.isArray(p.includes)? p.includes.slice(0,4):[];
+      wrap.insertAdjacentHTML('beforeend', `
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-soft">
+            <img class="card-img-top pkg-img" src="${p.img || 'https://placehold.co/800x500?text=Package'}" alt="">
+            <div class="card-body">
+              <span class="badge bg-success mb-2">${p.category || 'แพ็กเกจ'}</span>
+              <h5 class="card-title">${p.title || ''}</h5>
+              ${p.short ? `<p class="text-muted small mb-2">${p.short}</p>`:''}
+              ${includes.length? `<ul class="small text-muted mb-3">${includes.map(i=>`<li>• ${i}</li>`).join('')}</ul>`:''}
+              <div class="d-flex align-items-baseline gap-2">
+                <span class="price-now">${thb(p.price)}</span>
+                ${p.oldPrice? `<span class="price-old">${thb(p.oldPrice)}</span>`:''}
+              </div>
+            </div>
+            <div class="card-footer bg-white border-0 pb-4">
+              <a href="/hospital/packages.html" class="btn btn-outline-primary w-100">ดูรายละเอียด</a>
+            </div>
+          </div>
+        </div>
+      `);
+    });
+  }
+
+  async function loadFeaturedPackages(){
+    try{
+      const res = await fetch(PACKAGES_JSON,{cache:'no-store'});
+      const data = await res.json();
+      let arr = Array.isArray(data) ? data : (data && Array.isArray(data.data) ? data.data : []);
+      let active = arr.filter(x => String(x.active).toLowerCase() === 'true');
+
+      // เลือก "โปรโมชัน" ก่อน ถ้าไม่ครบ 3 เติมด้วยรายการอื่น
+      const promos = active.filter(x => (x.category || '').includes('โปร'));
+      let pick = promos.slice(0,3);
+      if (pick.length < 3){
+        const rest = active.filter(x => !promos.includes(x));
+        pick = pick.concat(rest.slice(0, 3 - pick.length));
+      }
+      renderFeatured(pick);
+    }catch(e){
+      console.error('load packages failed:', e);
+      const wrap = document.getElementById('pkgRow');
+      if(wrap){
+        wrap.innerHTML = `<div class="col-12 text-center text-danger">ไม่สามารถโหลดแพ็กเกจได้ในขณะนี้</div>`;
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadFeaturedPackages);
+</script>
+
+<!-- Cookie toast script -->
+<script>
   (function(){
     const k='cookie.accepted';
     const accepted=localStorage.getItem(k);
