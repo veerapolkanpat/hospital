@@ -57,14 +57,14 @@
       <hr>
       <div class="row g-3">
         <div class="col-md-6">
-          <label class="form-label">ไฟล์ข้อมูลแพ็กเกจ</label>
-          <input id="pathPackages" class="form-control" value="hospital/packages.json">
-          <div class="form-text small-help">จะถูกเขียนทับเมื่อบันทึก</div>
+          <label class="form-label">ไฟล์ข้อมูลแพ็กเกจ (พาธใน repo)</label>
+          <input id="pathPackages" class="form-control" value="packages.json">
+          <div class="form-text small-help">ตัวอย่าง: <code class="k">packages.json</code> หรือ <code class="k">data/packages.json</code></div>
         </div>
         <div class="col-md-6">
-          <label class="form-label">โฟลเดอร์เก็บรูปแพ็กเกจ</label>
-          <input id="pathImages" class="form-control" value="hospital/assets/images">
-          <div class="form-text small-help">รูปใหม่จะถูกอัปโหลดในโฟลเดอร์นี้</div>
+          <label class="form-label">โฟลเดอร์เก็บรูปแพ็กเกจ (พาธใน repo)</label>
+          <input id="pathImages" class="form-control" value="assets/images">
+          <div class="form-text small-help">ตัวอย่าง: <code class="k">assets/images</code></div>
         </div>
       </div>
     </div>
@@ -200,8 +200,8 @@ let cfg = {
   repo:   localStorage.getItem('gh.repo')   || 'hospital',
   branch: localStorage.getItem('gh.branch') || 'main',
   token:  localStorage.getItem('gh.token')  || '',
-  pathPackages: localStorage.getItem('gh.pathPackages') || 'hospital/packages.json',
-  pathImages:   localStorage.getItem('gh.pathImages')   || 'hospital/assets/images'
+  pathPackages: localStorage.getItem('gh.pathPackages') || 'packages.json',
+  pathImages:   localStorage.getItem('gh.pathImages')   || 'assets/images'
 };
 
 function applyCfgToForm(){
@@ -209,16 +209,16 @@ function applyCfgToForm(){
   els.repo.value = cfg.repo || '';
   els.branch.value = cfg.branch || '';
   els.token.value = cfg.token || '';
-  els.pathPackages.value = cfg.pathPackages || 'hospital/packages.json';
-  els.pathImages.value   = cfg.pathImages   || 'hospital/assets/images';
+  els.pathPackages.value = cfg.pathPackages || 'packages.json';
+  els.pathImages.value   = cfg.pathImages   || 'assets/images';
 }
 function updateCfgFromForm(){
   cfg.owner  = (els.owner.value  || '').trim();
   cfg.repo   = (els.repo.value   || '').trim();
   cfg.branch = (els.branch.value || 'main').trim();
   cfg.token  = (els.token.value  || '').trim();
-  cfg.pathPackages = (els.pathPackages.value || 'hospital/packages.json').trim();
-  cfg.pathImages   = (els.pathImages.value   || 'hospital/assets/images').trim();
+  cfg.pathPackages = (els.pathPackages.value || 'packages.json').trim();
+  cfg.pathImages   = (els.pathImages.value   || 'assets/images').trim();
 }
 function loadCfg(){
   try{
@@ -246,7 +246,7 @@ function saveCfg(){
     els.cfgMsg.textContent = 'บันทึกแล้ว';
   }catch(e){
     console.error('localStorage write failed:', e);
-    els.cfgMsg.textContent = 'บันทึกไม่ได้: บราวเซอร์บล็อก localStorage';
+    els.cfgMsg.textContent = 'บันทึกไม่ได้: บราว์เซอร์บล็อก localStorage';
   }
   setTimeout(()=>els.cfgMsg.textContent='', 2000);
 }
@@ -264,12 +264,13 @@ function authHeaders(){
 async function ghGetContent(path){
   const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(cfg.branch)}`;
   const res = await fetch(url, { headers: authHeaders() });
-  if(!res.ok) throw new Error(`โหลดไฟล์ไม่สำเร็จ: ${res.status}`);
+  if (res.status === 404) return { notFound: true };
+  if (!res.ok) throw new Error(`โหลดไฟล์ไม่สำเร็จ: ${res.status}`);
   return res.json();
 }
 async function ghPutContent(path, contentText, message, sha=null){
   const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}`;
-  const body = { message, content: b64encodeUTF8(contentText), branch: cfg.branch };
+  const body = { message, content: btoa(unescape(encodeURIComponent(contentText))), branch: cfg.branch };
   if(sha) body.sha = sha;
   const res = await fetch(url, { method:'PUT', headers:{...authHeaders(),'Content-Type':'application/json'}, body: JSON.stringify(body) });
   if(!res.ok){ const t = await res.text(); throw new Error(`บันทึกไฟล์ไม่สำเร็จ: ${res.status} ${t}`); }
@@ -282,10 +283,7 @@ async function ghPutBinary(path, arrayBuffer, message){
   if(!res.ok){ const t = await res.text(); throw new Error(`อัปโหลดรูปไม่สำเร็จ: ${res.status} ${t}`); }
   return res.json();
 }
-
 // base64 helpers
-function b64encodeUTF8(str){ return btoa(unescape(encodeURIComponent(str))); }
-function b64decodeUTF8(b64){ return decodeURIComponent(escape(atob(b64))); }
 function arrayBufferToBase64(buffer){
   let binary=''; const bytes=new Uint8Array(buffer); for(let i=0;i<bytes.byteLength;i++) binary+=String.fromCharCode(bytes[i]); return btoa(binary);
 }
@@ -294,10 +292,21 @@ function arrayBufferToBase64(buffer){
 async function loadPackagesJson(){
   updateCfgFromForm();
   const meta = await ghGetContent(cfg.pathPackages);
+  if (meta.notFound) {
+    packagesSha = null;
+    PACKS = [];
+    renderTable();
+    showMsg('warning','ยังไม่พบ packages.json ใน repo (เริ่มรายการว่าง). เพิ่มแล้วกดบันทึกเพื่อสร้างไฟล์');
+    return;
+  }
   packagesSha = meta.sha || null;
-  const jsonText = b64decodeUTF8(meta.content);
+
+  // ----- decode base64 -> string -> JSON -----
+  const decoded = atob(meta.content); // meta.encoding === 'base64'
   let parsed;
-  try{ parsed = JSON.parse(jsonText); }catch(e){ throw new Error('รูปแบบ JSON ไม่ถูกต้อง'); }
+  try { parsed = JSON.parse(decoded); }
+  catch(e){ throw new Error('packages.json ไม่ใช่ JSON ที่ถูกต้อง'); }
+
   PACKS = Array.isArray(parsed) ? parsed : (parsed && Array.isArray(parsed.data)) ? parsed.data : [];
   renderTable();
   showMsg('success', `โหลดแพ็กเกจ ${PACKS.length} รายการ`);
@@ -378,12 +387,13 @@ async function uploadImageIfSelected(){
   const filename = `${Date.now()}-${safeName}`;
   const path = `${cfg.pathImages.replace(/\/$/,'')}/${filename}`;
   await ghPutBinary(path, buf, `feat: upload image ${filename}`);
+  // URL รูปสำหรับเว็บ (ภายใต้ GitHub Pages): /<repo>/<path>
   const relUrl = `/${cfg.repo}/${path}`.replace(/\/{2,}/g,'/');
   return relUrl;
 }
 function normalizeImageUrl(url){
   if(/^https?:\/\//i.test(url)) return url;
-  return url.replace(/\/{2,}/g,'/');
+  return url.replace(/\/{2,}/g,'/'); 
 }
 
 // ============== CRUD HANDLERS ===================
@@ -395,7 +405,9 @@ els.form.addEventListener('submit', async (e)=>{
     const data = getFormData();
     if(newImg) data.img = newImg;
     data.img = normalizeImageUrl(data.img);
+
     if(PACKS.some(x=>x.id===data.id)) return showMsg('warning','มี ID นี้อยู่แล้ว ใช้ปุ่ม "อัปเดตตาม ID" แทน');
+
     PACKS.push(data);
     await savePackagesJson(`feat: add package ${data.id}`);
     showMsg('success','บันทึกแพ็กเกจใหม่เรียบร้อย');
