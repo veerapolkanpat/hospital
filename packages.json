@@ -3,9 +3,9 @@
     "id": "CHK-BASIC",
     "title": "ตรวจสุขภาพพื้นฐาน (Basic)",
     "category": "ตรวจสุขภาพ",
-    "price": 1490,
-    "oldPrice": 1890,
-    "img": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200&auto=format&fit=crop",
+    "price": 2100,
+    "oldPrice": 3000,
+    "img": "/hospital/hospital/assets/images/1755328441858-delnquwxyz35.jpg",
     "short": "ชุดตรวจพื้นฐาน เหมาะสำหรับทุกเพศทุกวัย",
     "includes": [
       "ตรวจร่างกายโดยแพทย์",
