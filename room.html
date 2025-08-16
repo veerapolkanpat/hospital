@@ -5,142 +5,166 @@
   <title>ห้องพักและสิ่งอำนวยความสะดวก</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
+  <!-- Bootstrap + Font -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Font: Prompt -->
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Prompt', sans-serif;
-      background-color: #f8f9fa;
+    :root{ --card-radius: 14px; }
+    body{font-family:'Prompt',sans-serif;background:#f8f9fa}
+    /* navbar fixed → ชดเชยพื้นที่ด้านบน */
+    .section-top{padding-top:90px}
+    @media (max-width:768px){.section-top{padding-top:120px}}
+
+    /* การ์ด/รูป แบบเดียวกับ packages.html */
+    .room-card{
+      background:#fff;border:0;border-radius:var(--card-radius);
+      box-shadow:0 8px 24px rgba(0,0,0,.06);
+      transition:transform .25s ease, box-shadow .25s ease;
+      overflow:hidden;height:100%;
+    }
+    .room-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.09)}
+    .room-img{
+      width:100%;height:220px;object-fit:cover;display:block
+    }
+    .room-title{font-weight:700;color:#0d6efd}
+    .room-note{color:#6c757d}
+    .chip{
+      display:inline-block;font-size:.8rem;padding:.25rem .6rem;border-radius:999px;
+      background:#e7f1ff;color:#0d6efd;border:1px solid #b9dcff
     }
 
-    .room-img {
-      height: 220px;
-      object-fit: cover;
-      border-radius: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-    }
+    /* ปุ่มใน modal header ให้แนบธีม */
+    .modal-header.bg-primary .btn-close,
+    .modal-header.bg-success .btn-close,
+    .modal-header.bg-danger .btn-close{filter:invert(1)}
 
-    .room-img:hover {
-      transform: scale(1.03);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .room-label {
-      text-align: center;
-      margin-top: 10px;
-      font-weight: bold;
-      color: #007bff;
-    }
-
-    .section-top {
-      padding-top: 90px; /* ปรับระยะห่างจาก navbar */
-    }
-
-    @media (max-width: 768px) {
-      .section-top {
-        padding-top: 120px;
-      }
-    }
+    /* ให้ภาพลื่นตาขึ้นเล็กน้อย */
+    img{transition:filter .2s ease}
+    img[loading="lazy"]{filter:saturate(.98)}
   </style>
 </head>
-<body>
 
-<!-- ✅ Navbar -->
+<!-- ใช้ layout sticky footer -->
+<body class="d-flex flex-column min-vh-100">
+
+<!-- Navbar (ธีมเดียวกับ packages.html) -->
 <header class="bg-white shadow-sm fixed-top">
   <nav class="navbar navbar-expand-md navbar-light bg-white container">
     <a class="navbar-brand d-flex align-items-center" href="https://veerapolkanpat.github.io/hospital/">
-      <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" alt="Logo" class="rounded-circle me-2" style="height: 48px; width: 48px;">
+      <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/LOGO.png" alt="Logo"
+           class="rounded-circle me-2" style="height:48px;width:48px">
       <span class="fw-bold text-success">รพ.วีระพลการแพทย์</span>
     </a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav ms-auto mb-2 mb-md-0">
         <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/hospital/">หน้าแรก</a></li>
         <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/hospital/#about">เกี่ยวกับเรา</a></li>
+
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="https://veerapolkanpat.github.io/hospital/#services" role="button" data-bs-toggle="dropdown">บริการ</a>
+          <!-- ทำให้เมนูบริการ active บนหน้า room -->
+          <a class="nav-link dropdown-toggle active" href="https://veerapolkanpat.github.io/hospital/#services" role="button" data-bs-toggle="dropdown" aria-expanded="false">บริการ</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/hospital/room.html">ห้องพักและสิ่งอำนวยความสะดวก</a></li>
+            <li><a class="dropdown-item active" aria-current="page" href="/hospital/room.html">ห้องพักและสิ่งอำนวยความสะดวก</a></li>
             <li><a class="dropdown-item" href="/hospital/insurance.html">บริษัทประกันคู่สัญญา</a></li>
             <li><a class="dropdown-item" href="/hospital/packages.html">แพ็กเกจและโปรโมชัน</a></li>
           </ul>
         </li>
+
         <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/hospital/#doctors">แพทย์ของเรา</a></li>
         <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/appointment-form/" target="_blank">นัดหมาย</a></li>
-        <!-- <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/hospital/#health-qa">ปรึกษา AI</a></li> -->
         <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/hospital/#contact">ติดต่อเรา</a></li>
       </ul>
     </div>
   </nav>
 </header>
 
-<!-- ✅ Content -->
-<div class="container section-top">
-  <h2 class="text-center text-primary fw-bold mb-4">ห้องพักและสิ่งอำนวยความสะดวก</h2>
-  <p class="text-center mb-5">
-    โรงพยาบาลวีระพลการแพทย์ เสนอบริการห้องพักพร้อมสิ่งอำนวยความสะดวกครบครัน โดยมีให้เลือกหลายประเภท ตั้งแต่ห้องราคาประหยัดจนถึงห้อง VIP
-  </p>
+<!-- Content -->
+<main class="container section-top pb-5 flex-grow-1">
+  <div class="text-center mb-4">
+    <!-- <span class="chip">บริการของเรา</span> -->
+    <h2 class="fw-bold text-primary mt-2">ห้องพักและสิ่งอำนวยความสะดวก</h2>
+    <p class="text-secondary mb-0">
+      โรงพยาบาลวีระพลการแพทย์มีห้องพักหลายประเภท ตั้งแต่ห้องราคาประหยัดจนถึงห้อง VIP
+      พร้อมสิ่งอำนวยความสะดวกครบครันเพื่อการพักฟื้นอย่างสบายใจ
+    </p>
+  </div>
 
   <div class="row g-4">
     <!-- VIP Room -->
-    <div class="col-md-4 text-center">
-      <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip2.avif" class="img-fluid room-img" data-bs-toggle="modal" data-bs-target="#vipModal">
-      <div class="room-label">ห้อง VIP</div>
-      <small class="text-muted d-block">คลิกที่รูปเพื่อดูรายละเอียด</small>
-      <p class="card-text">ห้องพักเดี่ยวมีความเป็นส่วนตัว พร้อมสิ่งอำนวยความสะดวกครบครัน เช่น โทรทัศน์ ตู้เย็น โซฟา เตียงปรับระดับ และห้องน้ำในตัว</p>
+    <div class="col-md-4">
+      <article class="room-card h-100">
+        <img loading="lazy" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip2.avif"
+             alt="ห้อง VIP" class="room-img" data-bs-toggle="modal" data-bs-target="#vipModal">
+        <div class="p-3">
+          <h5 class="room-title mb-1">ห้อง VIP</h5>
+          <small class="room-note d-block mb-2">คลิกที่รูปเพื่อดูรายละเอียด</small>
+          <p class="mb-0">
+            ห้องเดี่ยวเป็นส่วนตัว สิ่งอำนวยความสะดวกครบ เช่น ทีวี ตู้เย็น โซฟา เตียงปรับระดับ ห้องน้ำในตัว และ Wi-Fi
+          </p>
+        </div>
+      </article>
     </div>
 
     <!-- Special Room -->
-    <div class="col-md-4 text-center">
-      <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip3.avif" class="img-fluid room-img" data-bs-toggle="modal" data-bs-target="#specialModal">
-      <div class="room-label">ห้องพิเศษรวม</div>
-      <small class="text-muted d-block">คลิกที่รูปเพื่อดูรายละเอียด</small>
-      <p class="card-text">ห้องพิเศษรวมให้บริการในราคาประหยัด พร้อมความเป็นส่วนตัวและสิ่งอำนวยความสะดวกที่จำเป็น เพื่อการพักฟื้นอย่างสบายใจ</p>
+    <div class="col-md-4">
+      <article class="room-card h-100">
+        <img loading="lazy" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip3.avif"
+             alt="ห้องพิเศษรวม" class="room-img" data-bs-toggle="modal" data-bs-target="#specialModal">
+        <div class="p-3">
+          <h5 class="room-title mb-1">ห้องพิเศษรวม</h5>
+          <small class="room-note d-block mb-2">คลิกที่รูปเพื่อดูรายละเอียด</small>
+          <p class="mb-0">
+            ราคาประหยัด แต่ยังคงความสบายและความเป็นส่วนตัว พร้อมอุปกรณ์จำเป็นครบถ้วน
+          </p>
+        </div>
+      </article>
     </div>
 
-    <!-- Pre-ICU Room -->
-    <div class="col-md-4 text-center">
-      <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/icu.avif" class="img-fluid room-img" data-bs-toggle="modal" data-bs-target="#icuModal">
-      <div class="room-label">ห้อง Pre-ICU</div>
-      <small class="text-muted d-block">คลิกที่รูปเพื่อดูรายละเอียด</small>
-      <p class="card-text">เพราะทุกนาทีคือความหวัง ห้อง Pre-ICU ได้รับการจัดสรรเพื่อดูแลผู้ป่วยอย่างใกล้ชิด พร้อมเครื่องมือครบครันและทีมแพทย์-พยาบาลที่พร้อมดูแลตลอด 24 ชั่วโมง</p>
+    <!-- Pre-ICU -->
+    <div class="col-md-4">
+      <article class="room-card h-100">
+        <img loading="lazy" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/icu.avif"
+             alt="ห้อง Pre-ICU" class="room-img" data-bs-toggle="modal" data-bs-target="#icuModal">
+        <div class="p-3">
+          <h5 class="room-title mb-1">ห้อง Pre-ICU</h5>
+          <small class="room-note d-block mb-2">คลิกที่รูปเพื่อดูรายละเอียด</small>
+          <p class="mb-0">
+            ออกแบบเพื่อดูแลผู้ป่วยใกล้ชิด เครื่องมือครบ ทีมแพทย์-พยาบาลพร้อม 24 ชม.
+          </p>
+        </div>
+      </article>
     </div>
   </div>
-</div>
+</main>
 
-<!-- ✅ Modals -->
+<!-- Modals -->
 <!-- VIP -->
-<div class="modal fade" id="vipModal" tabindex="-1">
+<div class="modal fade" id="vipModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-primary text-white">
         <h5 class="modal-title">รายละเอียดห้อง VIP</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <div class="row">
+        <div class="row g-3">
           <div class="col-md-4 text-center">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip2.avif" class="img-fluid mb-3 rounded">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip2-1.avif" class="img-fluid rounded">
+            <img loading="lazy" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip2.avif" class="img-fluid mb-3 rounded" alt="">
+            <img loading="lazy" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip2-1.avif" class="img-fluid rounded" alt="">
           </div>
           <div class="col-md-5">
             <h6 class="text-primary fw-bold">สิ่งอำนวยความสะดวก</h6>
-            <ul>
-              <li>เตียงปรับระดับไฟฟ้า</li>
-              <li>ปุ่มเรียกพยาบาล</li>
-              <li>ทีวีพร้อมเคเบิล</li>
-              <li>กระติกน้ำร้อนไฟฟ้า</li>
-              <li>เครื่องปรับอากาศ</li>
-              <li>ห้องน้ำในตัว</li>
-              <li>ตู้เก็บของ</li>
-              <li>ฟรี Wi-Fi</li>
+            <ul class="mb-0">
+              <li>เตียงปรับระดับไฟฟ้า • ปุ่มเรียกพยาบาล</li>
+              <li>ทีวีพร้อมเคเบิล • ตู้เย็น • กระติกน้ำร้อนไฟฟ้า</li>
+              <li>เครื่องปรับอากาศ • ห้องน้ำในตัว</li>
+              <li>ตู้เก็บของ • ฟรี Wi-Fi</li>
             </ul>
           </div>
           <div class="col-md-3">
@@ -160,29 +184,26 @@
   </div>
 </div>
 
-<!-- Special Room -->
-<div class="modal fade" id="specialModal" tabindex="-1">
+<!-- Special -->
+<div class="modal fade" id="specialModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
         <h5 class="modal-title">รายละเอียดห้องพิเศษรวม</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <div class="row">
+        <div class="row g-3">
           <div class="col-md-4 text-center">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip3.avif" class="img-fluid mb-3 rounded">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip3-1.avif" class="img-fluid rounded">
+            <img loading="lazy" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip3.avif" class="img-fluid mb-3 rounded" alt="">
+            <img loading="lazy" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/vip3-1.avif" class="img-fluid rounded" alt="">
           </div>
           <div class="col-md-5">
             <h6 class="text-success fw-bold">สิ่งอำนวยความสะดวก</h6>
-            <ul>
-              <li>เตียงปรับระดับ</li>
-              <li>ปุ่มกดเรียกพยาบาล</li>
-              <li>กระติกน้ำร้อนไฟฟ้า</li>
-              <li>เครื่องปรับอากาศ</li>
-              <li>ของใช้ในห้องน้ำ</li>
-              <li>ตู้ส่วนตัวเฉพาะผู้ป่วย</li>
+            <ul class="mb-0">
+              <li>เตียงปรับระดับ • ปุ่มกดเรียกพยาบาล</li>
+              <li>กระติกน้ำร้อนไฟฟ้า • เครื่องปรับอากาศ</li>
+              <li>ของใช้ในห้องน้ำ • ตู้ส่วนตัว</li>
               <li>ฟรี Wi-Fi</li>
             </ul>
           </div>
@@ -204,33 +225,27 @@
 </div>
 
 <!-- Pre-ICU -->
-<div class="modal fade" id="icuModal" tabindex="-1">
+<div class="modal fade" id="icuModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title">รายละเอียดห้อง Pre-ICU</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <div class="row">
+        <div class="row g-3">
           <div class="col-md-4 text-center">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/icu.avif" class="img-fluid mb-3 rounded">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/icu1.avif" class="img-fluid rounded">
+            <img loading="lazy" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/icu.avif" class="img-fluid mb-3 rounded" alt="">
+            <img loading="lazy" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/icu1.avif" class="img-fluid rounded" alt="">
           </div>
           <div class="col-md-5">
             <h6 class="text-danger fw-bold">สิ่งอำนวยความสะดวก</h6>
-            <ul>
-              <li>เตียงไฟฟ้าปรับระดับ</li>
-              <li>ระบบมอนิเตอร์ชีพจร</li>
-              <li>เครื่องช่วยหายใจ</li>
-              <li>กล้องวงจรปิด</li>
-              <li>ปุ่มกดเรียกพยาบาล</li>
-              <li>กระติกน้ำร้อนไฟฟ้า</li>
-              <li>เครื่องปรับอากาศ</li>
-              <li>ของใช้ในห้องน้ำ</li>
-              <li>ตู้ส่วนตัว</li>
-              <li>Wi-Fi</li>
-              <li>บริการ 24 ชั่วโมง</li>
+            <ul class="mb-0">
+              <li>เตียงไฟฟ้าปรับระดับ • ระบบมอนิเตอร์ชีพจร</li>
+              <li>เครื่องช่วยหายใจ • กล้องวงจรปิด</li>
+              <li>ปุ่มเรียกพยาบาล • เครื่องปรับอากาศ</li>
+              <li>ของใช้ในห้องน้ำ • ตู้ส่วนตัว • Wi-Fi</li>
+              <li>ทีมแพทย์และพยาบาล 24 ชม.</li>
             </ul>
           </div>
           <div class="col-md-3">
@@ -249,7 +264,20 @@
     </div>
   </div>
 </div>
-<!-- ✅ Bootstrap Bundle -->
+
+<!-- Footer (ติดก้นจอแน่นอน) -->
+<footer class="bg-dark text-white py-4 mt-auto">
+  <div class="container text-center">
+    <p class="mb-2">© 2025 โรงพยาบาล วีระพลการแพทย์ สงวนลิขสิทธิ์</p>
+    <div class="d-inline-flex gap-3">
+      <a href="https://veerapolkanpat.github.io/hospital/privacy-policy.html" class="link-light text-decoration-none">นโยบายความเป็นส่วนตัว</a>
+      <span class="text-secondary">|</span>
+      <a href="https://veerapolkanpat.github.io/hospital/terms.html" class="link-light text-decoration-none">ข้อกำหนดและเงื่อนไข</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
