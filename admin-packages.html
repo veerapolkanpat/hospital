@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>จัดการแพ็กเกจ (GitHub-Only)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body{font-family:'Prompt',sans-serif;background:#f8f9fa}
+  .section-top{padding-top:90px}
+  .form-control,.form-select{border-radius:10px}
+  textarea{min-height:84px}
+  code.k{background:#f1f5f9;padding:.15rem .4rem;border-radius:6px}
+  .small-help{opacity:.85}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-white shadow-sm fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-success" href="/hospital/">รพ.วีระพลการแพทย์</a>
+    <span class="small text-muted">Admin: แพ็กเกจ (GitHub Only)</span>
+  </div>
+</nav>
+
+<div class="container section-top">
+
+  <!-- CONFIG -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="fw-bold mb-3">ตั้งค่า GitHub</h5>
+      <div class="row g-3 align-items-end">
+        <div class="col-md-3">
+          <label class="form-label">Owner</label>
+          <input id="ghOwner" class="form-control" placeholder="เช่น veerapolkanpat">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Repo</label>
+          <input id="ghRepo" class="form-control" placeholder="เช่น hospital">
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Branch</label>
+          <input id="ghBranch" class="form-control" placeholder="main">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">GitHub Token</label>
+          <input id="ghToken" type="password" class="form-control" placeholder="ใส่เฉพาะผู้ดูแล (เก็บที่เครื่องนี้)">
+          <div class="form-text small-help">แนะนำใช้ Fine-grained token: ให้สิทธิ์เฉพาะ repo นี้ และเฉพาะ <code class="k">contents:write</code></div>
+        </div>
+        <div class="col-12 d-flex gap-2">
+          <button id="btnSaveCfg" class="btn btn-primary">บันทึกการตั้งค่า</button>
+          <button id="btnLoad" class="btn btn-outline-secondary">โหลด packages.json</button>
+          <div id="cfgMsg" class="ms-auto small text-muted"></div>
+        </div>
+      </div>
+      <hr>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">ไฟล์ข้อมูลแพ็กเกจ</label>
+          <input id="pathPackages" class="form-control" value="hospital/packages.json">
+          <div class="form-text small-help">จะถูกเขียนทับเมื่อบันทึก</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">โฟลเดอร์เก็บรูปแพ็กเกจ</label>
+          <input id="pathImages" class="form-control" value="hospital/assets/images">
+          <div class="form-text small-help">รูปใหม่จะถูกอัปโหลดในโฟลเดอร์นี้</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="fw-bold mb-3">ฟอร์มแพ็กเกจ</h5>
+      <form id="pkgForm" class="row g-3">
+        <div class="col-md-3">
+          <label class="form-label">ID (ห้ามซ้ำ)</label>
+          <input name="id" class="form-control" placeholder="เช่น CHK-BASIC" required>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">ชื่อแพ็กเกจ (title)</label>
+          <input name="title" class="form-control" required>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">หมวดหมู่ (category)</label>
+          <select name="category" class="form-select" required>
+            <option value="ตรวจสุขภาพ">ตรวจสุขภาพ</option>
+            <option value="วัคซีน">วัคซีน</option>
+            <option value="ทันตกรรม">ทันตกรรม</option>
+            <option value="คลอดบุตร">คลอดบุตร</option>
+            <option value="ศัลยกรรม/หัตถการ">ศัลยกรรม/หัตถการ</option>
+            <option value="ตา/ENT">ตา/ENT</option>
+            <option value="กายภาพบำบัด">กายภาพบำบัด</option>
+            <option value="ห้องพัก/เหมาจ่าย">ห้องพัก/เหมาจ่าย</option>
+            <option value="โปรโมชัน">โปรโมชัน</option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">ราคา (THB)</label>
+          <input name="price" type="number" class="form-control" min="0" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">ราคาเดิม (ถ้ามี)</label>
+          <input name="oldPrice" type="number" class="form-control" min="0">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">คำอธิบายย่อ (short)</label>
+          <input name="short" class="form-control">
+        </div>
+
+        <div class="col-md-7">
+          <label class="form-label">รายการครอบคลุม (includes)</label>
+          <textarea name="includes" class="form-control" placeholder="คั่นด้วย | เช่น CBC|FBS|X-ray"></textarea>
+          <div class="form-text small-help">จะแปลงเป็น Array ตอนใช้งานในหน้า packages.html</div>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">หมายเหตุ (note)</label>
+          <textarea name="note" class="form-control"></textarea>
+        </div>
+
+        <div class="col-md-8">
+          <label class="form-label">ลิงก์รูปภาพ (img)</label>
+          <input name="img" class="form-control" placeholder="/hospital/assets/images/xxx.jpg หรือ https://...">
+          <div class="form-text small-help">อัปโหลดรูปใหม่ด้านล่าง ระบบจะใส่พาธให้เอง</div>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">อัปโหลดรูปใหม่</label>
+          <input id="imgFile" type="file" accept="image/*" class="form-control">
+          <div class="form-text small-help">อัปแล้วจะบันทึกเป็นไฟล์ในโฟลเดอร์ภาพที่กำหนด</div>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">แสดงผล (active)</label>
+          <select name="active" class="form-select">
+            <option value="true" selected>TRUE</option>
+            <option value="false">FALSE</option>
+          </select>
+        </div>
+
+        <div class="col-12 d-flex gap-2">
+          <button class="btn btn-primary" id="btnCreate" type="submit">บันทึก/เพิ่มใหม่</button>
+          <button class="btn btn-warning" id="btnUpdate" type="button">อัปเดตตาม ID</button>
+          <button class="btn btn-outline-danger ms-auto" id="btnDelete" type="button">ลบตาม ID</button>
+        </div>
+      </form>
+      <div id="msg" class="mt-3 small"></div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-2">
+        <h5 class="fw-bold mb-0">รายการแพ็กเกจ</h5>
+        <button class="btn btn-sm btn-outline-secondary ms-auto" id="btnReload">รีโหลด</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-sm table-striped align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th><th>ชื่อ</th><th>หมวด</th><th class="text-end">ราคา</th><th>active</th><th>แก้ไข</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============== BASIC CONFIG/STATE ==============
+const els = {
+  owner:  document.getElementById('ghOwner'),
+  repo:   document.getElementById('ghRepo'),
+  branch: document.getElementById('ghBranch'),
+  token:  document.getElementById('ghToken'),
+  pathPackages: document.getElementById('pathPackages'),
+  pathImages:   document.getElementById('pathImages'),
+  saveCfg: document.getElementById('btnSaveCfg'),
+  loadBtn: document.getElementById('btnLoad'),
+  cfgMsg:  document.getElementById('cfgMsg'),
+  form:    document.getElementById('pkgForm'),
+  msg:     document.getElementById('msg'),
+  imgFile: document.getElementById('imgFile'),
+  reload:  document.getElementById('btnReload'),
+  tbody:   document.getElementById('tbody'),
+  btnUpdate: document.getElementById('btnUpdate'),
+  btnDelete: document.getElementById('btnDelete'),
+};
+let PACKS = [];              // โครงข้อมูลทั้งหมด
+let packagesSha = null;      // sha ของไฟล์ packages.json ปัจจุบัน
+let cfg = {
+  owner:  localStorage.getItem('gh.owner')  || 'veerapolkanpat',
+  repo:   localStorage.getItem('gh.repo')   || 'hospital',
+  branch: localStorage.getItem('gh.branch') || 'main',
+  token:  localStorage.getItem('gh.token')  || '',
+  pathPackages: localStorage.getItem('gh.pathPackages') || 'hospital/packages.json',
+  pathImages:   localStorage.getItem('gh.pathImages')   || 'hospital/assets/images'
+};
+applyCfgToForm();
+
+function applyCfgToForm(){
+  els.owner.value = cfg.owner;
+  els.repo.value = cfg.repo;
+  els.branch.value = cfg.branch;
+  els.token.value = cfg.token;
+  els.pathPackages.value = cfg.pathPackages;
+  els.pathImages.value = cfg.pathImages;
+}
+function updateCfgFromForm(){
+  cfg.owner  = els.owner.value.trim();
+  cfg.repo   = els.repo.value.trim();
+  cfg.branch = els.branch.value.trim() || 'main';
+  cfg.token  = els.token.value.trim();
+  cfg.pathPackages = els.pathPackages.value.trim() || 'hospital/packages.json';
+  cfg.pathImages   = els.pathImages.value.trim()   || 'hospital/assets/images';
+}
+function saveCfg(){
+  updateCfgFromForm();
+  localStorage.setItem('gh.owner', cfg.owner);
+  localStorage.setItem('gh.repo', cfg.repo);
+  localStorage.setItem('gh.branch', cfg.branch);
+  localStorage.setItem('gh.token', cfg.token);
+  localStorage.setItem('gh.pathPackages', cfg.pathPackages);
+  localStorage.setItem('gh.pathImages', cfg.pathImages);
+  els.cfgMsg.textContent = 'บันทึกแล้ว';
+  setTimeout(()=>els.cfgMsg.textContent='', 2000);
+}
+els.saveCfg.addEventListener('click', saveCfg);
+
+// ============== GITHUB API HELPERS ==============
+const GH_API = 'https://api.github.com';
+
+async function ghGetContent(path){
+  // GET /repos/{owner}/{repo}/contents/{path}?ref=branch
+  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(cfg.branch)}`;
+  const res = await fetch(url, { headers: authHeaders() });
+  if(!res.ok) throw new Error(`โหลดไฟล์ไม่สำเร็จ: ${res.status}`);
+  return res.json(); // {content, sha, ...}
+}
+
+async function ghPutContent(path, contentText, message, sha=null){
+  // PUT /repos/{owner}/{repo}/contents/{path}
+  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}`;
+  const body = {
+    message,
+    content: b64encodeUTF8(contentText),
+    branch: cfg.branch
+  };
+  if(sha) body.sha = sha;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {...authHeaders(), 'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  if(!res.ok) {
+    const t = await res.text();
+    throw new Error(`บันทึกไฟล์ไม่สำเร็จ: ${res.status} ${t}`);
+  }
+  return res.json(); // {content:{sha,...}}
+}
+
+async function ghPutBinary(path, arrayBuffer, message){
+  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}`;
+  const body = {
+    message,
+    content: arrayBufferToBase64(arrayBuffer),
+    branch: cfg.branch
+  };
+  const res = await fetch(url, {
+    method:'PUT',
+    headers: {...authHeaders(), 'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  if(!res.ok){
+    const t = await res.text();
+    throw new Error(`อัปโหลดรูปไม่สำเร็จ: ${res.status} ${t}`);
+  }
+  return res.json();
+}
+
+function authHeaders(){
+  const h = { 'Accept': 'application/vnd.github+json' };
+  if(cfg.token) h['Authorization'] = `Bearer ${cfg.token}`;
+  return h;
+}
+
+// base64 helpers
+function b64encodeUTF8(str){
+  return btoa(unescape(encodeURIComponent(str)));
+}
+function b64decodeUTF8(b64){
+  return decodeURIComponent(escape(atob(b64)));
+}
+function arrayBufferToBase64(buffer){
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  const len = bytes.byteLength;
+  for (let i = 0; i < len; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+
+// ============== PACKAGES.json LOAD/SAVE =========
+async function loadPackagesJson(){
+  updateCfgFromForm();
+  const meta = await ghGetContent(cfg.pathPackages);
+  packagesSha = meta.sha || null;
+  const jsonText = b64decodeUTF8(meta.content);
+  let parsed;
+  try {
+    parsed = JSON.parse(jsonText);
+  } catch(e){
+    throw new Error('รูปแบบ JSON ไม่ถูกต้อง');
+  }
+  PACKS = Array.isArray(parsed) ? parsed
+        : (parsed && Array.isArray(parsed.data)) ? parsed.data
+        : [];
+  // รองรับ 2 ฟอร์แมต: [..] หรือ {ok:true,data:[..]}
+  renderTable();
+  showMsg('success', `โหลดแพ็กเกจ ${PACKS.length} รายการ`);
+}
+els.loadBtn.addEventListener('click', () => loadPackagesJson().catch(e=>showMsg('danger', e.message)));
+els.reload.addEventListener('click', () => loadPackagesJson().catch(e=>showMsg('danger', e.message)));
+
+async function savePackagesJson(commitMsg){
+  const payload = JSON.stringify(PACKS, null, 2); // ใช้รูปแบบ array ตรง ๆ
+  const r = await ghPutContent(cfg.pathPackages, payload, commitMsg || 'chore: update packages.json', packagesSha);
+  packagesSha = r.content?.sha || null;
+}
+
+// ============== UI HELPERS ======================
+function fmtTHB(v){ return new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0}).format(Number(v||0)); }
+function showMsg(type, text){
+  els.msg.className = `alert alert-${type}`;
+  els.msg.textContent = text;
+  if(type!=='warning') setTimeout(()=>{ els.msg.className=''; els.msg.textContent=''; }, 3500);
+}
+function getFormData(){
+  const f = els.form;
+  const obj = {
+    id:       f.id.value.trim(),
+    title:    f.title.value.trim(),
+    category: f.category.value,
+    price:    Number(f.price.value||0),
+    oldPrice: f.oldPrice.value==='' ? null : Number(f.oldPrice.value||0),
+    img:      f.img.value.trim(),
+    short:    f.short.value.trim(),
+    includes: (f.includes.value||'').split('|').map(s=>s.trim()).filter(Boolean),
+    note:     f.note.value.trim(),
+    active:   String(f.active.value).toLowerCase()==='true'
+  };
+  return obj;
+}
+function setFormData(p){
+  const f = els.form;
+  f.id.value       = p.id||'';
+  f.title.value    = p.title||'';
+  f.category.value = p.category||'ตรวจสุขภาพ';
+  f.price.value    = p.price??'';
+  f.oldPrice.value = (p.oldPrice==null || p.oldPrice==='') ? '' : p.oldPrice;
+  f.img.value      = p.img||'';
+  f.short.value    = p.short||'';
+  f.includes.value = Array.isArray(p.includes) ? p.includes.join('|') : (p.includes||'');
+  f.note.value     = p.note||'';
+  f.active.value   = p.active ? 'true' : 'false';
+}
+function renderTable(){
+  const tb = els.tbody;
+  tb.innerHTML = '';
+  PACKS.forEach(p=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><code class="k">${p.id}</code></td>
+      <td>${p.title||''}</td>
+      <td>${p.category||''}</td>
+      <td class="text-end">${fmtTHB(p.price)}</td>
+      <td>${p.active ? 'TRUE' : 'FALSE'}</td>
+      <td><button class="btn btn-sm btn-outline-primary" data-id="${p.id}">แก้ไข</button></td>
+    `;
+    tb.appendChild(tr);
+  });
+  tb.querySelectorAll('button[data-id]').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      const id = e.currentTarget.getAttribute('data-id');
+      const found = PACKS.find(x=>x.id===id);
+      if(found) {
+        setFormData(found);
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+    });
+  });
+}
+
+// ============== IMAGE UPLOAD ====================
+async function uploadImageIfSelected(){
+  const file = els.imgFile.files?.[0];
+  if(!file) return null; // ไม่อัปโหลด
+  if(!file.type.startsWith('image/')) throw new Error('ไฟล์ที่อัปโหลดไม่ใช่รูปภาพ');
+  const buf = await file.arrayBuffer();
+  // สร้างชื่อไฟล์ใหม่ ป้องกันชนกัน
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  const filename = `${Date.now()}-${safeName}`;
+  const path = `${cfg.pathImages.replace(/\/$/,'')}/${filename}`;
+  await ghPutBinary(path, buf, `feat: upload image ${filename}`);
+  // แนะนำใช้พาธ relative (ทำงานได้ทั้งหน้าเว็บและ raw)
+  const relUrl = `/${cfg.repo}/${path}`.replace(/\/{2,}/g,'/');
+  return relUrl; // เช่น /hospital/hospital/assets/images/xxx (ถ้า repo= hospital อยู่ root ให้เป็น /hospital/assets/images/xxx)
+}
+
+// ปรับให้พาธสวย: ถ้า repo เป็น root ของ Pages (/<user>.github.io) อาจต่างไป
+function normalizeImageUrl(url){
+  // ถ้าเป็น absolute http/https ปล่อยผ่าน
+  if(/^https?:\/\//i.test(url)) return url;
+  // บีบ // ให้เป็น /
+  return url.replace(/\/{2,}/g,'/'); 
+}
+
+// ============== CRUD HANDLERS ===================
+els.form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  try{
+    updateCfgFromForm();
+    // อัปโหลดรูปก่อน (ถ้ามี)
+    const newImg = await uploadImageIfSelected();
+    const data = getFormData();
+    if(newImg) data.img = newImg;
+    data.img = normalizeImageUrl(data.img);
+
+    // ตรวจซ้ำ ID
+    if(PACKS.some(x=>x.id===data.id)) return showMsg('warning','มี ID นี้อยู่แล้ว ใช้ปุ่ม "อัปเดตตาม ID" แทน');
+
+    PACKS.push(data);
+    await savePackagesJson(`feat: add package ${data.id}`);
+    showMsg('success', 'บันทึกแพ็กเกจใหม่เรียบร้อย');
+    renderTable();
+    els.form.reset();
+  }catch(err){
+    showMsg('danger', err.message);
+  }
+});
+
+els.btnUpdate.addEventListener('click', async ()=>{
+  try{
+    updateCfgFromForm();
+    const newImg = await uploadImageIfSelected();
+    const data = getFormData();
+    if(!data.id) return showMsg('warning','กรุณาใส่ ID ที่ต้องการอัปเดต');
+    const idx = PACKS.findIndex(x=>x.id===data.id);
+    if(idx===-1) return showMsg('warning','ไม่พบ ID นี้ในรายการ');
+
+    if(newImg) data.img = newImg;
+    data.img = normalizeImageUrl(data.img);
+
+    PACKS[idx] = data;
+    await savePackagesJson(`chore: update package ${data.id}`);
+    showMsg('success', 'อัปเดตสำเร็จ');
+    renderTable();
+  }catch(err){
+    showMsg('danger', err.message);
+  }
+});
+
+els.btnDelete.addEventListener('click', async ()=>{
+  try{
+    updateCfgFromForm();
+    const id = els.form.id.value.trim();
+    if(!id) return showMsg('warning','กรุณาใส่ ID');
+    if(!confirm(`ยืนยันลบแพ็กเกจ ${id}?`)) return;
+    const before = PACKS.length;
+    PACKS = PACKS.filter(x=>x.id!==id);
+    if(PACKS.length===before) return showMsg('warning','ไม่พบ ID นี้');
+
+    await savePackagesJson(`chore: delete package ${id}`);
+    showMsg('success','ลบสำเร็จ');
+    renderTable();
+    els.form.reset();
+  }catch(err){
+    showMsg('danger', err.message);
+  }
+});
+</script>
+
+</body>
+</html>

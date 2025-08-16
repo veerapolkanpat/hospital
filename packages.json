@@ -1,0 +1,122 @@
+[
+  {
+    "id": "CHK-BASIC",
+    "title": "ตรวจสุขภาพพื้นฐาน (Basic)",
+    "category": "ตรวจสุขภาพ",
+    "price": 1490,
+    "oldPrice": 1890,
+    "img": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200&auto=format&fit=crop",
+    "short": "ชุดตรวจพื้นฐาน เหมาะสำหรับทุกเพศทุกวัย",
+    "includes": ["ตรวจร่างกายโดยแพทย์", "CBC", "FBS น้ำตาล", "ไขมันพื้นฐาน (Cholesterol, HDL, LDL, TG)", "เอกซเรย์ทรวงอก"],
+    "note": "รวมค่าแพทย์และค่าบริการแล้ว (หากต้องตรวจเพิ่มมีค่าใช้จ่ายเพิ่มเติม)",
+    "active": true
+  },
+  {
+    "id": "CHK-EXEC",
+    "title": "ตรวจสุขภาพผู้บริหาร Executive",
+    "category": "ตรวจสุขภาพ",
+    "price": 5990,
+    "oldPrice": 6990,
+    "img": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
+    "short": "ประเมินความเสี่ยง หัวใจ ตับ ไต ต่อมไทรอยด์ แบบเจาะลึก",
+    "includes": ["EKG", "เอกซเรย์ปอด", "LFT ตับ", "BUN/Cr ไต", "Uric", "HbA1c", "TSH"],
+    "note": "งดน้ำ/อาหารอย่างน้อย 8 ชั่วโมงก่อนตรวจ",
+    "active": true
+  },
+  {
+    "id": "VAC-FLU",
+    "title": "วัคซีนไข้หวัดใหญ่ 4 สายพันธุ์",
+    "category": "วัคซีน",
+    "price": 790,
+    "oldPrice": 990,
+    "img": "https://images.unsplash.com/photo-1606313564200-e75d5e30476e?q=80&w=1200&auto=format&fit=crop",
+    "short": "ป้องกันไข้หวัดใหญ่ 1 ปี ครอบคลุม 4 สายพันธุ์",
+    "includes": ["ค่าบริการทางการพยาบาล", "วัคซีน 1 โดส", "ใบรับรองการรับวัคซีน"],
+    "note": "เหมาะกับทุกวัย โดยเฉพาะกลุ่มเสี่ยง",
+    "active": true
+  },
+  {
+    "id": "DENT-SCALE",
+    "title": "ขูดหินปูน + ขัดฟัน",
+    "category": "ทันตกรรม",
+    "price": 900,
+    "oldPrice": 1200,
+    "img": "https://images.unsplash.com/photo-1581594693700-99c45a7c838f?q=80&w=1200&auto=format&fit=crop",
+    "short": "ลดคราบหินปูน คราบชา/กาแฟ และกลิ่นปาก",
+    "includes": ["ขูดหินปูนทั้งปาก", "ขัดฟัน", "ประเมินสุขภาพเหงือก"],
+    "note": "ค่าบริการอาจปรับตามความซับซ้อน",
+    "active": true
+  },
+  {
+    "id": "OB-DELIVERY-N",
+    "title": "เหมาจ่ายคลอดธรรมชาติ (ห้องเดี่ยวมาตรฐาน)",
+    "category": "คลอดบุตร",
+    "price": 25900,
+    "oldPrice": 28900,
+    "img": "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1200&auto=format&fit=crop",
+    "short": "ครอบคลุมค่าห้อง ค่าทำคลอด และดูแลทารกพื้นฐาน",
+    "includes": ["ทำคลอดธรรมชาติ", "ค่าห้อง 2 คืน", "ค่าดูแลทารกแรกเกิดพื้นฐาน"],
+    "note": "ไม่รวมภาวะแทรกซ้อน/หัตถการพิเศษ",
+    "active": true
+  },
+  {
+    "id": "SURG-HERNIA",
+    "title": "ผ่าตัดไส้เลื่อน (Day Surgery)",
+    "category": "ศัลยกรรม/หัตถการ",
+    "price": 32900,
+    "oldPrice": 38900,
+    "img": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
+    "short": "สำหรับไส้เลื่อนไม่ซับซ้อน กลับบ้านได้ในวันเดียว",
+    "includes": ["ค่าห้องผ่าตัด", "ค่ายา/เวชภัณฑ์มาตรฐาน", "ติดตามอาการหลังผ่าตัด 1 ครั้ง"],
+    "note": "ราคาสำหรับขนาดเล็ก-กลาง ไม่รวมภาวะแทรกซ้อน",
+    "active": true
+  },
+  {
+    "id": "EYE-CHECK",
+    "title": "ตรวจสุขภาพตา + วัดค่าสายตา",
+    "category": "ตา/ENT",
+    "price": 690,
+    "oldPrice": 890,
+    "img": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop",
+    "short": "เช็กความคมชัด ความดันตา และคัดกรองต้อหินเบื้องต้น",
+    "includes": ["วัดสายตา", "ตรวจลานสายตาเบื้องต้น", "ความดันตา"],
+    "note": "หากพบความผิดปกติ แพทย์แนะนำการตรวจต่อยอด",
+    "active": true
+  },
+  {
+    "id": "PHY-LOWBACK",
+    "title": "กายภาพบำบัดออฟฟิศซินโดรม/ปวดหลัง (3 ครั้ง)",
+    "category": "กายภาพบำบัด",
+    "price": 1990,
+    "oldPrice": 2400,
+    "img": "https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1200&auto=format&fit=crop",
+    "short": "ลดปวดและฟื้นฟูกล้ามเนื้อด้วยโปรแกรมเฉพาะบุคคล",
+    "includes": ["ประเมินโดยนักกายภาพ", "อัลตราซาวด์/คลื่นไฟฟ้า", "ท่าบริหารเฉพาะบุคคล"],
+    "note": "ควรนัดหมายล่วงหน้าเพื่อจัดคิวอุปกรณ์",
+    "active": true
+  },
+  {
+    "id": "ROOM-STD",
+    "title": "เหมาจ่ายห้องเดี่ยว มาตรฐาน/คืน",
+    "category": "ห้องพัก/เหมาจ่าย",
+    "price": 1800,
+    "oldPrice": null,
+    "img": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
+    "short": "ห้องเดี่ยวสะอาด เงียบ เป็นส่วนตัว พร้อมสิ่งอำนวยความสะดวก",
+    "includes": ["เตียงผู้ป่วยปรับไฟฟ้า", "ทีวี/ตู้เย็น/น้ำอุ่น", "Wi-Fi"],
+    "note": "ไม่รวมค่าบริการพยาบาล/แพทย์และเวชภัณฑ์",
+    "active": true
+  },
+  {
+    "id": "PROMO-DM",
+    "title": "โปรโมชันคัดกรองเบาหวาน + ไขมัน",
+    "category": "โปรโมชัน",
+    "price": 1090,
+    "oldPrice": 1490,
+    "img": "https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop",
+    "short": "เช็กความเสี่ยงเบาหวานและหลอดเลือดเบื้องต้น",
+    "includes": ["FBS", "HbA1c", "Lipid Profile"],
+    "note": "โปรโมชันถึงสิ้นเดือนนี้",
+    "active": true
+  }
+]
