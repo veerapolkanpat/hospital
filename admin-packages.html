@@ -49,8 +49,8 @@
           <div class="form-text small-help">แนะนำใช้ Fine-grained token: ให้สิทธิ์เฉพาะ repo นี้ และเฉพาะ <code class="k">contents:write</code></div>
         </div>
         <div class="col-12 d-flex gap-2">
-          <button id="btnSaveCfg" class="btn btn-primary">บันทึกการตั้งค่า</button>
-          <button id="btnLoad" class="btn btn-outline-secondary">โหลด packages.json</button>
+          <button id="btnSaveCfg" class="btn btn-primary" type="button">บันทึกการตั้งค่า</button>
+          <button id="btnLoad" class="btn btn-outline-secondary" type="button">โหลด packages.json</button>
           <div id="cfgMsg" class="ms-auto small text-muted"></div>
         </div>
       </div>
@@ -155,7 +155,7 @@
     <div class="card-body">
       <div class="d-flex align-items-center mb-2">
         <h5 class="fw-bold mb-0">รายการแพ็กเกจ</h5>
-        <button class="btn btn-sm btn-outline-secondary ms-auto" id="btnReload">รีโหลด</button>
+        <button class="btn btn-sm btn-outline-secondary ms-auto" id="btnReload" type="button">รีโหลด</button>
       </div>
       <div class="table-responsive">
         <table class="table table-sm table-striped align-middle">
@@ -192,8 +192,9 @@ const els = {
   btnUpdate: document.getElementById('btnUpdate'),
   btnDelete: document.getElementById('btnDelete'),
 };
-let PACKS = [];              // โครงข้อมูลทั้งหมด
-let packagesSha = null;      // sha ของไฟล์ packages.json ปัจจุบัน
+let PACKS = [];
+let packagesSha = null;
+
 let cfg = {
   owner:  localStorage.getItem('gh.owner')  || 'veerapolkanpat',
   repo:   localStorage.getItem('gh.repo')   || 'hospital',
@@ -202,107 +203,91 @@ let cfg = {
   pathPackages: localStorage.getItem('gh.pathPackages') || 'hospital/packages.json',
   pathImages:   localStorage.getItem('gh.pathImages')   || 'hospital/assets/images'
 };
-applyCfgToForm();
 
 function applyCfgToForm(){
-  els.owner.value = cfg.owner;
-  els.repo.value = cfg.repo;
-  els.branch.value = cfg.branch;
-  els.token.value = cfg.token;
-  els.pathPackages.value = cfg.pathPackages;
-  els.pathImages.value = cfg.pathImages;
+  els.owner.value = cfg.owner || '';
+  els.repo.value = cfg.repo || '';
+  els.branch.value = cfg.branch || '';
+  els.token.value = cfg.token || '';
+  els.pathPackages.value = cfg.pathPackages || 'hospital/packages.json';
+  els.pathImages.value   = cfg.pathImages   || 'hospital/assets/images';
 }
 function updateCfgFromForm(){
-  cfg.owner  = els.owner.value.trim();
-  cfg.repo   = els.repo.value.trim();
-  cfg.branch = els.branch.value.trim() || 'main';
-  cfg.token  = els.token.value.trim();
-  cfg.pathPackages = els.pathPackages.value.trim() || 'hospital/packages.json';
-  cfg.pathImages   = els.pathImages.value.trim()   || 'hospital/assets/images';
+  cfg.owner  = (els.owner.value  || '').trim();
+  cfg.repo   = (els.repo.value   || '').trim();
+  cfg.branch = (els.branch.value || 'main').trim();
+  cfg.token  = (els.token.value  || '').trim();
+  cfg.pathPackages = (els.pathPackages.value || 'hospital/packages.json').trim();
+  cfg.pathImages   = (els.pathImages.value   || 'hospital/assets/images').trim();
+}
+function loadCfg(){
+  try{
+    cfg.owner  = localStorage.getItem('gh.owner')        || cfg.owner;
+    cfg.repo   = localStorage.getItem('gh.repo')         || cfg.repo;
+    cfg.branch = localStorage.getItem('gh.branch')       || cfg.branch;
+    cfg.token  = localStorage.getItem('gh.token')        || cfg.token;
+    cfg.pathPackages = localStorage.getItem('gh.pathPackages') || cfg.pathPackages;
+    cfg.pathImages   = localStorage.getItem('gh.pathImages')   || cfg.pathImages;
+  }catch(e){
+    console.warn('localStorage read failed:', e);
+    els.cfgMsg.textContent = 'เบราว์เซอร์บล็อกการอ่าน localStorage';
+  }
+  applyCfgToForm();
 }
 function saveCfg(){
   updateCfgFromForm();
-  localStorage.setItem('gh.owner', cfg.owner);
-  localStorage.setItem('gh.repo', cfg.repo);
-  localStorage.setItem('gh.branch', cfg.branch);
-  localStorage.setItem('gh.token', cfg.token);
-  localStorage.setItem('gh.pathPackages', cfg.pathPackages);
-  localStorage.setItem('gh.pathImages', cfg.pathImages);
-  els.cfgMsg.textContent = 'บันทึกแล้ว';
+  try{
+    localStorage.setItem('gh.owner', cfg.owner);
+    localStorage.setItem('gh.repo', cfg.repo);
+    localStorage.setItem('gh.branch', cfg.branch);
+    localStorage.setItem('gh.token', cfg.token);
+    localStorage.setItem('gh.pathPackages', cfg.pathPackages);
+    localStorage.setItem('gh.pathImages', cfg.pathImages);
+    els.cfgMsg.textContent = 'บันทึกแล้ว';
+  }catch(e){
+    console.error('localStorage write failed:', e);
+    els.cfgMsg.textContent = 'บันทึกไม่ได้: บราวเซอร์บล็อก localStorage';
+  }
   setTimeout(()=>els.cfgMsg.textContent='', 2000);
 }
-els.saveCfg.addEventListener('click', saveCfg);
+els.saveCfg.addEventListener('click', (ev)=>{ ev.preventDefault(); saveCfg(); });
+document.addEventListener('DOMContentLoaded', loadCfg);
 
 // ============== GITHUB API HELPERS ==============
 const GH_API = 'https://api.github.com';
-
-async function ghGetContent(path){
-  // GET /repos/{owner}/{repo}/contents/{path}?ref=branch
-  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(cfg.branch)}`;
-  const res = await fetch(url, { headers: authHeaders() });
-  if(!res.ok) throw new Error(`โหลดไฟล์ไม่สำเร็จ: ${res.status}`);
-  return res.json(); // {content, sha, ...}
-}
-
-async function ghPutContent(path, contentText, message, sha=null){
-  // PUT /repos/{owner}/{repo}/contents/{path}
-  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}`;
-  const body = {
-    message,
-    content: b64encodeUTF8(contentText),
-    branch: cfg.branch
-  };
-  if(sha) body.sha = sha;
-  const res = await fetch(url, {
-    method: 'PUT',
-    headers: {...authHeaders(), 'Content-Type':'application/json'},
-    body: JSON.stringify(body)
-  });
-  if(!res.ok) {
-    const t = await res.text();
-    throw new Error(`บันทึกไฟล์ไม่สำเร็จ: ${res.status} ${t}`);
-  }
-  return res.json(); // {content:{sha,...}}
-}
-
-async function ghPutBinary(path, arrayBuffer, message){
-  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}`;
-  const body = {
-    message,
-    content: arrayBufferToBase64(arrayBuffer),
-    branch: cfg.branch
-  };
-  const res = await fetch(url, {
-    method:'PUT',
-    headers: {...authHeaders(), 'Content-Type':'application/json'},
-    body: JSON.stringify(body)
-  });
-  if(!res.ok){
-    const t = await res.text();
-    throw new Error(`อัปโหลดรูปไม่สำเร็จ: ${res.status} ${t}`);
-  }
-  return res.json();
-}
 
 function authHeaders(){
   const h = { 'Accept': 'application/vnd.github+json' };
   if(cfg.token) h['Authorization'] = `Bearer ${cfg.token}`;
   return h;
 }
+async function ghGetContent(path){
+  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(cfg.branch)}`;
+  const res = await fetch(url, { headers: authHeaders() });
+  if(!res.ok) throw new Error(`โหลดไฟล์ไม่สำเร็จ: ${res.status}`);
+  return res.json();
+}
+async function ghPutContent(path, contentText, message, sha=null){
+  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}`;
+  const body = { message, content: b64encodeUTF8(contentText), branch: cfg.branch };
+  if(sha) body.sha = sha;
+  const res = await fetch(url, { method:'PUT', headers:{...authHeaders(),'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  if(!res.ok){ const t = await res.text(); throw new Error(`บันทึกไฟล์ไม่สำเร็จ: ${res.status} ${t}`); }
+  return res.json();
+}
+async function ghPutBinary(path, arrayBuffer, message){
+  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}`;
+  const body = { message, content: arrayBufferToBase64(arrayBuffer), branch: cfg.branch };
+  const res = await fetch(url, { method:'PUT', headers:{...authHeaders(),'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  if(!res.ok){ const t = await res.text(); throw new Error(`อัปโหลดรูปไม่สำเร็จ: ${res.status} ${t}`); }
+  return res.json();
+}
 
 // base64 helpers
-function b64encodeUTF8(str){
-  return btoa(unescape(encodeURIComponent(str)));
-}
-function b64decodeUTF8(b64){
-  return decodeURIComponent(escape(atob(b64)));
-}
+function b64encodeUTF8(str){ return btoa(unescape(encodeURIComponent(str))); }
+function b64decodeUTF8(b64){ return decodeURIComponent(escape(atob(b64))); }
 function arrayBufferToBase64(buffer){
-  let binary = '';
-  const bytes = new Uint8Array(buffer);
-  const len = bytes.byteLength;
-  for (let i = 0; i < len; i++) binary += String.fromCharCode(bytes[i]);
-  return btoa(binary);
+  let binary=''; const bytes=new Uint8Array(buffer); for(let i=0;i<bytes.byteLength;i++) binary+=String.fromCharCode(bytes[i]); return btoa(binary);
 }
 
 // ============== PACKAGES.json LOAD/SAVE =========
@@ -312,15 +297,8 @@ async function loadPackagesJson(){
   packagesSha = meta.sha || null;
   const jsonText = b64decodeUTF8(meta.content);
   let parsed;
-  try {
-    parsed = JSON.parse(jsonText);
-  } catch(e){
-    throw new Error('รูปแบบ JSON ไม่ถูกต้อง');
-  }
-  PACKS = Array.isArray(parsed) ? parsed
-        : (parsed && Array.isArray(parsed.data)) ? parsed.data
-        : [];
-  // รองรับ 2 ฟอร์แมต: [..] หรือ {ok:true,data:[..]}
+  try{ parsed = JSON.parse(jsonText); }catch(e){ throw new Error('รูปแบบ JSON ไม่ถูกต้อง'); }
+  PACKS = Array.isArray(parsed) ? parsed : (parsed && Array.isArray(parsed.data)) ? parsed.data : [];
   renderTable();
   showMsg('success', `โหลดแพ็กเกจ ${PACKS.length} รายการ`);
 }
@@ -328,7 +306,7 @@ els.loadBtn.addEventListener('click', () => loadPackagesJson().catch(e=>showMsg(
 els.reload.addEventListener('click', () => loadPackagesJson().catch(e=>showMsg('danger', e.message)));
 
 async function savePackagesJson(commitMsg){
-  const payload = JSON.stringify(PACKS, null, 2); // ใช้รูปแบบ array ตรง ๆ
+  const payload = JSON.stringify(PACKS, null, 2);
   const r = await ghPutContent(cfg.pathPackages, payload, commitMsg || 'chore: update packages.json', packagesSha);
   packagesSha = r.content?.sha || null;
 }
@@ -342,7 +320,7 @@ function showMsg(type, text){
 }
 function getFormData(){
   const f = els.form;
-  const obj = {
+  return {
     id:       f.id.value.trim(),
     title:    f.title.value.trim(),
     category: f.category.value,
@@ -354,7 +332,6 @@ function getFormData(){
     note:     f.note.value.trim(),
     active:   String(f.active.value).toLowerCase()==='true'
   };
-  return obj;
 }
 function setFormData(p){
   const f = els.form;
@@ -370,8 +347,7 @@ function setFormData(p){
   f.active.value   = p.active ? 'true' : 'false';
 }
 function renderTable(){
-  const tb = els.tbody;
-  tb.innerHTML = '';
+  const tb = els.tbody; tb.innerHTML = '';
   PACKS.forEach(p=>{
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -380,18 +356,14 @@ function renderTable(){
       <td>${p.category||''}</td>
       <td class="text-end">${fmtTHB(p.price)}</td>
       <td>${p.active ? 'TRUE' : 'FALSE'}</td>
-      <td><button class="btn btn-sm btn-outline-primary" data-id="${p.id}">แก้ไข</button></td>
-    `;
+      <td><button class="btn btn-sm btn-outline-primary" data-id="${p.id}" type="button">แก้ไข</button></td>`;
     tb.appendChild(tr);
   });
   tb.querySelectorAll('button[data-id]').forEach(btn=>{
     btn.addEventListener('click', e=>{
       const id = e.currentTarget.getAttribute('data-id');
       const found = PACKS.find(x=>x.id===id);
-      if(found) {
-        setFormData(found);
-        window.scrollTo({top:0,behavior:'smooth'});
-      }
+      if(found){ setFormData(found); window.scrollTo({top:0,behavior:'smooth'}); }
     });
   });
 }
@@ -399,25 +371,19 @@ function renderTable(){
 // ============== IMAGE UPLOAD ====================
 async function uploadImageIfSelected(){
   const file = els.imgFile.files?.[0];
-  if(!file) return null; // ไม่อัปโหลด
+  if(!file) return null;
   if(!file.type.startsWith('image/')) throw new Error('ไฟล์ที่อัปโหลดไม่ใช่รูปภาพ');
   const buf = await file.arrayBuffer();
-  // สร้างชื่อไฟล์ใหม่ ป้องกันชนกัน
   const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
   const filename = `${Date.now()}-${safeName}`;
   const path = `${cfg.pathImages.replace(/\/$/,'')}/${filename}`;
   await ghPutBinary(path, buf, `feat: upload image ${filename}`);
-  // แนะนำใช้พาธ relative (ทำงานได้ทั้งหน้าเว็บและ raw)
   const relUrl = `/${cfg.repo}/${path}`.replace(/\/{2,}/g,'/');
-  return relUrl; // เช่น /hospital/hospital/assets/images/xxx (ถ้า repo= hospital อยู่ root ให้เป็น /hospital/assets/images/xxx)
+  return relUrl;
 }
-
-// ปรับให้พาธสวย: ถ้า repo เป็น root ของ Pages (/<user>.github.io) อาจต่างไป
 function normalizeImageUrl(url){
-  // ถ้าเป็น absolute http/https ปล่อยผ่าน
   if(/^https?:\/\//i.test(url)) return url;
-  // บีบ // ให้เป็น /
-  return url.replace(/\/{2,}/g,'/'); 
+  return url.replace(/\/{2,}/g,'/');
 }
 
 // ============== CRUD HANDLERS ===================
@@ -425,25 +391,18 @@ els.form.addEventListener('submit', async (e)=>{
   e.preventDefault();
   try{
     updateCfgFromForm();
-    // อัปโหลดรูปก่อน (ถ้ามี)
     const newImg = await uploadImageIfSelected();
     const data = getFormData();
     if(newImg) data.img = newImg;
     data.img = normalizeImageUrl(data.img);
-
-    // ตรวจซ้ำ ID
     if(PACKS.some(x=>x.id===data.id)) return showMsg('warning','มี ID นี้อยู่แล้ว ใช้ปุ่ม "อัปเดตตาม ID" แทน');
-
     PACKS.push(data);
     await savePackagesJson(`feat: add package ${data.id}`);
-    showMsg('success', 'บันทึกแพ็กเกจใหม่เรียบร้อย');
+    showMsg('success','บันทึกแพ็กเกจใหม่เรียบร้อย');
     renderTable();
     els.form.reset();
-  }catch(err){
-    showMsg('danger', err.message);
-  }
+  }catch(err){ showMsg('danger', err.message); }
 });
-
 els.btnUpdate.addEventListener('click', async ()=>{
   try{
     updateCfgFromForm();
@@ -452,19 +411,14 @@ els.btnUpdate.addEventListener('click', async ()=>{
     if(!data.id) return showMsg('warning','กรุณาใส่ ID ที่ต้องการอัปเดต');
     const idx = PACKS.findIndex(x=>x.id===data.id);
     if(idx===-1) return showMsg('warning','ไม่พบ ID นี้ในรายการ');
-
     if(newImg) data.img = newImg;
     data.img = normalizeImageUrl(data.img);
-
     PACKS[idx] = data;
     await savePackagesJson(`chore: update package ${data.id}`);
-    showMsg('success', 'อัปเดตสำเร็จ');
+    showMsg('success','อัปเดตสำเร็จ');
     renderTable();
-  }catch(err){
-    showMsg('danger', err.message);
-  }
+  }catch(err){ showMsg('danger', err.message); }
 });
-
 els.btnDelete.addEventListener('click', async ()=>{
   try{
     updateCfgFromForm();
@@ -474,14 +428,11 @@ els.btnDelete.addEventListener('click', async ()=>{
     const before = PACKS.length;
     PACKS = PACKS.filter(x=>x.id!==id);
     if(PACKS.length===before) return showMsg('warning','ไม่พบ ID นี้');
-
     await savePackagesJson(`chore: delete package ${id}`);
     showMsg('success','ลบสำเร็จ');
     renderTable();
     els.form.reset();
-  }catch(err){
-    showMsg('danger', err.message);
-  }
+  }catch(err){ showMsg('danger', err.message); }
 });
 </script>
 
