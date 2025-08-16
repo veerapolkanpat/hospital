@@ -105,7 +105,7 @@
     "category": "ตา/ENT",
     "price": 690,
     "oldPrice": 890,
-    "img": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop",
+    "img": "/hospital/hospital/assets/images/1755330689026-S__73138179.jpg",
     "short": "เช็กความคมชัด ความดันตา และคัดกรองต้อหินเบื้องต้น",
     "includes": [
       "วัดสายตา",
@@ -113,7 +113,7 @@
       "ความดันตา"
     ],
     "note": "หากพบความผิดปกติ แพทย์แนะนำการตรวจต่อยอด",
-    "active": true
+    "active": false
   },
   {
     "id": "PHY-LOWBACK",
