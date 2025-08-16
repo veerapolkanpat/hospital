@@ -73,7 +73,7 @@
     "category": "คลอดบุตร",
     "price": 25900,
     "oldPrice": 28900,
-    "img": "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1200&auto=format&fit=crop",
+    "img": "/hospital/hospital/assets/images/1755330660829-S__73138179.jpg",
     "short": "ครอบคลุมค่าห้อง ค่าทำคลอด และดูแลทารกพื้นฐาน",
     "includes": [
       "ทำคลอดธรรมชาติ",
@@ -81,7 +81,7 @@
       "ค่าดูแลทารกแรกเกิดพื้นฐาน"
     ],
     "note": "ไม่รวมภาวะแทรกซ้อน/หัตถการพิเศษ",
-    "active": true
+    "active": false
   },
   {
     "id": "SURG-HERNIA",
