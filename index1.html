@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>โรงพยาบาล วีระพลการแพทย์</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- <meta name="google-site-verification" content="..."> -->
   <meta name="description" content="โรงพยาบาลวีระพลการแพทย์ ให้บริการตรวจรักษาโรคทั่วไป ตรวจสุขภาพ ตรวจเลือด ตรวจเอกซเรย์ พร้อมทีมแพทย์และพยาบาลผู้เชี่ยวชาญ ดูแลด้วยหัวใจ">
   <meta name="keywords" content="โรงพยาบาล, รพ.วีระพลการแพทย์, วีระพลการแพทย์, สุขภาพ, ตรวจรักษา">
   <meta name="robots" content="index, follow">
@@ -17,9 +16,8 @@
 
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font -->
+  <!-- Fonts + Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
@@ -33,16 +31,38 @@
     .section-pad{padding:80px 0}
     .shadow-soft{box-shadow:0 8px 24px rgba(0,0,0,.08)}
 
-    /* == Doctors card (ตามภาพตัวอย่าง) == */
-    .doc-card{background:#eaf3ff;border:0;border-radius:16px;padding:32px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
-    .doc-oval{width:160px;height:200px;border-radius:80px/100px;background:#fff;margin:0 auto 14px;position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.08);display:flex;align-items:flex-start;justify-content:center}
-    .doc-oval img{width:120px;height:140px;object-fit:cover;border-radius:50%;border:6px solid #fff;margin-top:18px;z-index:2}
-    .doc-oval svg{position:absolute;left:0;bottom:-1px;width:100%;height:auto}
+    /* ===== Doctors card – ปรับสวยขึ้น ===== */
+    .doc-card{
+      background:#eaf3ff;border:0;border-radius:16px;padding:32px;
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .doc-card:hover{ transform:translateY(-4px); box-shadow:0 16px 32px rgba(0,0,0,.12); }
+
+    .doc-oval{
+      width:170px;height:210px;border-radius:85px/105px;margin:0 auto 14px;
+      position:relative;overflow:hidden;
+      background:radial-gradient(120px 100px at 50% 10%, #ffffff 0 60%, #e8f2ff 61% 100%);
+      box-shadow:0 6px 18px rgba(0,0,0,.08);
+    }
+    .doc-oval::before{
+      content:"";position:absolute;inset:-8px;border-radius:inherit;
+      background:linear-gradient(135deg,#8cc8ff33,#2ecc7133);filter:blur(10px);
+    }
+    .doc-oval img{
+      width:128px;height:148px;object-fit:cover;border-radius:50%;
+      border:6px solid #fff;margin-top:18px;position:relative;z-index:2;
+      transition:transform .25s ease;
+    }
+    .doc-card:hover .doc-oval img{ transform:translateY(-2px) scale(1.03); }
+    .doc-oval svg{ position:absolute;left:0;bottom:-1px;width:100%;height:auto;z-index:1;
+      filter:drop-shadow(0 6px 8px rgba(46,204,113,.35));
+    }
     .doc-name{font-weight:700;margin-bottom:.25rem}
     .doc-spec{color:#0d6efd;font-weight:600;margin-bottom:.25rem}
     .doc-brief{color:#6c757d;font-size:.95rem}
 
-    /* == Featured package card == */
+    /* Featured packages */
     .pkg-img{height:200px;object-fit:cover}
     .price-now{color:#dc3545;font-weight:700;font-size:1.15rem}
     .price-old{color:#6c757d;font-size:.9rem;text-decoration:line-through}
@@ -334,14 +354,71 @@
   </div>
 </div>
 
+<!-- Package Detail Modal -->
+<div class="modal fade" id="pkgModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pkgTitle">รายละเอียดแพ็กเกจ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-5">
+            <img id="pkgImg" class="img-fluid rounded-3" alt="">
+          </div>
+          <div class="col-md-7">
+            <div class="mb-2"><span class="badge bg-success" id="pkgCat"></span></div>
+            <div class="d-flex align-items-baseline gap-2 mb-2">
+              <span class="price-now" id="pkgPrice"></span>
+              <span class="price-old" id="pkgOldPrice" style="display:none"></span>
+            </div>
+            <p class="text-muted small mb-2" id="pkgShort"></p>
+            <ul class="small mb-3" id="pkgIncludes"></ul>
+            <p class="small text-secondary mb-0" id="pkgNote"></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="/hospital/packages.html" class="btn btn-outline-primary">ไปหน้ารวมแพ็กเกจ</a>
+        <button class="btn btn-primary" data-bs-dismiss="modal">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Featured packages loader -->
+<!-- Featured packages loader + Modal logic -->
 <script>
-  const PACKAGES_JSON = '/hospital/packages.json'; // โหลดจาก GitHub Pages โดยตรง
+  const PACKAGES_JSON = '/hospital/packages.json';  // โหลดจาก GitHub Pages
+  let ALL_PKGS = [];
+  let pkgModal;
 
-  function thb(n){ return new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0}).format(Number(n||0)); }
+  function thb(n){
+    return new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0})
+      .format(Number(n||0));
+  }
+
+  function openPkgModal(id){
+    const p = ALL_PKGS.find(x=>x.id===id);
+    if(!p) return;
+    document.getElementById('pkgTitle').textContent = p.title || 'รายละเอียดแพ็กเกจ';
+    const img = document.getElementById('pkgImg');
+    img.src = p.img || 'https://placehold.co/800x500?text=Package';
+    img.alt = p.title || 'package image';
+    document.getElementById('pkgCat').textContent = p.category || 'แพ็กเกจ';
+    document.getElementById('pkgPrice').textContent = thb(p.price);
+    const oldEl = document.getElementById('pkgOldPrice');
+    if(p.oldPrice){ oldEl.textContent = thb(p.oldPrice); oldEl.style.display='inline'; }
+    else { oldEl.style.display='none'; }
+    document.getElementById('pkgShort').textContent = p.short || '';
+    const inc = Array.isArray(p.includes) ? p.includes : [];
+    document.getElementById('pkgIncludes').innerHTML = inc.map(i=>`<li>• ${i}</li>`).join('');
+    document.getElementById('pkgNote').textContent = p.note || '';
+    pkgModal.show();
+  }
 
   function renderFeatured(list){
     const wrap = document.getElementById('pkgRow');
@@ -352,7 +429,7 @@
       wrap.insertAdjacentHTML('beforeend', `
         <div class="col-md-6 col-lg-4">
           <div class="card h-100 shadow-soft">
-            <img class="card-img-top pkg-img" src="${p.img || 'https://placehold.co/800x500?text=Package'}" alt="">
+            <img class="card-img-top pkg-img" src="${p.img || 'https://placehold.co/800x500?text=Package'}" alt="${p.title||''}">
             <div class="card-body">
               <span class="badge bg-success mb-2">${p.category || 'แพ็กเกจ'}</span>
               <h5 class="card-title">${p.title || ''}</h5>
@@ -364,11 +441,28 @@
               </div>
             </div>
             <div class="card-footer bg-white border-0 pb-4">
-              <a href="/hospital/packages.html" class="btn btn-outline-primary w-100">ดูรายละเอียด</a>
+              <a href="#" class="btn btn-outline-primary w-100 js-open-pkg" data-pkg-id="${p.id}">ดูรายละเอียด</a>
             </div>
           </div>
         </div>
       `);
+    });
+
+    // bind เปิดโมดัล
+    wrap.querySelectorAll('.js-open-pkg').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        e.preventDefault();
+        openPkgModal(btn.getAttribute('data-pkg-id'));
+      });
+    });
+
+    // คลิกภาพก็เปิดโมดัลได้
+    wrap.querySelectorAll('.card-img-top').forEach(img=>{
+      img.style.cursor='pointer';
+      img.addEventListener('click', ()=>{
+        const id = img.closest('.card').querySelector('.js-open-pkg').getAttribute('data-pkg-id');
+        openPkgModal(id);
+      });
     });
   }
 
@@ -378,6 +472,7 @@
       const data = await res.json();
       let arr = Array.isArray(data) ? data : (data && Array.isArray(data.data) ? data.data : []);
       let active = arr.filter(x => String(x.active).toLowerCase() === 'true');
+      ALL_PKGS = active.slice();
 
       // เลือก "โปรโมชัน" ก่อน ถ้าไม่ครบ 3 เติมด้วยรายการอื่น
       const promos = active.filter(x => (x.category || '').includes('โปร'));
@@ -396,11 +491,7 @@
     }
   }
 
-  document.addEventListener('DOMContentLoaded', loadFeaturedPackages);
-</script>
-
-<!-- Cookie toast script -->
-<script>
+  // Cookie toast
   (function(){
     const k='cookie.accepted';
     const accepted=localStorage.getItem(k);
@@ -408,11 +499,14 @@
       const toastEl=document.getElementById('cookieToast');
       const t=new bootstrap.Toast(toastEl,{delay:0, autohide:false});
       t.show();
-      document.getElementById('acceptCookies').addEventListener('click',()=>{
-        localStorage.setItem(k,'1'); t.hide();
-      });
+      document.getElementById('acceptCookies').addEventListener('click',()=>{localStorage.setItem(k,'1'); t.hide();});
     }
   })();
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    pkgModal = new bootstrap.Modal(document.getElementById('pkgModal'));
+    loadFeaturedPackages();
+  });
 </script>
 </body>
 </html>
