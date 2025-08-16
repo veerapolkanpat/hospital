@@ -45,8 +45,8 @@
         </div>
         <div class="col-md-4">
           <label class="form-label">GitHub Token</label>
-          <input id="ghToken" type="password" class="form-control" placeholder="ใส่เฉพาะผู้ดูแล (เก็บที่เครื่องนี้)">
-          <div class="form-text small-help">แนะนำใช้ Fine-grained token: ให้สิทธิ์เฉพาะ repo นี้ และเฉพาะ <code class="k">contents:write</code></div>
+          <input id="ghToken" type="password" class="form-control" placeholder="เก็บไว้ที่เครื่องนี้เท่านั้น">
+          <div class="form-text small-help">แนะนำ Fine-grained token (เฉพาะ repo นี้) และสิทธิ์ <code class="k">contents:write</code></div>
         </div>
         <div class="col-12 d-flex gap-2">
           <button id="btnSaveCfg" class="btn btn-primary" type="button">บันทึกการตั้งค่า</button>
@@ -59,12 +59,12 @@
         <div class="col-md-6">
           <label class="form-label">ไฟล์ข้อมูลแพ็กเกจ (พาธใน repo)</label>
           <input id="pathPackages" class="form-control" value="packages.json">
-          <div class="form-text small-help">ตัวอย่าง: <code class="k">packages.json</code> หรือ <code class="k">data/packages.json</code></div>
+          <div class="form-text small-help">เช่น <code class="k">packages.json</code> หรือ <code class="k">data/packages.json</code></div>
         </div>
         <div class="col-md-6">
           <label class="form-label">โฟลเดอร์เก็บรูปแพ็กเกจ (พาธใน repo)</label>
           <input id="pathImages" class="form-control" value="assets/images">
-          <div class="form-text small-help">ตัวอย่าง: <code class="k">assets/images</code></div>
+          <div class="form-text small-help">เช่น <code class="k">assets/images</code></div>
         </div>
       </div>
     </div>
@@ -114,7 +114,7 @@
         <div class="col-md-7">
           <label class="form-label">รายการครอบคลุม (includes)</label>
           <textarea name="includes" class="form-control" placeholder="คั่นด้วย | เช่น CBC|FBS|X-ray"></textarea>
-          <div class="form-text small-help">จะแปลงเป็น Array ตอนใช้งานในหน้า packages.html</div>
+          <div class="form-text small-help">จะแปลงเป็น Array ตอนใช้งาน</div>
         </div>
         <div class="col-md-5">
           <label class="form-label">หมายเหตุ (note)</label>
@@ -124,12 +124,11 @@
         <div class="col-md-8">
           <label class="form-label">ลิงก์รูปภาพ (img)</label>
           <input name="img" class="form-control" placeholder="/hospital/assets/images/xxx.jpg หรือ https://...">
-          <div class="form-text small-help">อัปโหลดรูปใหม่ด้านล่าง ระบบจะใส่พาธให้เอง</div>
+          <div class="form-text small-help">ถ้าอัปโหลดรูปใหม่ ระบบจะตั้งพาธให้อัตโนมัติ</div>
         </div>
         <div class="col-md-4">
           <label class="form-label">อัปโหลดรูปใหม่</label>
           <input id="imgFile" type="file" accept="image/*" class="form-control">
-          <div class="form-text small-help">อัปแล้วจะบันทึกเป็นไฟล์ในโฟลเดอร์ภาพที่กำหนด</div>
         </div>
 
         <div class="col-md-3">
@@ -230,7 +229,7 @@ function loadCfg(){
     cfg.pathImages   = localStorage.getItem('gh.pathImages')   || cfg.pathImages;
   }catch(e){
     console.warn('localStorage read failed:', e);
-    els.cfgMsg.textContent = 'เบราว์เซอร์บล็อกการอ่าน localStorage';
+    els.cfgMsg.textContent = 'เบราว์เซอร์บล็อก localStorage';
   }
   applyCfgToForm();
 }
@@ -283,9 +282,18 @@ async function ghPutBinary(path, arrayBuffer, message){
   if(!res.ok){ const t = await res.text(); throw new Error(`อัปโหลดรูปไม่สำเร็จ: ${res.status} ${t}`); }
   return res.json();
 }
-// base64 helpers
 function arrayBufferToBase64(buffer){
-  let binary=''; const bytes=new Uint8Array(buffer); for(let i=0;i<bytes.byteLength;i++) binary+=String.fromCharCode(bytes[i]); return btoa(binary);
+  let binary=''; const bytes=new Uint8Array(buffer);
+  for(let i=0;i<bytes.byteLength;i++) binary+=String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+
+// ===== UTF-8 helpers (แก้ภาษาไทยเพี้ยน) =====
+function base64ToUtf8(b64){
+  const bin = atob(b64);                       // base64 → binary string
+  const bytes = new Uint8Array(bin.length);
+  for (let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder('utf-8').decode(bytes); // ← UTF-8 ปลอดภัยกับภาษาไทย
 }
 
 // ============== PACKAGES.json LOAD/SAVE =========
@@ -301,10 +309,10 @@ async function loadPackagesJson(){
   }
   packagesSha = meta.sha || null;
 
-  // ----- decode base64 -> string -> JSON -----
-  const decoded = atob(meta.content); // meta.encoding === 'base64'
+  // ----- decode base64 -> UTF-8 -> JSON -----
+  const jsonText = base64ToUtf8(meta.content);
   let parsed;
-  try { parsed = JSON.parse(decoded); }
+  try { parsed = JSON.parse(jsonText); }
   catch(e){ throw new Error('packages.json ไม่ใช่ JSON ที่ถูกต้อง'); }
 
   PACKS = Array.isArray(parsed) ? parsed : (parsed && Array.isArray(parsed.data)) ? parsed.data : [];
@@ -387,7 +395,7 @@ async function uploadImageIfSelected(){
   const filename = `${Date.now()}-${safeName}`;
   const path = `${cfg.pathImages.replace(/\/$/,'')}/${filename}`;
   await ghPutBinary(path, buf, `feat: upload image ${filename}`);
-  // URL รูปสำหรับเว็บ (ภายใต้ GitHub Pages): /<repo>/<path>
+  // URL รูปสำหรับเว็บภายใต้ GitHub Pages
   const relUrl = `/${cfg.repo}/${path}`.replace(/\/{2,}/g,'/');
   return relUrl;
 }
