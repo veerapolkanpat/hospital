@@ -121,7 +121,7 @@
     "category": "กายภาพบำบัด",
     "price": 1990,
     "oldPrice": 2400,
-    "img": "/hospital/hospital/assets/images/1755330698664-S__73138179.jpg",
+    "img": "/hospital/hospital/assets/images/1755330704588-S__73138179.jpg",
     "short": "ลดปวดและฟื้นฟูกล้ามเนื้อด้วยโปรแกรมเฉพาะบุคคล",
     "includes": [
       "ประเมินโดยนักกายภาพ",
@@ -129,7 +129,7 @@
       "ท่าบริหารเฉพาะบุคคล"
     ],
     "note": "ควรนัดหมายล่วงหน้าเพื่อจัดคิวอุปกรณ์",
-    "active": true
+    "active": false
   },
   {
     "id": "ROOM-STD",
