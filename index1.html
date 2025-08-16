@@ -8,7 +8,7 @@
   <meta name="keywords" content="โรงพยาบาล, รพ.วีระพลการแพทย์, วีระพลการแพทย์, สุขภาพ, ตรวจรักษา">
   <meta name="robots" content="index, follow">
 
-  <!-- Canonical (ให้เหลืออันเดียว) -->
+  <!-- Canonical -->
   <link rel="canonical" href="https://veerapolkanpat.github.io/hospital/">
 
   <!-- OpenGraph -->
@@ -20,7 +20,7 @@
   <meta property="og:locale" content="th_TH">
   <meta property="og:type" content="website">
 
-  <!-- WebSite (ผูกกับ Organization ด้วย @id/publisher) -->
+  <!-- WebSite -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -62,11 +62,9 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
-
-    // ไม่ใช้คุกกี้จนกว่าจะยินยอม
-    gtag('consent', 'default', { 'analytics_storage': 'denied' });
+    gtag('consent','default',{'analytics_storage':'denied'});
     gtag('js', new Date());
-    gtag('config', 'G-QZ0FG8PVXQ', { anonymize_ip: true });
+    gtag('config','G-QZ0FG8PVXQ',{anonymize_ip:true});
   </script>
 
   <!-- Bootstrap / Fonts / Icons -->
@@ -78,19 +76,21 @@
     body{font-family:'Prompt',sans-serif;background-color:#f8f9fa}
     .navbar-brand img{height:48px;width:48px;border-radius:50%}
 
-    /* Hero */
-    .hero{min-height:85vh;background:url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg') center/cover no-repeat;position:relative;display:flex;align-items:center}
-    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,.6))}
-    .hero .inner{position:relative;color:#fff;max-width:780px;margin:auto;text-align:center;background:rgba(0,0,0,.55);border-radius:1rem;padding:2rem 1.5rem}
+    /* ===== HERO CAROUSEL ===== */
+    .hero-slide{min-height:85vh;background-size:cover;background-position:center;position:relative;display:flex;align-items:center}
+    .hero-slide::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.6))}
+    .hero-slide .inner{position:relative;color:#fff;max-width:900px;margin:auto;text-align:center;background:rgba(0,0,0,.55);border-radius:1rem;padding:2rem 1.5rem}
+    .carousel-control-prev,.carousel-control-next{filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
+
     .section-pad{padding:80px 0}
     .shadow-soft{box-shadow:0 8px 24px rgba(0,0,0,.08)}
 
     /* Doctors card */
-    .doc-card{background:#eaf3ff;border:0;border-radius:16px;padding:32px;box-shadow:0 8px 24px rgba(0,0,0,.08);transition:transform .25s ease, box-shadow .25s ease}
+    .doc-card{background:#eaf3ff;border:0;border-radius:16px;padding:32px;box-shadow:0 8px 24px rgba(0,0,0,.08);transition:transform .25s, box-shadow .25s}
     .doc-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(0,0,0,.12)}
     .doc-oval{width:170px;height:210px;border-radius:85px/105px;margin:0 auto 14px;position:relative;overflow:hidden;background:radial-gradient(120px 100px at 50% 10%, #ffffff 0 60%, #e8f2ff 61% 100%);box-shadow:0 6px 18px rgba(0,0,0,.08)}
     .doc-oval::before{content:"";position:absolute;inset:-8px;border-radius:inherit;background:linear-gradient(135deg,#8cc8ff33,#2ecc7133);filter:blur(10px)}
-    .doc-oval img{width:128px;height:148px;object-fit:cover;border-radius:50%;border:6px solid #fff;margin-top:18px;position:relative;z-index:2;transition:transform .25s ease}
+    .doc-oval img{width:128px;height:148px;object-fit:cover;border-radius:50%;border:6px solid #fff;margin-top:18px;position:relative;z-index:2;transition:transform .25s}
     .doc-card:hover .doc-oval img{transform:translateY(-2px) scale(1.03)}
     .doc-oval svg{position:absolute;left:0;bottom:-1px;width:100%;height:auto;z-index:1;filter:drop-shadow(0 6px 8px rgba(46,204,113,.35))}
     .doc-name{font-weight:700;margin-bottom:.25rem}
@@ -101,7 +101,7 @@
     .pkg-img{height:200px;object-fit:cover}
     .price-now{color:#dc3545;font-weight:700;font-size:1.15rem}
     .price-old{color:#6c757d;font-size:.9rem;text-decoration:line-through}
-    #pkgIncludes, .card-body ul { padding-left: 1.15rem; } /* bullet สวยๆ */
+    #pkgIncludes, .card-body ul { padding-left: 1.15rem; }
 
     /* Cookie toast */
     #cookieToast{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:1080}
@@ -111,12 +111,11 @@
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
   <div class="container">
     <a class="navbar-brand fw-bold text-success d-flex align-items-center" href="/hospital/">
-      <img src="https://veerapolkanpat.github.io/hospital/LOGO.png" alt="โลโก้โรงพยาบาล">
-         รพ.วีระพลการแพทย์
+      <img src="https://veerapolkanpat.github.io/hospital/LOGO.png" alt="โลโก้" class="me-2"> รพ.วีระพลการแพทย์
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
       <span class="navbar-toggler-icon"></span>
@@ -125,7 +124,6 @@
       <ul class="navbar-nav ms-auto fw-semibold">
         <li class="nav-item"><a class="nav-link" href="#hero">หน้าแรก</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">เกี่ยวกับเรา</a></li>
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#services" data-bs-toggle="dropdown">บริการ</a>
           <ul class="dropdown-menu">
@@ -134,7 +132,6 @@
             <li><a class="dropdown-item" href="/hospital/packages.html">แพ็กเกจและโปรโมชัน</a></li>
           </ul>
         </li>
-
         <li class="nav-item"><a class="nav-link" href="#doctors">แพทย์ของเรา</a></li>
         <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/appointment-form/">นัดหมาย</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">ติดต่อเรา</a></li>
@@ -143,18 +140,41 @@
   </div>
 </nav>
 
-<!-- Hero -->
-<header id="hero" class="hero">
-  <div class="container">
-    <div class="inner shadow-soft">
-      <h1 class="fw-bold display-6 mb-3">ดูแลสุขภาพของคุณด้วยใจ ที่โรงพยาบาล วีระพลการแพทย์</h1>
-      <p class="lead mb-4">บริการทางการแพทย์ครบวงจร ด้วยทีมแพทย์ผู้เชี่ยวชาญและเทคโนโลยีที่ทันสมัย</p>
-      <a class="btn btn-primary btn-lg px-4" href="https://veerapolkanpat.github.io/appointment-form/">
-        นัดหมายแพทย์วันนี้ <i class="fa-solid fa-calendar-days ms-2"></i>
-      </a>
+<!-- ===== HERO CAROUSEL (ดึงโปร/แพ็กเกจอัตโนมัติ) ===== -->
+<section id="hero" class="position-relative">
+  <div id="homeHero" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
+    <div class="carousel-inner" id="heroSlides">
+      <!-- สไลด์เริ่มต้น (fallback) -->
+      <div class="carousel-item active" id="heroStatic">
+        <div class="hero-slide" style="background-image:url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg')">
+          <div class="container">
+            <div class="inner shadow-soft">
+              <h1 class="fw-bold display-6 mb-3">ดูแลสุขภาพของคุณด้วยใจ ที่โรงพยาบาล วีระพลการแพทย์</h1>
+              <p class="lead mb-4">บริการทางการแพทย์ครบวงจร ด้วยทีมแพทย์ผู้เชี่ยวชาญและเทคโนโลยีที่ทันสมัย</p>
+              <a class="btn btn-primary btn-lg px-4" href="https://veerapolkanpat.github.io/appointment-form/">
+                นัดหมายแพทย์วันนี้ <i class="fa-solid fa-calendar-days ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- สไลด์โปร/แพ็กเกจจะถูกเติมด้วย JS -->
     </div>
+
+    <div class="carousel-indicators" id="heroIndicators">
+      <button type="button" data-bs-target="#homeHero" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#homeHero" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#homeHero" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-</header>
+</section>
 
 <!-- About -->
 <section id="about" class="section-pad bg-white">
@@ -164,7 +184,7 @@
 
     <div class="row g-4 align-items-center">
       <div class="col-md-6">
-        <img class="img-fluid rounded-3 shadow-soft" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/front_hos.jpg" alt="ภาพอาคารโรงพยาบาล วีระพลการแพทย์">
+        <img class="img-fluid rounded-3 shadow-soft" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/front_hos.jpg" alt="ภาพโรงพยาบาล">
       </div>
       <div class="col-md-6">
         <h5 class="fw-semibold mb-3">โรงพยาบาล วีระพลการแพทย์</h5>
@@ -187,7 +207,6 @@
   <div class="container">
     <h3 class="text-center fw-bold text-success mb-4">การรับรองคุณภาพตามมาตรฐาน</h3>
 
-    <!-- desktop / tablet -->
     <div class="row g-3 d-none d-md-flex">
       <div class="col-md-4">
         <div class="card h-100 shadow-sm border-0 text-center p-3">
@@ -206,7 +225,6 @@
       </div>
     </div>
 
-    <!-- mobile: สไลด์แนวนอน -->
     <div class="d-flex d-md-none gap-3 overflow-auto pb-2">
       <div class="card shadow-sm border-0 p-3" style="min-width:240px">
         <img src="https://static.wixstatic.com/media/204ab8_c6722c9728e4457bb481d3419fa48387~mv2.jpg/v1/fill/w_262,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/204ab8_c6722c9728e4457bb481d3419fa48387~mv2.jpg" alt="ตรารับรองมาตรฐานหน่วยงานสาธารณสุข" class="cert-img mx-auto">
@@ -288,7 +306,7 @@
       <div class="col-md-6 col-lg-4">
         <div class="doc-card text-center h-100">
           <div class="doc-oval">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr1.avif" alt="นพ.วีระพล พจน์จลองศิลป์">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr1.avif" alt="">
             <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
           </div>
           <div class="doc-name">นพ.วีระพล พจน์จลองศิลป์</div>
@@ -300,7 +318,7 @@
       <div class="col-md-6 col-lg-4">
         <div class="doc-card text-center h-100">
           <div class="doc-oval">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr2.avif" alt="นพ.พณิช พจน์จลองศิลป์">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr2.avif" alt="">
             <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
           </div>
           <div class="doc-name">นพ.พณิช พจน์จลองศิลป์</div>
@@ -312,7 +330,7 @@
       <div class="col-md-6 col-lg-4">
         <div class="doc-card text-center h-100">
           <div class="doc-oval">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr4.avif" alt="พญ.สุมณทิพย์ พจน์จลองศิลป์">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr4.avif" alt="">
             <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
           </div>
           <div class="doc-name">พญ.สุมณทิพย์ พจน์จลองศิลป์</div>
@@ -324,7 +342,7 @@
       <div class="col-md-6 col-lg-4">
         <div class="doc-card text-center h-100">
           <div class="doc-oval">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr3.avif" alt="พญ.บุษบงก์ ดวงมาตย์พล">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr3.avif" alt="">
             <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
           </div>
           <div class="doc-name">พญ.บุษบงก์ ดวงมาตย์พล</div>
@@ -336,7 +354,7 @@
       <div class="col-md-6 col-lg-4">
         <div class="doc-card text-center h-100">
           <div class="doc-oval">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr5.avif" alt="นพ.ปราโมทย์ โคตรพันธุ์กูล">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr5.avif" alt="">
             <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
           </div>
           <div class="doc-name">นพ.ปราโมทย์ โคตรพันธุ์กูล</div>
@@ -348,7 +366,7 @@
       <div class="col-md-6 col-lg-4">
         <div class="doc-card text-center h-100">
           <div class="doc-oval">
-            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr6.avif" alt="พล.ต นพ.ดาราพงศ์ ลังกาฟ้า">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr6.avif" alt="">
             <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
           </div>
           <div class="doc-name">พล.ต นพ.ดาราพงศ์ ลังกาฟ้า</div>
@@ -396,13 +414,7 @@
       </div>
       <div class="col-lg-6">
         <div class="p-2 bg-light rounded-3 shadow-soft h-100">
-          <iframe
-            class="w-100 rounded-2"
-            style="border:0; height:320px"
-            loading="lazy" allowfullscreen
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d617.8342201905568!2d102.43968137166904!3d17.203137844513154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3123bf58cad887d1%3A0x510f0ada2af4cf95!2z4LmC4Lij4LiH4Lie4Lii4Liy4Lia4Liy4Lil4Lin4Li14Lij4Liw4Lie4Lil4LiB4Liy4Lij4LmB4Lie4LiX4Lii4LmM!5e0!3m2!1sth!2sth!4v1752745781507!5m2!1sth!2sth">
-          </iframe>
+          <iframe class="w-100 rounded-2" style="border:0;height:320px" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d617.8342201905568!2d102.43968137166904!3d17.203137844513154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3123bf58cad887d1%3A0x510f0ada2af4cf95!2z4LmC4Lij4LiH4Lie4Lii4Liy4Lia4Liy4Lil4Lin4Li14Lij4Liw4Lie4Lil4LiB4Liy4Lij4LmB4Lie4LiX4Lii4LmM!5e0!3m2!1sth!2sth!4v1752745781507!5m2!1sth!2sth"></iframe>
         </div>
       </div>
     </div>
@@ -440,9 +452,7 @@
       </div>
       <div class="modal-body">
         <div class="row g-3">
-          <div class="col-md-5">
-            <img id="pkgImg" class="img-fluid rounded-3" alt="">
-          </div>
+          <div class="col-md-5"><img id="pkgImg" class="img-fluid rounded-3" alt=""></div>
           <div class="col-md-7">
             <div class="mb-2"><span class="badge bg-success" id="pkgCat"></span></div>
             <div class="d-flex align-items-baseline gap-2 mb-2">
@@ -466,17 +476,81 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Featured packages loader + Modal logic -->
 <script>
   const PACKAGES_JSON = '/hospital/packages.json';
   let ALL_PKGS = [];
   let pkgModal;
 
   function thb(n){
-    return new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0})
-      .format(Number(n||0));
+    return new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0}).format(Number(n||0));
   }
 
+  /* ---------- HERO: Build slides from packages ---------- */
+  function buildHeroCarousel(pkgs){
+    const slidesEl = document.getElementById('heroSlides');
+    const indEl    = document.getElementById('heroIndicators');
+    if(!slidesEl || !indEl) return;
+
+    const promos = pkgs.filter(x => (x.category||'').includes('โปร'));
+    let pick = promos.slice(0,3);
+    if(pick.length<3){
+      const rest = pkgs.filter(x => !promos.includes(x));
+      pick = pick.concat(rest.slice(0,3-pick.length));
+    }
+    if(pick.length===0) return; // ไม่มีข้อมูล → ใช้สไลด์ fallback
+
+    indEl.innerHTML = '';
+    slidesEl.innerHTML = '';
+
+    pick.forEach((p,i)=>{
+      const active = i===0 ? 'active' : '';
+      const oldHtml = p.oldPrice ? `<span class="price-old fs-6 ms-1">${thb(p.oldPrice)}</span>` : '';
+      slidesEl.insertAdjacentHTML('beforeend', `
+        <div class="carousel-item ${active}">
+          <div class="hero-slide" style="background-image:url('${p.img || 'https://placehold.co/1600x900?text=Package'}')">
+            <div class="container">
+              <div class="inner shadow-soft">
+                <span class="badge bg-danger mb-2">โปรโมชัน</span>
+                <h1 class="fw-bold display-6 mb-2">${p.title || 'แพ็กเกจโรงพยาบาล'}</h1>
+                ${p.short ? `<p class="lead mb-3">${p.short}</p>` : ''}
+                <div class="d-flex align-items-center justify-content-center gap-3 flex-wrap mb-3">
+                  <span class="price-now fs-3">${thb(p.price)}</span>${oldHtml}
+                </div>
+                <div class="d-flex gap-2 justify-content-center flex-wrap">
+                  <a href="#" class="btn btn-primary btn-lg js-open-pkg" data-pkg-id="${p.id}">ดูรายละเอียด</a>
+                  <a href="/hospital/packages.html" class="btn btn-outline-light btn-lg">ดูแพ็กเกจทั้งหมด</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `);
+      indEl.insertAdjacentHTML('beforeend', `
+        <button type="button" data-bs-target="#homeHero" data-bs-slide-to="${i}" class="${active}" ${i===0?'aria-current="true"':''} aria-label="Slide ${i+1}"></button>
+      `);
+    });
+
+    // สไลด์แนะนำโรงพยาบาลต่อท้าย
+    const idx = pick.length;
+    slidesEl.insertAdjacentHTML('beforeend', `
+      <div class="carousel-item">
+        <div class="hero-slide" style="background-image:url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg')">
+          <div class="container">
+            <div class="inner shadow-soft">
+              <h1 class="fw-bold display-6 mb-3">ดูแลสุขภาพของคุณด้วยใจ ที่โรงพยาบาล วีระพลการแพทย์</h1>
+              <p class="lead mb-4">บริการทางการแพทย์ครบวงจร ด้วยทีมแพทย์ผู้เชี่ยวชาญและเทคโนโลยีที่ทันสมัย</p>
+              <a class="btn btn-primary btn-lg px-4" href="https://veerapolkanpat.github.io/appointment-form/">
+                นัดหมายแพทย์วันนี้ <i class="fa-solid fa-calendar-days ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `);
+    indEl.insertAdjacentHTML('beforeend', `<button type="button" data-bs-target="#homeHero" data-bs-slide-to="${idx}" aria-label="Slide ${idx+1}"></button>`);
+  }
+
+  /* ---------- Modal open ---------- */
   function openPkgModal(id){
     const p = ALL_PKGS.find(x=>x.id===id);
     if(!p) return;
@@ -487,16 +561,15 @@
     document.getElementById('pkgCat').textContent = p.category || 'แพ็กเกจ';
     document.getElementById('pkgPrice').textContent = thb(p.price);
     const oldEl = document.getElementById('pkgOldPrice');
-    if(p.oldPrice){ oldEl.textContent = thb(p.oldPrice); oldEl.style.display='inline'; }
-    else { oldEl.style.display='none'; }
+    if(p.oldPrice){ oldEl.textContent = thb(p.oldPrice); oldEl.style.display='inline'; } else { oldEl.style.display='none'; }
     document.getElementById('pkgShort').textContent = p.short || '';
     const inc = Array.isArray(p.includes) ? p.includes : [];
-    // ไม่ใส่ '•' ซ้ำกับ bullet
     document.getElementById('pkgIncludes').innerHTML = inc.map(i=>`<li>${i}</li>`).join('');
     document.getElementById('pkgNote').textContent = p.note || '';
     pkgModal.show();
   }
 
+  /* ---------- Featured ---------- */
   function renderFeatured(list){
     const wrap = document.getElementById('pkgRow');
     if(!wrap) return;
@@ -524,32 +597,20 @@
         </div>
       `);
     });
-
-    wrap.querySelectorAll('.js-open-pkg').forEach(btn=>{
-      btn.addEventListener('click', e=>{
-        e.preventDefault();
-        openPkgModal(btn.getAttribute('data-pkg-id'));
-      });
-    });
-
-    wrap.querySelectorAll('.card-img-top').forEach(img=>{
-      img.style.cursor='pointer';
-      img.addEventListener('click', ()=>{
-        const id = img.closest('.card').querySelector('.js-open-pkg').getAttribute('data-pkg-id');
-        openPkgModal(id);
-      });
-    });
   }
 
-  async function loadFeaturedPackages(){
+  /* ---------- Load packages -> Build Hero + Featured ---------- */
+  async function loadPackagesAndBuild(){
     try{
       const res = await fetch(PACKAGES_JSON,{cache:'no-store'});
       const data = await res.json();
-      let arr = Array.isArray(data) ? data : (data && Array.isArray(data.data) ? data.data : []);
-      let active = arr.filter(x => String(x.active).toLowerCase() === 'true');
+      const arr = Array.isArray(data) ? data : (data && Array.isArray(data.data) ? data.data : []);
+      const active = arr.filter(x => String(x.active).toLowerCase() === 'true');
       ALL_PKGS = active.slice();
 
-      const promos = active.filter(x => (x.category || '').includes('โปร'));
+      buildHeroCarousel(active);
+
+      const promos = active.filter(x => (x.category||'').includes('โปร'));
       let pick = promos.slice(0,3);
       if (pick.length < 3){
         const rest = active.filter(x => !promos.includes(x));
@@ -559,31 +620,38 @@
     }catch(e){
       console.error('load packages failed:', e);
       const wrap = document.getElementById('pkgRow');
-      if(wrap){
-        wrap.innerHTML = `<div class="col-12 text-center text-danger">ไม่สามารถโหลดแพ็กเกจได้ในขณะนี้</div>`;
-      }
+      if(wrap){ wrap.innerHTML = `<div class="col-12 text-center text-danger">ไม่สามารถโหลดแพ็กเกจได้ในขณะนี้</div>`; }
     }
   }
 
-  // Cookie toast + อัปเดต consent เมื่อยอมรับ
+  /* ---------- Cookie toast ---------- */
   (function(){
     const k='cookie.accepted';
     const accepted=localStorage.getItem(k);
     if(!accepted){
       const toastEl=document.getElementById('cookieToast');
-      const t=new bootstrap.Toast(toastEl,{delay:0, autohide:false});
+      const t=new bootstrap.Toast(toastEl,{delay:0,autohide:false});
       t.show();
       document.getElementById('acceptCookies').addEventListener('click',()=>{
         localStorage.setItem(k,'1');
-        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        gtag('consent','update',{'analytics_storage':'granted'});
         t.hide();
       });
     }
   })();
 
+  /* Delegated click for all .js-open-pkg (ทั้งในฮีโร่และในการ์ด) */
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.js-open-pkg');
+    if(btn){
+      e.preventDefault();
+      openPkgModal(btn.getAttribute('data-pkg-id'));
+    }
+  });
+
   document.addEventListener('DOMContentLoaded', ()=>{
     pkgModal = new bootstrap.Modal(document.getElementById('pkgModal'));
-    loadFeaturedPackages();
+    loadPackagesAndBuild();
   });
 </script>
 </body>
