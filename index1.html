@@ -69,6 +69,9 @@
 
     /* Cookie toast bottom */
     #cookieToast{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:1080}
+
+    .cert-img{max-height:110px;width:auto;object-fit:contain}
+    
   </style>
 </head>
 <body>
@@ -139,6 +142,69 @@
           พร้อมสิ่งอำนวยความสะดวก ครบถ้วนเพื่อความสบายของผู้ป่วยและญาติ
         </p>
         <a href="/hospital/about.html" class="btn btn-outline-primary">เกี่ยวกับเรา <i class="fa-solid fa-arrow-right ms-1"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Certificates (ใต้เกี่ยวกับเรา) -->
+<section id="certs" class="py-5 bg-white">
+  <div class="container">
+    <h3 class="text-center fw-bold text-success mb-4">การรับรองคุณภาพตามมาตรฐาน</h3>
+
+    <!-- desktop / tablet: 3 คอลัมน์ -->
+    <div class="row g-3 d-none d-md-flex">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-3">
+          <img
+            src="https://static.wixstatic.com/media/204ab8_c6722c9728e4457bb481d3419fa48387~mv2.jpg/v1/fill/w_262,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/204ab8_c6722c9728e4457bb481d3419fa48387~mv2.jpg"
+            alt="ตรารับรองมาตรฐานหน่วยงานสาธารณสุข"
+            class="cert-img mx-auto"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-3">
+          <img
+            src="https://static.wixstatic.com/media/204ab8_a94e350ec03442d4b1684633297c7133~mv2.jpg/v1/fill/w_500,h_166,al_c,lg_1,q_80,enc_avif,quality_auto/204ab8_a94e350ec03442d4b1684633297c7133~mv2.jpg"
+            alt="Laboratory Accreditation"
+            class="cert-img mx-auto"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-3">
+          <img
+            src="https://static.wixstatic.com/media/204ab8_55fa885077cf4158a9d6fbe0dea5c970~mv2.jpg/v1/fill/w_324,h_374,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/AA.jpg"
+            alt="เกียรติบัตรโรงพยาบาลคุณธรรม"
+            class="cert-img mx-auto"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- mobile: สไลด์แนวนอน -->
+    <div class="d-flex d-md-none gap-3 overflow-auto pb-2">
+      <div class="card shadow-sm border-0 p-3" style="min-width: 240px;">
+        <img
+          src="https://static.wixstatic.com/media/204ab8_c6722c9728e4457bb481d3419fa48387~mv2.jpg/v1/fill/w_262,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/204ab8_c6722c9728e4457bb481d3419fa48387~mv2.jpg"
+          alt="ตรารับรองมาตรฐานหน่วยงานสาธารณสุข"
+          class="cert-img mx-auto"
+        />
+      </div>
+      <div class="card shadow-sm border-0 p-3" style="min-width: 240px;">
+        <img
+          src="https://static.wixstatic.com/media/204ab8_a94e350ec03442d4b1684633297c7133~mv2.jpg/v1/fill/w_500,h_166,al_c,lg_1,q_80,enc_avif,quality_auto/204ab8_a94e350ec03442d4b1684633297c7133~mv2.jpg"
+          alt="Laboratory Accreditation"
+          class="cert-img mx-auto"
+        />
+      </div>
+      <div class="card shadow-sm border-0 p-3" style="min-width: 240px;">
+        <img
+          src="https://static.wixstatic.com/media/204ab8_55fa885077cf4158a9d6fbe0dea5c970~mv2.jpg/v1/fill/w_324,h_374,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/AA.jpg"
+          alt="เกียรติบัตรโรงพยาบาลคุณธรรม"
+          class="cert-img mx-auto"
+        />
       </div>
     </div>
   </div>
