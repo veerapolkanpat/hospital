@@ -77,10 +77,6 @@ body::before {
   padding: 20px;
   max-width: 800px;
   animation: fadeInUp 1.5s ease-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px; /* ✅ ระยะห่างระหว่างภาพและข้อความ */
 }
 
 @keyframes fadeInUp {
@@ -93,7 +89,7 @@ body::before {
   position: relative;
   width: 200px;
   height: 200px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   background-image: url('images/queen_sirikit.webp');
   background-size: contain;
   background-position: center;
@@ -158,7 +154,7 @@ body::before {
 /* ===== ข้อความและหัวข้อ ===== */
 h1 {
   font-family: 'TH Charm of AU', 'Charm', cursive;
-  font-size: 2rem;
+  font-size: 2.6rem;
   font-weight: 700;
   line-height: 1.5;
   margin: 0;
@@ -246,7 +242,7 @@ body.fade-out {
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .content { padding: 15px; max-width: 90%; gap: 30px; }
+  .content { padding: 15px; max-width: 90%; }
   h1 { font-size: 1.9rem; }
   h2 { font-size: 1.1rem; }
   p { font-size: 1rem; }
