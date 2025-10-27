@@ -4,110 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ราชินีในรัชกาลที่ ๙</title>
+
+  <!-- ฟอนต์ไทยสวยงาม -->
+  <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- ลิงก์ไปยัง style.css -->
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Sarabun', sans-serif;
-      color: white;
-      background-color: #000;
-      text-align: center;
-      overflow-y: auto; /* ✅ ป้องกันข้อความโดนตัด */
-    }
-
-    .intro {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      position: relative;
-      padding: 20px;
-    }
-
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.05), rgba(0,0,0,1));
-      z-index: 1;
-    }
-
-    .content {
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-      line-height: 1.6;
-    }
-
-    .emblem {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/7/7e/Hospital_font_awesome.svg') center/cover no-repeat;
-      margin: 0 auto 20px;
-      box-shadow: 0 0 25px rgba(255,255,255,0.3);
-    }
-
-    h1 {
-      color: #ffd700;
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-    }
-
-    h2 {
-      font-weight: 400;
-      font-size: 1.2rem;
-      margin: 0.5rem 0 1rem;
-    }
-
-    p {
-      font-size: 1rem;
-      margin: 0.8rem 0;
-    }
-
-    .enter {
-      margin-top: 20px;
-      padding: 10px 24px;
-      border: 2px solid #ffd700;
-      background: transparent;
-      color: white;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
-
-    .enter:hover {
-      background: #ffd700;
-      color: #000;
-    }
-
-    /* เอฟเฟกต์ fade-out */
-    .fade-out {
-      animation: fadeOut 1s forwards;
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-  </style>
 </head>
 
 <body>
   <div class="intro">
     <div class="overlay"></div>
     <div class="content">
+      <!-- พระบรมฉายาลักษณ์ -->
       <div class="emblem"></div>
 
+      <!-- ข้อความถวายความอาลัย -->
       <h1>เสด็จสู่สวรรคาลัย</h1>
       <h2>สมเด็จพระนางเจ้าสิริกิติ์<br>พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง</h2>
 
@@ -120,9 +32,12 @@
 
   <script>
     function enterSite() {
+      // เพิ่มคลาส fade-out เพื่อให้ค่อยๆ จางหาย
       document.body.classList.add('fade-out');
+
+      // รอ 1 วินาที แล้วเข้าสู่หน้าเว็บหลัก
       setTimeout(() => {
-        window.location.href = "main.html"; // 🔗 เปลี่ยนชื่อไฟล์นี้เป็นหน้าหลักของคุณ
+        window.location.href = "main.html"; // 👉 เปลี่ยนชื่อไฟล์นี้เป็นหน้าหลักของคุณ
       }, 1000);
     }
   </script>
