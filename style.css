@@ -1,10 +1,17 @@
+/* ------------------------------
+   🌟 Hospital Tribute Intro Page
+   Author: veerapolkanpat.github.io
+   Updated: 2025-10-27
+--------------------------------*/
+
 body {
   margin: 0;
   font-family: 'Sarabun', sans-serif;
   background: #000;
   color: #fff;
-  overflow: hidden;
+  overflow-y: auto; /* ✅ อนุญาตให้เลื่อนข้อความได้ */
 }
+
 /* Floating particles animation */
 body::before {
   content: '';
@@ -26,20 +33,16 @@ body::before {
   z-index: 1;
 }
 @keyframes sparkle {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(-100px) rotate(360deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
 }
+
+/* Background & Layout */
 .intro {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: url('bg_monochrome.jpg') center/cover no-repeat;
+  background: url('images/bg_monochrome.jpg') center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,7 +53,7 @@ body::before {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
   top: 0;
   left: 0;
 }
@@ -62,29 +65,26 @@ body::before {
   animation: fadeInUp 1.5s ease-out;
 }
 @keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
+
+/* Portrait Emblem */
 .emblem {
   position: relative;
   width: 200px;
   height: 200px;
   margin: 0 auto 30px;
-  background-image: url(images/queen_sirikit.webp);
+  background-image: url('images/queen_sirikit.webp');
   background-size: contain;
+  background-position: center;
   border-radius: 999px;
   filter: grayscale(100%) brightness(1.1) contrast(1.1);
-  border: 4px solid rgba(255, 255, 255, 0.3);
+  border: 4px solid rgba(255,255,255,0.3);
   box-shadow:
-    0 0 30px rgba(255, 255, 255, 0.3),
-    0 0 60px rgba(255, 255, 255, 0.1),
-    inset 0 0 20px rgba(255, 255, 255, 0.1);
+    0 0 30px rgba(255,255,255,0.3),
+    0 0 60px rgba(255,255,255,0.1),
+    inset 0 0 20px rgba(255,255,255,0.1);
   transition: all 0.5s ease;
   animation: glow 3s ease-in-out infinite alternate;
 }
@@ -92,25 +92,26 @@ body::before {
   transform: scale(1.05);
   filter: grayscale(0%) brightness(1.2) contrast(1.2);
   box-shadow:
-    0 0 40px rgba(255, 255, 255, 0.5),
-    0 0 80px rgba(255, 255, 255, 0.2),
-    inset 0 0 30px rgba(255, 255, 255, 0.2);
+    0 0 40px rgba(255,255,255,0.5),
+    0 0 80px rgba(255,255,255,0.2),
+    inset 0 0 30px rgba(255,255,255,0.2);
 }
 @keyframes glow {
   0% {
     box-shadow:
-      0 0 30px rgba(255, 255, 255, 0.3),
-      0 0 60px rgba(255, 255, 255, 0.1),
-      inset 0 0 20px rgba(255, 255, 255, 0.1);
+      0 0 30px rgba(255,255,255,0.3),
+      0 0 60px rgba(255,255,255,0.1),
+      inset 0 0 20px rgba(255,255,255,0.1);
   }
   100% {
     box-shadow:
-      0 0 40px rgba(255, 255, 255, 0.4),
-      0 0 80px rgba(255, 255, 255, 0.2),
-      inset 0 0 30px rgba(255, 255, 255, 0.15);
+      0 0 40px rgba(255,255,255,0.4),
+      0 0 80px rgba(255,255,255,0.2),
+      inset 0 0 30px rgba(255,255,255,0.15);
   }
 }
-/* Golden ring around image */
+
+/* Golden rotating ring */
 .emblem::before {
   content: '';
   position: absolute;
@@ -128,20 +129,18 @@ body::before {
   opacity: 0.8;
 }
 @keyframes rotate {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
+
+/* Typography */
 h1 {
-  font-weight: 600;
-  font-size: 2rem;
+  font-family: 'Charm', cursive; /* ✅ ใช้ฟอนต์แบบภาพตัวอย่าง */
+  font-weight: 700;
+  font-size: 2.3rem;
   line-height: 1.5;
   margin: 0;
   background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
-  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -149,17 +148,12 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 @keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 h2 {
+  font-family: 'Sarabun', sans-serif;
   font-weight: 400;
   margin: 10px 0 20px;
   line-height: 1.6;
@@ -175,8 +169,10 @@ p {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   animation: fadeInUp 1.5s ease-out 1s both;
 }
+
+/* Button */
 button.enter {
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
   border: 2px solid #ffd700;
   color: #fff;
   padding: 12px 30px;
@@ -198,50 +194,34 @@ button.enter::before {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.4), transparent);
   transition: left 0.5s ease;
 }
-button.enter:hover::before {
-  left: 100%;
-}
+button.enter:hover::before { left: 100%; }
 button.enter:hover {
   background: linear-gradient(45deg, #ffd700, #ffed4e);
   color: #000;
   border-color: #ffed4e;
   transform: translateY(-2px);
-  box-shadow:
-    0 5px 15px rgba(255, 215, 0, 0.4),
-    0 0 20px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(255,215,0,0.4),
+              0 0 20px rgba(255,215,0,0.3);
 }
+
+/* Fade-out animation */
 body.fade-out {
   opacity: 0;
   transition: opacity 1s ease;
 }
-/* Responsive Design */
+
+/* Responsive */
 @media (max-width: 768px) {
-  .content {
-    padding: 15px;
-    max-width: 90%;
-  }
-  h1 {
-    font-size: 1.6rem;
-  }
-  h2 {
-    font-size: 1.1rem;
-  }
-  p {
-    font-size: 1rem;
-  }
-  button.enter {
-    padding: 10px 25px;
-    font-size: 0.9rem;
-  }
+  .content { padding: 15px; max-width: 90%; }
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.1rem; }
+  p { font-size: 1rem; }
+  button.enter { padding: 10px 25px; font-size: 0.9rem; }
 }
 @media (max-width: 480px) {
-  h1 {
-    font-size: 1.4rem;
-  }
-  h2 {
-    font-size: 1rem;
-  }
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1rem; }
 }
