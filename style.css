@@ -1,28 +1,11 @@
-/* ----------------------------------
-   ✨ Thai Royal Tribute Intro Page
-   Updated: 2025-10-27
----------------------------------- */
-
-/* ===== ฟอนต์ ===== */
-@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Sarabun:wght@300;400;600&display=swap');
-
-/* ฟอนต์ไทยประดิษฐ์ (ถ้ามีไฟล์ในโฟลเดอร์ fonts/) */
-@font-face {
-  font-family: 'TH Charm of AU';
-  src: url('fonts/THCharmofAU.ttf') format('truetype');
-  font-display: swap;
-}
-
-/* ===== พื้นฐาน ===== */
 body {
   margin: 0;
   font-family: 'Sarabun', sans-serif;
   background: #000;
   color: #fff;
-  overflow-y: auto;
+  overflow: hidden;
 }
-
-/* ดวงดาวระยิบระยับ */
+/* Floating particles animation */
 body::before {
   content: '';
   position: absolute;
@@ -30,8 +13,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background:
-    radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+  background: radial-gradient(2px 2px at 20px 30px, #fff, transparent),
     radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.5), transparent),
     radial-gradient(1px 1px at 90px 40px, #fff, transparent),
     radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.3), transparent),
@@ -43,34 +25,35 @@ body::before {
   opacity: 0.6;
   z-index: 1;
 }
-
 @keyframes sparkle {
-  0% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
-  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
 }
-
-/* ===== Layout หลัก ===== */
 .intro {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: url('images/bg_monochrome.jpg') center/cover no-repeat;
+  background: url('bg_monochrome.jpg') center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   background-attachment: fixed;
 }
-
 .overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
   top: 0;
   left: 0;
 }
-
 .content {
   position: relative;
   z-index: 2;
@@ -78,57 +61,56 @@ body::before {
   max-width: 800px;
   animation: fadeInUp 1.5s ease-out;
 }
-
 @keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
-/* ===== กรอบพระบรมฉายาลักษณ์ ===== */
 .emblem {
   position: relative;
   width: 200px;
   height: 200px;
   margin: 0 auto 30px;
-  background-image: url('images/queen_sirikit.webp');
+  background-image: url(images/queen_sirikit.webp);
   background-size: contain;
-  background-position: center;
   border-radius: 999px;
   filter: grayscale(100%) brightness(1.1) contrast(1.1);
-  border: 4px solid rgba(255,255,255,0.3);
+  border: 4px solid rgba(255, 255, 255, 0.3);
   box-shadow:
-    0 0 30px rgba(255,255,255,0.3),
-    0 0 60px rgba(255,255,255,0.1),
-    inset 0 0 20px rgba(255,255,255,0.1);
+    0 0 30px rgba(255, 255, 255, 0.3),
+    0 0 60px rgba(255, 255, 255, 0.1),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
   transition: all 0.5s ease;
   animation: glow 3s ease-in-out infinite alternate;
 }
-
 .emblem:hover {
   transform: scale(1.05);
   filter: grayscale(0%) brightness(1.2) contrast(1.2);
   box-shadow:
-    0 0 40px rgba(255,255,255,0.5),
-    0 0 80px rgba(255,255,255,0.2),
-    inset 0 0 30px rgba(255,255,255,0.2);
+    0 0 40px rgba(255, 255, 255, 0.5),
+    0 0 80px rgba(255, 255, 255, 0.2),
+    inset 0 0 30px rgba(255, 255, 255, 0.2);
 }
-
 @keyframes glow {
   0% {
     box-shadow:
-      0 0 30px rgba(255,255,255,0.3),
-      0 0 60px rgba(255,255,255,0.1),
-      inset 0 0 20px rgba(255,255,255,0.1);
+      0 0 30px rgba(255, 255, 255, 0.3),
+      0 0 60px rgba(255, 255, 255, 0.1),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
   }
   100% {
     box-shadow:
-      0 0 40px rgba(255,255,255,0.4),
-      0 0 80px rgba(255,255,255,0.2),
-      inset 0 0 30px rgba(255,255,255,0.15);
+      0 0 40px rgba(255, 255, 255, 0.4),
+      0 0 80px rgba(255, 255, 255, 0.2),
+      inset 0 0 30px rgba(255, 255, 255, 0.15);
   }
 }
-
-/* วงแหวนทองรอบรูป */
+/* Golden ring around image */
 .emblem::before {
   content: '';
   position: absolute;
@@ -145,17 +127,17 @@ body::before {
   animation: rotate 10s linear infinite;
   opacity: 0.8;
 }
-
 @keyframes rotate {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
-
-/* ===== ข้อความและหัวข้อ ===== */
 h1 {
-  font-family: 'TH Charm of AU', 'Charm', cursive;
-  font-size: 2.6rem;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 2rem;
   line-height: 1.5;
   margin: 0;
   background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
@@ -166,15 +148,18 @@ h1 {
   animation: gradientShift 3s ease-in-out infinite;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-
 h2 {
-  font-family: 'Sarabun', sans-serif;
   font-weight: 400;
   margin: 10px 0 20px;
   line-height: 1.6;
@@ -183,19 +168,15 @@ h2 {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   animation: fadeInUp 1.5s ease-out 0.5s both;
 }
-
 p {
-  font-family: 'Sarabun', sans-serif;
   font-size: 1.1rem;
   color: #ddd;
   margin-bottom: 40px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   animation: fadeInUp 1.5s ease-out 1s both;
 }
-
-/* ===== ปุ่มเข้าสู่เว็บไซต์ ===== */
 button.enter {
-  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   border: 2px solid #ffd700;
   color: #fff;
   padding: 12px 30px;
@@ -210,7 +191,6 @@ button.enter {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   animation: fadeInUp 1.5s ease-out 1.5s both;
 }
-
 button.enter::before {
   content: '';
   position: absolute;
@@ -218,38 +198,50 @@ button.enter::before {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
   transition: left 0.5s ease;
 }
-
-button.enter:hover::before { left: 100%; }
-
+button.enter:hover::before {
+  left: 100%;
+}
 button.enter:hover {
   background: linear-gradient(45deg, #ffd700, #ffed4e);
   color: #000;
   border-color: #ffed4e;
   transform: translateY(-2px);
   box-shadow:
-    0 5px 15px rgba(255,215,0,0.4),
-    0 0 20px rgba(255,215,0,0.3);
+    0 5px 15px rgba(255, 215, 0, 0.4),
+    0 0 20px rgba(255, 215, 0, 0.3);
 }
-
-/* ===== เอฟเฟกต์จางหายเมื่อเปลี่ยนหน้า ===== */
 body.fade-out {
   opacity: 0;
   transition: opacity 1s ease;
 }
-
-/* ===== Responsive ===== */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .content { padding: 15px; max-width: 90%; }
-  h1 { font-size: 1.9rem; }
-  h2 { font-size: 1.1rem; }
-  p { font-size: 1rem; }
-  button.enter { padding: 10px 25px; font-size: 0.9rem; }
+  .content {
+    padding: 15px;
+    max-width: 90%;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  button.enter {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
 }
-
 @media (max-width: 480px) {
-  h1 { font-size: 1.6rem; }
-  h2 { font-size: 1rem; }
+  h1 {
+    font-size: 1.4rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
 }
