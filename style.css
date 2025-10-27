@@ -6,6 +6,7 @@
 /* ===== ฟอนต์ ===== */
 @import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Sarabun:wght@300;400;600&display=swap');
 
+/* ฟอนต์ไทยประดิษฐ์ (ถ้ามีไฟล์ในโฟลเดอร์ fonts/) */
 @font-face {
   font-family: 'TH Charm of AU';
   src: url('fonts/THCharmofAU.ttf') format('truetype');
@@ -31,9 +32,9 @@ body::before {
   height: 100%;
   background:
     radial-gradient(2px 2px at 20px 30px, #fff, transparent),
-    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.5), transparent),
     radial-gradient(1px 1px at 90px 40px, #fff, transparent),
-    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.3), transparent),
     radial-gradient(2px 2px at 160px 30px, #fff, transparent);
   background-repeat: repeat;
   background-size: 200px 100px;
@@ -74,13 +75,12 @@ body::before {
   position: relative;
   z-index: 2;
   padding: 20px;
-  padding-top: 40px; /* ✅ เพิ่ม padding ด้านบนให้ข้อความลงแน่นอน */
   max-width: 800px;
   animation: fadeInUp 1.5s ease-out;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 35px; /* ✅ ระยะห่างระหว่างรูปและข้อความ */
+  gap: 40px; /* ✅ ระยะห่างระหว่างภาพและข้อความ */
 }
 
 @keyframes fadeInUp {
@@ -132,10 +132,33 @@ body::before {
   }
 }
 
+/* วงแหวนทองรอบรูป */
+.emblem::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700, #ffed4e) border-box;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite: subtract;
+  animation: rotate 10s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes rotate {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 /* ===== ข้อความและหัวข้อ ===== */
 h1 {
   font-family: 'TH Charm of AU', 'Charm', cursive;
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   font-weight: 700;
   line-height: 1.5;
   margin: 0;
