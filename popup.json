@@ -1,10 +1,20 @@
 {
   "active": true,
+<<<<<<< HEAD
+  "expiresAt": "2026-12-31",
+  "oncePerVisit": true,
+  "image": "/hospital/assets/images/queen_tribute.jpg",
+=======
   "expiresAt": null,
   "oncePerVisit": true,
   "image": "/hospital/assets/images/1782194709289-723067482_1645257820935415_6482048453980929429_n.jpg",
+>>>>>>> 20e53750e085bf5cc5f084ebcb28112f0c246de4
   "title": "",
   "subtitle": "",
   "body1": "",
   "body2": ""
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 20e53750e085bf5cc5f084ebcb28112f0c246de4

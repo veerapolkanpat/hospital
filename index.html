@@ -1,43 +1,934 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ราชินีในรัชกาลที่ ๙</title>
+  <meta charset="UTF-8" />
+  <title>โรงพยาบาล วีระพลการแพทย์</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="โรงพยาบาลวีระพลการแพทย์ ให้บริการตรวจรักษาโรคทั่วไป ตรวจสุขภาพ ตรวจเลือด ตรวจเอกซเรย์ พร้อมทีมแพทย์และพยาบาลผู้เชี่ยวชาญ ดูแลด้วยหัวใจ">
+  <meta name="keywords" content="โรงพยาบาล, รพ.วีระพลการแพทย์, วีระพลการแพทย์, สุขภาพ, ตรวจรักษา">
+  <meta name="robots" content="index, follow">
 
-  <!-- ฟอนต์ไทย (ออนไลน์) -->
-  <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://veerapolkanpat.github.io/hospital/">
 
-  <!-- ลิงก์ไฟล์ CSS -->
-  <link rel="stylesheet" href="style.css">
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="โรงพยาบาลวีระพลการแพทย์">
+  <meta property="og:title" content="โรงพยาบาลวีระพลการแพทย์ – บริการตรวจรักษาและดูแลสุขภาพครบวงจร">
+  <meta property="og:description" content="ให้บริการตรวจรักษาโรคทั่วไป ตรวจสุขภาพ ตรวจเลือด ตรวจเอกซเรย์ พร้อมทีมแพทย์และพยาบาลผู้เชี่ยวชาญ">
+  <meta property="og:image" content="https://veerapolkanpat.github.io/hospital/LOGO.png">
+  <meta property="og:url" content="https://veerapolkanpat.github.io/hospital/">
+  <meta property="og:locale" content="th_TH">
+  <meta property="og:type" content="website">
+
+  <!-- WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://veerapolkanpat.github.io/hospital/#website",
+    "name": "โรงพยาบาลวีระพลการแพทย์",
+    "alternateName": ["รพ.วีระพลการแพทย์","Veerapolkanpat Hospital"],
+    "url": "https://veerapolkanpat.github.io/hospital/",
+    "publisher": { "@id": "https://veerapolkanpat.github.io/hospital/#org" }
+  }
+  </script>
+
+  <!-- Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://veerapolkanpat.github.io/hospital/#org",
+    "name": "โรงพยาบาลวีระพลการแพทย์",
+    "url": "https://veerapolkanpat.github.io/hospital/",
+    "logo": "https://veerapolkanpat.github.io/hospital/LOGO.png",
+    "sameAs": [
+      "https://www.facebook.com/Veerapolkanpat",
+      "https://line.me/R/ti/p/@981gqmdr"
+    ]
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/hospital/favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/hospital/favicon-32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/hospital/favicon-16.png?v=2">
+  <link rel="shortcut icon" href="/hospital/favicon.ico?v=2">
+  <link rel="apple-touch-icon" href="/hospital/apple-touch-icon.png?v=2">
+  <meta name="theme-color" content="#0d6efd">
+
+  <!-- GA4 + Consent Mode -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ0FG8PVXQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent','default',{'analytics_storage':'denied'});
+    gtag('js', new Date());
+    gtag('config','G-QZ0FG8PVXQ',{anonymize_ip:true});
+  </script>
+
+  <!-- Bootstrap / Fonts / Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    body{font-family:'Prompt',sans-serif;background-color:#f8f9fa}
+    .navbar-brand img{height:48px;width:48px;border-radius:50%}
+
+    /* ===== HERO CAROUSEL ===== */
+    .hero-slide{min-height:85vh;background-size:cover;background-position:center;position:relative;display:flex;align-items:center}
+    .hero-slide::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.6))}
+    .hero-slide .inner{position:relative;color:#fff;max-width:900px;margin:auto;text-align:center;background:rgba(0,0,0,.55);border-radius:1rem;padding:2rem 1.5rem}
+    .carousel-control-prev,.carousel-control-next{filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
+
+    .section-pad{padding:80px 0}
+    .shadow-soft{box-shadow:0 8px 24px rgba(0,0,0,.08)}
+
+    /* Doctors card */
+    .doc-card{background:#eaf3ff;border:0;border-radius:16px;padding:32px;box-shadow:0 8px 24px rgba(0,0,0,.08);transition:transform .25s, box-shadow .25s}
+    .doc-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(0,0,0,.12)}
+    .doc-oval{width:170px;height:210px;border-radius:85px/105px;margin:0 auto 14px;position:relative;overflow:hidden;background:radial-gradient(120px 100px at 50% 10%, #ffffff 0 60%, #e8f2ff 61% 100%);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+    .doc-oval::before{content:"";position:absolute;inset:-8px;border-radius:inherit;background:linear-gradient(135deg,#8cc8ff33,#2ecc7133);filter:blur(10px)}
+    .doc-oval img{width:128px;height:148px;object-fit:cover;border-radius:50%;border:6px solid #fff;margin-top:18px;position:relative;z-index:2;transition:transform .25s}
+    .doc-card:hover .doc-oval img{transform:translateY(-2px) scale(1.03)}
+    .doc-oval svg{position:absolute;left:0;bottom:-1px;width:100%;height:auto;z-index:1;filter:drop-shadow(0 6px 8px rgba(46,204,113,.35))}
+    .doc-name{font-weight:700;margin-bottom:.25rem}
+    .doc-spec{color:#0d6efd;font-weight:600;margin-bottom:.25rem}
+    .doc-brief{color:#6c757d;font-size:.95rem}
+
+    /* Packages */
+    .pkg-img{height:200px;object-fit:cover}
+    .price-now{color:#dc3545;font-weight:700;font-size:1.15rem}
+    .price-old{color:#6c757d;font-size:.9rem;text-decoration:line-through}
+    #pkgIncludes, .card-body ul { padding-left: 1.15rem; }
+
+    /* Cookie toast */
+    #cookieToast{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:1080}
+
+    .cert-img{max-height:110px;width:auto;object-fit:contain}
+
+    /* ===== TRIBUTE MODAL ===== */
+    #tributeModal .modal-dialog{margin:0;max-width:100%}
+    #tributeModal .modal-content{
+      background:#000;
+      min-height:100vh;border:none;border-radius:0;
+      position:relative;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+    }
+    #tributeStars{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+    .tribute-close-btn{
+      position:absolute;top:1.1rem;right:1.1rem;z-index:10;
+      background:rgba(255,255,255,.9);border:none;color:#111;
+      width:46px;height:46px;border-radius:50%;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;font-size:1rem;
+      transition:background .18s,transform .15s;box-shadow:0 3px 14px rgba(0,0,0,.55);
+    }
+    .tribute-close-btn:hover{background:#fff;transform:scale(1.08)}
+    /* Full-image layout */
+    .tribute-img-wrap{
+      position:relative;z-index:2;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      width:100%;min-height:100vh;padding:.75rem;
+      animation:tFadeIn 1.1s ease-out;
+    }
+    .tribute-img-wrap img{
+      max-height:96vh;
+      max-width:min(600px,96vw);
+      width:auto;height:auto;
+      object-fit:contain;display:block;
+    }
+    .tribute-caption{
+      color:#c8c0b0;font-size:.85rem;text-align:center;
+      margin-top:.6rem;line-height:1.65;
+      max-width:min(600px,96vw);
+    }
+    @keyframes tFadeIn{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
+  </style>
 </head>
-
 <body>
-  <div class="intro">
-    <div class="overlay"></div>
-    <div class="content">
 
-      <!-- พระบรมฉายาลักษณ์ -->
-      <div class="emblem"></div>
-
-      <!-- ข้อความถวายความอาลัย -->
-      <h1>สถิตอยู่ในใจตราบนิรันดร์</h1>
-      <h2>สมเด็จพระนางเจ้าสิริกิติ์<br>พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง</h2>
-
-      <p>น้อมสำนึกในพระมหากรุณาธิคุณอันหาที่สุดมิได้</p>
-      <p>ข้าพระพุทธเจ้า คณะแพทย์ ผู้บริหาร พยาบาล และบุคลากร โรงพยาบาลวีระพลการแพทย์</p>
-
-      <button class="enter" onclick="enterSite()">เข้าสู่เว็บไซต์</button>
+<!-- ===== TRIBUTE MEMORIAL MODAL ===== -->
+<div class="modal fade" id="tributeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen p-0 m-0">
+    <div class="modal-content">
+      <canvas id="tributeStars"></canvas>
+      <button class="tribute-close-btn" data-bs-dismiss="modal" aria-label="ปิด">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="tribute-img-wrap">
+        <img id="tributeImg" src="/hospital/images/queen_sirikit.webp" alt="สถิตในดวงใจตราบนิรันดร์">
+        <div class="tribute-caption d-none" id="tributeCaption"></div>
+      </div>
     </div>
   </div>
+</div>
 
-  <script>
-    function enterSite() {
-      document.body.classList.add('fade-out');
-      setTimeout(() => {
-        window.location.href = "main.html"; // 🔗 หน้าหลักของเว็บคุณ
-      }, 1000);
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-success d-flex align-items-center" href="/hospital/">
+      <img src="https://veerapolkanpat.github.io/hospital/LOGO.png" alt="โลโก้" class="me-2"> รพ.วีระพลการแพทย์
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="mainNav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto fw-semibold">
+        <li class="nav-item"><a class="nav-link" href="#hero">หน้าแรก</a></li>
+        <li class="nav-item"><a class="nav-link" href="/hospital/about.html">เกี่ยวกับเรา</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/hospital/services.html" data-bs-toggle="dropdown">บริการ</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/hospital/services.html">บริการของเรา</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/hospital/room.html">ห้องพักและสิ่งอำนวยความสะดวก</a></li>
+            <li><a class="dropdown-item" href="/hospital/insurance.html">บริษัทประกันคู่สัญญา</a></li>
+            <li><a class="dropdown-item" href="/hospital/packages.html">แพ็กเกจและโปรโมชัน</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#doctors">แพทย์ของเรา</a></li>
+        <li class="nav-item"><a class="nav-link" href="/hospital/news.html">ข่าวสาร</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://veerapolkanpat.github.io/appointment-form/">นัดหมาย</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">ติดต่อเรา</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO CAROUSEL (ดึงโปร/แพ็กเกจอัตโนมัติ) ===== -->
+<section id="hero" class="position-relative">
+  <div id="homeHero" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
+    <div class="carousel-inner" id="heroSlides">
+      <!-- สไลด์เริ่มต้น (fallback) -->
+      <div class="carousel-item active" id="heroStatic">
+        <div class="hero-slide" style="background-image:url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg')">
+          <div class="container">
+            <div class="inner shadow-soft">
+              <h1 class="fw-bold display-6 mb-3">ดูแลสุขภาพของคุณด้วยใจ ที่โรงพยาบาล วีระพลการแพทย์</h1>
+              <p class="lead mb-4">บริการทางการแพทย์ครบวงจร ด้วยทีมแพทย์ผู้เชี่ยวชาญและเทคโนโลยีที่ทันสมัย</p>
+              <a class="btn btn-primary btn-lg px-4" href="https://veerapolkanpat.github.io/appointment-form/">
+                นัดหมายแพทย์วันนี้ <i class="fa-solid fa-calendar-days ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- สไลด์โปร/แพ็กเกจจะถูกเติมด้วย JS -->
+    </div>
+
+    <div class="carousel-indicators" id="heroIndicators">
+      <button type="button" data-bs-target="#homeHero" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#homeHero" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#homeHero" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="section-pad bg-white">
+  <div class="container">
+    <h2 class="text-primary fw-bold text-center mb-4">เกี่ยวกับเรา</h2>
+    <p class="text-center text-muted mb-5">โรงพยาบาลวีระพลการแพทย์ – คุณภาพมาตรฐาน อบอุ่นบริการ เหมือนบ้าน เหมือนญาติ</p>
+
+    <div class="row g-4 align-items-center">
+      <div class="col-md-6">
+        <img class="img-fluid rounded-3 shadow-soft" src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/front_hos.jpg" alt="ภาพโรงพยาบาล">
+      </div>
+      <div class="col-md-6">
+        <h5 class="fw-semibold mb-3">โรงพยาบาล วีระพลการแพทย์</h5>
+        <p class="text-muted">
+          โรงพยาบาลวีระพลการแพทย์ ก่อตั้งด้วยความมุ่งมั่นในการเป็นศูนย์กลางการดูแลสุขภาพครบวงจร
+          พร้อมจำนวนเตียง 50 เตียง และมาตรฐานสากล โดยทีมแพทย์ พยาบาล และบุคลากรผู้เชี่ยวชาญ
+        </p>
+        <p class="text-muted">
+          เรานำเทคโนโลยีการแพทย์ที่ทันสมัยมาใช้ เพื่อการวินิจฉัยและรักษาที่แม่นยำ
+          พร้อมสิ่งอำนวยความสะดวก ครบถ้วนเพื่อความสบายของผู้ป่วยและญาติ
+        </p>
+        <a href="/hospital/about.html" class="btn btn-outline-primary">เกี่ยวกับเรา <i class="fa-solid fa-arrow-right ms-1"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Counter -->
+<section class="py-5" style="background:linear-gradient(135deg,#0d6efd 0%,#0a58ca 100%)">
+  <div class="container">
+    <div class="row g-4 text-white text-center" id="statsRow">
+      <div class="col-6 col-md-3">
+        <div class="display-4 fw-bold counter" data-target="30" data-suffix="+">0</div>
+        <div class="mt-1 fw-light opacity-75">ปีแห่งประสบการณ์</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="display-4 fw-bold counter" data-target="50" data-suffix="">0</div>
+        <div class="mt-1 fw-light opacity-75">เตียงรองรับผู้ป่วย</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="display-4 fw-bold counter" data-target="6" data-suffix="+">0</div>
+        <div class="mt-1 fw-light opacity-75">แพทย์ผู้เชี่ยวชาญ</div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="display-4 fw-bold counter" data-target="70" data-suffix="+">0</div>
+        <div class="mt-1 fw-light opacity-75">บริษัทประกันคู่สัญญา</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Certificates -->
+<section id="certs" class="py-5 bg-white">
+  <div class="container">
+    <h3 class="text-center fw-bold text-success mb-4">การรับรองคุณภาพตามมาตรฐาน</h3>
+
+    <div class="row g-3 d-none d-md-flex">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-3">
+          <img src="https://static.wixstatic.com/media/204ab8_c6722c9728e4457bb481d3419fa48387~mv2.jpg/v1/fill/w_262,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/204ab8_c6722c9728e4457bb481d3419fa48387~mv2.jpg" alt="ตรารับรองมาตรฐานหน่วยงานสาธารณสุข" class="cert-img mx-auto">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-3">
+          <img src="https://static.wixstatic.com/media/204ab8_a94e350ec03442d4b1684633297c7133~mv2.jpg/v1/fill/w_500,h_166,al_c,lg_1,q_80,enc_avif,quality_auto/204ab8_a94e350ec03442d4b1684633297c7133~mv2.jpg" alt="Laboratory Accreditation" class="cert-img mx-auto">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 text-center p-3">
+          <img src="https://static.wixstatic.com/media/204ab8_55fa885077cf4158a9d6fbe0dea5c970~mv2.jpg/v1/fill/w_324,h_374,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/AA.jpg" alt="เกียรติบัตรโรงพยาบาลคุณธรรม" class="cert-img mx-auto">
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex d-md-none gap-3 overflow-auto pb-2">
+      <div class="card shadow-sm border-0 p-3" style="min-width:240px">
+        <img src="https://static.wixstatic.com/media/204ab8_c6722c9728e4457bb481d3419fa48387~mv2.jpg/v1/fill/w_262,h_186,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/204ab8_c6722c9728e4457bb481d3419fa48387~mv2.jpg" alt="ตรารับรองมาตรฐานหน่วยงานสาธารณสุข" class="cert-img mx-auto">
+      </div>
+      <div class="card shadow-sm border-0 p-3" style="min-width:240px">
+        <img src="https://static.wixstatic.com/media/204ab8_a94e350ec03442d4b1684633297c7133~mv2.jpg/v1/fill/w_500,h_166,al_c,lg_1,q_80,enc_avif,quality_auto/204ab8_a94e350ec03442d4b1684633297c7133~mv2.jpg" alt="Laboratory Accreditation" class="cert-img mx-auto">
+      </div>
+      <div class="card shadow-sm border-0 p-3" style="min-width:240px">
+        <img src="https://static.wixstatic.com/media/204ab8_55fa885077cf4158a9d6fbe0dea5c970~mv2.jpg/v1/fill/w_324,h_374,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/AA.jpg" alt="เกียรติบัตรโรงพยาบาลคุณธรรม" class="cert-img mx-auto">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="section-pad bg-light">
+  <div class="container">
+    <h2 class="text-primary fw-bold text-center mb-4">บริการของเรา</h2>
+    <p class="text-center text-muted mb-5">ครอบคลุมตั้งแต่การตรวจสุขภาพทั่วไป จนถึงการรักษาเฉพาะทาง</p>
+
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-soft text-center">
+          <div class="display-6 text-primary mt-4 mb-2"><i class="fas fa-heartbeat"></i></div>
+          <div class="card-body pt-0">
+            <h5 class="card-title">แผนกอายุรกรรม</h5>
+            <p class="card-text text-muted">ดูแลรักษาโรคทั่วไปและโรคเรื้อรังต่างๆ</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-soft text-center">
+          <div class="display-6 text-primary mt-4 mb-2"><i class="fas fa-cut"></i></div>
+          <div class="card-body pt-0">
+            <h5 class="card-title">แผนกศัลยกรรม</h5>
+            <p class="card-text text-muted">ผ่าตัดทั่วไปและเฉพาะทางด้วยทีมแพทย์มากประสบการณ์</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-soft text-center">
+          <div class="display-6 text-primary mt-4 mb-2"><i class="fas fa-truck-medical"></i></div>
+          <div class="card-body pt-0">
+            <h5 class="card-title">ฉุกเฉิน 24 ชม.</h5>
+            <p class="card-text text-muted">พร้อมทีมและอุปกรณ์ฉุกเฉิน มาตรฐานความปลอดภัย</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-soft text-center">
+          <div class="display-6 text-primary mt-4 mb-2"><i class="fas fa-stethoscope"></i></div>
+          <div class="card-body pt-0">
+            <h5 class="card-title">ตรวจสุขภาพประจำปี</h5>
+            <p class="card-text text-muted">แพ็กเกจตรวจสุขภาพครบวงจร ตรวจเลือด เอกซเรย์ คลื่นไฟฟ้าหัวใจ</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-soft text-center">
+          <div class="display-6 text-primary mt-4 mb-2"><i class="fas fa-tooth"></i></div>
+          <div class="card-body pt-0">
+            <h5 class="card-title">ทันตกรรม</h5>
+            <p class="card-text text-muted">อุดฟัน ถอนฟัน ขูดหินปูน รากฟันเทียม โดยทันตแพทย์ผู้เชี่ยวชาญ</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-soft text-center">
+          <div class="display-6 text-primary mt-4 mb-2"><i class="fas fa-person-walking"></i></div>
+          <div class="card-body pt-0">
+            <h5 class="card-title">กายภาพบำบัด</h5>
+            <p class="card-text text-muted">ฟื้นฟูสมรรถภาพร่างกาย ด้วยเครื่องมือและนักกายภาพผู้เชี่ยวชาญ</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-soft text-center">
+          <div class="display-6 text-primary mt-4 mb-2"><i class="fas fa-baby"></i></div>
+          <div class="card-body pt-0">
+            <h5 class="card-title">สูติกรรม / คลอดบุตร</h5>
+            <p class="card-text text-muted">ดูแลครรภ์และคลอดบุตรโดยสูติแพทย์ พร้อมห้องพักหลังคลอดที่ทันสมัย</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Packages (3) -->
+<section id="featured-packages" class="section-pad bg-white">
+  <div class="container">
+    <h2 class="text-primary fw-bold text-center mb-4">แพ็กเกจ / โปรโมชันแนะนำ</h2>
+    <p class="text-center text-muted mb-4">คัดมาให้ 3 รายการที่น่าสนใจจากระบบแพ็กเกจ</p>
+
+    <div class="row g-4" id="pkgRow">
+      <div class="col-12">
+        <div class="text-center text-muted">
+          <i class="fa-solid fa-spinner fa-spin me-2"></i>กำลังโหลดแพ็กเกจ...
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="/hospital/packages.html" class="btn btn-primary">ดูแพ็กเกจทั้งหมด</a>
+    </div>
+  </div>
+</section>
+
+<!-- Doctors -->
+<section id="doctors" class="section-pad bg-light">
+  <div class="container">
+    <h2 class="text-primary fw-bold text-center mb-4">แพทย์ของเรา</h2>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr1.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">นพ.วีระพล พจน์จลองศิลป์</div>
+          <div class="doc-spec">เวชศาสตร์ทั่วไป</div>
+          <div class="doc-brief">ปริญญาบัตร แพทย์ศาสตร์บัณฑิต คณะแพทยศาสตร์ ม.เชียงใหม่</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr2.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">นพ.พณิช พจน์จลองศิลป์</div>
+          <div class="doc-spec">ผู้เชี่ยวชาญสาขาอายุรศาสตร์</div>
+          <div class="doc-brief">คณะแพทยศาสตร์ ศิริราชพยาบาล ม.มหิดล</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr4.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">พญ.สุมณทิพย์ พจน์จลองศิลป์</div>
+          <div class="doc-spec">อายุรศาสตร์ และโรคหัวใจ</div>
+          <div class="doc-brief">คณะแพทยศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr3.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">พญ.บุษบงก์ ดวงมาตย์พล</div>
+          <div class="doc-spec">วิสัญญีวิทยา</div>
+          <div class="doc-brief">คณะแพทยศาสตร์ มหาวิทยาลัยขอนแก่น</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr5.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">นพ.ปราโมทย์ โคตรพันธุ์กูล</div>
+          <div class="doc-spec">ศัลยศาสตร์ทั่วไป</div>
+          <div class="doc-brief">คณะแพทยศาสตร์ ศิริราชพยาบาล ม.มหิดล</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="doc-card text-center h-100">
+          <div class="doc-oval">
+            <img src="https://raw.githubusercontent.com/veerapolkanpat/hospital/main/dr6.avif" alt="">
+            <svg viewBox="0 0 200 110"><path d="M0,110 C40,60 160,60 200,110 L0,110 Z" fill="#2ecc71"/></svg>
+          </div>
+          <div class="doc-name">พล.ต นพ.ดาราพงศ์ ลังกาฟ้า</div>
+          <div class="doc-spec">สูติศาสตร์ และนรีเวชวิทยา</div>
+          <div class="doc-brief">คณะแพทยศาสตร์ มหาวิทยาลัยเชียงใหม่</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="#contact" class="btn btn-outline-secondary">สอบถามตารางตรวจแพทย์</a>
+    </div>
+  </div>
+</section>
+
+<!-- Appointment CTA -->
+<section id="appointment" class="py-5 bg-primary text-white">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-3">นัดหมายแพทย์</h2>
+    <p class="mb-4">สะดวก รวดเร็ว เลือกวันเวลาได้ — จองนัดออนไลน์</p>
+    <a href="https://veerapolkanpat.github.io/appointment-form/" class="btn btn-light btn-lg">
+      ไปที่หน้าจองนัดหมาย <i class="fa-solid fa-up-right-from-square ms-2"></i>
+    </a>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section-pad bg-white">
+  <div class="container">
+    <h2 class="text-primary fw-bold text-center mb-4">ติดต่อเรา</h2>
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="p-4 bg-light rounded-3 shadow-soft h-100">
+          <h5 class="fw-semibold mb-3">ข้อมูลการติดต่อ</h5>
+          <p class="mb-2"><strong class="text-primary">ที่อยู่: </strong>12 หมู่ 15 ถนนวิจารณ์รังสรรค์ ต.หนองบัว อ.เมืองหนองบัวลำภู จ.หนองบัวลำภู 39000</p>
+          <p class="mb-2"><strong class="text-primary">โทรศัพท์: </strong>(042)312-344, (042)312-345, (042)-312-346</p>
+          <p class="mb-2"><strong class="text-primary">โทรสาร: </strong>(042)312-341</p>
+          <p class="mb-3"><strong class="text-primary">อีเมล: </strong>veerapolkarnpat@hotmail.com</p>
+          <div class="pt-3 border-top mb-3">
+            <p class="fw-semibold mb-2"><i class="fas fa-clock text-primary me-2"></i>เวลาทำการ</p>
+            <p class="mb-1 small text-muted">ห้องฉุกเฉิน: <strong class="text-dark">ตลอด 24 ชั่วโมง</strong></p>
+            <p class="mb-1 small text-muted">แผนกผู้ป่วยนอก: <strong class="text-dark">จ.–อ. 08:00–20:00 น.</strong></p>
+            <p class="mb-0 small text-muted">ทันตกรรม / กายภาพบำบัด: <strong class="text-dark">จ.–ศ. 08:00–17:00 น.</strong></p>
+          </div>
+          <div class="d-flex gap-3">
+            <a class="text-primary fs-4" target="_blank" href="https://www.facebook.com/Veerapolkanpat" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+            <a class="text-success fs-4" target="_blank" href="https://line.me/R/ti/p/@981gqmdr" aria-label="LINE OA"><i class="fab fa-line"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="p-2 bg-light rounded-3 shadow-soft h-100">
+          <iframe class="w-100 rounded-2" style="border:0;height:320px" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d617.8342201905568!2d102.43968137166904!3d17.203137844513154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3123bf58cad887d1%3A0x510f0ada2af4cf95!2z4LmC4Lij4LiH4Lie4Lii4Liy4Lia4Liy4Lil4Lin4Li14Lij4Liw4Lie4Lil4LiB4Liy4Lij4LmB4Lie4LiX4Lii4LmM!5e0!3m2!1sth!2sth!4v1752745781507!5m2!1sth!2sth"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white pt-5 pb-3">
+  <div class="container">
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="d-flex align-items-center mb-3">
+          <img src="https://veerapolkanpat.github.io/hospital/LOGO.png" alt="โลโก้" class="rounded-circle me-2" style="width:44px;height:44px;object-fit:cover">
+          <span class="fw-bold">โรงพยาบาลวีระพลการแพทย์</span>
+        </div>
+        <p class="text-white-50 small">12 หมู่ 15 ถนนวิจารณ์รังสรรค์ ต.หนองบัว อ.เมือง จ.หนองบัวลำภู 39000</p>
+        <div class="d-flex gap-3 mt-2">
+          <a href="https://www.facebook.com/Veerapolkanpat" target="_blank" rel="noopener" class="text-white-50 fs-5" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+          <a href="https://line.me/R/ti/p/@981gqmdr" target="_blank" rel="noopener" class="text-white-50 fs-5" aria-label="LINE OA"><i class="fab fa-line"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h6 class="text-white fw-bold mb-3">ลิงก์ด่วน</h6>
+        <ul class="list-unstyled small mb-0">
+          <li class="mb-1"><a href="/hospital/" class="text-white-50 text-decoration-none">หน้าแรก</a></li>
+          <li class="mb-1"><a href="/hospital/about.html" class="text-white-50 text-decoration-none">เกี่ยวกับเรา</a></li>
+          <li class="mb-1"><a href="/hospital/packages.html" class="text-white-50 text-decoration-none">แพ็กเกจบริการ</a></li>
+          <li class="mb-1"><a href="/hospital/room.html" class="text-white-50 text-decoration-none">ห้องพักและสิ่งอำนวยความสะดวก</a></li>
+          <li class="mb-1"><a href="/hospital/insurance.html" class="text-white-50 text-decoration-none">บริษัทประกันคู่สัญญา</a></li>
+          <li class="mb-1"><a href="/hospital/news.html" class="text-white-50 text-decoration-none">ข่าวสาร</a></li>
+          <li class="mb-0"><a href="https://veerapolkanpat.github.io/appointment-form/" target="_blank" class="text-white-50 text-decoration-none">นัดหมายแพทย์</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h6 class="text-white fw-bold mb-3">ติดต่อเรา</h6>
+        <ul class="list-unstyled small text-white-50 mb-0">
+          <li class="mb-2"><i class="fas fa-phone me-2 text-primary"></i>(042) 312-344 / 312-345 / 312-346</li>
+          <li class="mb-2"><i class="fas fa-fax me-2 text-primary"></i>(042) 312-341</li>
+          <li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i>veerapolkarnpat@hotmail.com</li>
+          <li><i class="fas fa-clock me-2 text-primary"></i>ฉุกเฉิน 24 ชั่วโมง</li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-secondary mb-3">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-white-50">
+      <span>© 2026 โรงพยาบาลวีระพลการแพทย์ สงวนลิขสิทธิ์</span>
+      <div class="d-flex gap-3 mt-2 mt-md-0">
+        <a href="/hospital/privacy-policy.html" class="text-white-50 text-decoration-none">นโยบายความเป็นส่วนตัว</a>
+        <span>|</span>
+        <a href="/hospital/terms.html" class="text-white-50 text-decoration-none">ข้อกำหนดและเงื่อนไข</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Cookie toast -->
+<div id="cookieToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      เว็บไซต์นี้ใช้คุกกี้เพื่อปรับปรุงประสบการณ์ของคุณ อ่านเพิ่มเติมที่
+      <a class="link-light text-decoration-underline" href="/hospital/privacy-policy.html">นโยบายความเป็นส่วนตัว</a>
+    </div>
+    <button type="button" class="btn btn-light btn-sm me-2 my-auto" id="acceptCookies">ยอมรับ</button>
+  </div>
+</div>
+
+<!-- Package Detail Modal -->
+<div class="modal fade" id="pkgModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pkgTitle">รายละเอียดแพ็กเกจ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-5"><img id="pkgImg" class="img-fluid rounded-3" alt=""></div>
+          <div class="col-md-7">
+            <div class="mb-2"><span class="badge bg-success" id="pkgCat"></span></div>
+            <div class="d-flex align-items-baseline gap-2 mb-2">
+              <span class="price-now" id="pkgPrice"></span>
+              <span class="price-old" id="pkgOldPrice" style="display:none"></span>
+            </div>
+            <p class="text-muted small mb-2" id="pkgShort"></p>
+            <ul class="small mb-3" id="pkgIncludes"></ul>
+            <p class="small text-secondary mb-0" id="pkgNote"></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="/hospital/packages.html" class="btn btn-outline-primary">ไปหน้ารวมแพ็กเกจ</a>
+        <button class="btn btn-primary" data-bs-dismiss="modal">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Contact -->
+<div style="position:fixed;right:1.2rem;bottom:5.5rem;z-index:1090;display:flex;flex-direction:column;gap:.55rem">
+  <a href="https://line.me/R/ti/p/@981gqmdr" target="_blank" rel="noopener"
+     class="btn btn-success rounded-circle d-flex align-items-center justify-content-center shadow"
+     style="width:52px;height:52px;font-size:1.5rem" aria-label="LINE OA">
+    <i class="fab fa-line"></i>
+  </a>
+  <a href="tel:042312344"
+     class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center shadow"
+     style="width:52px;height:52px;font-size:1.2rem" aria-label="โทรหาเรา">
+    <i class="fas fa-phone"></i>
+  </a>
+</div>
+<!-- Scroll to top -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="btn btn-secondary rounded-circle shadow d-none"
+  style="position:fixed;right:1.2rem;bottom:1.5rem;width:44px;height:44px;z-index:1090;padding:0"
+  aria-label="กลับขึ้นบน"><i class="fas fa-chevron-up"></i></button>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const PACKAGES_JSON = '/hospital/packages.json';
+  let ALL_PKGS = [];
+  let pkgModal;
+
+  function thb(n){
+    return new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0}).format(Number(n||0));
+  }
+
+  /* ---------- HERO: Build slides from packages ---------- */
+  function buildHeroCarousel(pkgs){
+    const slidesEl = document.getElementById('heroSlides');
+    const indEl    = document.getElementById('heroIndicators');
+    if(!slidesEl || !indEl) return;
+
+    const promos = pkgs.filter(x => (x.category||'').includes('โปร'));
+    let pick = promos.slice(0,3);
+    if(pick.length<3){
+      const rest = pkgs.filter(x => !promos.includes(x));
+      pick = pick.concat(rest.slice(0,3-pick.length));
     }
-  </script>
+    if(pick.length===0) return; // ไม่มีข้อมูล → ใช้สไลด์ fallback
+
+    indEl.innerHTML = '';
+    slidesEl.innerHTML = '';
+
+    pick.forEach((p,i)=>{
+      const active = i===0 ? 'active' : '';
+      const oldHtml = p.oldPrice ? `<span class="price-old fs-6 ms-1">${thb(p.oldPrice)}</span>` : '';
+      slidesEl.insertAdjacentHTML('beforeend', `
+        <div class="carousel-item ${active}">
+          <div class="hero-slide" style="background-image:url('${p.img || 'https://placehold.co/1600x900?text=Package'}')">
+            <div class="container">
+              <div class="inner shadow-soft">
+                <span class="badge bg-danger mb-2">โปรโมชัน</span>
+                <h1 class="fw-bold display-6 mb-2">${p.title || 'แพ็กเกจโรงพยาบาล'}</h1>
+                ${p.short ? `<p class="lead mb-3">${p.short}</p>` : ''}
+                <div class="d-flex align-items-center justify-content-center gap-3 flex-wrap mb-3">
+                  <span class="price-now fs-3">${thb(p.price)}</span>${oldHtml}
+                </div>
+                <div class="d-flex gap-2 justify-content-center flex-wrap">
+                  <a href="#" class="btn btn-primary btn-lg js-open-pkg" data-pkg-id="${p.id}">ดูรายละเอียด</a>
+                  <a href="/hospital/packages.html" class="btn btn-outline-light btn-lg">ดูแพ็กเกจทั้งหมด</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `);
+      indEl.insertAdjacentHTML('beforeend', `
+        <button type="button" data-bs-target="#homeHero" data-bs-slide-to="${i}" class="${active}" ${i===0?'aria-current="true"':''} aria-label="Slide ${i+1}"></button>
+      `);
+    });
+
+    // สไลด์แนะนำโรงพยาบาลต่อท้าย
+    const idx = pick.length;
+    slidesEl.insertAdjacentHTML('beforeend', `
+      <div class="carousel-item">
+        <div class="hero-slide" style="background-image:url('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/bg.jpg')">
+          <div class="container">
+            <div class="inner shadow-soft">
+              <h1 class="fw-bold display-6 mb-3">ดูแลสุขภาพของคุณด้วยใจ ที่โรงพยาบาล วีระพลการแพทย์</h1>
+              <p class="lead mb-4">บริการทางการแพทย์ครบวงจร ด้วยทีมแพทย์ผู้เชี่ยวชาญและเทคโนโลยีที่ทันสมัย</p>
+              <a class="btn btn-primary btn-lg px-4" href="https://veerapolkanpat.github.io/appointment-form/">
+                นัดหมายแพทย์วันนี้ <i class="fa-solid fa-calendar-days ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `);
+    indEl.insertAdjacentHTML('beforeend', `<button type="button" data-bs-target="#homeHero" data-bs-slide-to="${idx}" aria-label="Slide ${idx+1}"></button>`);
+  }
+
+  /* ---------- Modal open ---------- */
+  function openPkgModal(id){
+    const p = ALL_PKGS.find(x=>x.id===id);
+    if(!p) return;
+    document.getElementById('pkgTitle').textContent = p.title || 'รายละเอียดแพ็กเกจ';
+    const img = document.getElementById('pkgImg');
+    img.src = p.img || 'https://placehold.co/800x500?text=Package';
+    img.alt = p.title || 'package image';
+    document.getElementById('pkgCat').textContent = p.category || 'แพ็กเกจ';
+    document.getElementById('pkgPrice').textContent = thb(p.price);
+    const oldEl = document.getElementById('pkgOldPrice');
+    if(p.oldPrice){ oldEl.textContent = thb(p.oldPrice); oldEl.style.display='inline'; } else { oldEl.style.display='none'; }
+    document.getElementById('pkgShort').textContent = p.short || '';
+    const inc = Array.isArray(p.includes) ? p.includes : [];
+    document.getElementById('pkgIncludes').innerHTML = inc.map(i=>`<li>${i}</li>`).join('');
+    document.getElementById('pkgNote').textContent = p.note || '';
+    pkgModal.show();
+  }
+
+  /* ---------- Featured ---------- */
+  function renderFeatured(list){
+    const wrap = document.getElementById('pkgRow');
+    if(!wrap) return;
+    wrap.innerHTML = '';
+    list.forEach(p=>{
+      const includes = Array.isArray(p.includes)? p.includes.slice(0,4):[];
+      wrap.insertAdjacentHTML('beforeend', `
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-soft">
+            <img class="card-img-top pkg-img" src="${p.img || 'https://placehold.co/800x500?text=Package'}" alt="${p.title||'แพ็กเกจ'}">
+            <div class="card-body">
+              <span class="badge bg-success mb-2">${p.category || 'แพ็กเกจ'}</span>
+              <h5 class="card-title">${p.title || ''}</h5>
+              ${p.short ? `<p class="text-muted small mb-2">${p.short}</p>`:''}
+              ${includes.length ? `<ul class="small text-muted mb-3">${includes.map(i=>`<li>${i}</li>`).join('')}</ul>` : ''}
+              <div class="d-flex align-items-baseline gap-2">
+                <span class="price-now">${thb(p.price)}</span>
+                ${p.oldPrice? `<span class="price-old">${thb(p.oldPrice)}</span>`:''}
+              </div>
+            </div>
+            <div class="card-footer bg-white border-0 pb-4">
+              <a href="#" class="btn btn-outline-primary w-100 js-open-pkg" data-pkg-id="${p.id}">ดูรายละเอียด</a>
+            </div>
+          </div>
+        </div>
+      `);
+    });
+  }
+
+  /* ---------- Load packages -> Build Hero + Featured ---------- */
+  async function loadPackagesAndBuild(){
+    try{
+      const res = await fetch(PACKAGES_JSON,{cache:'no-store'});
+      const data = await res.json();
+      const arr = Array.isArray(data) ? data : (data && Array.isArray(data.data) ? data.data : []);
+      const active = arr.filter(x => String(x.active).toLowerCase() === 'true');
+      ALL_PKGS = active.slice();
+
+      buildHeroCarousel(active);
+
+      const promos = active.filter(x => (x.category||'').includes('โปร'));
+      let pick = promos.slice(0,3);
+      if (pick.length < 3){
+        const rest = active.filter(x => !promos.includes(x));
+        pick = pick.concat(rest.slice(0, 3 - pick.length));
+      }
+      renderFeatured(pick);
+    }catch(e){
+      console.error('load packages failed:', e);
+      const wrap = document.getElementById('pkgRow');
+      if(wrap){ wrap.innerHTML = `<div class="col-12 text-center text-danger">ไม่สามารถโหลดแพ็กเกจได้ในขณะนี้</div>`; }
+    }
+  }
+
+  /* ---------- Cookie toast ---------- */
+  (function(){
+    const k='cookie.accepted';
+    const accepted=localStorage.getItem(k);
+    if(!accepted){
+      const toastEl=document.getElementById('cookieToast');
+      const t=new bootstrap.Toast(toastEl,{delay:0,autohide:false});
+      t.show();
+      document.getElementById('acceptCookies').addEventListener('click',()=>{
+        localStorage.setItem(k,'1');
+        gtag('consent','update',{'analytics_storage':'granted'});
+        t.hide();
+      });
+    }
+  })();
+
+  /* Delegated click for all .js-open-pkg (ทั้งในฮีโร่และในการ์ด) */
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.js-open-pkg');
+    if(btn){
+      e.preventDefault();
+      openPkgModal(btn.getAttribute('data-pkg-id'));
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    pkgModal = new bootstrap.Modal(document.getElementById('pkgModal'));
+    loadPackagesAndBuild();
+
+    /* ===== Canvas star particles for tribute popup ===== */
+    let _starsAF = null;
+    function _startStars(){
+      const cv = document.getElementById('tributeStars');
+      if(!cv) return;
+      const ctx = cv.getContext('2d');
+      function resize(){ cv.width = window.innerWidth; cv.height = window.innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+      const S = Array.from({length:140}, ()=>({
+        x: Math.random(), y: Math.random(),
+        r: Math.random()*1.3+0.3,
+        phase: Math.random()*Math.PI*2,
+        spd: Math.random()*0.007+0.002
+      }));
+      function draw(t){
+        ctx.clearRect(0,0,cv.width,cv.height);
+        S.forEach(s=>{
+          const a = (Math.sin(t*s.spd+s.phase)+1)/2*0.7+0.05;
+          ctx.beginPath();
+          ctx.arc(s.x*cv.width, s.y*cv.height, s.r, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(255,255,255,${a})`;
+          ctx.fill();
+        });
+        _starsAF = requestAnimationFrame(draw);
+      }
+      _starsAF = requestAnimationFrame(draw);
+    }
+    function _stopStars(){ if(_starsAF){ cancelAnimationFrame(_starsAF); _starsAF=null; } }
+
+    /* ===== Tribute popup — fetch popup.json config then decide to show ===== */
+    (async function initTributePopup(){
+      if(localStorage.getItem('wpk_visited')) return;
+      let cfg = null;
+      try{
+        const r = await fetch('https://raw.githubusercontent.com/veerapolkanpat/hospital/main/popup.json?_='+Date.now());
+        if(r.ok) cfg = await r.json();
+      }catch(_){}
+
+      if(cfg){
+        if(cfg.active === false) return;
+        if(cfg.expiresAt){
+          const exp = new Date(cfg.expiresAt); exp.setHours(23,59,59,999);
+          if(new Date() > exp) return;
+        }
+        if(cfg.image){ const img=document.getElementById('tributeImg'); if(img) img.src=cfg.image; }
+        // Optional caption below image (body1 + body2) — show only if filled
+        const lines = [cfg.body1, cfg.body2].filter(Boolean);
+        if(lines.length){
+          const cap = document.getElementById('tributeCaption');
+          if(cap){ cap.innerHTML = lines.join('<br>'); cap.classList.remove('d-none'); }
+        }
+      }
+
+      const tributeEl = document.getElementById('tributeModal');
+      const tributeModal = new bootstrap.Modal(tributeEl, {backdrop:true, keyboard:true});
+      tributeEl.addEventListener('shown.bs.modal', _startStars, {once:true});
+      tributeEl.addEventListener('hidden.bs.modal', ()=>{
+        _stopStars();
+        localStorage.setItem('wpk_visited','1');
+      }, {once:true});
+      tributeModal.show();
+    })();
+  });
+
+  window.addEventListener('scroll', ()=>{
+    const btn = document.getElementById('scrollTop');
+    if(btn){ btn.classList.toggle('d-none', window.scrollY < 300); }
+  });
+
+  /* Counter animation triggered on scroll */
+  (function(){
+    let counted = false;
+    function runCounters(){
+      if(counted) return;
+      const statsRow = document.getElementById('statsRow');
+      if(!statsRow) return;
+      const rect = statsRow.getBoundingClientRect();
+      if(rect.top > window.innerHeight) return;
+      counted = true;
+      document.querySelectorAll('.counter').forEach(el=>{
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1600;
+        const step = Math.ceil(target / (duration / 16));
+        let current = 0;
+        const timer = setInterval(()=>{
+          current = Math.min(current + step, target);
+          el.textContent = current + suffix;
+          if(current >= target) clearInterval(timer);
+        }, 16);
+      });
+    }
+    window.addEventListener('scroll', runCounters, {passive:true});
+    runCounters();
+  })();
+</script>
 </body>
 </html>

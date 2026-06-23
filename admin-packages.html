@@ -2,476 +2,1000 @@
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<title>จัดการแพ็กเกจ (GitHub-Only)</title>
+<title>แอดมิน – โรงพยาบาลวีระพลการแพทย์</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
-<!-- Favicon (แนะนำวางไว้ที่ /hospital/ รากของเว็บ) -->
-<link rel="icon" type="image/svg+xml" href="/hospital/favicon.svg?v=2">
-<link rel="icon" type="image/png" sizes="32x32" href="/hospital/favicon-32.png?v=2">
-<link rel="icon" type="image/png" sizes="16x16" href="/hospital/favicon-16.png?v=2">
-<link rel="shortcut icon" href="/hospital/favicon.ico?v=2">
-<link rel="apple-touch-icon" href="/hospital/apple-touch-icon.png?v=2">
-<meta name="theme-color" content="#0d6efd">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ0FG8PVXQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QZ0FG8PVXQ');
-</script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
-  body{font-family:'Prompt',sans-serif;background:#f8f9fa}
-  .section-top{padding-top:90px}
-  .form-control,.form-select{border-radius:10px}
-  textarea{min-height:84px}
-  code.k{background:#f1f5f9;padding:.15rem .4rem;border-radius:6px}
-  .small-help{opacity:.85}
+  body{font-family:'Prompt',sans-serif;background:#f0f4f8}
+  .section-top{padding-top:80px}
+  .form-control,.form-select{border-radius:8px}
+  textarea{min-height:80px}
+  code.k{background:#e8f0fe;color:#1a56db;padding:.15rem .4rem;border-radius:6px;font-size:.85em}
+  .status-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
+  .dot-ok{background:#198754}
+  .dot-warn{background:#fd7e14}
+  .dot-err{background:#dc3545}
+  #cfgPanel{transition:all .2s}
+  .nav-tabs .nav-link{font-weight:600;color:#495057}
+  .nav-tabs .nav-link.active{color:#0d6efd}
+  .thumb-preview{width:60px;height:60px;object-fit:cover;border-radius:8px;border:1px solid #dee2e6}
+  #tokenHelp{font-size:.82rem}
+  .alert-sm{padding:.4rem .8rem;font-size:.875rem}
 </style>
 </head>
 <body>
 
 <nav class="navbar navbar-light bg-white shadow-sm fixed-top">
-  <div class="container">
-    <a class="navbar-brand fw-bold text-success" href="/hospital/">รพ.วีระพลการแพทย์</a>
-    <span class="small text-muted">Admin: แพ็กเกจ (GitHub Only)</span>
+  <div class="container-xl">
+    <a class="navbar-brand fw-bold text-success d-flex align-items-center gap-2" href="/hospital/">
+      <i class="fas fa-hospital-user"></i> รพ.วีระพลการแพทย์
+    </a>
+    <span class="badge bg-secondary">Admin Panel</span>
   </div>
 </nav>
 
-<div class="container section-top">
+<div class="container-xl section-top pb-5">
 
-  <!-- CONFIG -->
-  <div class="card mb-4">
+  <!-- ===== GitHub Config ===== -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-white d-flex align-items-center justify-content-between py-2">
+      <span class="fw-bold"><i class="fab fa-github me-2"></i>ตั้งค่า GitHub API</span>
+      <div id="connStatus" class="small text-muted">ยังไม่ได้เชื่อมต่อ</div>
+    </div>
     <div class="card-body">
-      <h5 class="fw-bold mb-3">ตั้งค่า GitHub</h5>
       <div class="row g-3 align-items-end">
-        <div class="col-md-3">
-          <label class="form-label">Owner</label>
-          <input id="ghOwner" class="form-control" placeholder="เช่น veerapolkanpat">
+        <div class="col-6 col-md-3">
+          <label class="form-label fw-semibold">Owner</label>
+          <input id="ghOwner" class="form-control" placeholder="veerapolkanpat">
         </div>
-        <div class="col-md-3">
-          <label class="form-label">Repo</label>
-          <input id="ghRepo" class="form-control" placeholder="เช่น hospital">
+        <div class="col-6 col-md-3">
+          <label class="form-label fw-semibold">Repo</label>
+          <input id="ghRepo" class="form-control" placeholder="hospital">
         </div>
-        <div class="col-md-2">
-          <label class="form-label">Branch</label>
+        <div class="col-4 col-md-2">
+          <label class="form-label fw-semibold">Branch</label>
           <input id="ghBranch" class="form-control" placeholder="main">
         </div>
-        <div class="col-md-4">
-          <label class="form-label">GitHub Token</label>
-          <input id="ghToken" type="password" class="form-control" placeholder="เก็บไว้ที่เครื่องนี้เท่านั้น">
-          <div class="form-text small-help">แนะนำ Fine-grained token (เฉพาะ repo นี้) และสิทธิ์ <code class="k">contents:write</code></div>
+        <div class="col-8 col-md-4">
+          <label class="form-label fw-semibold">Personal Access Token</label>
+          <div class="input-group">
+            <input id="ghToken" type="password" class="form-control" placeholder="ghp_xxxxxxxxxx">
+            <button class="btn btn-outline-secondary" type="button" id="btnShowToken" title="แสดง/ซ่อน Token">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+          <div id="tokenHelp" class="text-muted mt-1">
+            <i class="fas fa-info-circle text-primary me-1"></i>
+            ต้องการ Fine-grained token สิทธิ์ <code class="k">Contents: Read &amp; write</code>
+            — <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">สร้าง Token ใหม่</a>
+          </div>
         </div>
-        <div class="col-12 d-flex gap-2">
-          <button id="btnSaveCfg" class="btn btn-primary" type="button">บันทึกการตั้งค่า</button>
-          <button id="btnLoad" class="btn btn-outline-secondary" type="button">โหลด packages.json</button>
-          <div id="cfgMsg" class="ms-auto small text-muted"></div>
-        </div>
-      </div>
-      <hr>
-      <div class="row g-3">
-        <div class="col-md-6">
-          <label class="form-label">ไฟล์ข้อมูลแพ็กเกจ (พาธใน repo)</label>
-          <input id="pathPackages" class="form-control" value="packages.json">
-          <div class="form-text small-help">เช่น <code class="k">packages.json</code> หรือ <code class="k">data/packages.json</code></div>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">โฟลเดอร์เก็บรูปแพ็กเกจ (พาธใน repo)</label>
-          <input id="pathImages" class="form-control" value="assets/images">
-          <div class="form-text small-help">เช่น <code class="k">assets/images</code></div>
+        <div class="col-12 d-flex flex-wrap gap-2">
+          <button id="btnSaveCfg" class="btn btn-primary"><i class="fas fa-save me-1"></i>บันทึกการตั้งค่า</button>
+          <button id="btnLoadAll" class="btn btn-outline-success"><i class="fas fa-cloud-download-alt me-1"></i>โหลดข้อมูลทั้งหมด</button>
+          <div id="cfgMsg" class="ms-auto small text-muted align-self-center"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FORM -->
-  <div class="card mb-4">
-    <div class="card-body">
-      <h5 class="fw-bold mb-3">ฟอร์มแพ็กเกจ</h5>
-      <form id="pkgForm" class="row g-3">
-        <div class="col-md-3">
-          <label class="form-label">ID (ห้ามซ้ำ)</label>
-          <input name="id" class="form-control" placeholder="เช่น CHK-BASIC" required>
-        </div>
-        <div class="col-md-5">
-          <label class="form-label">ชื่อแพ็กเกจ (title)</label>
-          <input name="title" class="form-control" required>
-        </div>
-        <div class="col-md-4">
-          <label class="form-label">หมวดหมู่ (category)</label>
-          <select name="category" class="form-select" required>
-            <option value="ตรวจสุขภาพ">ตรวจสุขภาพ</option>
-            <option value="วัคซีน">วัคซีน</option>
-            <option value="ทันตกรรม">ทันตกรรม</option>
-            <option value="คลอดบุตร">คลอดบุตร</option>
-            <option value="ศัลยกรรม/หัตถการ">ศัลยกรรม/หัตถการ</option>
-            <option value="ตา/ENT">ตา/ENT</option>
-            <option value="กายภาพบำบัด">กายภาพบำบัด</option>
-            <option value="ห้องพัก/เหมาจ่าย">ห้องพัก/เหมาจ่าย</option>
-            <option value="โปรโมชัน">โปรโมชัน</option>
-          </select>
+  <!-- ===== Tabs ===== -->
+  <ul class="nav nav-tabs mb-0" id="adminTabs" role="tablist">
+    <li class="nav-item">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabPackages" type="button">
+        <i class="fas fa-box-open me-1"></i>แพ็กเกจ
+        <span class="badge bg-primary ms-1" id="pkgCount">0</span>
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabNews" type="button">
+        <i class="fas fa-newspaper me-1"></i>ข่าวสาร
+        <span class="badge bg-primary ms-1" id="newsCount">0</span>
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabPopup" type="button">
+        <i class="fas fa-window-maximize me-1"></i>Popup ต้อนรับ
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content bg-white border border-top-0 rounded-bottom shadow-sm p-4">
+
+    <!-- ========== TAB: PACKAGES ========== -->
+    <div class="tab-pane fade show active" id="tabPackages">
+      <div class="row g-4">
+
+        <!-- Form -->
+        <div class="col-lg-6">
+          <h6 class="fw-bold mb-3 text-primary"><i class="fas fa-edit me-1"></i>เพิ่ม / แก้ไขแพ็กเกจ</h6>
+          <form id="pkgForm" class="row g-2">
+            <div class="col-5">
+              <label class="form-label">ID <span class="text-danger">*</span></label>
+              <input name="id" class="form-control form-control-sm" placeholder="เช่น CHK-BASIC" required>
+            </div>
+            <div class="col-7">
+              <label class="form-label">หมวดหมู่ <span class="text-danger">*</span></label>
+              <select name="category" class="form-select form-select-sm" required>
+                <option value="ตรวจสุขภาพ">ตรวจสุขภาพ</option>
+                <option value="วัคซีน">วัคซีน</option>
+                <option value="ทันตกรรม">ทันตกรรม</option>
+                <option value="คลอดบุตร">คลอดบุตร</option>
+                <option value="ศัลยกรรม/หัตถการ">ศัลยกรรม/หัตถการ</option>
+                <option value="ตา/ENT">ตา/ENT</option>
+                <option value="กายภาพบำบัด">กายภาพบำบัด</option>
+                <option value="ห้องพัก/เหมาจ่าย">ห้องพัก/เหมาจ่าย</option>
+                <option value="โปรโมชัน">โปรโมชัน</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">ชื่อแพ็กเกจ <span class="text-danger">*</span></label>
+              <input name="title" class="form-control form-control-sm" required>
+            </div>
+
+            <div class="col-5">
+              <label class="form-label">ราคา (บาท) <span class="text-danger">*</span></label>
+              <input name="price" type="number" class="form-control form-control-sm" min="0" required>
+            </div>
+            <div class="col-4">
+              <label class="form-label">ราคาเดิม</label>
+              <input name="oldPrice" type="number" class="form-control form-control-sm" min="0" placeholder="ไม่บังคับ">
+            </div>
+            <div class="col-3">
+              <label class="form-label">แสดง</label>
+              <select name="active" class="form-select form-select-sm">
+                <option value="true">เปิด</option>
+                <option value="false">ปิด</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">คำอธิบายย่อ</label>
+              <input name="short" class="form-control form-control-sm">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">รายการครอบคลุม <small class="text-muted">(คั่นด้วย |)</small></label>
+              <textarea name="includes" class="form-control form-control-sm" placeholder="CBC | FBS | X-ray | EKG"></textarea>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">หมายเหตุ</label>
+              <textarea name="note" class="form-control form-control-sm"></textarea>
+            </div>
+
+            <div class="col-8">
+              <label class="form-label">ลิงก์รูปภาพ</label>
+              <input name="img" id="pkgImgUrl" class="form-control form-control-sm" placeholder="/hospital/assets/images/xxx.jpg">
+            </div>
+            <div class="col-4">
+              <label class="form-label">อัปโหลดรูปใหม่</label>
+              <input id="pkgImgFile" type="file" accept="image/*" class="form-control form-control-sm">
+            </div>
+
+            <div class="col-12 d-flex gap-2 mt-1">
+              <button class="btn btn-primary btn-sm" id="btnPkgCreate" type="submit">
+                <i class="fas fa-plus me-1"></i>เพิ่มใหม่
+              </button>
+              <button class="btn btn-warning btn-sm" id="btnPkgUpdate" type="button">
+                <i class="fas fa-save me-1"></i>อัปเดต
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" id="btnPkgClear" type="button">
+                <i class="fas fa-times me-1"></i>ล้างฟอร์ม
+              </button>
+              <button class="btn btn-outline-danger btn-sm ms-auto" id="btnPkgDelete" type="button">
+                <i class="fas fa-trash me-1"></i>ลบ
+              </button>
+            </div>
+          </form>
+          <div id="pkgMsg" class="mt-2 small"></div>
         </div>
 
-        <div class="col-md-3">
-          <label class="form-label">ราคา (THB)</label>
-          <input name="price" type="number" class="form-control" min="0" required>
+        <!-- Table -->
+        <div class="col-lg-6">
+          <h6 class="fw-bold mb-3 text-primary"><i class="fas fa-list me-1"></i>รายการแพ็กเกจ</h6>
+          <div class="table-responsive" style="max-height:520px;overflow-y:auto">
+            <table class="table table-sm table-hover align-middle">
+              <thead class="table-light sticky-top">
+                <tr>
+                  <th>ID</th><th>ชื่อ</th><th>หมวด</th>
+                  <th class="text-end">ราคา</th><th>สถานะ</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="pkgTbody"></tbody>
+            </table>
+          </div>
         </div>
-        <div class="col-md-3">
-          <label class="form-label">ราคาเดิม (ถ้ามี)</label>
-          <input name="oldPrice" type="number" class="form-control" min="0">
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">คำอธิบายย่อ (short)</label>
-          <input name="short" class="form-control">
-        </div>
-
-        <div class="col-md-7">
-          <label class="form-label">รายการครอบคลุม (includes)</label>
-          <textarea name="includes" class="form-control" placeholder="คั่นด้วย | เช่น CBC|FBS|X-ray"></textarea>
-          <div class="form-text small-help">จะแปลงเป็น Array ตอนใช้งาน</div>
-        </div>
-        <div class="col-md-5">
-          <label class="form-label">หมายเหตุ (note)</label>
-          <textarea name="note" class="form-control"></textarea>
-        </div>
-
-        <div class="col-md-8">
-          <label class="form-label">ลิงก์รูปภาพ (img)</label>
-          <input name="img" class="form-control" placeholder="/hospital/assets/images/xxx.jpg หรือ https://...">
-          <div class="form-text small-help">ถ้าอัปโหลดรูปใหม่ ระบบจะตั้งพาธให้อัตโนมัติ</div>
-        </div>
-        <div class="col-md-4">
-          <label class="form-label">อัปโหลดรูปใหม่</label>
-          <input id="imgFile" type="file" accept="image/*" class="form-control">
-        </div>
-
-        <div class="col-md-3">
-          <label class="form-label">แสดงผล (active)</label>
-          <select name="active" class="form-select">
-            <option value="true" selected>TRUE</option>
-            <option value="false">FALSE</option>
-          </select>
-        </div>
-
-        <div class="col-12 d-flex gap-2">
-          <button class="btn btn-primary" id="btnCreate" type="submit">บันทึก/เพิ่มใหม่</button>
-          <button class="btn btn-warning" id="btnUpdate" type="button">อัปเดตตาม ID</button>
-          <button class="btn btn-outline-danger ms-auto" id="btnDelete" type="button">ลบตาม ID</button>
-        </div>
-      </form>
-      <div id="msg" class="mt-3 small"></div>
-    </div>
-  </div>
-
-  <!-- TABLE -->
-  <div class="card">
-    <div class="card-body">
-      <div class="d-flex align-items-center mb-2">
-        <h5 class="fw-bold mb-0">รายการแพ็กเกจ</h5>
-        <button class="btn btn-sm btn-outline-secondary ms-auto" id="btnReload" type="button">รีโหลด</button>
       </div>
-      <div class="table-responsive">
-        <table class="table table-sm table-striped align-middle">
-          <thead class="table-light">
-            <tr>
-              <th>ID</th><th>ชื่อ</th><th>หมวด</th><th class="text-end">ราคา</th><th>active</th><th>แก้ไข</th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+    </div><!-- /tabPackages -->
 
+    <!-- ========== TAB: NEWS ========== -->
+    <div class="tab-pane fade" id="tabNews">
+      <div class="row g-4">
+
+        <!-- Form -->
+        <div class="col-lg-6">
+          <h6 class="fw-bold mb-3 text-primary"><i class="fas fa-edit me-1"></i>เพิ่ม / แก้ไขข่าวสาร</h6>
+          <form id="newsForm" class="row g-2">
+            <div class="col-5">
+              <label class="form-label">ID <span class="text-danger">*</span></label>
+              <input name="id" class="form-control form-control-sm" placeholder="เช่น NEWS-001" required>
+            </div>
+            <div class="col-7">
+              <label class="form-label">หมวดหมู่ <span class="text-danger">*</span></label>
+              <select name="category" class="form-select form-select-sm" required>
+                <option value="โปรโมชัน">โปรโมชัน</option>
+                <option value="ประชาสัมพันธ์">ประชาสัมพันธ์</option>
+                <option value="รับสมัครงาน">รับสมัครงาน</option>
+                <option value="เอกสาร">เอกสาร</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">หัวข้อข่าว <span class="text-danger">*</span></label>
+              <input name="title" class="form-control form-control-sm" required>
+            </div>
+
+            <div class="col-7">
+              <label class="form-label">วันที่แสดง <small class="text-muted">(เช่น 15 มีนาคม 2568)</small></label>
+              <input name="dateText" class="form-control form-control-sm" placeholder="DD เดือน YYYY">
+            </div>
+            <div class="col-5">
+              <label class="form-label">แสดง</label>
+              <select name="active" class="form-select form-select-sm">
+                <option value="true">เปิด</option>
+                <option value="false">ปิด</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">เนื้อหาย่อ <span class="text-danger">*</span></label>
+              <textarea name="body" class="form-control form-control-sm" required placeholder="เนื้อหาสั้นๆ ที่แสดงในการ์ด..."></textarea>
+            </div>
+
+            <div class="col-7">
+              <label class="form-label">ลิงก์ปุ่ม</label>
+              <input name="link" class="form-control form-control-sm" placeholder="/hospital/packages.html">
+            </div>
+            <div class="col-5">
+              <label class="form-label">ชื่อปุ่ม</label>
+              <input name="linkText" class="form-control form-control-sm" placeholder="ดูรายละเอียด">
+            </div>
+
+            <div class="col-12 d-flex gap-2 mt-1">
+              <button class="btn btn-primary btn-sm" id="btnNewsCreate" type="submit">
+                <i class="fas fa-plus me-1"></i>เพิ่มใหม่
+              </button>
+              <button class="btn btn-warning btn-sm" id="btnNewsUpdate" type="button">
+                <i class="fas fa-save me-1"></i>อัปเดต
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" id="btnNewsClear" type="button">
+                <i class="fas fa-times me-1"></i>ล้างฟอร์ม
+              </button>
+              <button class="btn btn-outline-danger btn-sm ms-auto" id="btnNewsDelete" type="button">
+                <i class="fas fa-trash me-1"></i>ลบ
+              </button>
+            </div>
+          </form>
+          <div id="newsMsg" class="mt-2 small"></div>
+        </div>
+
+        <!-- Table -->
+        <div class="col-lg-6">
+          <h6 class="fw-bold mb-3 text-primary"><i class="fas fa-list me-1"></i>รายการข่าวสาร</h6>
+          <div class="table-responsive" style="max-height:520px;overflow-y:auto">
+            <table class="table table-sm table-hover align-middle">
+              <thead class="table-light sticky-top">
+                <tr><th>ID</th><th>หัวข้อ</th><th>หมวด</th><th>สถานะ</th><th></th></tr>
+              </thead>
+              <tbody id="newsTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div><!-- /tabNews -->
+
+    <!-- ========== TAB: POPUP ========== -->
+    <div class="tab-pane fade" id="tabPopup">
+      <div class="row g-4">
+
+        <!-- Form -->
+        <div class="col-lg-7">
+          <h6 class="fw-bold mb-3 text-primary"><i class="fas fa-cog me-1"></i>ตั้งค่า Popup ต้อนรับ</h6>
+
+          <div class="alert alert-info alert-sm mb-3">
+            <i class="fas fa-info-circle me-1"></i>
+            Popup จะแสดงเฉพาะผู้เยี่ยมชมครั้งแรก (localStorage <code>wpk_visited</code>) ตาม <code>popup.json</code> ในรีโป
+          </div>
+
+          <form id="popupForm" class="row g-3">
+            <div class="col-6 col-md-4">
+              <label class="form-label fw-semibold">สถานะ Popup</label>
+              <select id="popupActive" class="form-select">
+                <option value="true">เปิด (แสดง)</option>
+                <option value="false">ปิด (ไม่แสดง)</option>
+              </select>
+            </div>
+            <div class="col-6 col-md-4">
+              <label class="form-label fw-semibold">แสดงถึงวันที่</label>
+              <input id="popupExpires" type="date" class="form-control">
+              <div class="form-text">เว้นว่างไว้ = แสดงตลอดไป</div>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold">รูปภาพ Popup</label>
+              <div class="row g-2 align-items-start">
+                <div class="col-md-5">
+                  <label class="form-label small text-muted mb-1">อัปโหลดรูปใหม่</label>
+                  <input id="popupImgFile" type="file" accept="image/*" class="form-control form-control-sm">
+                  <button id="btnPopupUpload" type="button" class="btn btn-outline-primary btn-sm mt-1 w-100">
+                    <i class="fas fa-cloud-upload-alt me-1"></i>อัปโหลด &amp; รับ Link
+                  </button>
+                  <div id="uploadProgress" class="small text-muted mt-1"></div>
+                </div>
+                <div class="col-auto d-none d-md-flex align-items-center pt-4 text-muted small">หรือ</div>
+                <div class="col">
+                  <label class="form-label small text-muted mb-1">ลิงก์รูปภาพ (กรอกเองหรือระบบจะสร้างให้)</label>
+                  <div class="input-group input-group-sm">
+                    <input id="popupImage" class="form-control" placeholder="/hospital/assets/images/filename.jpg">
+                    <button class="btn btn-outline-secondary" type="button" id="btnPreviewPopupImg" title="ดูตัวอย่าง">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                  <div id="popupImgPreview" class="mt-2 d-none">
+                    <img id="popupImgPreviewEl" src="" alt="preview" class="thumb-preview">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">หัวข้อหลัก (tribute-h1)</label>
+              <input id="popupTitle" class="form-control" placeholder="สถิตอยู่ในใจตราบนิรันดร์">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">ชื่อ / คำอธิบาย (tribute-h2) <small class="text-muted">— ใช้ \n ขึ้นบรรทัดใหม่</small></label>
+              <textarea id="popupSubtitle" class="form-control" rows="2" placeholder="สมเด็จพระนางเจ้าสิริกิติ์\nพระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง"></textarea>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">เนื้อหาบรรทัดที่ 1</label>
+              <input id="popupBody1" class="form-control" placeholder="น้อมสำนึกในพระมหากรุณาธิคุณอันหาที่สุดมิได้">
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold">เนื้อหาบรรทัดที่ 2</label>
+              <input id="popupBody2" class="form-control" placeholder="ข้าพระพุทธเจ้า คณะแพทย์ ...">
+            </div>
+
+            <div class="col-12 d-flex flex-wrap gap-2 mt-1">
+              <button id="btnPopupSave" class="btn btn-primary btn-sm" type="button">
+                <i class="fas fa-save me-1"></i>บันทึก popup.json ขึ้น GitHub
+              </button>
+              <button id="btnPopupReset" class="btn btn-outline-secondary btn-sm" type="button">
+                <i class="fas fa-undo me-1"></i>โหลดค่าเดิม
+              </button>
+            </div>
+          </form>
+          <div id="popupMsg" class="mt-2 small"></div>
+        </div>
+
+        <!-- Testing panel -->
+        <div class="col-lg-5">
+          <h6 class="fw-bold mb-3 text-primary"><i class="fas fa-flask me-1"></i>ทดสอบ Popup</h6>
+
+          <div class="card border-0 bg-light p-3 mb-3">
+            <p class="small text-muted mb-2">
+              <i class="fas fa-info-circle me-1 text-primary"></i>
+              Popup แสดงเฉพาะครั้งแรก เพราะเก็บสถานะไว้ใน <code>localStorage</code> ของเบราว์เซอร์ กด "ล้างสถานะ" แล้ว refresh หน้าแรกเพื่อทดสอบ
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+              <button id="btnClearVisited" class="btn btn-warning btn-sm">
+                <i class="fas fa-eraser me-1"></i>ล้างสถานะผู้เยี่ยมชม
+              </button>
+              <a href="/hospital/" target="_blank" class="btn btn-outline-success btn-sm">
+                <i class="fas fa-external-link-alt me-1"></i>เปิดหน้าแรก
+              </a>
+            </div>
+            <div id="visitedStatus" class="mt-2 small"></div>
+          </div>
+
+          <div class="card border-0 bg-light p-3">
+            <h6 class="fw-semibold mb-2 small">สถานะปัจจุบัน</h6>
+            <table class="table table-sm table-borderless mb-0 small">
+              <tr><td class="text-muted">popup.json active</td><td id="statusActive">—</td></tr>
+              <tr><td class="text-muted">แสดงถึงวันที่</td><td id="statusExpires">—</td></tr>
+              <tr><td class="text-muted">วันนี้</td><td id="statusToday">—</td></tr>
+              <tr><td class="text-muted">wpk_visited</td><td id="statusVisited">—</td></tr>
+              <tr><td class="text-muted">ผล</td><td id="statusResult" class="fw-bold">—</td></tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tabPopup -->
+
+  </div><!-- /tab-content -->
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// ============== BASIC CONFIG/STATE ==============
-const els = {
-  owner:  document.getElementById('ghOwner'),
-  repo:   document.getElementById('ghRepo'),
-  branch: document.getElementById('ghBranch'),
-  token:  document.getElementById('ghToken'),
-  pathPackages: document.getElementById('pathPackages'),
-  pathImages:   document.getElementById('pathImages'),
-  saveCfg: document.getElementById('btnSaveCfg'),
-  loadBtn: document.getElementById('btnLoad'),
-  cfgMsg:  document.getElementById('cfgMsg'),
-  form:    document.getElementById('pkgForm'),
-  msg:     document.getElementById('msg'),
-  imgFile: document.getElementById('imgFile'),
-  reload:  document.getElementById('btnReload'),
-  tbody:   document.getElementById('tbody'),
-  btnUpdate: document.getElementById('btnUpdate'),
-  btnDelete: document.getElementById('btnDelete'),
-};
-let PACKS = [];
-let packagesSha = null;
-
-let cfg = {
-  owner:  localStorage.getItem('gh.owner')  || 'veerapolkanpat',
-  repo:   localStorage.getItem('gh.repo')   || 'hospital',
-  branch: localStorage.getItem('gh.branch') || 'main',
-  token:  localStorage.getItem('gh.token')  || '',
-  pathPackages: localStorage.getItem('gh.pathPackages') || 'packages.json',
-  pathImages:   localStorage.getItem('gh.pathImages')   || 'assets/images'
-};
-
-function applyCfgToForm(){
-  els.owner.value = cfg.owner || '';
-  els.repo.value = cfg.repo || '';
-  els.branch.value = cfg.branch || '';
-  els.token.value = cfg.token || '';
-  els.pathPackages.value = cfg.pathPackages || 'packages.json';
-  els.pathImages.value   = cfg.pathImages   || 'assets/images';
-}
-function updateCfgFromForm(){
-  cfg.owner  = (els.owner.value  || '').trim();
-  cfg.repo   = (els.repo.value   || '').trim();
-  cfg.branch = (els.branch.value || 'main').trim();
-  cfg.token  = (els.token.value  || '').trim();
-  cfg.pathPackages = (els.pathPackages.value || 'packages.json').trim();
-  cfg.pathImages   = (els.pathImages.value   || 'assets/images').trim();
-}
-function loadCfg(){
-  try{
-    cfg.owner  = localStorage.getItem('gh.owner')        || cfg.owner;
-    cfg.repo   = localStorage.getItem('gh.repo')         || cfg.repo;
-    cfg.branch = localStorage.getItem('gh.branch')       || cfg.branch;
-    cfg.token  = localStorage.getItem('gh.token')        || cfg.token;
-    cfg.pathPackages = localStorage.getItem('gh.pathPackages') || cfg.pathPackages;
-    cfg.pathImages   = localStorage.getItem('gh.pathImages')   || cfg.pathImages;
-  }catch(e){
-    console.warn('localStorage read failed:', e);
-    els.cfgMsg.textContent = 'เบราว์เซอร์บล็อก localStorage';
-  }
-  applyCfgToForm();
-}
-function saveCfg(){
-  updateCfgFromForm();
-  try{
-    localStorage.setItem('gh.owner', cfg.owner);
-    localStorage.setItem('gh.repo', cfg.repo);
-    localStorage.setItem('gh.branch', cfg.branch);
-    localStorage.setItem('gh.token', cfg.token);
-    localStorage.setItem('gh.pathPackages', cfg.pathPackages);
-    localStorage.setItem('gh.pathImages', cfg.pathImages);
-    els.cfgMsg.textContent = 'บันทึกแล้ว';
-  }catch(e){
-    console.error('localStorage write failed:', e);
-    els.cfgMsg.textContent = 'บันทึกไม่ได้: บราว์เซอร์บล็อก localStorage';
-  }
-  setTimeout(()=>els.cfgMsg.textContent='', 2000);
-}
-els.saveCfg.addEventListener('click', (ev)=>{ ev.preventDefault(); saveCfg(); });
-document.addEventListener('DOMContentLoaded', loadCfg);
-
-// ============== GITHUB API HELPERS ==============
+// ==========================================
+// CONFIG
+// ==========================================
 const GH_API = 'https://api.github.com';
 
+const els = {
+  owner:    document.getElementById('ghOwner'),
+  repo:     document.getElementById('ghRepo'),
+  branch:   document.getElementById('ghBranch'),
+  token:    document.getElementById('ghToken'),
+  saveCfg:  document.getElementById('btnSaveCfg'),
+  loadAll:  document.getElementById('btnLoadAll'),
+  cfgMsg:   document.getElementById('cfgMsg'),
+  connStatus: document.getElementById('connStatus'),
+  showToken:  document.getElementById('btnShowToken'),
+  // packages
+  pkgForm:   document.getElementById('pkgForm'),
+  pkgMsg:    document.getElementById('pkgMsg'),
+  pkgImgFile: document.getElementById('pkgImgFile'),
+  pkgImgUrl:  document.getElementById('pkgImgUrl'),
+  pkgTbody:  document.getElementById('pkgTbody'),
+  pkgCount:  document.getElementById('pkgCount'),
+  btnPkgUpdate: document.getElementById('btnPkgUpdate'),
+  btnPkgDelete: document.getElementById('btnPkgDelete'),
+  btnPkgClear:  document.getElementById('btnPkgClear'),
+  // news
+  newsForm:  document.getElementById('newsForm'),
+  newsMsg:   document.getElementById('newsMsg'),
+  newsTbody: document.getElementById('newsTbody'),
+  newsCount: document.getElementById('newsCount'),
+  btnNewsUpdate: document.getElementById('btnNewsUpdate'),
+  btnNewsDelete: document.getElementById('btnNewsDelete'),
+  btnNewsClear:  document.getElementById('btnNewsClear'),
+};
+
+let cfg = {
+  owner:  'veerapolkanpat',
+  repo:   'hospital',
+  branch: 'main',
+  token:  '',
+  pathPackages: 'packages.json',
+  pathNews:     'news.json',
+  pathImages:   'assets/images',
+};
+
+function loadCfgFromStorage(){
+  for(const key of ['owner','repo','branch','token','pathPackages','pathNews','pathImages']){
+    const v = localStorage.getItem('gh.'+key);
+    if(v) cfg[key] = v;
+  }
+  els.owner.value  = cfg.owner;
+  els.repo.value   = cfg.repo;
+  els.branch.value = cfg.branch;
+  els.token.value  = cfg.token;
+}
+function saveCfgToStorage(){
+  cfg.owner  = els.owner.value.trim()  || cfg.owner;
+  cfg.repo   = els.repo.value.trim()   || cfg.repo;
+  cfg.branch = els.branch.value.trim() || 'main';
+  cfg.token  = els.token.value.trim();
+  for(const key of ['owner','repo','branch','token','pathPackages','pathImages','pathNews']){
+    localStorage.setItem('gh.'+key, cfg[key]);
+  }
+  flash(els.cfgMsg,'บันทึกแล้ว','text-success');
+}
+els.saveCfg.addEventListener('click', saveCfgToStorage);
+els.showToken.addEventListener('click', ()=>{
+  const inp = els.token;
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  els.showToken.querySelector('i').className = inp.type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+});
+
+// ==========================================
+// GITHUB API HELPERS
+// ==========================================
 function authHeaders(){
   const h = { 'Accept': 'application/vnd.github+json' };
   if(cfg.token) h['Authorization'] = `Bearer ${cfg.token}`;
   return h;
 }
-async function ghGetContent(path){
-  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(cfg.branch)}`;
+
+// FIX: path ต้องไม่ encodeURIComponent ทั้งก้อน (/ ต้องเป็น / ไม่ใช่ %2F)
+async function ghGet(path){
+  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${path}?ref=${encodeURIComponent(cfg.branch)}`;
   const res = await fetch(url, { headers: authHeaders() });
-  if (res.status === 404) return { notFound: true };
-  if (!res.ok) throw new Error(`โหลดไฟล์ไม่สำเร็จ: ${res.status}`);
+  if(res.status === 404) return { notFound: true };
+  if(!res.ok) throw new Error(`GET ${path}: ${res.status} ${await res.text()}`);
   return res.json();
 }
-async function ghPutContent(path, contentText, message, sha=null){
-  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}`;
-  const body = { message, content: btoa(unescape(encodeURIComponent(contentText))), branch: cfg.branch };
+
+async function ghPut(path, contentText, message, sha=null){
+  // Encode UTF-8 → base64 correctly (รองรับภาษาไทย)
+  const bytes = new TextEncoder().encode(contentText);
+  let binary = '';
+  bytes.forEach(b => binary += String.fromCharCode(b));
+  const b64 = btoa(binary);
+
+  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
+  const body = { message, content: b64, branch: cfg.branch };
   if(sha) body.sha = sha;
-  const res = await fetch(url, { method:'PUT', headers:{...authHeaders(),'Content-Type':'application/json'}, body: JSON.stringify(body) });
-  if(!res.ok){ const t = await res.text(); throw new Error(`บันทึกไฟล์ไม่สำเร็จ: ${res.status} ${t}`); }
+  const res = await fetch(url, {
+    method:'PUT',
+    headers:{...authHeaders(), 'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  if(!res.ok) throw new Error(`PUT ${path}: ${res.status} ${await res.text()}`);
   return res.json();
 }
+
 async function ghPutBinary(path, arrayBuffer, message){
-  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${encodeURIComponent(path)}`;
-  const body = { message, content: arrayBufferToBase64(arrayBuffer), branch: cfg.branch };
-  const res = await fetch(url, { method:'PUT', headers:{...authHeaders(),'Content-Type':'application/json'}, body: JSON.stringify(body) });
-  if(!res.ok){ const t = await res.text(); throw new Error(`อัปโหลดรูปไม่สำเร็จ: ${res.status} ${t}`); }
+  let binary = '';
+  new Uint8Array(arrayBuffer).forEach(b => binary += String.fromCharCode(b));
+  const b64 = btoa(binary);
+
+  const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
+  const body = { message, content: b64, branch: cfg.branch };
+  const res = await fetch(url, {
+    method:'PUT',
+    headers:{...authHeaders(), 'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  if(!res.ok) throw new Error(`Upload ${path}: ${res.status} ${await res.text()}`);
   return res.json();
 }
-function arrayBufferToBase64(buffer){
-  let binary=''; const bytes=new Uint8Array(buffer);
-  for(let i=0;i<bytes.byteLength;i++) binary+=String.fromCharCode(bytes[i]);
-  return btoa(binary);
-}
 
-// ===== UTF-8 helpers (แก้ภาษาไทยเพี้ยน) =====
 function base64ToUtf8(b64){
-  const bin = atob(b64);                       // base64 → binary string
+  const bin = atob(b64.replace(/\s/g,''));
   const bytes = new Uint8Array(bin.length);
-  for (let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
-  return new TextDecoder('utf-8').decode(bytes); // ← UTF-8 ปลอดภัยกับภาษาไทย
+  for(let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder('utf-8').decode(bytes);
 }
 
-// ============== PACKAGES.json LOAD/SAVE =========
-async function loadPackagesJson(){
-  updateCfgFromForm();
-  const meta = await ghGetContent(cfg.pathPackages);
-  if (meta.notFound) {
-    packagesSha = null;
-    PACKS = [];
-    renderTable();
-    showMsg('warning','ยังไม่พบ packages.json ใน repo (เริ่มรายการว่าง). เพิ่มแล้วกดบันทึกเพื่อสร้างไฟล์');
-    return;
+// ==========================================
+// PACKAGES
+// ==========================================
+let PACKS = [];
+let pkgSha = null;
+
+async function loadPackages(){
+  const meta = await ghGet(cfg.pathPackages);
+  if(meta.notFound){ pkgSha = null; PACKS = []; }
+  else {
+    pkgSha = meta.sha || null;
+    const parsed = JSON.parse(base64ToUtf8(meta.content));
+    PACKS = Array.isArray(parsed) ? parsed : (parsed?.data || []);
   }
-  packagesSha = meta.sha || null;
-
-  // ----- decode base64 -> UTF-8 -> JSON -----
-  const jsonText = base64ToUtf8(meta.content);
-  let parsed;
-  try { parsed = JSON.parse(jsonText); }
-  catch(e){ throw new Error('packages.json ไม่ใช่ JSON ที่ถูกต้อง'); }
-
-  PACKS = Array.isArray(parsed) ? parsed : (parsed && Array.isArray(parsed.data)) ? parsed.data : [];
-  renderTable();
-  showMsg('success', `โหลดแพ็กเกจ ${PACKS.length} รายการ`);
-}
-els.loadBtn.addEventListener('click', () => loadPackagesJson().catch(e=>showMsg('danger', e.message)));
-els.reload.addEventListener('click', () => loadPackagesJson().catch(e=>showMsg('danger', e.message)));
-
-async function savePackagesJson(commitMsg){
-  const payload = JSON.stringify(PACKS, null, 2);
-  const r = await ghPutContent(cfg.pathPackages, payload, commitMsg || 'chore: update packages.json', packagesSha);
-  packagesSha = r.content?.sha || null;
+  renderPkgTable();
+  els.pkgCount.textContent = PACKS.length;
+  return PACKS.length;
 }
 
-// ============== UI HELPERS ======================
-function fmtTHB(v){ return new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0}).format(Number(v||0)); }
-function showMsg(type, text){
-  els.msg.className = `alert alert-${type}`;
-  els.msg.textContent = text;
-  if(type!=='warning') setTimeout(()=>{ els.msg.className=''; els.msg.textContent=''; }, 3500);
+async function savePackages(msg){
+  const r = await ghPut(cfg.pathPackages, JSON.stringify(PACKS, null, 2), msg, pkgSha);
+  pkgSha = r.content?.sha || pkgSha;
 }
-function getFormData(){
-  const f = els.form;
+
+async function uploadPkgImage(){
+  const file = els.pkgImgFile.files?.[0];
+  if(!file) return null;
+  if(!file.type.startsWith('image/')) throw new Error('ไฟล์ไม่ใช่รูปภาพ');
+  const buf = await file.arrayBuffer();
+  const safe = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  const path = `${cfg.pathImages.replace(/\/$/,'')}/${Date.now()}-${safe}`;
+  await ghPutBinary(path, buf, `feat: upload image ${safe}`);
+  return `/${cfg.repo}/${path}`;
+}
+
+function getPkgFormData(){
+  const f = els.pkgForm;
   return {
     id:       f.id.value.trim(),
     title:    f.title.value.trim(),
     category: f.category.value,
     price:    Number(f.price.value||0),
-    oldPrice: f.oldPrice.value==='' ? null : Number(f.oldPrice.value||0),
+    oldPrice: f.oldPrice.value==='' ? null : Number(f.oldPrice.value),
     img:      f.img.value.trim(),
     short:    f.short.value.trim(),
     includes: (f.includes.value||'').split('|').map(s=>s.trim()).filter(Boolean),
     note:     f.note.value.trim(),
-    active:   String(f.active.value).toLowerCase()==='true'
+    active:   f.active.value === 'true',
   };
 }
-function setFormData(p){
-  const f = els.form;
+function setPkgFormData(p){
+  const f = els.pkgForm;
   f.id.value       = p.id||'';
   f.title.value    = p.title||'';
   f.category.value = p.category||'ตรวจสุขภาพ';
   f.price.value    = p.price??'';
-  f.oldPrice.value = (p.oldPrice==null || p.oldPrice==='') ? '' : p.oldPrice;
+  f.oldPrice.value = (p.oldPrice==null||p.oldPrice==='') ? '' : p.oldPrice;
   f.img.value      = p.img||'';
   f.short.value    = p.short||'';
-  f.includes.value = Array.isArray(p.includes) ? p.includes.join('|') : (p.includes||'');
+  f.includes.value = Array.isArray(p.includes) ? p.includes.join('|') : '';
   f.note.value     = p.note||'';
   f.active.value   = p.active ? 'true' : 'false';
 }
-function renderTable(){
-  const tb = els.tbody; tb.innerHTML = '';
+function renderPkgTable(){
+  els.pkgTbody.innerHTML = '';
   PACKS.forEach(p=>{
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td><code class="k">${p.id}</code></td>
-      <td>${p.title||''}</td>
-      <td>${p.category||''}</td>
-      <td class="text-end">${fmtTHB(p.price)}</td>
-      <td>${p.active ? 'TRUE' : 'FALSE'}</td>
-      <td><button class="btn btn-sm btn-outline-primary" data-id="${p.id}" type="button">แก้ไข</button></td>`;
-    tb.appendChild(tr);
+      <td class="text-truncate" style="max-width:140px">${p.title||''}</td>
+      <td><span class="badge bg-light text-dark border">${p.category||''}</span></td>
+      <td class="text-end">${thb(p.price)}</td>
+      <td><span class="badge ${p.active?'bg-success':'bg-secondary'}">${p.active?'เปิด':'ปิด'}</span></td>
+      <td><button class="btn btn-xs btn-outline-primary py-0 px-2 edit-pkg" data-id="${p.id}">แก้ไข</button></td>`;
+    els.pkgTbody.appendChild(tr);
   });
-  tb.querySelectorAll('button[data-id]').forEach(btn=>{
-    btn.addEventListener('click', e=>{
-      const id = e.currentTarget.getAttribute('data-id');
-      const found = PACKS.find(x=>x.id===id);
-      if(found){ setFormData(found); window.scrollTo({top:0,behavior:'smooth'}); }
+  els.pkgTbody.querySelectorAll('.edit-pkg').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const p = PACKS.find(x=>x.id===btn.dataset.id);
+      if(p){ setPkgFormData(p); window.scrollTo({top:0,behavior:'smooth'}); }
     });
   });
 }
 
-// ============== IMAGE UPLOAD ====================
-async function uploadImageIfSelected(){
-  const file = els.imgFile.files?.[0];
-  if(!file) return null;
-  if(!file.type.startsWith('image/')) throw new Error('ไฟล์ที่อัปโหลดไม่ใช่รูปภาพ');
-  const buf = await file.arrayBuffer();
-  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-  const filename = `${Date.now()}-${safeName}`;
-  const path = `${cfg.pathImages.replace(/\/$/,'')}/${filename}`;
-  await ghPutBinary(path, buf, `feat: upload image ${filename}`);
-  // URL รูปสำหรับเว็บภายใต้ GitHub Pages
-  const relUrl = `/${cfg.repo}/${path}`.replace(/\/{2,}/g,'/');
-  return relUrl;
-}
-function normalizeImageUrl(url){
-  if(/^https?:\/\//i.test(url)) return url;
-  return url.replace(/\/{2,}/g,'/'); 
-}
-
-// ============== CRUD HANDLERS ===================
-els.form.addEventListener('submit', async (e)=>{
+els.pkgForm.addEventListener('submit', async e=>{
   e.preventDefault();
   try{
-    updateCfgFromForm();
-    const newImg = await uploadImageIfSelected();
-    const data = getFormData();
-    if(newImg) data.img = newImg;
-    data.img = normalizeImageUrl(data.img);
-
-    if(PACKS.some(x=>x.id===data.id)) return showMsg('warning','มี ID นี้อยู่แล้ว ใช้ปุ่ม "อัปเดตตาม ID" แทน');
-
+    const imgUrl = await uploadPkgImage();
+    const data = getPkgFormData();
+    if(imgUrl) data.img = imgUrl;
+    if(!data.id || !data.title) return showMsg(els.pkgMsg,'warning','กรุณากรอก ID และชื่อแพ็กเกจ');
+    if(PACKS.some(x=>x.id===data.id)) return showMsg(els.pkgMsg,'warning','มี ID นี้แล้ว กด "อัปเดต" แทน');
     PACKS.push(data);
-    await savePackagesJson(`feat: add package ${data.id}`);
-    showMsg('success','บันทึกแพ็กเกจใหม่เรียบร้อย');
-    renderTable();
-    els.form.reset();
-  }catch(err){ showMsg('danger', err.message); }
+    await savePackages(`feat: add package ${data.id}`);
+    renderPkgTable();
+    els.pkgCount.textContent = PACKS.length;
+    els.pkgForm.reset();
+    showMsg(els.pkgMsg,'success','เพิ่มแพ็กเกจสำเร็จ ✓');
+  }catch(err){ showMsg(els.pkgMsg,'danger',err.message); }
 });
-els.btnUpdate.addEventListener('click', async ()=>{
+els.btnPkgUpdate.addEventListener('click', async()=>{
   try{
-    updateCfgFromForm();
-    const newImg = await uploadImageIfSelected();
-    const data = getFormData();
-    if(!data.id) return showMsg('warning','กรุณาใส่ ID ที่ต้องการอัปเดต');
+    const imgUrl = await uploadPkgImage();
+    const data = getPkgFormData();
+    if(!data.id) return showMsg(els.pkgMsg,'warning','กรุณาใส่ ID');
     const idx = PACKS.findIndex(x=>x.id===data.id);
-    if(idx===-1) return showMsg('warning','ไม่พบ ID นี้ในรายการ');
-    if(newImg) data.img = newImg;
-    data.img = normalizeImageUrl(data.img);
+    if(idx===-1) return showMsg(els.pkgMsg,'warning','ไม่พบ ID นี้');
+    if(imgUrl) data.img = imgUrl;
     PACKS[idx] = data;
-    await savePackagesJson(`chore: update package ${data.id}`);
-    showMsg('success','อัปเดตสำเร็จ');
-    renderTable();
-  }catch(err){ showMsg('danger', err.message); }
+    await savePackages(`chore: update package ${data.id}`);
+    renderPkgTable();
+    showMsg(els.pkgMsg,'success','อัปเดตสำเร็จ ✓');
+  }catch(err){ showMsg(els.pkgMsg,'danger',err.message); }
 });
-els.btnDelete.addEventListener('click', async ()=>{
+els.btnPkgDelete.addEventListener('click', async()=>{
   try{
-    updateCfgFromForm();
-    const id = els.form.id.value.trim();
-    if(!id) return showMsg('warning','กรุณาใส่ ID');
-    if(!confirm(`ยืนยันลบแพ็กเกจ ${id}?`)) return;
+    const id = els.pkgForm.id.value.trim();
+    if(!id) return showMsg(els.pkgMsg,'warning','กรุณาใส่ ID');
+    if(!confirm(`ยืนยันลบแพ็กเกจ "${id}"?`)) return;
     const before = PACKS.length;
     PACKS = PACKS.filter(x=>x.id!==id);
-    if(PACKS.length===before) return showMsg('warning','ไม่พบ ID นี้');
-    await savePackagesJson(`chore: delete package ${id}`);
-    showMsg('success','ลบสำเร็จ');
-    renderTable();
-    els.form.reset();
-  }catch(err){ showMsg('danger', err.message); }
+    if(PACKS.length===before) return showMsg(els.pkgMsg,'warning','ไม่พบ ID นี้');
+    await savePackages(`chore: delete package ${id}`);
+    renderPkgTable();
+    els.pkgCount.textContent = PACKS.length;
+    els.pkgForm.reset();
+    showMsg(els.pkgMsg,'success','ลบสำเร็จ ✓');
+  }catch(err){ showMsg(els.pkgMsg,'danger',err.message); }
+});
+els.btnPkgClear.addEventListener('click', ()=>{ els.pkgForm.reset(); els.pkgMsg.className=''; els.pkgMsg.textContent=''; });
+
+// ==========================================
+// NEWS
+// ==========================================
+const NEWS_CAT_STYLE = {
+  'โปรโมชัน':    { badge:'bg-danger',   icon:'fa-tag',          color:'#dc3545', bg:'linear-gradient(135deg,#fff5f5,#ffe3e3)' },
+  'ประชาสัมพันธ์':{ badge:'bg-primary',  icon:'fa-bullhorn',     color:'#0d6efd', bg:'linear-gradient(135deg,#e8f4fd,#cce5ff)' },
+  'รับสมัครงาน': { badge:'bg-success',  icon:'fa-user-nurse',   color:'#198754', bg:'linear-gradient(135deg,#f0fff4,#d4edda)' },
+  'เอกสาร':      { badge:'bg-secondary', icon:'fa-file-pdf',    color:'#6c757d', bg:'linear-gradient(135deg,#f8f9fa,#e9ecef)' },
+};
+
+let NEWS = [];
+let newsSha = null;
+
+async function loadNews(){
+  const meta = await ghGet(cfg.pathNews);
+  if(meta.notFound){ newsSha = null; NEWS = []; }
+  else {
+    newsSha = meta.sha || null;
+    const parsed = JSON.parse(base64ToUtf8(meta.content));
+    NEWS = Array.isArray(parsed) ? parsed : [];
+  }
+  renderNewsTable();
+  els.newsCount.textContent = NEWS.length;
+  return NEWS.length;
+}
+
+async function saveNews(msg){
+  const r = await ghPut(cfg.pathNews, JSON.stringify(NEWS, null, 2), msg, newsSha);
+  newsSha = r.content?.sha || newsSha;
+}
+
+function getNewsFormData(){
+  const f = els.newsForm;
+  const cat = f.category.value;
+  const style = NEWS_CAT_STYLE[cat] || NEWS_CAT_STYLE['ประชาสัมพันธ์'];
+  return {
+    id:        f.id.value.trim(),
+    title:     f.title.value.trim(),
+    category:  cat,
+    dateText:  f.dateText.value.trim(),
+    body:      f.body.value.trim(),
+    link:      f.link.value.trim(),
+    linkText:  f.linkText.value.trim() || 'อ่านเพิ่มเติม',
+    icon:      `fas ${style.icon}`,
+    iconColor: style.color,
+    iconBg:    style.bg,
+    active:    f.active.value === 'true',
+  };
+}
+function setNewsFormData(n){
+  const f = els.newsForm;
+  f.id.value       = n.id||'';
+  f.title.value    = n.title||'';
+  f.category.value = n.category||'โปรโมชัน';
+  f.dateText.value = n.dateText||'';
+  f.body.value     = n.body||'';
+  f.link.value     = n.link||'';
+  f.linkText.value = n.linkText||'';
+  f.active.value   = n.active ? 'true' : 'false';
+}
+function renderNewsTable(){
+  els.newsTbody.innerHTML = '';
+  NEWS.forEach(n=>{
+    const style = NEWS_CAT_STYLE[n.category] || {};
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><code class="k">${n.id}</code></td>
+      <td class="text-truncate" style="max-width:160px">${n.title||''}</td>
+      <td><span class="badge ${style.badge||'bg-secondary'}">${n.category||''}</span></td>
+      <td><span class="badge ${n.active?'bg-success':'bg-secondary'}">${n.active?'เปิด':'ปิด'}</span></td>
+      <td><button class="btn btn-xs btn-outline-primary py-0 px-2 edit-news" data-id="${n.id}">แก้ไข</button></td>`;
+    els.newsTbody.appendChild(tr);
+  });
+  els.newsTbody.querySelectorAll('.edit-news').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const n = NEWS.find(x=>x.id===btn.dataset.id);
+      if(n){ setNewsFormData(n); window.scrollTo({top:0,behavior:'smooth'}); }
+    });
+  });
+}
+
+els.newsForm.addEventListener('submit', async e=>{
+  e.preventDefault();
+  try{
+    const data = getNewsFormData();
+    if(!data.id || !data.title || !data.body) return showMsg(els.newsMsg,'warning','กรุณากรอก ID ชื่อข่าว และเนื้อหา');
+    if(NEWS.some(x=>x.id===data.id)) return showMsg(els.newsMsg,'warning','มี ID นี้แล้ว กด "อัปเดต" แทน');
+    NEWS.push(data);
+    await saveNews(`feat: add news ${data.id}`);
+    renderNewsTable();
+    els.newsCount.textContent = NEWS.length;
+    els.newsForm.reset();
+    showMsg(els.newsMsg,'success','เพิ่มข่าวสารสำเร็จ ✓');
+  }catch(err){ showMsg(els.newsMsg,'danger',err.message); }
+});
+els.btnNewsUpdate.addEventListener('click', async()=>{
+  try{
+    const data = getNewsFormData();
+    if(!data.id) return showMsg(els.newsMsg,'warning','กรุณาใส่ ID');
+    const idx = NEWS.findIndex(x=>x.id===data.id);
+    if(idx===-1) return showMsg(els.newsMsg,'warning','ไม่พบ ID นี้');
+    NEWS[idx] = data;
+    await saveNews(`chore: update news ${data.id}`);
+    renderNewsTable();
+    showMsg(els.newsMsg,'success','อัปเดตสำเร็จ ✓');
+  }catch(err){ showMsg(els.newsMsg,'danger',err.message); }
+});
+els.btnNewsDelete.addEventListener('click', async()=>{
+  try{
+    const id = els.newsForm.id.value.trim();
+    if(!id) return showMsg(els.newsMsg,'warning','กรุณาใส่ ID');
+    if(!confirm(`ยืนยันลบข่าว "${id}"?`)) return;
+    const before = NEWS.length;
+    NEWS = NEWS.filter(x=>x.id!==id);
+    if(NEWS.length===before) return showMsg(els.newsMsg,'warning','ไม่พบ ID นี้');
+    await saveNews(`chore: delete news ${id}`);
+    renderNewsTable();
+    els.newsCount.textContent = NEWS.length;
+    els.newsForm.reset();
+    showMsg(els.newsMsg,'success','ลบสำเร็จ ✓');
+  }catch(err){ showMsg(els.newsMsg,'danger',err.message); }
+});
+els.btnNewsClear.addEventListener('click', ()=>{ els.newsForm.reset(); els.newsMsg.className=''; els.newsMsg.textContent=''; });
+
+// ==========================================
+// POPUP CONFIG
+// ==========================================
+let POPUP_CFG = null;
+let popupSha = null;
+
+const defaultPopupCfg = () => ({
+  active: true,
+  expiresAt: '',
+  oncePerVisit: true,
+  image: '/hospital/images/queen_sirikit.webp',
+  title: 'สถิตอยู่ในใจตราบนิรันดร์',
+  subtitle: 'สมเด็จพระนางเจ้าสิริกิติ์\nพระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง',
+  body1: 'น้อมสำนึกในพระมหากรุณาธิคุณอันหาที่สุดมิได้',
+  body2: 'ข้าพระพุทธเจ้า คณะแพทย์ ผู้บริหาร พยาบาล และบุคลากร โรงพยาบาลวีระพลการแพทย์'
+});
+
+async function loadPopup(){
+  const meta = await ghGet('popup.json');
+  if(meta.notFound){ popupSha = null; POPUP_CFG = defaultPopupCfg(); }
+  else{ popupSha = meta.sha||null; POPUP_CFG = JSON.parse(base64ToUtf8(meta.content)); }
+  fillPopupForm(POPUP_CFG);
+  updatePopupStatus();
+}
+
+function fillPopupForm(c){
+  document.getElementById('popupActive').value   = c.active ? 'true' : 'false';
+  document.getElementById('popupExpires').value  = c.expiresAt || '';
+  document.getElementById('popupImage').value    = c.image || '';
+  document.getElementById('popupTitle').value    = c.title || '';
+  document.getElementById('popupSubtitle').value = c.subtitle || '';
+  document.getElementById('popupBody1').value    = c.body1 || '';
+  document.getElementById('popupBody2').value    = c.body2 || '';
+}
+
+function getPopupForm(){
+  return {
+    active:      document.getElementById('popupActive').value === 'true',
+    expiresAt:   document.getElementById('popupExpires').value || null,
+    oncePerVisit: true,
+    image:       document.getElementById('popupImage').value.trim(),
+    title:       document.getElementById('popupTitle').value.trim(),
+    subtitle:    document.getElementById('popupSubtitle').value.trim(),
+    body1:       document.getElementById('popupBody1').value.trim(),
+    body2:       document.getElementById('popupBody2').value.trim(),
+  };
+}
+
+function updatePopupStatus(){
+  const today = new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('statusToday').textContent = today;
+  const c = POPUP_CFG;
+  if(!c){ document.getElementById('statusResult').textContent='ยังไม่โหลด'; return; }
+  document.getElementById('statusActive').innerHTML   = c.active ? '<span class="badge bg-success">เปิด</span>' : '<span class="badge bg-secondary">ปิด</span>';
+  document.getElementById('statusExpires').textContent = c.expiresAt || 'ไม่กำหนด (แสดงตลอดไป)';
+  const visited = !!localStorage.getItem('wpk_visited');
+  document.getElementById('statusVisited').innerHTML = visited ? '<span class="badge bg-warning text-dark">มีสถานะแล้ว (ไม่แสดง)</span>' : '<span class="badge bg-success">ยังไม่มีสถานะ (จะแสดง)</span>';
+  let result = '✓ จะแสดง popup';
+  if(!c.active) result = '✗ ปิดอยู่ (active=false)';
+  else if(c.expiresAt && new Date() > new Date(c.expiresAt)) result = '✗ หมดอายุแล้ว';
+  else if(visited) result = '✗ ผู้ใช้นี้เห็นแล้ว (localStorage)';
+  document.getElementById('statusResult').textContent = result;
+}
+
+// Upload popup image → fill link automatically
+document.getElementById('btnPopupUpload').addEventListener('click', async()=>{
+  const file = document.getElementById('popupImgFile').files?.[0];
+  const prog = document.getElementById('uploadProgress');
+  if(!file) return showMsg(prog,'warning','กรุณาเลือกไฟล์รูปก่อน','text-warning');
+  if(!file.type.startsWith('image/')) return showMsg(prog,'danger','ไฟล์ที่เลือกไม่ใช่รูปภาพ','text-danger');
+  if(!cfg.token) return showMsg(prog,'danger','กรุณาตั้งค่า GitHub Token ก่อน','text-danger');
+
+  prog.className = 'small text-primary mt-1';
+  prog.innerHTML = '<span class="spinner-border spinner-border-sm me-1" style="width:10px;height:10px"></span>กำลังอัปโหลด...';
+
+  try{
+    const buf  = await file.arrayBuffer();
+    const safe = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    const path = `${cfg.pathImages.replace(/\/$/,'')}/${Date.now()}-${safe}`;
+    await ghPutBinary(path, buf, `feat: upload popup image ${safe}`);
+
+    const link = `/${cfg.repo}/${path}`;
+    document.getElementById('popupImage').value = link;
+
+    // Show preview
+    const prev = document.getElementById('popupImgPreview');
+    const prevEl = document.getElementById('popupImgPreviewEl');
+    prevEl.src = `https://raw.githubusercontent.com/${cfg.owner}/${cfg.repo}/${cfg.branch}/${path}`;
+    prev.classList.remove('d-none');
+
+    prog.className = 'small text-success mt-1';
+    prog.innerHTML = `<i class="fas fa-check me-1"></i>อัปโหลดสำเร็จ — link ถูกสร้างให้แล้ว`;
+  }catch(err){
+    prog.className = 'small text-danger mt-1';
+    prog.textContent = 'อัปโหลดไม่สำเร็จ: ' + friendlyErr(err.message);
+  }
+});
+
+// Preview existing link
+document.getElementById('btnPreviewPopupImg').addEventListener('click', ()=>{
+  const url = document.getElementById('popupImage').value.trim();
+  if(!url) return;
+  const prev = document.getElementById('popupImgPreview');
+  const prevEl = document.getElementById('popupImgPreviewEl');
+  // Convert /hospital/assets/images/x.jpg → raw GitHub URL if needed
+  const raw = url.startsWith('http') ? url
+    : `https://raw.githubusercontent.com/${cfg.owner}/${cfg.repo}/${cfg.branch}/${url.replace(`/${cfg.repo}/`,'')}`;
+  prevEl.src = raw;
+  prev.classList.remove('d-none');
+});
+
+document.getElementById('btnPopupSave').addEventListener('click', async()=>{
+  try{
+    POPUP_CFG = getPopupForm();
+    const r = await ghPut('popup.json', JSON.stringify(POPUP_CFG, null, 2), 'chore: update popup config', popupSha);
+    popupSha = r.content?.sha || popupSha;
+    updatePopupStatus();
+    showMsg(document.getElementById('popupMsg'),'success','บันทึก popup.json สำเร็จ ✓');
+  }catch(err){ showMsg(document.getElementById('popupMsg'),'danger',err.message); }
+});
+document.getElementById('btnPopupReset').addEventListener('click', ()=>{
+  if(POPUP_CFG) fillPopupForm(POPUP_CFG);
+});
+document.getElementById('btnClearVisited').addEventListener('click', ()=>{
+  localStorage.removeItem('wpk_visited');
+  updatePopupStatus();
+  document.getElementById('visitedStatus').className = 'mt-2 small text-success';
+  document.getElementById('visitedStatus').textContent = 'ล้างสถานะแล้ว — refresh หน้าแรกเพื่อทดสอบ';
+});
+
+// Update status when switching to popup tab
+document.querySelector('[data-bs-target="#tabPopup"]').addEventListener('shown.bs.tab', updatePopupStatus);
+
+// ==========================================
+// LOAD ALL
+// ==========================================
+async function loadAll(){
+  saveCfgToStorage();
+  setStatus('loading','กำลังโหลด...');
+  try{
+    const [pCount, nCount] = await Promise.all([loadPackages(), loadNews()]);
+    await loadPopup();
+    setStatus('ok',`โหลดสำเร็จ — แพ็กเกจ ${pCount} รายการ, ข่าว ${nCount} รายการ`);
+  }catch(err){
+    setStatus('err','โหลดไม่สำเร็จ: '+ friendlyErr(err.message));
+    console.error(err);
+  }
+}
+
+function friendlyErr(msg){
+  if(msg.includes('401')) return 'Token ไม่ถูกต้องหรือหมดอายุ (401)';
+  if(msg.includes('403')) return 'Token ไม่มีสิทธิ์เขียน (403) — ต้องการสิทธิ์ Contents: write';
+  if(msg.includes('404')) return 'ไม่พบ repo หรือ branch (404)';
+  if(msg.includes('422')) return 'ไฟล์มีอยู่แล้ว SHA ไม่ตรง (422) — กด "โหลดข้อมูล" ก่อน';
+  return msg;
+}
+
+function setStatus(state, text){
+  const icons = { ok:'<span class="status-dot dot-ok"></span>', err:'<span class="status-dot dot-err"></span>', loading:'<span class="spinner-border spinner-border-sm me-1" style="width:10px;height:10px"></span>' };
+  els.connStatus.innerHTML = (icons[state]||'') + text;
+}
+
+els.loadAll.addEventListener('click', loadAll);
+
+// ==========================================
+// UTILS
+// ==========================================
+function thb(v){ return new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0}).format(Number(v||0)); }
+
+function showMsg(el, type, text){
+  el.className = `alert alert-${type} alert-sm mt-2`;
+  el.textContent = text;
+  if(type !== 'warning') setTimeout(()=>{ el.className=''; el.textContent=''; }, 4000);
+}
+function flash(el, text, cls){
+  el.className = cls; el.textContent = text;
+  setTimeout(()=>{ el.textContent=''; el.className=''; }, 2000);
+}
+
+// ==========================================
+// INIT
+// ==========================================
+document.addEventListener('DOMContentLoaded', ()=>{
+  loadCfgFromStorage();
+  if(cfg.token) loadAll();
+  else setStatus('warn','กรุณาใส่ GitHub Token แล้วกด "โหลดข้อมูล"');
 });
 </script>
-
 </body>
 </html>
