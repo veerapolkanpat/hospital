@@ -513,7 +513,6 @@ async function ghGet(path){
 }
 
 async function ghPut(path, contentText, message, sha=null){
-  // Encode UTF-8 → base64 correctly (รองรับภาษาไทย)
   const bytes = new TextEncoder().encode(contentText);
   let binary = '';
   bytes.forEach(b => binary += String.fromCharCode(b));
@@ -522,13 +521,29 @@ async function ghPut(path, contentText, message, sha=null){
   const url = `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${path}`;
   const body = { message, content: b64, branch: cfg.branch };
   if(sha) body.sha = sha;
-  const res = await fetch(url, {
+
+  let res = await fetch(url, {
     method:'PUT',
     headers:{...authHeaders(), 'Content-Type':'application/json'},
     body: JSON.stringify(body)
   });
+
+  // 422 = file exists but SHA not supplied → fetch current SHA and retry once
+  if(res.status === 422 && !sha){
+    const meta = await ghGet(path);
+    if(meta.sha){
+      body.sha = meta.sha;
+      res = await fetch(url, {
+        method:'PUT',
+        headers:{...authHeaders(), 'Content-Type':'application/json'},
+        body: JSON.stringify(body)
+      });
+    }
+  }
+
   if(!res.ok) throw new Error(`PUT ${path}: ${res.status} ${await res.text()}`);
-  return res.json();
+  const result = await res.json();
+  return result;
 }
 
 async function ghPutBinary(path, arrayBuffer, message){
